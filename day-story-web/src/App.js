@@ -1,19 +1,17 @@
+import React from 'react';
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import './App.css';
-import ReceptionPage from './Pages/ReceptionPage.jsx';
-import '/node_modules/@material/web/all.js';
-
+import ReceptionPage from './Pages/ReceptionPage/ReceptionPage';
+import '/node_modules/@material/web/all';
 
 function App() {
   return (
-    <div className="App">
-      <BrowserRouter>
-        <Routes>
-          <Route index element={<ReceptionPage />} />
-        </Routes>
-      </BrowserRouter>
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route index element={<ReceptionPage />} />
+      </Routes>
+    </BrowserRouter>
   );
-
 }
+
 export default App;
+

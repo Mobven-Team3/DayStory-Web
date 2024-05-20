@@ -1,7 +1,21 @@
-import React from "react";
+import React from 'react';
+import './scss/ReceptionPage.css';
+import '/node_modules/@material/web/all';
+
 
 const ReceptionPage = () => {
-  return <div>aysu</div>;
-};
+  return (
+    <div className='container'>
+      <header>
+        <div className=''>
+
+        </div>
+
+      </header>
+
+
+    </div>
+  );
+}
 
 export default ReceptionPage;
