@@ -143,6 +143,7 @@ import { useNavigate } from "react-router-dom";
 import './scss/ReceptionPage.css';
 import '/node_modules/@material/web/all';
 
+
 const ReceptionPage = () => {
   const navigate = useNavigate();
   const [setLoading] = useState(false);
@@ -238,24 +239,13 @@ const ReceptionPage = () => {
               focus-label-text-color="red"
             ></md-outlined-text-field>
 
-            
-
-
-
-
-            
-
-
-
-
-
-
-            
+        
             <md-filled-button
             onClick={registerUser}
             >Devam
             </md-filled-button>
             <button onClick={backHomeHandler}>Geri</button>
+            
           </div>
         </div>
       </div>
