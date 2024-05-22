@@ -1,147 +1,8 @@
-// import React, { useState } from 'react';
-// import { useNavigate } from "react-router-dom";
-// import './scss/ReceptionPage.css';
-// import '/node_modules/@material/web/all';
-
-
-// const ReceptionPage = () => {
-//   const navigate = useNavigate();
-//   const [loading, setLoading] = useState(false);
-
-//   const [formData, setFormData] = useState({
-//     firstName: "",
-//     lastName: "",
-//     gender: "",
-//     birthdate: "",
-//     roles: ["default"],
-//   });
-
-
-//   const handleChange = (e) => {
-//     const { name, value } = e.target;
-//     setFormData({ ...formData, [name]: value });
-//   };
-
-//   const registerUser = async () => {
-//     try {
-//       if (!formData.firstName.trim() || !formData.lastName.trim() || !formData.userName.trim() || !formData.password.trim()) {
-//         if (!formData.firstName.trim()) {
-//           alert("İsim boş bırakılamaz.");
-//         } else if (!formData.lastName.trim()) {
-//           alert("Soyisim boş bırakılamaz.");
-//         } else if (!formData.userName.trim()) {
-//           alert("Kullanıcı adı boş bırakılamaz.");
-//         } else if (!formData.password.trim()) {
-//           alert("Şifre boş bırakılamaz.");
-//         }
-//         return;
-//       }
-
-//       if (!isPasswordValid(formData.password)) {
-//         console.error("Şifre kriterlerine uyunuz: En az 6 karakter ve en az bir rakam içermelidir.");
-//         alert("Şifreniz en az 6 karakter ve en az bir rakam içermelidir.");
-//         return;
-//       }
-
-//       const response = await fetch("http://localhost:5120/api/authentication", {
-//         method: "POST",
-//         headers: {
-//           "Content-Type": "application/json"
-//         },
-//         body: JSON.stringify(formData)
-//       });
-
-//       if (response.ok) {
-//         setLoading(true);
-//         navigate("/");
-//       } else {
-//         const errorData = await response.json();
-//         console.error("Registration failed:", errorData);
-//       }
-//     } catch (error) {
-//       console.error("Error registering user:", error);
-//     }
-//   };
-
-//   const isPasswordValid = (password) => {
-
-//     return password.length >= 6 && /\d/.test(password);
-//   };
-
-//   const backHomeHandler = () => {
-//     const newPath = '/aysu';
-//     navigate(newPath);
-//   };
-
-
-
-//   return (
-//     <div className='container'>
-//       <header className='header'>
-//         <div className='header__logo'></div>
-//         <p className='header__text'>DayStory</p>
-//       </header>
-
-//       <div className='form'>
-//         <div className='form__description'>
-//           <div className='form__description-img'></div>
-//           <div className='form__description-text'>
-//             <h2>Lorem ipsum dolor sit amet</h2>
-//             <p>Consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna </p>
-//           </div>
-//         </div>
-
-//         <div className='form__list'>
-
-//           <div className='form__list-header'>Yeni Hesap Oluştur</div>
-
-//           <div className='form__list-item'>
-
-//             <p>Kişisel bilgilerinizi giriniz.</p>
-
-//             <md-outlined-text-field
-//               label="İsim"
-//               value="İsminizi Yazınız."
-//               required
-//               focus-label-text-color="red"
-//             > </md-outlined-text-field>
-
-//             <md-outlined-text-field
-//               label="Soyisim"
-//               value="Soyisminizi Yazınız."
-//               required
-//               focus-label-text-color="red"
-//             > </md-outlined-text-field>
-
-
-//             <button onClick={backHomeHandler} className="back-icon">
-//               {" "}
-//             </button>
-
-//           </div>
-//           <div>
-
-
-
-
-
-//           </div>
-
-//         </div>
-
-//       </div>
-
-
-//     </div>
-//   );
-// }
-
-// export default ReceptionPage;
-
 import React, { useState } from 'react';
 import { useNavigate } from "react-router-dom";
 import './scss/ReceptionPage.css';
 import '/node_modules/@material/web/all';
+
 
 const ReceptionPage = () => {
   const navigate = useNavigate();
@@ -152,27 +13,43 @@ const ReceptionPage = () => {
     lastName: "",
     gender: "",
     birthdate: "",
-    roles: ["default"],
+    role: ["default"],
   });
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
+    setFormData({
+      ...formData,
+      [name]: value
+    });
+  };
+
+  const handleGenderChange = (e) => {
+    const gender = e.target;
+    setFormData({
+      ...formData,
+      gender: gender.textContent
+    });
+
   };
 
   const registerUser = async () => {
     try {
-      if (!formData.firstName.trim() || !formData.lastName.trim()) {
+      if (!formData.firstName.trim() || !formData.lastName.trim() || !formData.gender.trim() || !formData.birthdate.trim()) {
         if (!formData.firstName.trim()) {
           alert("İsim boş bırakılamaz.");
         } else if (!formData.lastName.trim()) {
           alert("Soyisim boş bırakılamaz.");
+        } else if (!formData.gender.trim()) {
+          alert("Cinsiyet boş bırakılamaz.");
+        } else if (!formData.birthdate.trim()) {
+          alert("Doğum tarihi boş bırakılamaz.");
         }
         return;
       }
 
 
-      const response = await fetch("http://localhost:5120/api/authentication", {
+      const response = await fetch("", {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
@@ -182,7 +59,7 @@ const ReceptionPage = () => {
 
       if (response.ok) {
         setLoading(true);
-        navigate("/aaaaaa");
+        navigate("/girişyap");
       } else {
         const errorData = await response.json();
         console.error("Registration failed:", errorData);
@@ -192,12 +69,16 @@ const ReceptionPage = () => {
     }
   };
 
- 
+
 
   const backHomeHandler = () => {
     const newPath = '/aysu';
     navigate(newPath);
   };
+
+
+
+
 
   return (
     <div className='container'>
@@ -223,39 +104,59 @@ const ReceptionPage = () => {
             <md-outlined-text-field
               label="İsim"
               name="firstName"
+              placeholder="İsminizi yazınız."
               value={formData.firstName}
               onInput={handleChange}
               required
-              focus-label-text-color="red"
+              supporting-text="*required"
             ></md-outlined-text-field>
 
             <md-outlined-text-field
               label="Soyisim"
               name="lastName"
+              placeholder="Soyisminizi yazınız."
               value={formData.lastName}
               onInput={handleChange}
               required
-              focus-label-text-color="red"
+              supporting-text="*required"
             ></md-outlined-text-field>
 
-            
+            <div className='form__list-item'>
+
+              <md-outlined-select
+                label="Cinsiyet"
+                name="gender"
+                value={formData.gender}
+                onInput={handleGenderChange}
+                required
+                supporting-text="*required"
+              >
+                <md-select-option value="Kadın" onClick={handleGenderChange}>Kadın</md-select-option>
+                <md-select-option value="Erkek" onClick={handleGenderChange}>Erkek</md-select-option>
+                <md-select-option value="Belirtme" onClick={handleGenderChange}> Belirtme</md-select-option>
+              </md-outlined-select>
+
+              <md-outlined-text-field
+                type="date"
+                name="birthdate"
+                label="Doğum Tarihi"
+                format="mm/dd/yyyy"
+                value={formData.birthdate}
+                onInput={handleChange}
+                required
+                supporting-text="*required"
+              >
+              </md-outlined-text-field>
+            </div>
 
 
+            {/* <p>{formData.birthdate}</p> */}
 
-
-            
-
-
-
-
-
-
-            
             <md-filled-button
-            onClick={registerUser}
+              onClick={backHomeHandler}
             >Devam
             </md-filled-button>
-            <button onClick={backHomeHandler}>Geri</button>
+            <button onClick={registerUser}>Geri</button>
           </div>
         </div>
       </div>
@@ -264,3 +165,4 @@ const ReceptionPage = () => {
 }
 
 export default ReceptionPage;
+
