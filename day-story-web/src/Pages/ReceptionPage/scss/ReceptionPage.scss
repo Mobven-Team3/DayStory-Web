@@ -1,6 +1,100 @@
+// font Roboto
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+
+
 .container {
-    align-items: center;
-    justify-content: center;
-    text-align: center;
+    padding: 60px;
+}
+
+.header {
     display: flex;
+    align-items: center;
+    gap: 10px;
+
+    &__logo {
+        background-color: #79767D;
+        border-radius: 50%;
+        width: 60px;
+        height: 60px;
+    }
+
+    &__text {
+        font-family: "Roboto", sans-serif;
+        font-weight: 400;
+        font-size: 32px;
+        line-height: 40px;
+        margin: 0px;
+    }
+}
+
+
+.form {
+    display: flex;
+    justify-content: space-around;
+
+
+    &__description {
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        padding: 103px;
+
+
+        &-img {
+            width: 400px;
+            height: 400px;
+            background-color: rgba(20, 18, 24, 0.08);
+            border-radius: 25px;
+        }
+
+        &-text {
+            width: 400px;
+
+            h2 {
+                color: rgba(0, 0, 0, 1);
+                font-size: 22px;
+                font-family: "Roboto", sans-serif;
+                font-weight: 400;
+                line-height: 28px;
+            }
+
+            p {
+                font-family: "Roboto", sans-serif;
+                font-size: 16px;
+                font-weight: 400;
+                line-height: 24px;
+                letter-spacing: 0.5px;
+            }
+
+        }
+    }
+
+    &__list {
+        padding: 60px;
+        background-color: rgba(247, 242, 250, 1);
+        border-radius: 50px;
+
+        &-header{
+            margin: 0px;
+            width: auto;
+            font-family: "Roboto", sans-serif;
+            font-weight: 400;
+            font-size: 32px;
+            line-height: 40px;
+        }
+
+        &-items {
+            display: grid;
+            gap: 40px;
+            justify-content: center;
+
+
+            md-outlined-text-field {
+                width: 500px;
+            }
+        }
+
+
+
+    }
 }
