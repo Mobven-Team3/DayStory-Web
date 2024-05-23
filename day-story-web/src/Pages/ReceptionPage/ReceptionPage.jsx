@@ -72,8 +72,7 @@ const ReceptionPage = () => {
 
 
   const backHomeHandler = () => {
-    const newPath = '/aysu';
-    navigate(newPath);
+   
   };
 
 
@@ -144,7 +143,7 @@ const ReceptionPage = () => {
                 value={formData.birthdate}
                 onInput={handleChange}
                 required
-                supporting-text="*required"
+                supporting-text="gg/aa/yyyy"
               >
               </md-outlined-text-field>
             </div>
@@ -156,7 +155,9 @@ const ReceptionPage = () => {
               onClick={backHomeHandler}
             >Devam
             </md-filled-button>
-            <button onClick={registerUser}>Geri</button>
+            
+            <p>
+            Zaten bir hesabın var mı?</p> <a href="">Giriş Yap</a>
           </div>
         </div>
       </div>
