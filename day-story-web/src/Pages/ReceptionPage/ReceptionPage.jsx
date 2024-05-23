@@ -140,40 +140,51 @@
 
 import React, { useState } from 'react';
 import { useNavigate } from "react-router-dom";
+import FormListFirst from './formlistfirst';
+import FormListSecond from './formlistsecond';
 import './scss/ReceptionPage.css';
 import '/node_modules/@material/web/all';
 
-
 const ReceptionPage = () => {
   const navigate = useNavigate();
-  const [setLoading] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [currentForm, setCurrentForm] = useState(1);
 
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
     gender: "",
     birthdate: "",
-    roles: ["default"],
+    email:"",
+    username: "",
+    password: "",
+    role: ["default"],
   });
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: value
+    }));
+  };
+
+  const handleGenderChange = (e) => {
+    const { value } = e.target;
+    setFormData((prevData) => ({
+      ...prevData,
+      gender: value
+    }));
   };
 
   const registerUser = async () => {
     try {
-      if (!formData.firstName.trim() || !formData.lastName.trim()) {
-        if (!formData.firstName.trim()) {
-          alert("İsim boş bırakılamaz.");
-        } else if (!formData.lastName.trim()) {
-          alert("Soyisim boş bırakılamaz.");
-        }
+      if (!formData.firstName.trim() || !formData.lastName.trim() || !formData.gender.trim() || !formData.birthdate.trim() || !formData.username.trim() || !formData.password.trim()) {
+        alert("All fields are required.");
         return;
       }
 
-
-      const response = await fetch("http://localhost:5120/api/authentication", {
+      const response = await fetch("/api/register", {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
@@ -183,7 +194,7 @@ const ReceptionPage = () => {
 
       if (response.ok) {
         setLoading(true);
-        navigate("/aaaaaa");
+        navigate("/girişyap");
       } else {
         const errorData = await response.json();
         console.error("Registration failed:", errorData);
@@ -193,11 +204,8 @@ const ReceptionPage = () => {
     }
   };
 
- 
-
-  const backHomeHandler = () => {
-    const newPath = '/aysu';
-    navigate(newPath);
+  const toggleForm = () => {
+    setCurrentForm((prevForm) => (prevForm === 1 ? 2 : 1));
   };
 
   return (
@@ -218,34 +226,16 @@ const ReceptionPage = () => {
 
         <div className='form__list'>
           <div className='form__list-header'>Yeni Hesap Oluştur</div>
-          <div className='form__list-items'>
-            <p>Kişisel bilgilerinizi giriniz.</p>
 
-            <md-outlined-text-field
-              label="İsim"
-              name="firstName"
-              value={formData.firstName}
-              onInput={handleChange}
-              required
-              focus-label-text-color="red"
-            ></md-outlined-text-field>
+          {currentForm === 1 && <FormListFirst formData={formData} handleChange={handleChange} handleGenderChange={handleGenderChange} />}
+          {currentForm === 2 && <FormListSecond formData={formData} handleChange={handleChange} registerUser={registerUser} loading={loading} />}
 
-            <md-outlined-text-field
-              label="Soyisim"
-              name="lastName"
-              value={formData.lastName}
-              onInput={handleChange}
-              required
-              focus-label-text-color="red"
-            ></md-outlined-text-field>
-
-        
-            <md-filled-button
-            onClick={registerUser}
-            >Devam
+          <div className='form__list-footer'>
+            <md-filled-button type="button" onClick={toggleForm}>
+              {currentForm === 1 ? 'Devam' : 'Geri'}
             </md-filled-button>
-            <button onClick={backHomeHandler}>Geri</button>
-            
+
+            <p>Zaten bir hesabın var mı? <a href="/girişyap">Giriş Yap</a></p>
           </div>
         </div>
       </div>
