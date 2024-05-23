@@ -140,8 +140,8 @@
 
 import React, { useState } from 'react';
 import { useNavigate } from "react-router-dom";
-import FormListFirst from './formlistfirst';
-import FormListSecond from './formlistsecond';
+import FormListFirst from './LoginForm';
+import FormListSecond from './RegisterForm';
 import './scss/ReceptionPage.css';
 import '/node_modules/@material/web/all';
 
