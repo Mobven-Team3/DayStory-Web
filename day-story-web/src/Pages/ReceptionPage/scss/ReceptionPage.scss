@@ -103,7 +103,15 @@
             md-outlined-text-field {
                 width: 250px;
             }
-
         }
+        &-footer{
+            margin-top: 40px;
+            md-filled-button{
+                width: 500px;
+            }
+        }
+
     }
+
+    
 }

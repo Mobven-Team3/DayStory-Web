@@ -85,4 +85,10 @@
 }
 .form__list-item md-outlined-text-field {
   width: 250px;
+}
+.form__list-footer {
+  margin-top: 40px;
+}
+.form__list-footer md-filled-button {
+  width: 500px;
 }/*# sourceMappingURL=ReceptionPage.css.map */
