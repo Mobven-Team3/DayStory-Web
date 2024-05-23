@@ -265,7 +265,7 @@ const ReceptionPage = () => {
     lastName: "",
     gender: "",
     birthdate: "",
-    email: "",
+    email:"",
     username: "",
     password: "",
     role: ["default"],
