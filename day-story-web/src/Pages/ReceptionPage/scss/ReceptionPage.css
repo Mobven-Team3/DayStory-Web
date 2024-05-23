@@ -1,0 +1,78 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
+.container {
+  padding: 60px;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.header__logo {
+  background-color: #79767D;
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+}
+.header__text {
+  font-family: "Roboto", sans-serif;
+  font-weight: 400;
+  font-size: 32px;
+  line-height: 40px;
+  margin: 0px;
+}
+
+.form {
+  display: flex;
+  justify-content: space-around;
+}
+.form__description {
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 103px;
+}
+.form__description-img {
+  width: 400px;
+  height: 400px;
+  background-color: rgba(20, 18, 24, 0.08);
+  border-radius: 25px;
+}
+.form__description-text {
+  width: 400px;
+}
+.form__description-text h2 {
+  color: rgb(0, 0, 0);
+  font-size: 22px;
+  font-family: "Roboto", sans-serif;
+  font-weight: 400;
+  line-height: 28px;
+}
+.form__description-text p {
+  font-family: "Roboto", sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+  letter-spacing: 0.5px;
+}
+.form__list {
+  padding: 60px;
+  background-color: rgb(247, 242, 250);
+  border-radius: 50px;
+}
+.form__list-header {
+  margin: 0px;
+  width: auto;
+  font-family: "Roboto", sans-serif;
+  font-weight: 400;
+  font-size: 32px;
+  line-height: 40px;
+}
+.form__list-items {
+  display: grid;
+  gap: 40px;
+  justify-content: center;
+}
+.form__list-items md-outlined-text-field {
+  width: 500px;
+}/*# sourceMappingURL=ReceptionPage.css.map */
