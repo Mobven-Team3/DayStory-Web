@@ -3,10 +3,11 @@ import './scss/ReceptionPage.css';
 
 const LoginPage = ({ formData, handleChange, formTitle }) => { // formTitle prop'u ekleniyor
   return (
-    <form className='form_login-link'>
-      <p>{formTitle}</p> {/* Başlık buradan dinamik olarak alınıyor */}
-      
-      <div className='form__field'>
+    <>
+      <div className='form__list-header'>Yeni Hesap Oluştur</div>
+      <form className='form__list-items'>
+        <p>Hesap bilgilerinizi oluşturunuz.</p>
+        
         <md-outlined-text-field
           label="Kullanıcı Adı"
           name="username"
@@ -16,9 +17,7 @@ const LoginPage = ({ formData, handleChange, formTitle }) => { // formTitle prop
           required
           supporting-text="*required"
         ></md-outlined-text-field>
-      </div>
-      
-      <div className='form__field'>
+    
         <md-outlined-text-field
           type="password"
           label="Şifre"
@@ -29,8 +28,8 @@ const LoginPage = ({ formData, handleChange, formTitle }) => { // formTitle prop
           required
           supporting-text="*En az 7 karakter. 1 büyük harf, 1 küçük harf ve özel karakter."
         ></md-outlined-text-field>
-      </div>
-    </form>
+      </form>
+      </>
   );
 };
 

@@ -1,16 +1,14 @@
+import '@material/web/all';
 import React, { useState } from 'react';
-import { useNavigate, Link } from "react-router-dom"; 
+import { Link, useNavigate } from "react-router-dom";
 import FormListFirst from './formlistfirst';
 import FormListSecond from './formlistsecond';
-import LoginPage from './loginPage'; 
 import './scss/ReceptionPage.css';
-import '@material/web/all'; 
 
-const ReceptionPage = () => { 
+const ReceptionPage = () => {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
   const [currentForm, setCurrentForm] = useState(1);
-  const [formTitle, setFormTitle] = useState('Yeni Hesap Oluştur');
 
   const [formData, setFormData] = useState({
     firstName: "",
@@ -69,10 +67,7 @@ const ReceptionPage = () => {
   const toggleForm = () => {
     setCurrentForm((prevForm) => (prevForm === 1 ? 2 : 1));
   };
-  const showLoginPage = () => {
-    setCurrentForm(3); // LoginPage bileşenini göstermek için currentForm'u 3 yapıyoruz
-    setFormTitle('Giriş Yap'); // Giriş sayfasını gösterirken başlığı güncelleyin
-  };
+
 
   return (
     <div className='container'>
@@ -91,23 +86,36 @@ const ReceptionPage = () => {
         </div>
 
         <div className='form__list'>
-          <div className='form__list-header'>{formTitle}</div> {/* Başlık buradan dinamik olarak alınıyor */}
 
           {currentForm === 1 && <FormListFirst formData={formData} handleChange={handleChange} handleGenderChange={handleGenderChange} />}
           {currentForm === 2 && <FormListSecond formData={formData} handleChange={handleChange} registerUser={registerUser} loading={loading} />}
-          {currentForm === 3 && <LoginPage formData={formData} handleChange={handleChange} registerUser={registerUser} loading={loading} formTitle={formTitle} />} {/* formTitle prop'u ekleniyor */}
+          {/* {currentForm === 3 && <LoginPage formData={formData} handleChange={handleChange} registerUser={registerUser} loading={loading} />}  */}
 
           <div className='form__list-footer'>
             <md-filled-button type="button" onClick={toggleForm}>
               {currentForm === 1 ? 'Devam' : 'Geri'}
             </md-filled-button>
 
-            {currentForm !== 3 && ( // Eğer currentForm 3 değilse kaydol linki görüntülenecek
-              <div className='form__login-link'>
-                <Link to="#" onClick={showLoginPage}>Giriş Yap</Link> 
-              </div>
+            {currentForm === 2 && (
+              <md-filled-button type="button">
+                Kayıt ol
+              </md-filled-button>
             )}
+
+              <p>Zaten bir hesabın var mı?<Link to="#" >Giriş Yap</Link> </p>
+            
+
           </div>
+
+          <p>{formData.firstName}</p>
+          <p>{formData.lastName}</p>
+          <p>{formData.gender}</p>
+          <p>{formData.birthdate}</p>
+          <p>{formData.email}</p>
+          <p>{formData.username}</p>
+          <p>{formData.password}</p>
+
+
         </div>
       </div>
     </div>

@@ -2,9 +2,11 @@ import '@material/web/all';
 import React from 'react';
 import './scss/ReceptionPage.css';
 
-const FormListSecond = ({ formData, handleChange, handleGenderChange }) => {
+const FormListSecond = ({ formData, handleChange }) => {
     return (
-        <form className='form__list-items'>
+        <>
+            <div className='form__list-header'>Yeni Hesap Oluştur</div>
+            <form className='form__list-items'>
             <p>Hesap bilgilerinizi oluşturunuz.</p>
 
             <md-outlined-text-field
@@ -15,7 +17,6 @@ const FormListSecond = ({ formData, handleChange, handleGenderChange }) => {
                 value={formData.email}
                 onInput={handleChange}
                 required
-                supporting-text="*required"
             ></md-outlined-text-field>
 
             <md-outlined-text-field
@@ -25,7 +26,6 @@ const FormListSecond = ({ formData, handleChange, handleGenderChange }) => {
                 value={formData.username}
                 onInput={handleChange}
                 required
-                supporting-text="*required"
             ></md-outlined-text-field>
 
             <md-outlined-text-field
@@ -36,20 +36,20 @@ const FormListSecond = ({ formData, handleChange, handleGenderChange }) => {
                 value={formData.password}
                 onInput={handleChange}
                 required
-                supporting-text="*En az 7 karakter. 1 büyük harf ,1 küçük harf ve özel karakter."
             ></md-outlined-text-field>
 
             <md-outlined-text-field
                 type="password"
                 label="Şifre"
                 name="password"
-                placeholder="Şifre Belirleyiniz."
-                value={formData.password}
-                onInput={handleChange}
+                placeholder="Şifrenizi Onaylayınız."
+                // value={formData.password}
+                // onInput={handleChange}
                 required
                 supporting-text="*En az 7 karakter. 1 büyük harf ,1 küçük harf ve özel karakter."
             ></md-outlined-text-field>
         </form>
+        </>
     );
 }
 
