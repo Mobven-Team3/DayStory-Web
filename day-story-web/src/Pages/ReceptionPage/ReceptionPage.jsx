@@ -102,11 +102,11 @@ const ReceptionPage = () => {
               {currentForm === 1 ? 'Devam' : 'Geri'}
             </md-filled-button>
 
-            {currentForm !== 3 ? ( // Eğer currentForm 3 değilse kaydol linki görüntülenecek
+            {currentForm !== 3 && ( // Eğer currentForm 3 değilse kaydol linki görüntülenecek
               <div className='form__login-link'>
-                <Link to="#" onClick={showLoginPage}>Kaydol</Link> 
+                <Link to="#" onClick={showLoginPage}>Giriş Yap</Link> 
               </div>
-            ) : null}
+            )}
           </div>
         </div>
       </div>
