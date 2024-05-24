@@ -69,6 +69,7 @@ const ReceptionPage = () => {
   const toggleForm = () => {
     setCurrentForm((prevForm) => (prevForm === 1 ? 2 : 1));
   };
+
   const showLoginPage = () => {
     setCurrentForm(3); // LoginPage bileşenini göstermek için currentForm'u 3 yapıyoruz
     setFormTitle('Giriş Yap'); // Giriş sayfasını gösterirken başlığı güncelleyin
@@ -91,22 +92,23 @@ const ReceptionPage = () => {
         </div>
 
         <div className='form__list'>
-          <div className='form__list-header'>{formTitle}</div> {/* Başlık buradan dinamik olarak alınıyor */}
+          <div className='form__list-header'>{formTitle}</div>
 
           {currentForm === 1 && <FormListFirst formData={formData} handleChange={handleChange} handleGenderChange={handleGenderChange} />}
           {currentForm === 2 && <FormListSecond formData={formData} handleChange={handleChange} registerUser={registerUser} loading={loading} />}
-          {currentForm === 3 && <LoginPage formData={formData} handleChange={handleChange} registerUser={registerUser} loading={loading} formTitle={formTitle} />} {/* formTitle prop'u ekleniyor */}
+          {currentForm === 3 && <LoginPage formData={formData} handleChange={handleChange} registerUser={registerUser} loading={loading} formTitle={formTitle} />}
 
           <div className='form__list-footer'>
             <md-filled-button type="button" onClick={toggleForm}>
               {currentForm === 1 ? 'Devam' : 'Geri'}
             </md-filled-button>
 
-            {currentForm !== 3 ? ( // Eğer currentForm 3 değilse kaydol linki görüntülenecek
+            {currentForm !== 3 && (
               <div className='form__login-link'>
-                <Link to="#" onClick={showLoginPage}>Kaydol</Link> 
+                <Link to="#" onClick={showLoginPage}>Hesabın yok mu? Kaydol</Link> 
               </div>
-            ) : null}
+            )}
+
           </div>
         </div>
       </div>
