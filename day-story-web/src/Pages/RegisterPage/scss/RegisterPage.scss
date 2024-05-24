@@ -1,0 +1,141 @@
+// font Roboto
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+
+
+.container {
+    padding: 43px 78px;
+}
+
+.header {
+    display: flex;
+    align-items: center;
+
+    &__logo {
+        background-color: white;
+        width: 70px;
+        height: 70px;
+    }
+
+    &__text {
+        font-family: "Roboto", sans-serif;
+        color: rgba(90, 108, 165, 1);
+        font-weight: 400;
+        font-size: 32px;
+        line-height: 40px;
+        margin: 0px;
+
+        span {
+            font-family: "Roboto", sans-serif;
+            font-size: 32px;
+            font-weight: 300;
+            line-height: 40px;
+            text-align: left;
+
+        }
+    }
+}
+
+
+.form {
+    display: flex;
+    justify-content: space-around;
+
+
+    &__description {
+        width: 579px;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        padding: 60px;
+
+
+        &-img {
+            height: 482px;
+        }
+
+        &-text {
+            width: 579px;
+
+            h2 {
+                color: rgba(0, 0, 0, 1);
+                font-size: 22px;
+                font-family: "Roboto", sans-serif;
+                font-weight: 400;
+                line-height: 28px;
+            }
+
+            p {
+                font-family: "Roboto", sans-serif;
+                font-size: 16px;
+                font-weight: 400;
+                line-height: 24px;
+                letter-spacing: 0.5px;
+            }
+
+        }
+    }
+
+    &__list {
+        padding: 60px 80px;
+        background-color: rgba(247, 242, 250, 1);
+        border-radius: 50px;
+
+        p {
+            margin: 0px;
+        }
+
+        &-header {
+            margin: 0px;
+            width: auto;
+            font-family: "Roboto", sans-serif;
+            font-weight: 400;
+            font-size: 32px;
+            line-height: 40px;
+            margin-bottom: 80px;
+        }
+
+        &-items {
+            display: grid;
+            gap: 40px;
+            justify-content: center;
+
+            md-outlined-text-field {
+                width: 500px;
+            }
+        }
+
+        &-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 500px;
+
+            md-outlined-text-field {
+                width: 250px;
+            }
+        }
+
+        &-footer {
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            display: block;
+            margin-top: 80px;
+            width: 500px;
+            display: grid;
+            gap: 10px;
+
+            md-filled-button {
+                width: 500px;
+            }
+
+            p {
+                margin-top: 40px;
+                width: auto;
+            }
+        }
+
+    }
+
+
+}

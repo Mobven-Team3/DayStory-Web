@@ -1,6 +1,6 @@
 import '@material/web/all';
 import React from 'react';
-import './scss/ReceptionPage.css';
+import './scss/RegisterPage.css';
 
 const FormListFirst = ({ formData, handleChange, handleGenderChange }) => {
     return (
@@ -35,7 +35,6 @@ const FormListFirst = ({ formData, handleChange, handleGenderChange }) => {
                         value={formData.gender}
                         onInput={handleGenderChange}
                         required
-                        supporting-text="."
                     >
                         <md-select-option value="Kadın">Kadın</md-select-option>
                         <md-select-option value="Erkek">Erkek</md-select-option>
@@ -49,7 +48,6 @@ const FormListFirst = ({ formData, handleChange, handleGenderChange }) => {
                         value={formData.birthdate}
                         onInput={handleChange}
                         required
-                        supporting-text="gg/aa/yyyy"
                     ></md-outlined-text-field>
                 </div>
             </form>

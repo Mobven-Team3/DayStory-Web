@@ -1,0 +1,112 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
+.container {
+  padding: 43px 78px;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+}
+.header__logo {
+  background-color: white;
+  width: 70px;
+  height: 70px;
+}
+.header__text {
+  font-family: "Roboto", sans-serif;
+  color: rgb(90, 108, 165);
+  font-weight: 400;
+  font-size: 32px;
+  line-height: 40px;
+  margin: 0px;
+}
+.header__text span {
+  font-family: "Roboto", sans-serif;
+  font-size: 32px;
+  font-weight: 300;
+  line-height: 40px;
+  text-align: left;
+}
+
+.form {
+  display: flex;
+  justify-content: space-around;
+}
+.form__description {
+  width: 579px;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 60px;
+}
+.form__description-img {
+  height: 482px;
+}
+.form__description-text {
+  width: 579px;
+}
+.form__description-text h2 {
+  color: rgb(0, 0, 0);
+  font-size: 22px;
+  font-family: "Roboto", sans-serif;
+  font-weight: 400;
+  line-height: 28px;
+}
+.form__description-text p {
+  font-family: "Roboto", sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+  letter-spacing: 0.5px;
+}
+.form__list {
+  padding: 60px 80px;
+  background-color: rgb(247, 242, 250);
+  border-radius: 50px;
+}
+.form__list p {
+  margin: 0px;
+}
+.form__list-header {
+  margin: 0px;
+  width: auto;
+  font-family: "Roboto", sans-serif;
+  font-weight: 400;
+  font-size: 32px;
+  line-height: 40px;
+  margin-bottom: 80px;
+}
+.form__list-items {
+  display: grid;
+  gap: 40px;
+  justify-content: center;
+}
+.form__list-items md-outlined-text-field {
+  width: 500px;
+}
+.form__list-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 500px;
+}
+.form__list-item md-outlined-text-field {
+  width: 250px;
+}
+.form__list-footer {
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  display: block;
+  margin-top: 80px;
+  width: 500px;
+  display: grid;
+  gap: 10px;
+}
+.form__list-footer md-filled-button {
+  width: 500px;
+}
+.form__list-footer p {
+  margin-top: 40px;
+  width: auto;
+}/*# sourceMappingURL=RegisterPage.css.map */

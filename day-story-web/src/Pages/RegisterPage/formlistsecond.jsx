@@ -1,6 +1,6 @@
 import '@material/web/all';
 import React from 'react';
-import './scss/ReceptionPage.css';
+import './scss/RegisterPage.css';
 
 const FormListSecond = ({ formData, handleChange }) => {
     return (
@@ -46,7 +46,6 @@ const FormListSecond = ({ formData, handleChange }) => {
                 // value={formData.password}
                 // onInput={handleChange}
                 required
-                supporting-text="*En az 7 karakter. 1 büyük harf ,1 küçük harf ve özel karakter."
             ></md-outlined-text-field>
         </form>
         </>
