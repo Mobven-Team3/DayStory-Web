@@ -3,27 +3,35 @@
 
 
 .container {
-    padding: 60px;
+    padding: 43px 78px;
 }
 
 .header {
     display: flex;
     align-items: center;
-    gap: 10px;
 
     &__logo {
-        background-color: #79767D;
-        border-radius: 50%;
-        width: 60px;
-        height: 60px;
+        background-color: white;
+        width: 70px;
+        height: 70px;
     }
 
     &__text {
         font-family: "Roboto", sans-serif;
+        color: rgba(90, 108, 165, 1);
         font-weight: 400;
         font-size: 32px;
         line-height: 40px;
         margin: 0px;
+
+        span {
+            font-family: "Roboto", sans-serif;
+            font-size: 32px;
+            font-weight: 300;
+            line-height: 40px;
+            text-align: left;
+
+        }
     }
 }
 
@@ -34,21 +42,19 @@
 
 
     &__description {
+        width: 579px;
         justify-content: center;
         align-items: center;
         text-align: center;
-        padding: 103px;
+        padding: 60px;
 
 
         &-img {
-            width: 400px;
-            height: 400px;
-            background-color: rgba(20, 18, 24, 0.08);
-            border-radius: 25px;
+            height: 482px;
         }
 
         &-text {
-            width: 400px;
+            width: 579px;
 
             h2 {
                 color: rgba(0, 0, 0, 1);
@@ -70,9 +76,13 @@
     }
 
     &__list {
-        padding: 60px;
+        padding: 60px 80px;
         background-color: rgba(247, 242, 250, 1);
         border-radius: 50px;
+
+        p {
+            margin: 0px;
+        }
 
         &-header {
             margin: 0px;
@@ -104,14 +114,28 @@
                 width: 250px;
             }
         }
-        &-footer{
-            margin-top: 40px;
-            md-filled-button{
+
+        &-footer {
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            display: block;
+            margin-top: 80px;
+            width: 500px;
+            display: grid;
+            gap: 10px;
+
+            md-filled-button {
                 width: 500px;
+            }
+
+            p {
+                margin-top: 40px;
+                width: auto;
             }
         }
 
     }
 
-    
+
 }
