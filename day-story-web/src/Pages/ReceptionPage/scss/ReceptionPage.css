@@ -56,9 +56,12 @@
   letter-spacing: 0.5px;
 }
 .form__list {
-  padding: 60px;
+  padding: 60px 80px;
   background-color: rgb(247, 242, 250);
   border-radius: 50px;
+}
+.form__list p {
+  margin: 0px;
 }
 .form__list-header {
   margin: 0px;
@@ -87,8 +90,16 @@
   width: 250px;
 }
 .form__list-footer {
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  display: block;
   margin-top: 40px;
+  width: 500px;
 }
 .form__list-footer md-filled-button {
   width: 500px;
+}
+.form__list-footer p {
+  width: auto;
 }/*# sourceMappingURL=ReceptionPage.css.map */

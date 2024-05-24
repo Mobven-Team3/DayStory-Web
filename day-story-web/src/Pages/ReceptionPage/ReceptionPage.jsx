@@ -1,9 +1,9 @@
+import '@material/web/all';
 import React, { useState } from 'react';
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import FormListFirst from './formlistfirst';
 import FormListSecond from './formlistsecond';
 import './scss/ReceptionPage.css';
-import '/node_modules/@material/web/all';
 
 const ReceptionPage = () => {
   const navigate = useNavigate();
@@ -17,7 +17,8 @@ const ReceptionPage = () => {
     birthdate: "",
     email: "",
     username: "",
-    password: ""
+    password: "",
+    role: ["default"],
   });
 
   const handleChange = (e) => {
@@ -67,6 +68,7 @@ const ReceptionPage = () => {
     setCurrentForm((prevForm) => (prevForm === 1 ? 2 : 1));
   };
 
+
   return (
     <div className='container'>
       <header className='header'>
@@ -84,26 +86,36 @@ const ReceptionPage = () => {
         </div>
 
         <div className='form__list'>
-          <div className='form__list-header'>Yeni Hesap Oluştur</div>
 
-          {currentForm === 1 && <FormListFirst formData={formData} handleChange={handleChange} handleGenderChange={handleGenderChange}  />}
+          {currentForm === 1 && <FormListFirst formData={formData} handleChange={handleChange} handleGenderChange={handleGenderChange} />}
           {currentForm === 2 && <FormListSecond formData={formData} handleChange={handleChange} registerUser={registerUser} loading={loading} />}
+          {/* {currentForm === 3 && <LoginPage formData={formData} handleChange={handleChange} registerUser={registerUser} loading={loading} />}  */}
 
           <div className='form__list-footer'>
             <md-filled-button type="button" onClick={toggleForm}>
               {currentForm === 1 ? 'Devam' : 'Geri'}
             </md-filled-button>
 
-            <p>{formData.firstName}</p>
-            <p>{formData.lastName}</p>
-            <p>{formData.gender}</p>
-            <p>{formData.birthdate}</p>
-            <p>{formData.email}</p>
-            <p>{formData.username}</p>
-            <p>{formData.password}</p>
+            {currentForm === 2 && (
+              <md-filled-button type="button">
+                Kayıt ol
+              </md-filled-button>
+            )}
 
-            <p>Zaten bir hesabın var mı? <a href="/girişyap">Giriş Yap</a></p>
+              <p>Zaten bir hesabın var mı?<Link to="#" >Giriş Yap</Link> </p>
+            
+
           </div>
+
+          <p>{formData.firstName}</p>
+          <p>{formData.lastName}</p>
+          <p>{formData.gender}</p>
+          <p>{formData.birthdate}</p>
+          <p>{formData.email}</p>
+          <p>{formData.username}</p>
+          <p>{formData.password}</p>
+
+
         </div>
       </div>
     </div>

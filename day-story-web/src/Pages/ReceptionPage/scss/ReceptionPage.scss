@@ -70,9 +70,13 @@
     }
 
     &__list {
-        padding: 60px;
+        padding: 60px 80px;
         background-color: rgba(247, 242, 250, 1);
         border-radius: 50px;
+
+        p{
+            margin: 0px;
+        }
 
         &-header {
             margin: 0px;
@@ -105,9 +109,19 @@
             }
         }
         &-footer{
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            display: block;
             margin-top: 40px;
+            width: 500px;
+
             md-filled-button{
                 width: 500px;
+            }
+
+            p{
+                width: auto;
             }
         }
 
