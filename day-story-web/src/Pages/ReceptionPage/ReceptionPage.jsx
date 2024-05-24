@@ -17,8 +17,7 @@ const ReceptionPage = () => {
     birthdate: "",
     email: "",
     username: "",
-    password: "",
-    role: ["default"],
+    password: ""
   });
 
   const handleChange = (e) => {
@@ -87,13 +86,21 @@ const ReceptionPage = () => {
         <div className='form__list'>
           <div className='form__list-header'>Yeni Hesap Oluştur</div>
 
-          {currentForm === 1 && <FormListFirst formData={formData} handleChange={handleChange} handleGenderChange={handleGenderChange} />}
+          {currentForm === 1 && <FormListFirst formData={formData} handleChange={handleChange} handleGenderChange={handleGenderChange}  />}
           {currentForm === 2 && <FormListSecond formData={formData} handleChange={handleChange} registerUser={registerUser} loading={loading} />}
 
           <div className='form__list-footer'>
             <md-filled-button type="button" onClick={toggleForm}>
               {currentForm === 1 ? 'Devam' : 'Geri'}
             </md-filled-button>
+
+            <p>{formData.firstName}</p>
+            <p>{formData.lastName}</p>
+            <p>{formData.gender}</p>
+            <p>{formData.birthdate}</p>
+            <p>{formData.email}</p>
+            <p>{formData.username}</p>
+            <p>{formData.password}</p>
 
             <p>Zaten bir hesabın var mı? <a href="/girişyap">Giriş Yap</a></p>
           </div>

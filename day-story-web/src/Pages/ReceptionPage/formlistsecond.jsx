@@ -43,9 +43,9 @@ const FormListSecond = ({ formData, handleChange, handleGenderChange }) => {
                 type="password"
                 label="Şifre"
                 name="password"
-                placeholder="Şifre Belirleyiniz."
-                value={formData.password}
-                onInput={handleChange}
+                placeholder="Şifrenizi Onaylayınız."
+                // value={formData.password}
+                // onInput={handleChange}
                 required
                 supporting-text="*En az 7 karakter. 1 büyük harf ,1 küçük harf ve özel karakter."
             ></md-outlined-text-field>
