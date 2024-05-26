@@ -45,7 +45,7 @@ const FormListSecond = ({ formData, handleChange, onPreviousClick, submit }) => 
                     onInput={handleChange}
                     required
                 ></md-outlined-text-field>
-                
+
                 <md-outlined-text-field
                     type="password"
                     label="Şifre Tekrarı"
@@ -65,11 +65,11 @@ const FormListSecond = ({ formData, handleChange, onPreviousClick, submit }) => 
                             Kayıt Ol
                         </md-filled-button>
                     </div>
-
-                    <div className='form__list-footer'>
-                        <p>Zaten bir hesabın var mı? <a href="" onClick={handleLoginPageClick}><span>Giriş Yap</span></a></p>
-                    </div>
-
+                    <center>
+                        <div className='form__list-footer'>
+                            <p>Zaten bir hesabın var mı? <a href="" onClick={handleLoginPageClick}><span>Giriş Yap</span></a></p>
+                        </div>
+                    </center>
                 </div>
             </form>
         </>
