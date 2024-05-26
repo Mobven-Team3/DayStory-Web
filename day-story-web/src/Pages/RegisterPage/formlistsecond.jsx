@@ -9,7 +9,6 @@ const FormListSecond = ({ formData, handleChange, onPreviousClick, submit }) => 
         navigate('/login');
     };
 
-
     return (
         <>
             <div className='form__list-header'>Yeni Hesap Oluştur</div>
@@ -58,7 +57,8 @@ const FormListSecond = ({ formData, handleChange, onPreviousClick, submit }) => 
 
                 <div>
                     <div className='form__list-buttons'>
-                        <md-outlined-button onClick={onPreviousClick}>
+                        <md-outlined-button
+                            onClick={onPreviousClick}>
                             Back
                         </md-outlined-button>
                         <md-filled-button onClick={submit}>

@@ -2,8 +2,6 @@ import '@material/web/all';
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import './scss/loginPage.css';
-
 //images
 import logo from '../../../src/assets/images/daystory-logo.png';
 import login_img from '../../../src/assets/images/login_img.png';
