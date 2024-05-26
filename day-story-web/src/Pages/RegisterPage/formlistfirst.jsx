@@ -1,8 +1,15 @@
-import '@material/web/all';
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import './scss/RegisterPage.css';
 
-const FormListFirst = ({ formData, handleChange, handleGenderChange }) => {
+
+const FormListFirst = ({ formData, handleChange, handleGenderChange, nextbutton }) => {
+    const navigate = useNavigate();
+    const handleLoginPageClick = () => {
+        navigate('/login');
+    };
+
+
     return (
         <>
             <div className='form__list-header'>Yeni Hesap Oluştur</div>
@@ -16,7 +23,8 @@ const FormListFirst = ({ formData, handleChange, handleGenderChange }) => {
                     value={formData.firstName}
                     onInput={handleChange}
                     required
-                ></md-outlined-text-field>
+                >
+                </md-outlined-text-field>
 
                 <md-outlined-text-field
                     label="Soyisim"
@@ -25,8 +33,8 @@ const FormListFirst = ({ formData, handleChange, handleGenderChange }) => {
                     value={formData.lastName}
                     onInput={handleChange}
                     required
-                ></md-outlined-text-field>
-
+                >
+                </md-outlined-text-field>
 
                 <div className='form__list-item'>
                     <md-outlined-select
@@ -48,11 +56,30 @@ const FormListFirst = ({ formData, handleChange, handleGenderChange }) => {
                         value={formData.birthdate}
                         onInput={handleChange}
                         required
-                    ></md-outlined-text-field>
+                    >
+                    </md-outlined-text-field>
                 </div>
+
+                <div className='form__list-button'>
+                    <md-filled-button
+                        onClick={nextbutton}
+                    >
+                        Devam
+                    </md-filled-button>
+
+                    <div className='form__list-footer'>
+                        <p>Zaten bir hesabın var mı? <a href="" onClick={handleLoginPageClick}><span>Giriş Yap</span></a></p>
+                    </div>
+
+                </div>
+
             </form>
+
+
+
         </>
     );
 }
 
 export default FormListFirst;
+
