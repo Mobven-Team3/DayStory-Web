@@ -92,6 +92,9 @@
 .form__list-item md-outlined-text-field {
   width: 250px;
 }
+.form__list-item md-select-option {
+  background-color: white;
+}
 .form__list-button {
   margin: 0px;
   justify-content: center;
@@ -99,6 +102,7 @@
   text-align: center;
 }
 .form__list-button md-filled-button {
+  fill: black;
   width: 500px;
   --md-sys-color-primary: rgba(255, 255, 255, 0);
   background: linear-gradient(271.96deg, #6A7FC1 48.21%, #F3AFE5 100%);

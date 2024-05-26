@@ -117,6 +117,16 @@
             md-outlined-text-field {
                 width: 250px;
             }
+            md-outlined-select {
+
+
+            }
+
+            md-select-option{
+                background-color: white;
+            }
+
+
         }
 
         //formlistfirst buttonu
@@ -128,6 +138,7 @@
 
 
             md-filled-button {
+                fill: black;
                 width: 500px;
                 --md-sys-color-primary: rgba(255, 255, 255, 0);
                 background: linear-gradient(271.96deg, #6A7FC1 48.21%, #F3AFE5 100%);

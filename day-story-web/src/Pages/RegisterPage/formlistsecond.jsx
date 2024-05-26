@@ -24,6 +24,7 @@ const FormListSecond = ({ formData, handleChange, onPreviousClick, submit }) => 
                     value={formData.email}
                     onInput={handleChange}
                     required
+                    hasTrailingIcon
                 ></md-outlined-text-field>
 
                 <md-outlined-text-field
@@ -44,14 +45,14 @@ const FormListSecond = ({ formData, handleChange, onPreviousClick, submit }) => 
                     onInput={handleChange}
                     required
                 ></md-outlined-text-field>
-
+                
                 <md-outlined-text-field
                     type="password"
-                    label="Şifre"
-                    name="password"
+                    label="Şifre Tekrarı"
+                    name="confirmPassword"
                     placeholder="Şifrenizi Onaylayınız."
-                    // value={formData.password}
-                    // onInput={handleChange}
+                    value={formData.confirmPassword}
+                    onInput={handleChange}
                     required
                 ></md-outlined-text-field>
 
