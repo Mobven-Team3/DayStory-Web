@@ -9,7 +9,7 @@
 }
 .header__logo {
   width: 58px;
-  height: px;
+  height: 58px;
 }
 .header__text {
   font-family: "Roboto", sans-serif;
@@ -29,7 +29,9 @@
 
 .form {
   display: flex;
-  justify-content: space-around;
+  gap: 20px;
+  justify-content: center;
+  align-items: center;
 }
 .form__description {
   width: 579px;
@@ -39,20 +41,23 @@
   padding: 60px;
 }
 .form__description-img {
-  height: 482px;
+  height: 400px;
 }
 .form__description-text {
   width: 579px;
 }
 .form__description-text h2 {
-  color: rgb(0, 0, 0);
+  color: rgb(90, 108, 165);
+  margin: 0px;
   font-size: 22px;
   font-family: "Roboto", sans-serif;
   font-weight: 400;
   line-height: 28px;
 }
 .form__description-text p {
+  margin: 8px;
   font-family: "Roboto", sans-serif;
+  color: rgb(136, 136, 136);
   font-size: 16px;
   font-weight: 400;
   line-height: 24px;
@@ -60,7 +65,7 @@
 }
 .form__list {
   padding: 60px 80px;
-  background-color: rgb(247, 242, 250);
+  background-color: rgb(250, 250, 250);
   border-radius: 50px;
 }
 .form__list p {
@@ -73,15 +78,12 @@
   font-weight: 400;
   font-size: 32px;
   line-height: 40px;
-  margin-bottom: 80px;
+  margin-bottom: 70px;
 }
 .form__list-items {
   display: grid;
-  gap: 40px;
-  justify-content: center;
-}
-.form__list-items md-outlined-text-field {
-  width: 500px;
+  gap: 35px;
+  justify-content: space-between;
 }
 .form__list-item {
   display: flex;
@@ -92,20 +94,54 @@
 .form__list-item md-outlined-text-field {
   width: 250px;
 }
-.form__list-footer {
+.form__list-item md-select-option {
+  background-color: white;
+}
+.form__list-button {
+  margin: 0px;
   justify-content: center;
   align-items: center;
   text-align: center;
-  display: block;
-  margin-top: 80px;
+}
+.form__list-button md-filled-button {
+  fill: black;
   width: 500px;
-  display: grid;
+  --md-sys-color-primary: rgba(255, 255, 255, 0);
+  background: linear-gradient(271.96deg, #6A7FC1 48.21%, #F3AFE5 100%);
+}
+.form__list-buttons {
+  margin: 0px;
+  justify-content: space-between;
+  align-items: center;
+  text-align: center;
+  display: flex;
+  width: 500px;
   gap: 10px;
 }
-.form__list-footer md-filled-button {
-  width: 500px;
+.form__list-buttons md-outlined-button {
+  width: 240px;
+}
+.form__list-buttons md-filled-button {
+  width: 240px;
+  --md-sys-color-primary: rgba(255, 255, 255, 0);
+  background: linear-gradient(271.96deg, #6A7FC1 48.21%, #F3AFE5 100%);
+}
+.form__list-footer {
+  margin: 16px 0px;
 }
 .form__list-footer p {
-  margin-top: 40px;
-  width: auto;
+  font-family: "Roboto", sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 24px;
+  letter-spacing: 0.15px;
+  color: rgb(90, 108, 165);
+}
+.form__list-footer span {
+  font-family: "Roboto", sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 24px;
+  letter-spacing: 0.15px;
+  color: rgb(90, 108, 165);
 }/*# sourceMappingURL=loginPage.css.map */

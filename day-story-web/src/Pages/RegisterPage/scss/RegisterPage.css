@@ -29,7 +29,9 @@
 
 .form {
   display: flex;
+  gap: 20px;
   justify-content: center;
+  align-items: center;
 }
 .form__description {
   width: 579px;
@@ -39,7 +41,7 @@
   padding: 60px;
 }
 .form__description-img {
-  height: 450px;
+  height: 400px;
 }
 .form__description-text {
   width: 579px;

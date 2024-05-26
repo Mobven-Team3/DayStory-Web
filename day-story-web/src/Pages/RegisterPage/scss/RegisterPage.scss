@@ -36,7 +36,9 @@
 
 .form {
     display: flex;
+    gap: 20px;
     justify-content: center;
+    align-items: center;
 
 
     &__description {
@@ -48,7 +50,7 @@
 
 
         &-img {
-            height: 450px;
+            height: 400px;
         }
 
         &-text {
@@ -100,11 +102,6 @@
             display: grid;
             gap: 35px;
             justify-content: space-between;
-
-            md-outlined-text-field {
-
-            }
-            
         }
 
 
@@ -116,10 +113,6 @@
 
             md-outlined-text-field {
                 width: 250px;
-            }
-            md-outlined-select {
-
-
             }
 
             md-select-option{

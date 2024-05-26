@@ -10,7 +10,7 @@ import FormListSecond from './formlistsecond';
 
 //images
 import logo from '../../../src/assets/images/daystory-logo.png';
-import günlük from '../../../src/assets/images/daystory.png';
+import register_img from '../../../src/assets/images/register_img.png';
 
 
 const RegisterPage = () => {
@@ -85,7 +85,7 @@ const RegisterPage = () => {
 
       <div className='form'>
         <div className='form__description'>
-          <img className='form__description-img' src={günlük} alt="main_image" />
+          <img className='form__description-img' src={register_img} alt="main_image" />
           <div className='form__description-text'>
             <h2>Her sayfanın bir hikaye anlattığı yer</h2>
             <p>Sizin anılarınızı kalıcı hale getiriyoruz</p>
@@ -97,15 +97,13 @@ const RegisterPage = () => {
           {currentForm === 1 && <FormListFirst formData={formData} handleChange={handleChange} handleGenderChange={handleGenderChange} nextbutton={toggleForm} />}
           {currentForm === 2 && <FormListSecond formData={formData} handleChange={handleChange} onPreviousClick={toggleForm} submit={registerUser} />}
 
-          {/* {currentForm === 1 && <p>Zaten bir hesabın var mı?<span>Giriş Yap</span></p>  } */}
-
-          {/* <p>{formData.firstName}</p>
+          <p>{formData.firstName}</p>
           <p>{formData.lastName}</p>
           <p>{formData.gender}</p>
           <p>{formData.birthdate}</p>
           <p>{formData.email}</p>
           <p>{formData.username}</p>
-          <p>{formData.password}</p> */}
+          <p>{formData.password}</p>
 
         </div>
       </div>
