@@ -72,7 +72,8 @@ const RegisterPage = () => {
         setCurrentForm(2);
     } else {
       setCurrentForm(1);
-    }
+    };
+    
   };
 
 
@@ -85,11 +86,10 @@ const RegisterPage = () => {
 
       <div className='form'>
         <div className='form__description'>
-          <img className='form__description-img' src={register_img} alt="main_image" />
-          <div className='form__description-text'>
-            <h2>Her sayfanın bir hikaye anlattığı yer</h2>
-            <p>Sizin anılarınızı kalıcı hale getiriyoruz</p>
+        <div className='form__description-text'>
+            <h2>Day<span>Story</span> ’e Hoşgeldin!</h2>
           </div>
+          <img className='form__description-img' src={register_img} alt="main_image" />
         </div>
 
         <div className='form__list'>

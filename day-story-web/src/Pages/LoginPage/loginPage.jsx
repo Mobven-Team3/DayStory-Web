@@ -1,10 +1,17 @@
-import '@material/web/all';
-import React from 'react';
+import {
+  Button,
+  IconButton, InputAdornment,
+  TextField
+} from '@mui/material';
+
+import React, { useState } from 'react';
+import { FaEye, FaEyeSlash } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
 
 //images
 import logo from '../../../src/assets/images/daystory-logo.png';
 import login_img from '../../../src/assets/images/login_img.png';
+
 
 
 const LoginPage = () => {
@@ -15,6 +22,57 @@ const LoginPage = () => {
   };
 
 
+  const [showPassword, setShowPassword] = useState(false);
+
+  const handleClickShowPassword = () => {
+      setShowPassword(!showPassword);
+  };
+
+  const handleMouseDownPassword = (event) => {
+      event.preventDefault();
+  };
+
+
+  const [loginData, setLoginData] = useState({
+    username: '',
+    password: ''
+  })
+
+  const usernameHandler = (e) => {
+    const usernameData = e.target.value;
+    setLoginData({ ...loginData, username: usernameData });
+  };
+
+  const passwordHandler = (e) => {
+    const passwordData = e.target.value;
+    setLoginData({ ...loginData, password: passwordData });
+  };
+
+  const loginHandler = async () => {
+    try {
+      const loginRequest = await fetch('', {
+        method: 'POST',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ username: loginData.username, password: loginData.password })
+      });
+      if (200 <= loginRequest.status && loginRequest.status <= 299) {
+        const content = await loginRequest.json();
+        console.log(content)
+        window.localStorage.setItem('token', content.accessToken);
+        window.localStorage.setItem('userId', content.userId);
+
+        navigate('/deneme')
+      } else {
+        alert('Giriş Yapılamadısdfsd')
+      }
+    } catch (error) {
+      console.error(error);
+      alert('Giriş Yapılamadı');
+    }
+  };
 
 
   return (
@@ -25,49 +83,72 @@ const LoginPage = () => {
       </header>
 
       <div className='form'>
-        <div className='form__description'>
-          <img className='form__description-img' src={login_img} alt="main_image" />
-          <div className='form__description-text'>
-            <h2>Her sayfanın bir hikaye anlattığı yer</h2>
-            <p>Sizin anılarınızı kalıcı hale getiriyoruz</p>
+      <div className='form__description'>
+        <div className='form__description-text'>
+            <h2>Day<span>Story</span> ’e Hoşgeldin!</h2>
           </div>
+          <img className='form__description-img' src={login_img} alt="main_image" />
         </div>
 
         <div className='form__list'>
+          <>
+            <div className='form__list-header'>Giriş Yap</div>
+            <form className='form__list-items' onSubmit={loginHandler} noValidate>
+              <p>Hesap bilgilerinizi giriniz</p>
 
-          <div className='form__list-header'>Giriş Yap</div>
-          <form className='form__list-items'>
-            <p>Hesap bilgilerinizi giriniz.</p>
+              <TextField
+                label="Kullanıcı Adı"
+                name="username"
+                placeholder="Kullanıcı Adınızı Yazınız."
+                required
+                value={loginData.username}
+                onChange={usernameHandler}
+                fullWidth
+                margin="normal"
+              > </TextField>
 
-            <md-outlined-text-field
-              label="Kullanıcı Adı"
-              name="username"
-              placeholder="Kullanıcı Adınızı Yazınız."
-              required
-            ></md-outlined-text-field>
+              <TextField
+                type={showPassword ? 'text' : 'password'}
+                label="Şifre"
+                name="password"
+                value={loginData.password}
+                placeholder="Şifrenizi Belirleyiniz."
+                onChange={passwordHandler}
+                required
+                fullWidth
+                margin="normal"
+                InputProps={{
+                  endAdornment: (
+                    <InputAdornment position="end">
+                      <IconButton
+                        aria-label="toggle password visibility"
+                        onClick={handleClickShowPassword}
+                        onMouseDown={handleMouseDownPassword}
+                        edge="end"
+                      >
+                        {showPassword ? <FaEye /> : <FaEyeSlash />}
+                      </IconButton>
+                    </InputAdornment>
+                  )
+                }}
+              />
 
-            <md-outlined-text-field
-              type="password"
-              label="Şifre"
-              name="password"
-              placeholder="Şifrenizi Giriniz."
-              required
-            ></md-outlined-text-field>
+              <div className='form__list-button'>
+                <Button
+                  variant="contained"
+                  color="primary"
+                  type="submit"
+                >
+                  Giriş Yap
+                </Button>
 
-
-            <div className='form__list-button'>
-              <md-filled-button >
-                Giriş Yap
-              </md-filled-button>
-
-              <div className='form__list-footer'>
-                <p>Henüz hesabın yok mu? <a href="" onClick={handleLoginPageClick}><span>Kayıt Ol</span></a></p>
+                <div className='form__list-footer'>
+                  <p>Henüz hesabın yok mu? <span onClick={handleLoginPageClick}>Kayıt Ol</span></p>
+                </div>
               </div>
-              
-            </div>
-          </form>
+            </form>
+          </>
         </div>
-
       </div>
     </div>
   );
