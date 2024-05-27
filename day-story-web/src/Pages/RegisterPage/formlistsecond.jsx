@@ -1,94 +1,10 @@
-// import React from 'react';
-// import { useNavigate } from 'react-router-dom';
-// import './scss/RegisterPage.css';
-
-// const FormListSecond = ({ formData, handleChange, onPreviousClick, submit }) => {
-
-//     const navigate = useNavigate();
-//     const handleLoginPageClick = () => {
-//         navigate('/login');
-//     };
-
-//     return (
-//         <>
-//             <div className='form__list-header'>Yeni Hesap Oluştur</div>
-//             <form className='form__list-items'>
-//                 <p>Hesap bilgilerinizi oluşturunuz.</p>
-
-//                 <md-outlined-text-field
-//                     type="email"
-//                     label="Email"
-//                     name="email"
-//                     placeholder="Emailinizi Yazınız."
-//                     value={formData.email}
-//                     onInput={handleChange}
-//                     required
-//                     hasTrailingIcon
-//                 ></md-outlined-text-field>
-
-//                 <md-outlined-text-field
-//                     label="Kullanıcı Adı"
-//                     name="username"
-//                     placeholder="Kullanıcı Adı Belirleyiniz"
-//                     value={formData.username}
-//                     onInput={handleChange}
-//                     required
-//                 ></md-outlined-text-field>
-
-//                 <md-outlined-text-field
-//                     type="password"
-//                     label="Şifre"
-//                     name="password"
-//                     placeholder="Şifre Belirleyiniz."
-//                     value={formData.password}
-//                     onInput={handleChange}
-//                     required
-//                 ></md-outlined-text-field>
-
-//                 <md-outlined-text-field
-//                     type="password"
-//                     label="Şifre Tekrarı"
-//                     name="confirmPassword"
-//                     placeholder="Şifrenizi Onaylayınız."
-//                     value={formData.confirmPassword}
-//                     onInput={handleChange}
-//                     required
-//                 ></md-outlined-text-field>
-
-//                 <div>
-//                     <div className='form__list-buttons'>
-//                         <md-outlined-button
-//                             onClick={onPreviousClick}>
-//                             Back
-//                         </md-outlined-button>
-//                         <md-filled-button onClick={submit}>
-//                             Kayıt Ol
-//                         </md-filled-button>
-//                     </div>
-//                     <center>
-//                         <div className='form__list-footer'>
-//                             <p>Zaten bir hesabın var mı? <a href="" onClick={handleLoginPageClick}><span>Giriş Yap</span></a></p>
-//                         </div>
-//                     </center>
-//                 </div>
-//             </form>
-//         </>
-//     );
-// }
-
-// export default FormListSecond;
-
-
-
-
-import Button from '@mui/material/Button';
-import IconButton from '@mui/material/IconButton';
-import InputAdornment from '@mui/material/InputAdornment';
-import TextField from '@mui/material/TextField';
+import { Button, IconButton, InputAdornment, TextField } from '@mui/material';
 import React, { useState } from 'react';
+import { AiOutlineCloseCircle } from 'react-icons/ai';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
 import './scss/RegisterPage.css';
+
 
 const FormListSecond = ({ formData, handleChange, onPreviousClick, submit }) => {
 
@@ -104,6 +20,15 @@ const FormListSecond = ({ formData, handleChange, onPreviousClick, submit }) => 
         confirmPassword: '',
     });
 
+    const handleClear = (field) => {
+        handleChange({
+            target: {
+                name: field,
+                value: ''
+            }
+        });
+    };
+
     const [showPassword, setShowPassword] = useState(false);
 
     const handleClickShowPassword = () => {
@@ -115,14 +40,18 @@ const FormListSecond = ({ formData, handleChange, onPreviousClick, submit }) => 
     };
     const validate = () => {
         let tempErrors = {};
-        const emailRegex = /^[^\s@]+@[^\s@]+\.com+$/;
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@.$!%*?&])[A-Za-z\d@$!%.*?&]{7,}$/;
 
         tempErrors.email = formData.email ? '' : 'Email gereklidir.';
         if (formData.email && !emailRegex.test(formData.email)) {
-            tempErrors.email = 'Geçersiz email formatı. Örnek format: blabla@blabla.com ';
+            tempErrors.email = 'Geçersiz email formatı. Örnek format: blabla@blabla.blabla';
         }
         tempErrors.username = formData.username ? '' : 'Kullanıcı Adı gereklidir.';
         tempErrors.password = formData.password ? '' : 'Şifre gereklidir.';
+        if (formData.password && !passwordRegex.test(formData.password)) {
+            tempErrors.password = 'Geçersiz şifre formatı. En az 7 karakter. 1 büyük harf ,1 küçük harf ve özel karakter.';
+        }
         tempErrors.confirmPassword = formData.confirmPassword ? '' : 'Şifre Tekrarı gereklidir.';
         if (formData.password && formData.confirmPassword && formData.password !== formData.confirmPassword) {
             tempErrors.confirmPassword = 'Şifreler eşleşmiyor.';
@@ -132,13 +61,14 @@ const FormListSecond = ({ formData, handleChange, onPreviousClick, submit }) => 
 
         return Object.values(tempErrors).every(x => x === '');
     }
-
+    
     const handleSubmit = (e) => {
         e.preventDefault();
         if (validate()) {
             submit();
         }
     }
+
 
     return (
         <>
@@ -158,6 +88,21 @@ const FormListSecond = ({ formData, handleChange, onPreviousClick, submit }) => 
                     helperText={errors.email}
                     fullWidth
                     margin="normal"
+                    InputProps={{
+                        endAdornment: (
+                            formData.email && (
+                                <InputAdornment position="end">
+                                    <IconButton
+                                        aria-label="clear input"
+                                        onClick={() => handleClear('email')}
+                                        edge="end"
+                                    >
+                                        <AiOutlineCloseCircle />
+                                    </IconButton>
+                                </InputAdornment>
+                            )
+                        )
+                    }}
                 />
 
                 <TextField
@@ -171,6 +116,21 @@ const FormListSecond = ({ formData, handleChange, onPreviousClick, submit }) => 
                     helperText={errors.username}
                     fullWidth
                     margin="normal"
+                    InputProps={{
+                        endAdornment: (
+                            formData.username && (
+                                <InputAdornment position="end">
+                                    <IconButton
+                                        aria-label="clear input"
+                                        onClick={() => handleClear('username')}
+                                        edge="end"
+                                    >
+                                        <AiOutlineCloseCircle />
+                                    </IconButton>
+                                </InputAdornment>
+                            )
+                        )
+                    }}
                 />
                 
                 <TextField

@@ -1,13 +1,13 @@
 import {
     Button, FormControl, FormHelperText,
+    IconButton,
+    InputAdornment,
     InputLabel, MenuItem, Select, TextField
-} from '@mui/material'
-
-import React, { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
-import './scss/RegisterPage.css'
-
-
+} from '@mui/material';
+import React, { useState } from 'react';
+import { AiOutlineCloseCircle } from 'react-icons/ai';
+import { useNavigate } from 'react-router-dom';
+import './scss/RegisterPage.css';
 
 const FormListFirst = ({ formData, handleChange, handleGenderChange, nextbutton }) => {
     const navigate = useNavigate();
@@ -41,6 +41,15 @@ const FormListFirst = ({ formData, handleChange, handleGenderChange, nextbutton 
         }
     }
 
+    const handleClear = (field) => {
+        handleChange({
+            target: {
+                name: field,
+                value: ''
+            }
+        });
+    };
+
     return (
         <>
             <div className='form__list-header'>Yeni Hesap Oluştur</div>
@@ -58,7 +67,22 @@ const FormListFirst = ({ formData, handleChange, handleGenderChange, nextbutton 
                     helperText={errors.firstName}
                     fullWidth
                     margin="normal"
-                > </TextField>
+                    InputProps={{
+                        endAdornment: (
+                            formData.firstName && (
+                                <InputAdornment position="end">
+                                    <IconButton
+                                        aria-label="clear input"
+                                        onClick={() => handleClear('firstName')}
+                                        edge="end"
+                                    >
+                                        <AiOutlineCloseCircle />
+                                    </IconButton>
+                                </InputAdornment>
+                            )
+                        )
+                    }}
+                />
 
                 <TextField
                     label="Soyisim"
@@ -71,6 +95,21 @@ const FormListFirst = ({ formData, handleChange, handleGenderChange, nextbutton 
                     helperText={errors.lastName}
                     fullWidth
                     margin="normal"
+                    InputProps={{
+                        endAdornment: (
+                            formData.lastName && (
+                                <InputAdornment position="end">
+                                    <IconButton
+                                        aria-label="clear input"
+                                        onClick={() => handleClear('lastName')}
+                                        edge="end"
+                                    >
+                                        <AiOutlineCloseCircle />
+                                    </IconButton>
+                                </InputAdornment>
+                            )
+                        )
+                    }}
                 />
 
                 <div className='form__list-item'>
@@ -115,14 +154,13 @@ const FormListFirst = ({ formData, handleChange, handleGenderChange, nextbutton 
                     </Button>
 
                     <div className='form__list-footer'>
-                      <p>Zaten bir hesabın var mı? <span onClick={handleLoginPageClick}>Giriş Yap</span></p>
+                        <p>Zaten bir hesabın var mı? <span onClick={handleLoginPageClick}>Giriş Yap</span></p>
                     </div>
                 </div>
-
-
             </form>
         </>
     );
 }
 
 export default FormListFirst;
+
