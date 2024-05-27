@@ -97,14 +97,6 @@ const RegisterPage = () => {
           {currentForm === 1 && <FormListFirst formData={formData} handleChange={handleChange} handleGenderChange={handleGenderChange} nextbutton={toggleForm} />}
           {currentForm === 2 && <FormListSecond formData={formData} handleChange={handleChange} onPreviousClick={toggleForm} submit={registerUser} />}
 
-          <p>{formData.firstName}</p>
-          <p>{formData.lastName}</p>
-          <p>{formData.gender}</p>
-          <p>{formData.birthdate}</p>
-          <p>{formData.email}</p>
-          <p>{formData.username}</p>
-          <p>{formData.password}</p>
-
         </div>
       </div>
     </div>

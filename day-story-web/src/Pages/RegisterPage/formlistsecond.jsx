@@ -1,11 +1,10 @@
-import Button from '@mui/material/Button';
-import IconButton from '@mui/material/IconButton';
-import InputAdornment from '@mui/material/InputAdornment';
-import TextField from '@mui/material/TextField';
+import { Button, IconButton, InputAdornment, TextField } from '@mui/material';
 import React, { useState } from 'react';
+import { AiOutlineCloseCircle } from 'react-icons/ai';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
 import './scss/RegisterPage.css';
+
 
 const FormListSecond = ({ formData, handleChange, onPreviousClick, submit }) => {
 
@@ -20,6 +19,15 @@ const FormListSecond = ({ formData, handleChange, onPreviousClick, submit }) => 
         password: '',
         confirmPassword: '',
     });
+
+    const handleClear = (field) => {
+        handleChange({
+            target: {
+                name: field,
+                value: ''
+            }
+        });
+    };
 
     const [showPassword, setShowPassword] = useState(false);
 
@@ -61,6 +69,7 @@ const FormListSecond = ({ formData, handleChange, onPreviousClick, submit }) => 
         }
     }
 
+
     return (
         <>
             <div className='form__list-header'>Yeni Hesap Oluştur</div>
@@ -79,6 +88,21 @@ const FormListSecond = ({ formData, handleChange, onPreviousClick, submit }) => 
                     helperText={errors.email}
                     fullWidth
                     margin="normal"
+                    InputProps={{
+                        endAdornment: (
+                            formData.email && (
+                                <InputAdornment position="end">
+                                    <IconButton
+                                        aria-label="clear input"
+                                        onClick={() => handleClear('email')}
+                                        edge="end"
+                                    >
+                                        <AiOutlineCloseCircle />
+                                    </IconButton>
+                                </InputAdornment>
+                            )
+                        )
+                    }}
                 />
 
                 <TextField
@@ -92,6 +116,21 @@ const FormListSecond = ({ formData, handleChange, onPreviousClick, submit }) => 
                     helperText={errors.username}
                     fullWidth
                     margin="normal"
+                    InputProps={{
+                        endAdornment: (
+                            formData.username && (
+                                <InputAdornment position="end">
+                                    <IconButton
+                                        aria-label="clear input"
+                                        onClick={() => handleClear('username')}
+                                        edge="end"
+                                    >
+                                        <AiOutlineCloseCircle />
+                                    </IconButton>
+                                </InputAdornment>
+                            )
+                        )
+                    }}
                 />
                 
                 <TextField
