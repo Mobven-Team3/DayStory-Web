@@ -30,7 +30,7 @@
 .form {
   display: flex;
   gap: 20px;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
 }
 .form__description {
@@ -41,7 +41,7 @@
   padding: 60px;
 }
 .form__description-img {
-  height: 400px;
+  height: 580px;
 }
 .form__description-text {
   width: 579px;
@@ -49,10 +49,17 @@
 .form__description-text h2 {
   color: rgb(90, 108, 165);
   margin: 0px;
-  font-size: 22px;
+  font-size: 36px;
   font-family: "Roboto", sans-serif;
-  font-weight: 400;
-  line-height: 28px;
+  font-weight: 700;
+  line-height: 40px;
+  width: auto;
+}
+.form__description-text span {
+  font-family: "Roboto", sans-serif;
+  font-size: 36px;
+  font-weight: 300;
+  line-height: 40px;
 }
 .form__description-text p {
   margin: 8px;
@@ -82,7 +89,7 @@
 }
 .form__list-items {
   display: grid;
-  gap: 35px;
+  gap: 10px;
   justify-content: space-between;
 }
 .form__list-item {
@@ -90,27 +97,24 @@
   justify-content: space-between;
   align-items: center;
   width: 500px;
-}
-.form__list-item md-outlined-text-field {
-  width: 250px;
-}
-.form__list-item md-select-option {
-  background-color: white;
+  gap: 20px;
 }
 .form__list-button {
-  margin: 0px;
+  margin: 20px 0px 0px 0px;
   justify-content: center;
   align-items: center;
   text-align: center;
 }
-.form__list-button md-filled-button {
-  fill: black;
+.form__list-button Button {
+  border-radius: 20px;
   width: 500px;
-  --md-sys-color-primary: rgba(255, 255, 255, 0);
+  padding: 8px;
+  text-transform: none;
+  font-family: "Roboto", sans-serif;
   background: linear-gradient(271.96deg, #6A7FC1 48.21%, #F3AFE5 100%);
 }
 .form__list-buttons {
-  margin: 0px;
+  margin: 20px 0px 0px 0px;
   justify-content: space-between;
   align-items: center;
   text-align: center;
@@ -118,12 +122,19 @@
   width: 500px;
   gap: 10px;
 }
-.form__list-buttons md-outlined-button {
+.form__list-buttons Button {
+  border-radius: 20px;
+  text-transform: none;
   width: 240px;
+  font-family: "Roboto", sans-serif;
+  text-transform: none;
+  padding: 8px;
 }
-.form__list-buttons md-filled-button {
-  width: 240px;
-  --md-sys-color-primary: rgba(255, 255, 255, 0);
+.form__list-buttons-back {
+  background: transparent;
+  color: black;
+}
+.form__list-buttons-submit {
   background: linear-gradient(271.96deg, #6A7FC1 48.21%, #F3AFE5 100%);
 }
 .form__list-footer {
@@ -145,4 +156,6 @@
   line-height: 24px;
   letter-spacing: 0.15px;
   color: rgb(90, 108, 165);
+  text-decoration: underline;
+  cursor: pointer;
 }/*# sourceMappingURL=RegisterPage.css.map */
