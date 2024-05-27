@@ -48,7 +48,30 @@ const LoginPage = () => {
     setLoginData({ ...loginData, password: passwordData });
   };
 
-  const loginHandler = async () => {
+  const [errors, setErrors] = useState({
+    username: '',
+    password: '',
+});
+
+  const validate = () => {
+    let tempErrors = {};
+    const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@.$!%*?&])[A-Za-z\d@$!%.*?&]{7,}$/;
+
+  
+    tempErrors.username = loginData.username ? '' : 'Kullanıcı Adı gereklidir.';
+    tempErrors.password = loginData.password ? '' : 'Şifre gereklidir.';
+    if (loginData.password && !passwordRegex.test(loginData.password)) {
+        tempErrors.password = 'Geçersiz şifre formatı. En az 7 karakter. 1 büyük harf ,1 küçük harf ve özel karakter.';
+    }
+    setErrors(tempErrors);
+
+    return Object.values(tempErrors).every(x => x === '');
+}
+
+
+const loginHandler = async (e) => {
+  e.preventDefault();
+  if (validate()) {
     try {
       const loginRequest = await fetch('', {
         method: 'POST',
@@ -66,13 +89,15 @@ const LoginPage = () => {
 
         navigate('/deneme')
       } else {
-        alert('Giriş Yapılamadısdfsd')
+        alert('giriş yapılamadı backeden')
       }
     } catch (error) {
       console.error(error);
       alert('Giriş Yapılamadı');
-    }
-  };
+    };
+  }
+}
+  
 
 
   return (
@@ -103,6 +128,8 @@ const LoginPage = () => {
                 required
                 value={loginData.username}
                 onChange={usernameHandler}
+                error={!!errors.username}
+                helperText={errors.username}
                 fullWidth
                 margin="normal"
               > </TextField>
@@ -114,6 +141,8 @@ const LoginPage = () => {
                 value={loginData.password}
                 placeholder="Şifrenizi Belirleyiniz."
                 onChange={passwordHandler}
+                error={!!errors.password}
+                helperText={errors.password}
                 required
                 fullWidth
                 margin="normal"
