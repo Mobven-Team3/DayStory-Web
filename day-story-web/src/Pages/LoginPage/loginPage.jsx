@@ -1,18 +1,16 @@
-import {
-  Button,
-  IconButton, InputAdornment,
-  TextField
-} from '@mui/material';
-
 import React, { useState } from 'react';
-import { FaEye, FaEyeSlash } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
+
+//components
+import { Button, IconButton, InputAdornment, TextField } from '@mui/material';
 
 //images
 import logo from '../../../src/assets/images/daystory-logo.png';
 import login_img from '../../../src/assets/images/login_img.png';
 
-
+//icons
+import { AiOutlineCloseCircle } from 'react-icons/ai';
+import { FaEye, FaEyeSlash } from 'react-icons/fa';
 
 const LoginPage = () => {
 
@@ -25,11 +23,11 @@ const LoginPage = () => {
   const [showPassword, setShowPassword] = useState(false);
 
   const handleClickShowPassword = () => {
-      setShowPassword(!showPassword);
+    setShowPassword(!showPassword);
   };
 
   const handleMouseDownPassword = (event) => {
-      event.preventDefault();
+    event.preventDefault();
   };
 
 
@@ -38,40 +36,68 @@ const LoginPage = () => {
     password: ''
   })
 
-  const usernameHandler = (e) => {
-    const usernameData = e.target.value;
-    setLoginData({ ...loginData, username: usernameData });
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setLoginData((prevData) => ({ ...prevData, [name]: value }));
   };
 
-  const passwordHandler = (e) => {
-    const passwordData = e.target.value;
-    setLoginData({ ...loginData, password: passwordData });
-  };
+  const [errors, setErrors] = useState({
+    username: '',
+    password: '',
+  });
 
-  const loginHandler = async () => {
-    try {
-      const loginRequest = await fetch('', {
-        method: 'POST',
-        headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({ username: loginData.username, password: loginData.password })
-      });
-      if (200 <= loginRequest.status && loginRequest.status <= 299) {
-        const content = await loginRequest.json();
-        console.log(content)
-        window.localStorage.setItem('token', content.accessToken);
-        window.localStorage.setItem('userId', content.userId);
+  const validate = () => {
+    let tempErrors = {};
+    const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@.$!%*?&])[A-Za-z\d@$!%.*?&]{7,}$/;
 
-        navigate('/deneme')
-      } else {
-        alert('Giriş Yapılamadısdfsd')
-      }
-    } catch (error) {
-      console.error(error);
-      alert('Giriş Yapılamadı');
+
+    tempErrors.username = loginData.username ? '' : 'Kullanıcı Adı gereklidir.';
+    tempErrors.password = loginData.password ? '' : 'Şifre gereklidir.';
+    if (loginData.password && !passwordRegex.test(loginData.password)) {
+      tempErrors.password = 'Geçersiz şifre formatı. En az 7 karakter. 1 büyük harf ,1 küçük harf ve özel karakter.';
     }
+    setErrors(tempErrors);
+
+    return Object.values(tempErrors).every(x => x === '');
+  }
+
+
+  const loginHandler = async (e) => {
+    e.preventDefault();
+    if (validate()) {
+      try {
+        const loginRequest = await fetch('', {
+          method: 'POST',
+          headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({ username: loginData.username, password: loginData.password })
+        });
+        if (200 <= loginRequest.status && loginRequest.status <= 299) {
+          const content = await loginRequest.json();
+          console.log(content)
+          window.localStorage.setItem('token', content.accessToken);
+          window.localStorage.setItem('userId', content.userId);
+
+          navigate('/deneme')
+        } else {
+          alert('giriş yapılamadı backeden')
+        }
+      } catch (error) {
+        console.error(error);
+        alert('Giriş Yapılamadı');
+      };
+    }
+  }
+
+  const handleClear = (field) => {
+    handleChange({
+      target: {
+        name: field,
+        value: ''
+      }
+    });
   };
 
 
@@ -83,9 +109,9 @@ const LoginPage = () => {
       </header>
 
       <div className='form'>
-      <div className='form__description'>
-        <div className='form__description-text'>
-            <h2>Day<span>Story</span> ’e Hoşgeldin!</h2>
+        <div className='form__description'>
+          <div className='form__description-text'>
+            <h2>Day<span>Story</span> ’e Tekrar Hoşgeldin!</h2>
           </div>
           <img className='form__description-img' src={login_img} alt="main_image" />
         </div>
@@ -102,9 +128,27 @@ const LoginPage = () => {
                 placeholder="Kullanıcı Adınızı Yazınız."
                 required
                 value={loginData.username}
-                onChange={usernameHandler}
+                onChange={handleChange}
+                error={!!errors.username}
+                helperText={errors.username}
                 fullWidth
                 margin="normal"
+                InputProps={{
+                  endAdornment: (
+                    loginData.username && (
+                      <InputAdornment position="end">
+                        <IconButton
+                          aria-label="clear input"
+                          onClick={() => handleClear('username')}
+                          edge="end"
+                        >
+                          <AiOutlineCloseCircle />
+                        </IconButton>
+                      </InputAdornment>
+                    )
+                  )
+                }}
+
               > </TextField>
 
               <TextField
@@ -113,7 +157,9 @@ const LoginPage = () => {
                 name="password"
                 value={loginData.password}
                 placeholder="Şifrenizi Belirleyiniz."
-                onChange={passwordHandler}
+                onChange={handleChange}
+                error={!!errors.password}
+                helperText={errors.password}
                 required
                 fullWidth
                 margin="normal"
