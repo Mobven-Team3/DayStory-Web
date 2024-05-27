@@ -1,55 +1,125 @@
-import '@material/web/all';
-import React from 'react';
-import './scss/RegisterPage.css';
+import {
+    Button, FormControl, FormHelperText,
+    InputLabel, MenuItem, Select, TextField
+} from '@mui/material'
 
-const FormListFirst = ({ formData, handleChange, handleGenderChange }) => {
+import React, { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
+import './scss/RegisterPage.css'
+
+
+
+const FormListFirst = ({ formData, handleChange, handleGenderChange, nextbutton }) => {
+    const navigate = useNavigate();
+    const handleLoginPageClick = () => {
+        navigate('/login');
+    };
+
+    const [errors, setErrors] = useState({
+        firstName: '',
+        lastName: '',
+        gender: '',
+        birthdate: '',
+    });
+
+    const validate = () => {
+        let tempErrors = {};
+        tempErrors.firstName = formData.firstName ? '' : 'İsim gereklidir.';
+        tempErrors.lastName = formData.lastName ? '' : 'Soyisim gereklidir.';
+        tempErrors.gender = formData.gender ? '' : 'Cinsiyet seçimi gereklidir.';
+        tempErrors.birthdate = formData.birthdate ? '' : 'Doğum tarihi gereklidir.';
+
+        setErrors(tempErrors);
+
+        return Object.values(tempErrors).every(x => x === '');
+    }
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        if (validate()) {
+            nextbutton();
+        }
+    }
+
     return (
         <>
             <div className='form__list-header'>Yeni Hesap Oluştur</div>
-            <form className='form__list-items'>
+            <form className='form__list-items' onSubmit={handleSubmit} noValidate>
                 <p>Kişisel bilgilerinizi giriniz.</p>
 
-                <md-outlined-text-field
+                <TextField
                     label="İsim"
                     name="firstName"
                     placeholder="İsminizi yazınız."
                     value={formData.firstName}
-                    onInput={handleChange}
+                    onChange={handleChange}
                     required
-                ></md-outlined-text-field>
+                    error={!!errors.firstName}
+                    helperText={errors.firstName}
+                    fullWidth
+                    margin="normal"
+                > </TextField>
 
-                <md-outlined-text-field
+                <TextField
                     label="Soyisim"
                     name="lastName"
                     placeholder="Soyisminizi yazınız."
                     value={formData.lastName}
-                    onInput={handleChange}
+                    onChange={handleChange}
                     required
-                ></md-outlined-text-field>
-
+                    error={!!errors.lastName}
+                    helperText={errors.lastName}
+                    fullWidth
+                    margin="normal"
+                />
 
                 <div className='form__list-item'>
-                    <md-outlined-select
-                        label="Cinsiyet"
-                        name="gender"
-                        value={formData.gender}
-                        onInput={handleGenderChange}
-                        required
-                    >
-                        <md-select-option value="Kadın">Kadın</md-select-option>
-                        <md-select-option value="Erkek">Erkek</md-select-option>
-                        <md-select-option value="Belirtme">Belirtme</md-select-option>
-                    </md-outlined-select>
+                    <FormControl fullWidth margin="normal" error={!!errors.gender}>
+                        <InputLabel>Cinsiyet</InputLabel>
+                        <Select
+                            label="Cinsiyet"
+                            name="gender"
+                            value={formData.gender}
+                            onChange={handleGenderChange}
+                            required
+                        >
+                            <MenuItem value="Kadın">Kadın</MenuItem>
+                            <MenuItem value="Erkek">Erkek</MenuItem>
+                            <MenuItem value="Belirtme">Belirtme</MenuItem>
+                        </Select>
+                        {errors.gender && <FormHelperText>{errors.gender}</FormHelperText>}
+                    </FormControl>
 
-                    <md-outlined-text-field
+                    <TextField
                         type="date"
                         name="birthdate"
                         label="Doğum Tarihi"
                         value={formData.birthdate}
-                        onInput={handleChange}
+                        onChange={handleChange}
                         required
-                    ></md-outlined-text-field>
+                        error={!!errors.birthdate}
+                        helperText={errors.birthdate}
+                        fullWidth
+                        margin="normal"
+                        InputLabelProps={{ shrink: true }}
+                    />
                 </div>
+
+                <div className='form__list-button'>
+                    <Button
+                        variant="contained"
+                        color="primary"
+                        type="submit"
+                    >
+                        Devam
+                    </Button>
+
+                    <div className='form__list-footer'>
+                      <p>Zaten bir hesabın var mı? <span onClick={handleLoginPageClick}>Giriş Yap</span></p>
+                    </div>
+                </div>
+
+
             </form>
         </>
     );

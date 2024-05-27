@@ -1,6 +1,6 @@
 import '@material/web/all';
 import React, { useState } from 'react';
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 import './scss/RegisterPage.css';
 
@@ -10,12 +10,12 @@ import FormListSecond from './formlistsecond';
 
 //images
 import logo from '../../../src/assets/images/daystory-logo.png';
-import günlük from '../../../src/assets/images/daystory.png';
+import register_img from '../../../src/assets/images/register_img.png';
 
 
 const RegisterPage = () => {
   const navigate = useNavigate();
-  const [loading, setLoading] = useState(false);
+  const [setLoading] = useState(false);
   const [currentForm, setCurrentForm] = useState(1);
 
   const [formData, setFormData] = useState({
@@ -45,45 +45,7 @@ const RegisterPage = () => {
     }));
   };
 
-  const validateForm1 = () => {
-    if (!formData.firstName.trim()) {
-      alert("İsim boş bırakılamaz.");
-      return false;
-    }
-    if (!formData.lastName.trim()) {
-      alert("Soyisim boş bırakılamaz.");
-      return false;
-    }
-    if (!formData.gender.trim()) {
-      alert("Cinsiyet boş bırakılamaz.");
-      return false;
-    }
-    if (!formData.birthdate.trim()) {
-      alert("Doğum Tarihi boş bırakılamaz.");
-      return false;
-    }
-    return true;
-  };
-
-  const validateForm2 = () => {
-    if (!formData.email.trim()) {
-      alert("Email boş bırakılamaz.");
-      return false;
-    }
-    if (!formData.username.trim()) {
-      alert("Kullanıcı adı boş bırakılamaz.");
-      return false;
-    }
-    if (!formData.password.trim()) {
-      alert("Şifre boş bırakılamaz.");
-      return false;
-    }
-    return true;
-  };
-
   const registerUser = async () => {
-    if (!validateForm2()) return;
-
     try {
       const response = await fetch("", {
         method: "POST",
@@ -107,12 +69,11 @@ const RegisterPage = () => {
 
   const toggleForm = () => {
     if (currentForm === 1) {
-      if (validateForm1()) {
         setCurrentForm(2);
-      }
     } else {
       setCurrentForm(1);
-    }
+    };
+    
   };
 
 
@@ -125,33 +86,16 @@ const RegisterPage = () => {
 
       <div className='form'>
         <div className='form__description'>
-          <img className='form__description-img' src={günlük} alt="main_image" />
-          <div className='form__description-text'>
-            <h2>Her sayfanın bir hikaye anlattığı yer</h2>
-            <p>Sizin anılarınızı kalıcı hale getiriyoruz</p>
+        <div className='form__description-text'>
+            <h2>Day<span>Story</span> ’e Hoşgeldin!</h2>
           </div>
+          <img className='form__description-img' src={register_img} alt="main_image" />
         </div>
 
         <div className='form__list'>
 
-          {currentForm === 1 && <FormListFirst formData={formData} handleChange={handleChange} handleGenderChange={handleGenderChange} />}
-          {currentForm === 2 && <FormListSecond formData={formData} handleChange={handleChange} registerUser={registerUser} loading={loading} />}
-          
-          <div className='form__list-footer'>
-            <md-filled-button type="button" onClick={toggleForm} >
-              {currentForm === 1 ? 'Devam' : 'Geri'}
-            </md-filled-button>
-
-            {currentForm === 2 && (
-              <md-filled-button type="button" onClick={registerUser} >
-                Kayıt ol
-              </md-filled-button>
-            )}
-
-            <p>Zaten bir hesabın var mı?<Link to="#" >Giriş Yap</Link> </p>
-
-
-          </div>
+          {currentForm === 1 && <FormListFirst formData={formData} handleChange={handleChange} handleGenderChange={handleGenderChange} nextbutton={toggleForm} />}
+          {currentForm === 2 && <FormListSecond formData={formData} handleChange={handleChange} onPreviousClick={toggleForm} submit={registerUser} />}
 
           <p>{formData.firstName}</p>
           <p>{formData.lastName}</p>
