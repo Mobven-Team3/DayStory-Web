@@ -1,12 +1,12 @@
 import React from 'react';
 
 //css
-import './today-scss/TodayPage.css';
+import './note-scss/NotePage.css';
 
 //components
 import Footer from '../Footer/footer';
 
-const GalleryPage = () => {
+const NotePage = () => {
 
     return (
         <>
@@ -17,5 +17,5 @@ const GalleryPage = () => {
     );
 };
 
-export default GalleryPage;
+export default NotePage;
 

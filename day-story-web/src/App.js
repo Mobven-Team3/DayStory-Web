@@ -6,11 +6,11 @@ import '@mui/material';
 
 //components
 import Gallery from './Pages/GalleryPage/GalleryPage';
-import LoginPage from './Pages/LoginPage/LoginPage';
+import LoginPage from './Pages/LoginPage/loginPage';
 import MainPage from './Pages/MainPage/MainPage';
+import TodayPage from './Pages/NotePage/NotePage';
 import ReceptionPage from './Pages/ReceptionPage/ReceptionPage';
 import RegisterPage from './Pages/RegisterPage/RegisterPage';
-import TodayPage from './Pages/TodayPage/TodayPage';
 
 
 function App() {

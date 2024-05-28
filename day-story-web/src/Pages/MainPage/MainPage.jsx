@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { FaUserCircle } from 'react-icons/fa';
 import logo from '../../../src/assets/images/daystory-logo.png';
 import GallaryPage from '../GalleryPage/GalleryPage';
-import TodayPage from '../TodayPage/TodayPage';
+import TodayPage from '../NotePage/NotePage';
 import './mainpage-scss/MainPage.css';
 
 const MainPage = () => {
