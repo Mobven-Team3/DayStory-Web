@@ -1,7 +1,13 @@
+.navigation{
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+
 .nav {
+    padding: 20px 76px 30px 76px;
     background: #FAFAFA;
     filter: drop-shadow(0px 0.5px 0.5px rgba(0, 0, 0, 0.25));
-    padding: 30px 100px;
     justify-content: space-between;
     display: flex;
 
@@ -86,3 +92,4 @@
     }
 }
 
+}

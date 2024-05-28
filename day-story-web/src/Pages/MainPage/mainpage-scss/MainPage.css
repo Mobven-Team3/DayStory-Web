@@ -1,18 +1,24 @@
-.nav {
+.navigation {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+}
+.navigation .nav {
+  padding: 20px 76px 30px 76px;
   background: #FAFAFA;
   filter: drop-shadow(0px 0.5px 0.5px rgba(0, 0, 0, 0.25));
-  padding: 30px 100px;
   justify-content: space-between;
   display: flex;
 }
-.nav__logo {
+.navigation .nav__logo {
   align-items: center;
   display: flex;
 }
-.nav__logo-img {
+.navigation .nav__logo-img {
   width: 58px;
 }
-.nav__logo-text {
+.navigation .nav__logo-text {
   font-family: "Roboto", sans-serif;
   color: rgb(90, 108, 165);
   font-weight: 400;
@@ -20,21 +26,21 @@
   line-height: 40px;
   margin: 0px;
 }
-.nav__logo-text span {
+.navigation .nav__logo-text span {
   font-family: "Roboto", sans-serif;
   font-size: 32px;
   font-weight: 300;
   line-height: 40px;
   text-align: left;
 }
-.nav__items {
+.navigation .nav__items {
   display: flex;
   gap: 37px;
   justify-content: space-between;
   align-items: center;
   text-align: center;
 }
-.nav__items p {
+.navigation .nav__items p {
   margin: 0px;
   padding: 0px;
   font-family: "Roboto", sans-serif;
@@ -46,11 +52,11 @@
   position: relative;
   cursor: pointer;
 }
-.nav__items p.active {
+.navigation .nav__items p.active {
   font-weight: 700;
   color: #5A6CA5;
 }
-.nav__items p.active::after {
+.navigation .nav__items p.active::after {
   content: "";
   position: absolute;
   left: 0;
@@ -60,13 +66,12 @@
   background-color: #5A6CA5;
   animation: slide-in 0.3s ease-in-out;
 }
-.nav__items p:hover {
+.navigation .nav__items p:hover {
   color: #5A6CA5;
 }
-.nav__items p svg {
+.navigation .nav__items p svg {
   display: block;
 }
-
 @keyframes slide-in {
   from {
     width: 0;
@@ -74,4 +79,4 @@
   to {
     width: 100%;
   }
-}/*# sourceMappingURL=nabvar.css.map */
+}/*# sourceMappingURL=MainPage.css.map */

@@ -1,0 +1,90 @@
+.gallery-container {
+    margin-top: 108px;
+    padding: 13px 80px;
+
+
+    .days {
+        display: grid;
+        grid-template-columns: repeat(7, 1fr);
+        gap: 12px;
+        justify-content: space-between;
+
+    }
+
+    .calendar {
+        width: 160px;
+        display: grid;
+        gap: 7px;
+        justify-content: center;
+        align-items: center;
+        background-color: rgba(250, 250, 250, 1);
+        border-radius: 5px;
+        border: 1px solid rgba(219, 219, 219, 1);
+        padding: 5px;
+
+        &.today {
+            background-color: green;
+            color: #fff;
+        }
+
+        &__header {
+            font-family: "Roboto", sans-serif;
+            display: flex;
+            gap: 2px;
+            align-items: center;
+
+            &-dayno {
+                margin: 0px;
+                font-size: 25px;
+            }
+
+            &-dayname {
+                margin: 0px;
+                font-size: 10px;
+            }
+
+            &-month {
+                margin: 0px;
+                font-size: 12px;
+            }
+
+        }
+
+        &__image {
+
+            width: 152px;
+            height: 152px;
+            background-color: rgba(241, 240, 240, 1);
+
+        }
+
+    }
+
+
+
+    .month__container {
+        align-items: center;
+        justify-content: center;
+
+
+        &-text {
+            text-align: center;
+            font-family: "Roboto", sans-serif;
+            font-size: 40px;
+            font-weight: 300;
+            line-height: 16px;
+            color: rgba(73, 69, 79, 1);
+            padding: 20px;
+
+
+        }
+
+
+    }
+
+
+
+
+
+
+}
