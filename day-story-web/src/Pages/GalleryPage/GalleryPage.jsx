@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from 'react';
 
 //css
-import './gallary-scss/gallary.css';
+import './gallery-scss/gallery.css';
 
 //components
 import Footer from '../Footer/footer';
-import Navbar from '../Navbar/Navbar';
 
 const GalleryPage = () => {
     const [date, setDate] = useState(new Date());
@@ -80,7 +79,7 @@ const GalleryPage = () => {
 
     return (
         <>
-            <Navbar />
+            {/* <Navbar /> */}
             <div className='gallery-container'>
                 {Array.from({ length: currentDate.getMonth() + 1 }, (_, i) => renderCalendarForMonth(2024, i)).reverse()}
             </div>

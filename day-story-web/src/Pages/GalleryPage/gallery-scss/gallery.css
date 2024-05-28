@@ -1,4 +1,5 @@
 .gallery-container {
+  margin-top: 108px;
   padding: 13px 80px;
 }
 .gallery-container .days {
@@ -57,4 +58,4 @@
   line-height: 16px;
   color: rgb(73, 69, 79);
   padding: 20px;
-}/*# sourceMappingURL=gallary.css.map */
+}/*# sourceMappingURL=gallery.css.map */

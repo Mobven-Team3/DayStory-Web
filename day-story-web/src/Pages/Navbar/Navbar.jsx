@@ -1,22 +1,16 @@
 import React, { useState } from 'react';
+import { FaUserCircle } from 'react-icons/fa';
+import logo from '../../../src/assets/images/daystory-logo.png';
 import './navbar-scss/nabvar.css';
 
-// images
-import logo from '../../../src/assets/images/daystory-logo.png';
-
-// icons
-import { FaUserCircle } from 'react-icons/fa';
-
-
 const NavigationBar = () => {
-    const [activePage, setActivePage] = useState('Galeri');
+    const [activePage, setActivePage] = useState('');
 
-    const handlePageChange = (page) => {
+    const handlePageChangeGallary = (page) => { 
         setActivePage(page);
     };
 
     return (
-
         <div className='navigation'>
             <nav className="nav">
                 <div className="nav__logo">
@@ -25,20 +19,23 @@ const NavigationBar = () => {
                 </div>
                 <div className="nav__items">
                     <p
-                        className={`nav__item ${activePage === 'Galeri' ? 'active' : ''}`}
-                        onClick={() => handlePageChange('Galeri')}
+                        to="/gallary"
+                        className={`nav__item ${activePage === 'gallery' ? 'active' : ''}`} 
+                        onClick={() => handlePageChangeGallary('gallery')} 
                     >
                         Galeri
                     </p>
                     <p
-                        className={`nav__item ${activePage === 'Bu Gün' ? 'active' : ''}`}
-                        onClick={() => handlePageChange('Bu Gün')}
+                        to="/deneme" 
+                        className={`nav__item ${activePage === 'bugun' ? 'active' : ''}`} 
+                        onClick={() => handlePageChangeGallary('bugun')}
                     >
                         Bu Gün
                     </p>
                     <p
-                        className={`nav__item ${activePage === 'Profile' ? 'active' : ''}`}
-                        onClick={() => handlePageChange('Profile')}
+                        to="/profile" 
+                        className={`nav__item ${activePage === 'profile' ? 'active' : ''}`} 
+                        onClick={() => handlePageChangeGallary('profile')} 
                     >
                         <FaUserCircle size={30} />
                     </p>
@@ -49,4 +46,5 @@ const NavigationBar = () => {
 };
 
 export default NavigationBar;
+
 

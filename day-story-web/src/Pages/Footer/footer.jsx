@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import './footer-scss/footer.css';
 
 // images
@@ -7,11 +7,7 @@ import './footer-scss/footer.css';
 
 
 const Footer = () => {
-    const [activePage, setActivePage] = useState('Galeri');
 
-    const handlePageChange = (page) => {
-        setActivePage(page);
-    };
 
     return (
 
