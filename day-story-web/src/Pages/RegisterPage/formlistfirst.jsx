@@ -1,13 +1,19 @@
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+
+//css
+import './scss/RegisterPage.css';
+
+// components
 import {
-    Button, FormControl, FormHelperText,
-    IconButton,
-    InputAdornment,
+    Button, FormControl, FormHelperText, IconButton, InputAdornment,
     InputLabel, MenuItem, Select, TextField
 } from '@mui/material';
-import React, { useState } from 'react';
+
+//icons
 import { AiOutlineCloseCircle } from 'react-icons/ai';
-import { useNavigate } from 'react-router-dom';
-import './scss/RegisterPage.css';
+
+
 
 const FormListFirst = ({ formData, handleChange, handleGenderChange, nextbutton }) => {
     const navigate = useNavigate();
