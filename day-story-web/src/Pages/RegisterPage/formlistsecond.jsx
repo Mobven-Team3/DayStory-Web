@@ -1,9 +1,15 @@
-import { Button, IconButton, InputAdornment, TextField } from '@mui/material';
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+
+//css
+import './scss/RegisterPage.css';
+
+//components
+import { Button, IconButton, InputAdornment, TextField } from '@mui/material';
+
+//icons
 import { AiOutlineCloseCircle } from 'react-icons/ai';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
-import { useNavigate } from 'react-router-dom';
-import './scss/RegisterPage.css';
 
 
 const FormListSecond = ({ formData, handleChange, onPreviousClick, submit }) => {

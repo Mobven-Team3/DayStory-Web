@@ -1,7 +1,7 @@
-import '@material/web/all';
 import React, { useState } from 'react';
 import { useNavigate } from "react-router-dom";
 
+//css
 import './scss/RegisterPage.css';
 
 //components
