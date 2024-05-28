@@ -5,7 +5,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import '@mui/material';
 
 //components
-import Deneme from './Pages/Deneme/Deneme';
+import Deneme from './Pages/Deneme/deneme';
 import Gallery from './Pages/GalleryPage/GalleryPage';
 import LoginPage from './Pages/LoginPage/LoginPage';
 import ReceptionPage from './Pages/ReceptionPage/ReceptionPage';
