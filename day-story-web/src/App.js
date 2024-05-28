@@ -1,11 +1,16 @@
 import React from 'react';
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import Deneme from './Pages/Deneme/deneme';
-import LoginPage from './Pages/LoginPage/loginPage';
+
+//libraries
+import '@mui/material';
+
+//components
+import Deneme from './Pages/Deneme/Deneme';
+import Gallery from './Pages/GaleryPage/GaleryPage';
+import LoginPage from './Pages/LoginPage/LoginPage';
 import ReceptionPage from './Pages/ReceptionPage/ReceptionPage';
 import RegisterPage from './Pages/RegisterPage/RegisterPage';
 
-import '/node_modules/@material/web/all';
 
 function App() {
   return (
@@ -15,6 +20,7 @@ function App() {
         <Route path='/register' element={<RegisterPage />} />
         <Route path='/login' element={<LoginPage />} />
         <Route path='/deneme' element={<Deneme />} />
+        <Route path='/gallery' element={<Gallery />} />
       </Routes>
     </BrowserRouter>
   );
