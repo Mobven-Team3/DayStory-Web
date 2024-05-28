@@ -6,7 +6,7 @@ import '@mui/material';
 
 //components
 import Deneme from './Pages/Deneme/Deneme';
-import Gallery from './Pages/GaleryPage/GaleryPage';
+import Gallery from './Pages/GalleryPage/GalleryPage';
 import LoginPage from './Pages/LoginPage/LoginPage';
 import ReceptionPage from './Pages/ReceptionPage/ReceptionPage';
 import RegisterPage from './Pages/RegisterPage/RegisterPage';
