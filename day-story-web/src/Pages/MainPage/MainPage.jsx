@@ -7,7 +7,7 @@ import TodayPage from '../NotePage/NotePage';
 import './mainpage-scss/MainPage.css';
 
 const MainPage = () => {
-    const [activePage, setActivePage] = useState('');
+    const [activePage, setActivePage] = useState('gallery');
 
     const handlePageChange = (page) => { 
         setActivePage(page);
