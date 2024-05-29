@@ -114,9 +114,6 @@ import React, { useEffect, useState } from 'react';
 //css
 import './gallery-scss/gallery.css';
 
-//components
-import Footer from '../Footer/footer';
-
 const GalleryPage = () => {
     const [images, setImages] = useState([]);
     const [selectedDate, setSelectedDate] = useState(new Date());
@@ -187,15 +184,15 @@ const GalleryPage = () => {
     };
 
     return (
-        <>
-                <div className='gallery-container'>
+            <div className='gallery-container'>
+                <div className="month__container">
+                    <h2 className='month__container-text'>Mayıs 2024</h2>
                     <div className="days">
                         {renderImages()}
                     </div>
                 </div>
-                <Footer />
-            </>
-            );
+            </div>
+    );
 };
 
-            export default GalleryPage;
+export default GalleryPage;
