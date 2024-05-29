@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { FaUserCircle } from 'react-icons/fa';
 import logo from '../../../src/assets/images/daystory-logo.png';
+import Footer from '../Footer/footer';
 import GallaryPage from '../GalleryPage/GalleryPage';
 import TodayPage from '../NotePage/NotePage';
 import './mainpage-scss/MainPage.css';
@@ -45,6 +46,9 @@ const MainPage = () => {
 
             {activePage === 'gallery' && <GallaryPage />}
             {activePage === 'todaypage' && <TodayPage />}
+
+
+            <Footer  /> 
         </center>
     );
 };
