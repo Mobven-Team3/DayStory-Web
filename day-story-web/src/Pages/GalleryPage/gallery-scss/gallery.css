@@ -1,4 +1,8 @@
 .gallery-container {
+  width: -moz-max-content;
+  width: max-content;
+  height: -moz-max-content;
+  height: max-content;
   margin-top: 108px;
   padding: 13px 80px;
 }
@@ -47,6 +51,7 @@
   background-color: rgb(241, 240, 240);
 }
 .gallery-container .month__container {
+  text-align: left;
   align-items: center;
   justify-content: center;
 }
