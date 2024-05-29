@@ -34,7 +34,7 @@ const FormListFirst = ({ formData, handleChange, handleGenderChange, nextbutton 
         tempErrors.lastName = formData.lastName ? '' : 'Soyisim gereklidir.';
         tempErrors.gender = formData.gender ? '' : 'Cinsiyet seçimi gereklidir.';
         if (!formData.birthdate) {
-            tempErrors.birthdate = 'Doğum tarihi gereklidir.';
+            tempErrors.gender = formData.gender ? '' :  'Doğum tarihi gereklidir.';
         } else {
             const year = formData.birthdate.split('-')[0];
             tempErrors.birthdate = year.length === 4 ? '' : 'Yıl 4 haneli olmalıdır.';
