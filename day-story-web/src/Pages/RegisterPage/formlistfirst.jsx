@@ -151,6 +151,10 @@ const FormListFirst = ({ formData, handleChange, handleGenderChange, nextbutton 
                         fullWidth
                         margin="normal"
                         InputLabelProps={{ shrink: true }}
+                        inputProps={{
+                            max: "2024-12-30",
+                            min: "1993-01-01"
+                        }}
                     />
                 </div>
 

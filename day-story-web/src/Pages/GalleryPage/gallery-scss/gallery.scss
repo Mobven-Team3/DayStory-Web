@@ -1,4 +1,6 @@
 .gallery-container {
+    width: max-content;
+    height: max-content;
     margin-top: 108px;
     padding: 13px 80px;
 
@@ -63,12 +65,12 @@
 
 
     .month__container {
+        text-align: left;
         align-items: center;
         justify-content: center;
 
 
         &-text {
-            text-align: center;
             font-family: "Roboto", sans-serif;
             font-size: 40px;
             font-weight: 300;
