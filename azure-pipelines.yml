@@ -1,0 +1,64 @@
+# Node.js
+# Build a general Node.js project with npm.
+# Add steps that analyze code, save build artifacts, deploy, and more:
+# https://docs.microsoft.com/azure/devops/pipelines/languages/javascript
+
+trigger:
+- main
+
+pool:
+  name: Default
+  demands:
+  - agent.name -equals test-deneme
+steps:
+- task: NodeTool@0
+  inputs:
+    versionSpec: '18.x'
+  displayName: 'Install Node.js'
+
+
+- task: Npm@1
+  displayName: 'npm install'
+  inputs:
+    verbose: false
+
+- task: Npm@1
+  displayName: 'npm run build'
+  inputs:
+    command: custom
+    verbose: false
+    customCommand: 'run build'
+
+# - script: |
+#     sonar-scanner.bat -D"sonar.projectKey=MenuMaster-FrontEnd--T3-" -D"sonar.sources=." -D"sonar.host.url=http://localhost:9000" -D"sonar.token=sqa_302c8afa9b9b6410b5de145de201da1cd9ed75ba"
+#   displayName: 'SonarQube'
+
+- task: SSH@0
+  inputs:
+    sshEndpoint: 'mobven-ssh'
+    runOptions: 'commands'
+    commands: |
+      systemctl stop apache2
+
+    readyTimeout: '20000'
+  displayName: 'Service-Stop'
+
+
+- task: CopyFilesOverSSH@0
+  inputs:
+    sshEndpoint: 'mobven-ssh'
+    sourceFolder: '$(Pipeline.Workspace)/s/build'
+    contents: '**'
+    targetFolder: '/var/www/DayStory/html'
+    readyTimeout: '20000'
+  displayName: 'CopyFilesOverSSH'
+  
+- task: SSH@0
+  inputs:
+    sshEndpoint: 'mobven-ssh'
+    runOptions: 'commands'
+    commands: |
+      systemctl start apache2
+
+    readyTimeout: '20000'
+  displayName: 'Service-Start'
