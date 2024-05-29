@@ -1,5 +1,9 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
 .container {
+  width: -moz-max-content;
+  width: max-content;
+  height: -moz-max-content;
+  height: max-content;
   padding: 43px 78px;
 }
 
@@ -29,22 +33,19 @@
 
 .form {
   display: flex;
-  gap: 20px;
-  justify-content: space-between;
+  gap: 30px;
+  justify-content: space-around;
   align-items: center;
 }
 .form__description {
-  width: 579px;
+  width: 450px;
   justify-content: center;
   align-items: center;
   text-align: center;
   padding: 60px;
 }
 .form__description-img {
-  height: 580px;
-}
-.form__description-text {
-  width: 579px;
+  height: 500px;
 }
 .form__description-text h2 {
   color: rgb(90, 108, 165);

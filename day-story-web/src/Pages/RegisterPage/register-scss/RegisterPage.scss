@@ -3,6 +3,8 @@
 
 
 .container {
+    width: max-content;
+    height: max-content;
     padding: 43px 78px;
 }
 
@@ -36,13 +38,13 @@
 
 .form {
     display: flex;
-    gap: 20px;
-    justify-content: space-between;
+    gap: 30px;
+    justify-content: space-around;
     align-items: center;
 
 
     &__description {
-        width: 579px;
+        width: 450px;
         justify-content: center;
         align-items: center;
         text-align: center;
@@ -50,11 +52,10 @@
 
 
         &-img {
-            height: 580px;
+            height: 500px;
         }
 
         &-text {
-            width: 579px;
 
             h2 {
                 color: rgba(90, 108, 165, 1);

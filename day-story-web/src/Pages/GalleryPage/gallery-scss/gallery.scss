@@ -1,29 +1,32 @@
+
 .gallery-container {
-    margin-top: 108px;
-    padding: 13px 80px;
+    width: max-content;
+    height: max-content;
+    margin: 138px 0px ; 
+    padding: 0px 80px;
 
 
     .days {
         display: grid;
-        grid-template-columns: repeat(7, 1fr);
+        grid-template-columns: repeat(6, 1fr);
         gap: 12px;
         justify-content: space-between;
 
     }
 
     .calendar {
-        width: 160px;
+       text-align: left;
         display: grid;
-        gap: 7px;
-        justify-content: center;
+        gap: 10px;
+        justify-content: space-around;
         align-items: center;
         background-color: rgba(250, 250, 250, 1);
         border-radius: 5px;
         border: 1px solid rgba(219, 219, 219, 1);
-        padding: 5px;
+        padding: 10px;
 
         &.today {
-            background-color: green;
+            background-color: rgba(90, 108, 165, 1);
             color: #fff;
         }
 
@@ -51,30 +54,27 @@
         }
 
         &__image {
-
-            width: 152px;
-            height: 152px;
+            width: 150px;
+            height: 150px;
             background-color: rgba(241, 240, 240, 1);
 
         }
 
     }
 
-
-
     .month__container {
+        text-align: left;
         align-items: center;
         justify-content: center;
 
 
         &-text {
-            text-align: center;
             font-family: "Roboto", sans-serif;
             font-size: 40px;
             font-weight: 300;
             line-height: 16px;
             color: rgba(73, 69, 79, 1);
-            padding: 20px;
+            padding: 20px 10px;
 
 
         }

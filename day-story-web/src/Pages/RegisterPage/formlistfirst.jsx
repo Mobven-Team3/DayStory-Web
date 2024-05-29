@@ -33,8 +33,12 @@ const FormListFirst = ({ formData, handleChange, handleGenderChange, nextbutton 
         tempErrors.firstName = formData.firstName ? '' : 'İsim gereklidir.';
         tempErrors.lastName = formData.lastName ? '' : 'Soyisim gereklidir.';
         tempErrors.gender = formData.gender ? '' : 'Cinsiyet seçimi gereklidir.';
-        tempErrors.birthdate = formData.birthdate ? '' : 'Doğum tarihi gereklidir.';
-
+        if (!formData.birthdate) {
+            tempErrors.gender = formData.gender ? '' :  'Doğum tarihi gereklidir.';
+        } else {
+            const year = formData.birthdate.split('-')[0];
+            tempErrors.birthdate = year.length === 4 ? '' : 'Yıl 4 haneli olmalıdır.';
+        }
         setErrors(tempErrors);
 
         return Object.values(tempErrors).every(x => x === '');
@@ -147,6 +151,10 @@ const FormListFirst = ({ formData, handleChange, handleGenderChange, nextbutton 
                         fullWidth
                         margin="normal"
                         InputLabelProps={{ shrink: true }}
+                        inputProps={{
+                            max: "2024-12-30",
+                            min: "1993-01-01"
+                        }}
                     />
                 </div>
 
