@@ -20,7 +20,7 @@
 //                 const data = await response.json();
 //                 setImages(data);
 //             };
-    
+
 //             fetchImages();
 //             setDate(new Date());
 //             setCurrentDate(new Date());
@@ -109,83 +109,6 @@
 
 // ------------------------------------------------------------------------------------------------------------------------------------
 
-// import React, { useEffect, useState } from 'react';
-
-// //css
-// import './gallery-scss/gallery.css';
-
-// //components
-// import Footer from '../Footer/footer';
-
-// const GalleryPage = () => {
-//     const [images, setImages] = useState([]);
-//     const [selectedDate, setSelectedDate] = useState(new Date());
-//     const today = new Date();
-
-//     useEffect(() => {
-//         const fetchImages = async () => {
-//             // Bu statik veri, API'den gelecek verilerin yerine kullanılacak
-//             const data = [
-//                 { date: '2024-05-15', imageUrl: '', title: 'img' },
-//                 { date: '2024-05-20', imageUrl: '', title: 'img' },
-//                 { date: '2024-06-10', imageUrl: '', title: 'img' },
-//                 { date: '2024-06-15', imageUrl: '', title: 'img' },
-//                 { date: '2024-05-29', imageUrl: '', title: 'img' },
-//             ];
-            
-//             // Güncel tarihli veri kontrolü
-//             const todayExists = data.some(img => new Date(img.date).toDateString() === today.toDateString());
-
-//             // Eğer güncel tarihli veri yoksa ekle
-//             if (!todayExists) {
-//                 data.unshift({ date: today.toISOString(), imageUrl: 'https://www.petimce.com/i/l/002/0024015_en-populer-kedi-cinsleri-ve-benzersiz-ozellikleri.jpeg', title: 'Today\'s Image' });
-//             }
-            
-//             setImages(data);
-//             setSelectedDate(today);
-//         };
-
-//         fetchImages();
-//     }, [today]);
-
-//     const renderImages = () => {
-//         return images.map((img, index) => {
-//             const imgDate = new Date(img.date);
-//             const isSelected = selectedDate.toDateString() === imgDate.toDateString();
-//             return (
-//                 <button
-//                     key={index}
-//                     className={`calendar ${isSelected ? 'today' : ''}`}
-//                     onClick={() => setSelectedDate(imgDate)}
-//                 >
-//                     <div className="calendar__header">
-//                         <p className="calendar__header-dayno">{imgDate.getDate()}</p>
-//                         <div>
-//                             <p className="calendar__header-dayname">{imgDate.toLocaleDateString('tr-TR', { weekday: 'long' })}</p>
-//                             <p className="calendar__header-month">{imgDate.toLocaleDateString('tr-TR', { month: 'long', year: 'numeric' })}</p>
-//                         </div>
-//                     </div>
-//                     <img src={img.imageUrl} alt={`Image ${index + 1}`} className="calendar__image" />
-//                 </button>
-//             );
-//         });
-//     };
-
-//     return (
-//         <>
-//             <div className='gallery-container'>
-//                 <div className="days">
-//                     {renderImages()}
-//                 </div>
-//             </div>
-//             <Footer />
-//         </>
-//     );
-// };
-
-// export default GalleryPage;
-
-
 import React, { useEffect, useState } from 'react';
 
 //css
@@ -197,11 +120,10 @@ import Footer from '../Footer/footer';
 const GalleryPage = () => {
     const [images, setImages] = useState([]);
     const [selectedDate, setSelectedDate] = useState(new Date());
-    const today = new Date();
 
     useEffect(() => {
         const fetchImages = async () => {
-            // Bu statik veri, API'den gelecek verilerin yerine kullanılacak
+            const today = new Date();
             const data = [
                 { date: '2024-05-15', imageUrl: 'https://r.resimlink.com/r_hXi-nT4.png', title: 'img' },
                 { date: '2024-05-16', imageUrl: 'https://r.resimlink.com/NcqWARS_3Q.png', title: 'img' },
@@ -213,13 +135,10 @@ const GalleryPage = () => {
                 { date: '2024-05-22', imageUrl: 'https://r.resimlink.com/r_hXi-nT4.png', title: 'img' },
                 { date: '2024-05-23', imageUrl: 'https://r.resimlink.com/NcqWARS_3Q.png', title: 'img' },
                 { date: '2024-05-24', imageUrl: 'https://r.resimlink.com/r_hXi-nT4.png', title: 'img' },
-                { date: '2024-05-19', imageUrl: 'https://r.resimlink.com/NcqWARS_3Q.png', title: 'img' },
-                { date: '2024-05-20', imageUrl: 'https://r.resimlink.com/r_hXi-nT4.png', title: 'img' },
-                { date: '2024-05-21', imageUrl: 'https://r.resimlink.com/NcqWARS_3Q.png', title: 'img' },
-                { date: '2024-05-22', imageUrl: 'https://r.resimlink.com/r_hXi-nT4.png', title: 'img' },
-                { date: '2024-05-23', imageUrl: 'https://r.resimlink.com/NcqWARS_3Q.png', title: 'img' },
-                { date: '2024-05-24', imageUrl: 'https://r.resimlink.com/r_hXi-nT4.png', title: 'img' },
-            
+                { date: '2024-05-25', imageUrl: 'https://r.resimlink.com/NcqWARS_3Q.png', title: 'img' },
+                { date: '2024-05-26', imageUrl: 'https://r.resimlink.com/r_hXi-nT4.png', title: 'img' },
+                { date: '2024-05-27', imageUrl: 'https://r.resimlink.com/NcqWARS_3Q.png', title: 'img' },
+                { date: '2024-05-28', imageUrl: 'https://r.resimlink.com/r_hXi-nT4.png', title: 'img' },
             ];
 
             // Güncel tarihli veri kontrolü
@@ -240,9 +159,8 @@ const GalleryPage = () => {
             setImages(sortedData);
             setSelectedDate(today);
         };
-
         fetchImages();
-    }, [today]);
+    }, []);
 
     const renderImages = () => {
         return images.map((img, index) => {
@@ -261,7 +179,8 @@ const GalleryPage = () => {
                             <p className="calendar__header-month">{imgDate.toLocaleDateString('tr-TR', { month: 'long', year: 'numeric' })}</p>
                         </div>
                     </div>
-                    <img src={img.imageUrl} alt={`Image ${index + 1}`} className="calendar__image" />
+                    <img src={img.imageUrl} alt={`aysu`} className="calendar__image" />
+
                 </button>
             );
         });
@@ -269,14 +188,14 @@ const GalleryPage = () => {
 
     return (
         <>
-            <div className='gallery-container'>
-                <div className="days">
-                    {renderImages()}
+                <div className='gallery-container'>
+                    <div className="days">
+                        {renderImages()}
+                    </div>
                 </div>
-            </div>
-            <Footer />
-        </>
-    );
+                <Footer />
+            </>
+            );
 };
 
-export default GalleryPage;
+            export default GalleryPage;
