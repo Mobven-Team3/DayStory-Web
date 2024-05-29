@@ -1,20 +1,20 @@
 .gallery-container {
     width: max-content;
     height: max-content;
-    margin: 108px 0px ; 
+    margin: 120px 0px ; 
     padding: 13px 80px;
 
 
     .days {
         display: grid;
-        grid-template-columns: repeat(7, 1fr);
+        grid-template-columns: repeat(6, 1fr);
         gap: 12px;
         justify-content: space-between;
 
     }
 
     .calendar {
-       
+       text-align: left;
         display: grid;
         gap: 10px;
         justify-content: space-around;
@@ -54,7 +54,7 @@
 
         &__image {
             width: 150px;
-            height: 180px;
+            height: 150px;
             background-color: rgba(241, 240, 240, 1);
 
         }
