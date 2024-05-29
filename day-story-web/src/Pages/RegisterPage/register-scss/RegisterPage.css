@@ -33,22 +33,19 @@
 
 .form {
   display: flex;
-  gap: 20px;
-  justify-content: space-between;
+  gap: 30px;
+  justify-content: space-around;
   align-items: center;
 }
 .form__description {
-  width: 579px;
+  width: 450px;
   justify-content: center;
   align-items: center;
   text-align: center;
   padding: 60px;
 }
 .form__description-img {
-  height: 580px;
-}
-.form__description-text {
-  width: 579px;
+  height: 500px;
 }
 .form__description-text h2 {
   color: rgb(90, 108, 165);
