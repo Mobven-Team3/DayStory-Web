@@ -93,7 +93,6 @@ const FormListSecond = ({ formData, handleChange, onPreviousClick, submit }) => 
                     error={!!errors.email}
                     helperText={errors.email}
                     fullWidth
-                    margin="normal"
                     InputProps={{
                         endAdornment: (
                             formData.email && (
@@ -121,7 +120,6 @@ const FormListSecond = ({ formData, handleChange, onPreviousClick, submit }) => 
                     error={!!errors.username}
                     helperText={errors.username}
                     fullWidth
-                    margin="normal"
                     InputProps={{
                         endAdornment: (
                             formData.username && (
@@ -150,7 +148,6 @@ const FormListSecond = ({ formData, handleChange, onPreviousClick, submit }) => 
                     error={!!errors.password}
                     helperText={errors.password}
                     fullWidth
-                    margin="normal"
                     InputProps={{
                         endAdornment: (
                             <InputAdornment position="end">
@@ -178,7 +175,6 @@ const FormListSecond = ({ formData, handleChange, onPreviousClick, submit }) => 
                     error={!!errors.confirmPassword}
                     helperText={errors.confirmPassword}
                     fullWidth
-                    margin="normal"
                     InputProps={{
                         endAdornment: (
                             <InputAdornment position="end">

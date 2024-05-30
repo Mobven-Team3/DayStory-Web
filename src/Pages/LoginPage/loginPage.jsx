@@ -132,7 +132,6 @@ const LoginPage = () => {
                 error={!!errors.username}
                 helperText={errors.username}
                 fullWidth
-                margin="normal"
                 InputProps={{
                   endAdornment: (
                     loginData.username && (
@@ -162,7 +161,6 @@ const LoginPage = () => {
                 helperText={errors.password}
                 required
                 fullWidth
-                margin="normal"
                 InputProps={{
                   endAdornment: (
                     <InputAdornment position="end">
