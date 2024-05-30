@@ -100,6 +100,9 @@
   width: 500px;
   gap: 20px;
 }
+.form__list-item .cinsiyet {
+  width: 240px;
+}
 .form__list-button {
   margin: 20px 0px 0px 0px;
   justify-content: center;
