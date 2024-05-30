@@ -109,6 +109,95 @@
 
 // ------------------------------------------------------------------------------------------------------------------------------------
 
+// import React, { useEffect, useState } from 'react';
+
+// //css
+// import './gallery-scss/gallery.css';
+
+// const GalleryPage = () => {
+//     const [images, setImages] = useState([]);
+//     const [selectedDate, setSelectedDate] = useState(new Date());
+
+//     useEffect(() => {
+//         const fetchImages = async () => {
+//             const today = new Date();
+//             const data = [
+//                 { date: '2024-05-15', imageUrl: 'https://r.resimlink.com/r_hXi-nT4.png', title: 'img' },
+//                 { date: '2024-05-16', imageUrl: 'https://r.resimlink.com/NcqWARS_3Q.png', title: 'img' },
+//                 { date: '2024-05-17', imageUrl: 'https://r.resimlink.com/r_hXi-nT4.png', title: 'img' },
+//                 { date: '2024-05-18', imageUrl: 'https://r.resimlink.com/r_hXi-nT4.png', title: 'img' },
+//                 { date: '2024-05-19', imageUrl: 'https://r.resimlink.com/NcqWARS_3Q.png', title: 'img' },
+//                 { date: '2024-05-20', imageUrl: 'https://r.resimlink.com/r_hXi-nT4.png', title: 'img' },
+//                 { date: '2024-05-21', imageUrl: 'https://r.resimlink.com/NcqWARS_3Q.png', title: 'img' },
+//                 { date: '2024-05-22', imageUrl: 'https://r.resimlink.com/r_hXi-nT4.png', title: 'img' },
+//                 { date: '2024-05-23', imageUrl: 'https://r.resimlink.com/NcqWARS_3Q.png', title: 'img' },
+//                 { date: '2024-05-24', imageUrl: 'https://r.resimlink.com/r_hXi-nT4.png', title: 'img' },
+//                 { date: '2024-05-25', imageUrl: 'https://r.resimlink.com/NcqWARS_3Q.png', title: 'img' },
+//                 { date: '2024-05-26', imageUrl: 'https://r.resimlink.com/r_hXi-nT4.png', title: 'img' },
+//                 { date: '2024-05-27', imageUrl: 'https://r.resimlink.com/NcqWARS_3Q.png', title: 'img' },
+//                 { date: '2024-05-28', imageUrl: 'https://r.resimlink.com/r_hXi-nT4.png', title: 'img' },
+//             ];
+
+//             // Güncel tarihli veri kontrolü
+//             const todayExists = data.some(img => new Date(img.date).toDateString() === today.toDateString());
+
+//             // Eğer güncel tarihli veri yoksa ekle
+//             if (!todayExists) {
+//                 data.unshift({
+//                     date: today.toISOString(),
+//                     imageUrl: 'https://r.resimlink.com/ErUWpXBD.png',
+//                     title: "Today's Image"
+//                 });
+//             }
+
+//             // Verileri tarihe göre sıralama
+//             const sortedData = data.sort((a, b) => new Date(b.date) - new Date(a.date));
+
+//             setImages(sortedData);
+//             setSelectedDate(today);
+//         };
+//         fetchImages();
+//     }, []);
+
+//     const renderImages = () => {
+//         return images.map((img, index) => {
+//             const imgDate = new Date(img.date);
+//             const isSelected = selectedDate.toDateString() === imgDate.toDateString();
+//             return (
+//                 <button
+//                     key={index}
+//                     className={`calendar ${isSelected ? 'today' : ''}`}
+//                     onClick={() => setSelectedDate(imgDate)}
+//                 >
+//                     <div className="calendar__header">
+//                         <p className="calendar__header-dayno">{imgDate.getDate()}</p>
+//                         <div>
+//                             <p className="calendar__header-dayname">{imgDate.toLocaleDateString('tr-TR', { weekday: 'long' })}</p>
+//                             <p className="calendar__header-month">{imgDate.toLocaleDateString('tr-TR', { month: 'long', year: 'numeric' })}</p>
+//                         </div>
+//                     </div>
+//                     <img src={img.imageUrl} alt={`aysu`} className="calendar__image" />
+
+//                 </button>
+//             );
+//         });
+//     };
+
+//     return (
+//             <div className='gallery-container'>
+//                 <div className="month__container">
+//                     <h2 className='month__container-text'>Mayıs 2024</h2>
+//                     <div className="days">
+//                         {renderImages()}
+//                     </div>
+//                 </div>
+//             </div>
+//     );
+// };
+
+// export default GalleryPage;
+
+
 import React, { useEffect, useState } from 'react';
 
 //css
@@ -122,10 +211,16 @@ const GalleryPage = () => {
         const fetchImages = async () => {
             const today = new Date();
             const data = [
+                { date: '2024-04-15', imageUrl: 'https://r.resimlink.com/r_hXi-nT4.png', title: 'img' },
+                { date: '2024-04-16', imageUrl: 'https://r.resimlink.com/NcqWARS_3Q.png', title: 'img' },
+                { date: '2024-04-17', imageUrl: 'https://r.resimlink.com/r_hXi-nT4.png', title: 'img' },
+                { date: '2024-04-18', imageUrl: 'https://r.resimlink.com/r_hXi-nT4.png', title: 'img' },
+                { date: '2024-04-19', imageUrl: 'https://r.resimlink.com/NcqWARS_3Q.png', title: 'img' },
                 { date: '2024-05-15', imageUrl: 'https://r.resimlink.com/r_hXi-nT4.png', title: 'img' },
                 { date: '2024-05-16', imageUrl: 'https://r.resimlink.com/NcqWARS_3Q.png', title: 'img' },
                 { date: '2024-05-17', imageUrl: 'https://r.resimlink.com/r_hXi-nT4.png', title: 'img' },
                 { date: '2024-05-18', imageUrl: 'https://r.resimlink.com/r_hXi-nT4.png', title: 'img' },
+                { date: '2024-03-15', imageUrl: 'https://r.resimlink.com/r_hXi-nT4.png', title: 'img' },
                 { date: '2024-05-19', imageUrl: 'https://r.resimlink.com/NcqWARS_3Q.png', title: 'img' },
                 { date: '2024-05-20', imageUrl: 'https://r.resimlink.com/r_hXi-nT4.png', title: 'img' },
                 { date: '2024-05-21', imageUrl: 'https://r.resimlink.com/NcqWARS_3Q.png', title: 'img' },
@@ -159,7 +254,7 @@ const GalleryPage = () => {
         fetchImages();
     }, []);
 
-    const renderImages = () => {
+    const renderImages = (images) => {
         return images.map((img, index) => {
             const imgDate = new Date(img.date);
             const isSelected = selectedDate.toDateString() === imgDate.toDateString();
@@ -177,21 +272,44 @@ const GalleryPage = () => {
                         </div>
                     </div>
                     <img src={img.imageUrl} alt={`aysu`} className="calendar__image" />
-
                 </button>
             );
         });
     };
 
-    return (
-            <div className='gallery-container'>
-                <div className="month__container">
-                    <h2 className='month__container-text'>Mayıs 2024</h2>
-                    <div className="days">
-                        {renderImages()}
-                    </div>
+    const groupImagesByMonth = () => {
+        const groupedImages = images.reduce((acc, img) => {
+            const date = new Date(img.date);
+            const monthYear = date.toLocaleDateString('tr-TR', { month: 'long', year: 'numeric' });
+
+            if (!acc[monthYear]) {
+                acc[monthYear] = [];
+            }
+
+            acc[monthYear].push(img);
+            return acc;
+        }, {});
+
+        return groupedImages;
+    };
+
+    const renderMonths = () => {
+        const groupedImages = groupImagesByMonth();
+
+        return Object.keys(groupedImages).map((monthYear, index) => (
+            <div className="month__container" key={index}>
+                <h2 className='month__container-text'>{monthYear}</h2>
+                <div className="days">
+                    {renderImages(groupedImages[monthYear])}
                 </div>
             </div>
+        ));
+    };
+
+    return (
+        <div className='gallery-container'>
+            {renderMonths()}
+        </div>
     );
 };
 
