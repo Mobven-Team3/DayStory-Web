@@ -359,18 +359,18 @@
 // export default FormListFirst;
 
 
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import {
     Button, FormControl, FormHelperText, IconButton, InputAdornment,
     InputLabel, MenuItem, Select, TextField
 } from '@mui/material';
-import { AiOutlineCloseCircle } from 'react-icons/ai';
-import { LocalizationProvider, DatePicker } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import { DatePicker } from '@mui/x-date-pickers/DatePicker';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import dayjs from 'dayjs';
-import './register-scss/RegisterPage.css';
-
+import 'dayjs/locale/tr';
+import React, { useState } from 'react';
+import { AiOutlineCloseCircle } from 'react-icons/ai';
+import { useNavigate } from 'react-router-dom';
 
 
 // import {, ThemeProvider, createTheme} from '@mui/material';
@@ -442,6 +442,8 @@ const FormListFirst = ({ formData, handleChange, handleGenderChange, nextbutton 
         return Object.values(tempErrors).every(x => x === '');
     }
 
+
+
     const handleSubmit = (e) => {
         e.preventDefault();
         if (validate()) {
@@ -458,9 +460,13 @@ const FormListFirst = ({ formData, handleChange, handleGenderChange, nextbutton 
         });
     };
 
+    const handleDate = (date) => {
+        console.log(date);
+    };
+
     return (
         // <ThemeProvider theme={theme}>
-       <>
+        <>
             <div className='form__list-header'>Yeni Hesap Oluştur</div>
             <form className='form__list-items' onSubmit={handleSubmit} noValidate>
                 <p>Kişisel bilgilerinizi giriniz.</p>
@@ -538,31 +544,34 @@ const FormListFirst = ({ formData, handleChange, handleGenderChange, nextbutton 
                         {errors.gender && <FormHelperText>{errors.gender}</FormHelperText>}
                     </FormControl>
 
-                    <LocalizationProvider dateAdapter={AdapterDayjs}>
-                        <DatePicker
-                            label="Doğum Tarihi"
+                    <LocalizationProvider
+                        dateAdapter={AdapterDayjs} 
+                    >
+                        <DatePicker 
                             value={formData.birthdate ? dayjs(formData.birthdate) : null}
                             onChange={(date) => handleChange({
                                 target: {
                                     name: 'birthdate',
-                                    value: date ? date.format('YYYY-MM-DD') : ''
+                                    value: date ? date.format('MM-DD-YYYY') : ''
                                 }
                             })}
-                            renderInput={(params) => (
-                                <TextField
-                                    {...params}
-                                    required
-                                    error={!!errors.birthdate}
-                                    helperText={errors.birthdate}
-                                    fullWidth
-                                    margin="normal"
-                                    InputLabelProps={{ shrink: true }}
-                                />
-                            )}
-                            maxDate={dayjs('2024-12-30')}
-                            minDate={dayjs('1993-01-01')}
+                            disableFuture
+                            slotProps={{
+                                textField: {
+                                    helperText: errors.birthdate,
+                                    error: errors.birthdate
+                                },
+                            }}
                         />
+
                     </LocalizationProvider>
+
+
+
+
+
+
+
                 </div>
 
                 <div className='form__list-button'>
@@ -579,7 +588,7 @@ const FormListFirst = ({ formData, handleChange, handleGenderChange, nextbutton 
                     </div>
                 </div>
             </form>
-            </>
+        </>
     );
 }
 
