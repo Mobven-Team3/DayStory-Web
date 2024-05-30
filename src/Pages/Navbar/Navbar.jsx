@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { FaUserCircle } from 'react-icons/fa';
 import logo from '../../../src/assets/images/daystory-logo.png';
-import './navbar-scss/nabvar.css';
+import './navbar-scss/_nabvar.scss';
 
 const NavigationBar = () => {
     const [activePage, setActivePage] = useState('');

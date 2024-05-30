@@ -1,5 +1,5 @@
 import React from 'react';
-import './footer-scss/footer.css';
+import './footer-scss/_footer.scss';
 
 // images
 import logo from '../../../src/assets/images/daystory-logo.png';
