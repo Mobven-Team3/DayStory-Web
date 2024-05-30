@@ -87,7 +87,7 @@ const RegisterPage = () => {
       <div className='form'>
         <div className='form__description'>
         <div className='form__description-text'>
-            <h2>Day<span>Story</span> ’e Hoşgeldin!</h2>
+            <h2>Day<span>Story</span> ’e Hoş Geldin!</h2>
           </div>
           <img className='form__description-img' src={register_img} alt="main_image" />
         </div>
