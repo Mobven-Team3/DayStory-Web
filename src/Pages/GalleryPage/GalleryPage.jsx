@@ -142,7 +142,7 @@ const GalleryPage = () => {
                 { date: '2024-05-25', imageUrl: 'https://r.resimlink.com/NcqWARS_3Q.png', title: 'img' },
                 { date: '2024-05-26', imageUrl: 'https://r.resimlink.com/r_hXi-nT4.png', title: 'img' },
                 { date: '2024-05-27', imageUrl: 'https://r.resimlink.com/NcqWARS_3Q.png', title: 'img' },
-                { date: '2024-05-28', imageUrl: 'https://r.resimlink.com/r_hXi-nT4.png', title: 'img' },
+                { date: '2024-05-29', imageUrl: 'https://r.resimlink.com/r_hXi-nT4.png', title: 'img' },
             ];
 
             // Güncel tarihli veri kontrolü
