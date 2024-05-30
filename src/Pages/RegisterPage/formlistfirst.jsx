@@ -460,10 +460,6 @@ const FormListFirst = ({ formData, handleChange, handleGenderChange, nextbutton 
         });
     };
 
-    const handleDate = (date) => {
-        console.log(date);
-    };
-
     return (
         // <ThemeProvider theme={theme}>
         <>
