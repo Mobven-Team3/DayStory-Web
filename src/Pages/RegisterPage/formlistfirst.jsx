@@ -477,7 +477,6 @@ const FormListFirst = ({ formData, handleChange, handleGenderChange, nextbutton 
                     error={!!errors.firstName}
                     helperText={errors.firstName}
                     fullWidth
-                    margin="normal"
                     InputProps={{
                         endAdornment: (
                             formData.firstName && (
@@ -505,7 +504,6 @@ const FormListFirst = ({ formData, handleChange, handleGenderChange, nextbutton 
                     error={!!errors.lastName}
                     helperText={errors.lastName}
                     fullWidth
-                    margin="normal"
                     InputProps={{
                         endAdornment: (
                             formData.lastName && (
@@ -535,15 +533,17 @@ const FormListFirst = ({ formData, handleChange, handleGenderChange, nextbutton 
                         >
                             <MenuItem value="Kadın">Kadın</MenuItem>
                             <MenuItem value="Erkek">Erkek</MenuItem>
-                            <MenuItem value="Belirtme">Belirtme</MenuItem>
+                            <MenuItem value="Belirtmek İstemiyorum">Belirtmek İstemiyorum</MenuItem>
+                            <MenuItem value="Diğer">Diğer</MenuItem>
+
                         </Select>
                         {errors.gender && <FormHelperText>{errors.gender}</FormHelperText>}
                     </FormControl>
 
-                    <LocalizationProvider
+                    <LocalizationProvider 
                         dateAdapter={AdapterDayjs} 
                     >
-                        <DatePicker 
+                        <DatePicker
                             value={formData.birthdate ? dayjs(formData.birthdate) : null}
                             onChange={(date) => handleChange({
                                 target: {
@@ -561,12 +561,6 @@ const FormListFirst = ({ formData, handleChange, handleGenderChange, nextbutton 
                         />
 
                     </LocalizationProvider>
-
-
-
-
-
-
 
                 </div>
 
