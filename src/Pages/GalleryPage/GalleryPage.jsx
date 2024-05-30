@@ -4,7 +4,7 @@
 // import React, { useEffect, useState } from 'react';
 
 // //css
-// import './gallery-scss/gallery.css';
+// import './gallery-scss/_gallery.scss';
 
 // //components
 // import Footer from '../Footer/footer';
@@ -113,7 +113,7 @@
 import React, { useEffect, useState } from 'react';
 
 //css
-import './gallery-scss/gallery.css';
+import './gallery-scss/_gallery.scss';
 
 const GalleryPage = () => {
     const [images, setImages] = useState([]);

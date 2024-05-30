@@ -4,7 +4,7 @@ import logo from '../../../src/assets/images/daystory-logo.png';
 import Footer from '../Footer/footer';
 import GallaryPage from '../GalleryPage/GalleryPage';
 import TodayPage from '../NotePage/NotePage';
-import './mainpage-scss/MainPage.css';
+import './mainpage-scss/_mainPage.scss';
 
 const MainPage = () => {
     const [activePage, setActivePage] = useState('gallery');
