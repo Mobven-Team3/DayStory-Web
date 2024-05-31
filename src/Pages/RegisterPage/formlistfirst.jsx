@@ -85,6 +85,7 @@ const FormListFirst = ({ formData, handleChange, handleGenderChange, nextbutton 
     const validate = () => {
         let tempErrors = {};
         const maxLength = 50;
+        const minLength = 2;
     
         const calculateAge = (birthdate) => {
             const birthYear = new Date(birthdate).getFullYear();
@@ -95,11 +96,15 @@ const FormListFirst = ({ formData, handleChange, handleGenderChange, nextbutton 
         tempErrors.firstName = formData.firstName ? '' : 'İsim gereklidir.';
         if (formData.firstName && formData.firstName.length > maxLength) {
             tempErrors.firstName = 'İsim 50 karakterden fazla olamaz.';
+        } if (formData.firstName && formData.firstName.length < minLength) {
+            tempErrors.firstName = 'İsim 2 karakterden az olamaz.';
         }
     
         tempErrors.lastName = formData.lastName ? '' : 'Soyisim gereklidir.';
         if (formData.lastName && formData.lastName.length > maxLength) {
             tempErrors.lastName = 'Soyisim 50 karakterden fazla olamaz.';
+        }if (formData.lastName && formData.lastName.length < minLength) {
+            tempErrors.lastName = 'İsim 2 karakterden az olamaz.';
         }
     
         // tempErrors.gender = formData.gender ? '' : 'Cinsiyet seçimi gereklidir.';
@@ -221,10 +226,10 @@ const FormListFirst = ({ formData, handleChange, handleGenderChange, nextbutton 
                             onChange={handleGenderChange}
                             required
                         >
-                            <MenuItem value="Kadın">Kadın</MenuItem>
-                            <MenuItem value="Erkek">Erkek</MenuItem>
-                            <MenuItem value="Belirtmek İstemiyorum">Belirtmek İstemiyorum</MenuItem>
-                            <MenuItem value="Diğer">Diğer</MenuItem>
+                            <MenuItem value="Female">Kadın</MenuItem>
+                            <MenuItem value="Male">Erkek</MenuItem>
+                            <MenuItem value="NotSpecified">Belirtmek İstemiyorum</MenuItem>
+                            <MenuItem value="Other">Diğer</MenuItem>
 
                         </Select>
                         {errors.gender && <FormHelperText>{errors.gender}</FormHelperText>}

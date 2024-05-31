@@ -51,6 +51,7 @@ const FormListSecond = ({ formData, handleChange, onPreviousClick, submit }) => 
         const usernameRegex = /^[a-z0-9_-]+$/;
         const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@.$!%*?&])[A-Za-z\d@$!%.*?&]{7,}$/;
         const maxLength = 50;
+        const minLength = 3;
     
         // Email validation
         tempErrors.email = formData.email ? '' : 'Email gereklidir.';
@@ -59,6 +60,9 @@ const FormListSecond = ({ formData, handleChange, onPreviousClick, submit }) => 
         }
         if (formData.email && formData.email.length > maxLength) {
             tempErrors.email = 'Email 50 karakterden fazla olamaz.';
+        }
+        if (formData.email && formData.email.length < minLength) {
+            tempErrors.email = 'İsim 2 karakterden az olamaz.';
         }
     
         // Username validation
@@ -69,6 +73,9 @@ const FormListSecond = ({ formData, handleChange, onPreviousClick, submit }) => 
         if (formData.username && formData.username.length > maxLength) {
             tempErrors.username = 'Kullanıcı Adı 50 karakterden fazla olamaz.';
         }
+        if (formData.username && formData.username.length < minLength) {
+            tempErrors.username = 'İsim 2 karakterden az olamaz.';
+        }
     
         // Password validation
         tempErrors.password = formData.password ? '' : 'Şifre gereklidir.';
@@ -78,6 +85,9 @@ const FormListSecond = ({ formData, handleChange, onPreviousClick, submit }) => 
         if (formData.password && formData.password.length > maxLength) {
             tempErrors.password = 'Şifre 50 karakterden fazla olamaz.';
         }
+        if (formData.password && formData.password.length < minLength) {
+            tempErrors.password = 'İsim 2 karakterden az olamaz.';
+        }
     
         // Confirm Password validation
         tempErrors.confirmPassword = formData.confirmPassword ? '' : 'Şifre Tekrarı gereklidir.';
@@ -86,6 +96,9 @@ const FormListSecond = ({ formData, handleChange, onPreviousClick, submit }) => 
         }
         if (formData.password && formData.confirmPassword && formData.password !== formData.confirmPassword) {
             tempErrors.confirmPassword = 'Şifreler eşleşmiyor.';
+        }
+        if (formData.password && formData.password.length < minLength) {
+            tempErrors.password = 'İsim 2 karakterden az olamaz.';
         }
     
         setErrors(tempErrors);
