@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { useNavigate } from "react-router-dom";
 
@@ -12,11 +13,11 @@ import FormListSecond from './formlistsecond';
 import logo from '../../../src/assets/images/daystory-logo.png';
 import register_img from '../../../src/assets/images/register_img.png';
 
-
 const RegisterPage = () => {
   const navigate = useNavigate();
-  const [setLoading] = useState(false);
+  const [loading, setLoading] = useState(false);
   const [currentForm, setCurrentForm] = useState(1);
+
 
   const [formData, setFormData] = useState({
     firstName: "",
@@ -45,9 +46,11 @@ const RegisterPage = () => {
     }));
   };
 
+
   const registerUser = async () => {
+    setLoading(true);
     try {
-      const response = await fetch("", {
+      const response = await fetch("https://5c5eb3ddf47a409bbc789c200ed6f8f9.api.mockbin.io/", {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
@@ -56,16 +59,18 @@ const RegisterPage = () => {
       });
 
       if (response.ok) {
-        setLoading(true);
-        navigate("/girişyap");
+        navigate("/login");
       } else {
         const errorData = await response.json();
         console.error("Registration failed:", errorData);
       }
     } catch (error) {
       console.error("Error registering user:", error);
+    } finally {
+      setLoading(false);
     }
   };
+
 
   const toggleForm = () => {
     if (currentForm === 1) {
@@ -84,23 +89,37 @@ const RegisterPage = () => {
         <p className='header__text'>Day<span>Story</span></p>
       </header>
 
-      <div className='form'>
-        <div className='form__description'>
-        <div className='form__description-text'>
-            <h2>Day<span>Story</span>’e Hoş geldin!</h2>
+      
+      {loading ? (
+        <p>Kayıt Olunuyor...</p>
+      ) : (
+        <div className='form'>
+          <div className='form__description'>
+            <div className='form__description-text'>
+              <h2>Day<span>Story</span>’e Hoş geldin!</h2>
+            </div>
+            <img className='form__description-img' src={register_img} alt="main_image" />
           </div>
-          <img className='form__description-img' src={register_img} alt="main_image" />
-        </div>
 
-        <div className='form__list'>
+          <div className='form__list'>
 
-          {currentForm === 1 && <FormListFirst formData={formData} handleChange={handleChange} handleGenderChange={handleGenderChange} nextbutton={toggleForm} />}
-          {currentForm === 2 && <FormListSecond formData={formData} handleChange={handleChange} onPreviousClick={toggleForm} submit={registerUser} />}
+            {currentForm === 1 && <FormListFirst formData={formData} handleChange={handleChange} handleGenderChange={handleGenderChange} nextbutton={toggleForm} loading={loading} />}
+            {currentForm === 2 && <FormListSecond formData={formData} handleChange={handleChange} onPreviousClick={toggleForm} submit={registerUser} loading={loading} />}
           
+          </div>
         </div>
-      </div>
+)}
     </div>
   );
 }
 
 export default RegisterPage;
+
+
+
+
+
+
+
+
+
