@@ -221,10 +221,10 @@ const FormListFirst = ({ formData, handleChange, handleGenderChange, nextbutton 
                             onChange={handleGenderChange}
                             required
                         >
-                            <MenuItem value="Kadın">Kadın</MenuItem>
-                            <MenuItem value="Erkek">Erkek</MenuItem>
-                            <MenuItem value="Belirtmek İstemiyorum">Belirtmek İstemiyorum</MenuItem>
-                            <MenuItem value="Diğer">Diğer</MenuItem>
+                            <MenuItem value="Female">Kadın</MenuItem>
+                            <MenuItem value="Male">Erkek</MenuItem>
+                            <MenuItem value="NotSpecified">Belirtmek İstemiyorum</MenuItem>
+                            <MenuItem value="Other">Diğer</MenuItem>
 
                         </Select>
                         {errors.gender && <FormHelperText>{errors.gender}</FormHelperText>}
