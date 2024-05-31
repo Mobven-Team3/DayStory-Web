@@ -242,7 +242,7 @@ const FormListSecond = ({ formData, handleChange, onPreviousClick, submit }) => 
                         <Button className="form__list-buttons-submit"
                             variant="contained"
                             type="submit"
-                            onClick={submit}
+                            onClick={handleSubmit}
                         >
                             Kayıt Ol
                         </Button>
