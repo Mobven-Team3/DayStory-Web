@@ -51,7 +51,7 @@ const FormListSecond = ({ formData, handleChange, onPreviousClick, submit }) => 
         const usernameRegex = /^[a-z0-9_-]+$/;
         const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@.$!%*?&])[A-Za-z\d@$!%.*?&]{7,}$/;
         const maxLength = 50;
-        const minLength = 2;
+        const minLength = 3;
     
         // Email validation
         tempErrors.email = formData.email ? '' : 'Email gereklidir.';
