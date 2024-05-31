@@ -107,16 +107,7 @@ const FormListFirst = ({ formData, handleChange, handleGenderChange, nextbutton 
             tempErrors.lastName = 'İsim 2 karakterden az olamaz.';
         }
     
-        // tempErrors.gender = formData.gender ? '' : 'Cinsiyet seçimi gereklidir.';
-    
-        // tempErrors.birthdate = formData.birthdate ? '' : 'Doğum tarihi gereklidir.';
-        // if (formData.birthdate) {
-        //     const birthDate = dayjs(formData.birthdate, 'DD-MM-YYYY');
-        //     if (!birthDate.isValid()) {
-        //         tempErrors.birthdate = 'Geçersiz doğum tarihi.';
-        //     } 
-        // }
-
+        tempErrors.gender = formData.gender ? '' : 'Cinsiyet seçimi gereklidir.';
 
         tempErrors.birthdate = formData.birthdate ? '' : 'Doğum tarihi gereklidir.';
         if (formData.birthdate) {
@@ -125,8 +116,8 @@ const FormListFirst = ({ formData, handleChange, handleGenderChange, nextbutton 
                 tempErrors.birthdate = 'Geçersiz doğum tarihi.';
             } else {
                 const age = calculateAge(formData.birthdate);
-                if (age < 5 || age > 100) {
-                    tempErrors.birthdate = 'Geçersiz doğum tarihi. Yaşınız 5 ';
+                if (age < 5 || age > 100 ) {
+                    tempErrors.birthdate = 'Geçersiz doğum tarihi.';
                 }
             }
         }
