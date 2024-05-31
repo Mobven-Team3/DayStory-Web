@@ -85,6 +85,7 @@ const FormListFirst = ({ formData, handleChange, handleGenderChange, nextbutton 
     const validate = () => {
         let tempErrors = {};
         const maxLength = 50;
+        const minLength = 2;
     
         const calculateAge = (birthdate) => {
             const birthYear = new Date(birthdate).getFullYear();
@@ -95,11 +96,15 @@ const FormListFirst = ({ formData, handleChange, handleGenderChange, nextbutton 
         tempErrors.firstName = formData.firstName ? '' : 'İsim gereklidir.';
         if (formData.firstName && formData.firstName.length > maxLength) {
             tempErrors.firstName = 'İsim 50 karakterden fazla olamaz.';
+        } if (formData.firstName && formData.firstName.length < minLength) {
+            tempErrors.firstName = 'İsim 2 karakterden az olamaz.';
         }
     
         tempErrors.lastName = formData.lastName ? '' : 'Soyisim gereklidir.';
         if (formData.lastName && formData.lastName.length > maxLength) {
             tempErrors.lastName = 'Soyisim 50 karakterden fazla olamaz.';
+        }if (formData.lastName && formData.lastName.length < minLength) {
+            tempErrors.lastName = 'İsim 2 karakterden az olamaz.';
         }
     
         // tempErrors.gender = formData.gender ? '' : 'Cinsiyet seçimi gereklidir.';
