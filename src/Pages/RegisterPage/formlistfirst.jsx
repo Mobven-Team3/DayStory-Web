@@ -85,7 +85,7 @@ const FormListFirst = ({ formData, handleChange, handleGenderChange, nextbutton 
     const validate = () => {
         let tempErrors = {};
         const maxLength = 50;
-        const minLength = 3;
+        const minLength = 2;
     
         const calculateAge = (birthdate) => {
             const birthYear = new Date(birthdate).getFullYear();
