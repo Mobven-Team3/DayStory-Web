@@ -44,30 +44,69 @@ const FormListSecond = ({ formData, handleChange, onPreviousClick, submit }) => 
     const handleMouseDownPassword = (event) => {
         event.preventDefault();
     };
+
     const validate = () => {
         let tempErrors = {};
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        const emailRegex = /^[a-zA-Z0-9]+@[^\s@]+\.[^\s@]+$/;
+        const usernameRegex = /^[a-z0-9_-]+$/;
         const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@.$!%*?&])[A-Za-z\d@$!%.*?&]{7,}$/;
-
+        const maxLength = 50;
+        const minLength = 3;
+    
+        // Email validation
         tempErrors.email = formData.email ? '' : 'Email gereklidir.';
         if (formData.email && !emailRegex.test(formData.email)) {
-            tempErrors.email = 'Geçersiz email formatı. Örnek format: blabla@blabla.blabla';
+            tempErrors.email = 'Geçersiz email formatı. Örnek format: xxxx@xxxxx.xxxx';
         }
+        if (formData.email && formData.email.length > maxLength) {
+            tempErrors.email = 'Email 50 karakterden fazla olamaz.';
+        }
+        if (formData.email && formData.email.length < minLength) {
+            tempErrors.email = 'İsim 2 karakterden az olamaz.';
+        }
+    
+        // Username validation
         tempErrors.username = formData.username ? '' : 'Kullanıcı Adı gereklidir.';
+        if (formData.username && !usernameRegex.test(formData.username)) {
+            tempErrors.username = 'Geçersiz kullanıcı adı formatı. Küçük harfler, rakamlar, alt çizgi ve tire kullanılabilir.';
+        }
+        if (formData.username && formData.username.length > maxLength) {
+            tempErrors.username = 'Kullanıcı Adı 50 karakterden fazla olamaz.';
+        }
+        if (formData.username && formData.username.length < minLength) {
+            tempErrors.username = 'İsim 2 karakterden az olamaz.';
+        }
+    
+        // Password validation
         tempErrors.password = formData.password ? '' : 'Şifre gereklidir.';
         if (formData.password && !passwordRegex.test(formData.password)) {
-            tempErrors.password = 'Geçersiz şifre formatı. En az 7 karakter. 1 büyük harf ,1 küçük harf ve özel karakter.';
+            tempErrors.password = 'Geçersiz şifre formatı. En az 7 karakter. 1 büyük harf, 1 küçük harf ve özel karakter.';
         }
+        if (formData.password && formData.password.length > maxLength) {
+            tempErrors.password = 'Şifre 50 karakterden fazla olamaz.';
+        }
+        if (formData.password && formData.password.length < minLength) {
+            tempErrors.password = 'İsim 2 karakterden az olamaz.';
+        }
+    
+        // Confirm Password validation
         tempErrors.confirmPassword = formData.confirmPassword ? '' : 'Şifre Tekrarı gereklidir.';
+        if (formData.confirmPassword && formData.confirmPassword.length > maxLength) {
+            tempErrors.confirmPassword = 'Şifre Tekrarı 50 karakterden fazla olamaz.';
+        }
         if (formData.password && formData.confirmPassword && formData.password !== formData.confirmPassword) {
             tempErrors.confirmPassword = 'Şifreler eşleşmiyor.';
         }
-
+        if (formData.password && formData.password.length < minLength) {
+            tempErrors.password = 'İsim 2 karakterden az olamaz.';
+        }
+    
         setErrors(tempErrors);
-
+    
         return Object.values(tempErrors).every(x => x === '');
     }
     
+
     const handleSubmit = (e) => {
         e.preventDefault();
         if (validate()) {
@@ -93,7 +132,6 @@ const FormListSecond = ({ formData, handleChange, onPreviousClick, submit }) => 
                     error={!!errors.email}
                     helperText={errors.email}
                     fullWidth
-                    margin="normal"
                     InputProps={{
                         endAdornment: (
                             formData.email && (
@@ -121,7 +159,6 @@ const FormListSecond = ({ formData, handleChange, onPreviousClick, submit }) => 
                     error={!!errors.username}
                     helperText={errors.username}
                     fullWidth
-                    margin="normal"
                     InputProps={{
                         endAdornment: (
                             formData.username && (
@@ -150,7 +187,6 @@ const FormListSecond = ({ formData, handleChange, onPreviousClick, submit }) => 
                     error={!!errors.password}
                     helperText={errors.password}
                     fullWidth
-                    margin="normal"
                     InputProps={{
                         endAdornment: (
                             <InputAdornment position="end">
@@ -178,7 +214,6 @@ const FormListSecond = ({ formData, handleChange, onPreviousClick, submit }) => 
                     error={!!errors.confirmPassword}
                     helperText={errors.confirmPassword}
                     fullWidth
-                    margin="normal"
                     InputProps={{
                         endAdornment: (
                             <InputAdornment position="end">
@@ -207,7 +242,7 @@ const FormListSecond = ({ formData, handleChange, onPreviousClick, submit }) => 
                         <Button className="form__list-buttons-submit"
                             variant="contained"
                             type="submit"
-                            onClick={submit}
+                            onClick={handleSubmit}
                         >
                             Kayıt Ol
                         </Button>
