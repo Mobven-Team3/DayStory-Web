@@ -4,7 +4,6 @@ import React from 'react';
 import './note-scss/NotePage.css';
 
 //components
-import Footer from '../Footer/footer';
 
 const NotePage = () => {
 
@@ -12,7 +11,6 @@ const NotePage = () => {
         <>
             <div className='content'>
             </div>
-            <Footer />
         </>
     );
 };
