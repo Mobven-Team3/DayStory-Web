@@ -1,11 +1,10 @@
 import '@material/web/all';
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import NavigationBar from  '../../../src/Pages/Navbar/Navbar'; 
-import receptionImg from '../../../src/assets/images/Karşılama_resimleri.png'; 
 import receptionImg2 from '../../../src/assets/images/2 1.png';
 import receptionImg3 from '../../../src/assets/images/5 1.png';
 import receptionImg4 from '../../../src/assets/images/Group 26085612.png';
+import receptionImg from '../../../src/assets/images/Karşılama_resimleri.png';
 import './scss/Reception.scss';
 
 const ReceptionPage = () => {
@@ -23,7 +22,7 @@ const ReceptionPage = () => {
 
     return (
         <div>
-            <NavigationBar showFullMenu={false} />
+            <nav> day story </nav>
             <div className="reception-page">
                 <div className="content-container">
                     <div className="image-container">
