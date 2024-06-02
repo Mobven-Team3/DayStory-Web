@@ -137,12 +137,13 @@ const GalleryPage = () => {
                 { date: '2024-05-20', imageUrl: 'https://r.resimlink.com/r_hXi-nT4.png', title: 'img' },
                 { date: '2024-05-21', imageUrl: 'https://r.resimlink.com/NcqWARS_3Q.png', title: 'img' },
                 { date: '2024-05-22', imageUrl: 'https://r.resimlink.com/r_hXi-nT4.png', title: 'img' },
-                { date: '2024-05-23', imageUrl: 'https://r.resimlink.com/NcqWARS_3Q.png', title: 'img' },
-                { date: '2024-05-24', imageUrl: 'https://r.resimlink.com/r_hXi-nT4.png', title: 'img' },
+                { date: '2024-03-23', imageUrl: 'https://r.resimlink.com/NcqWARS_3Q.png', title: 'img' },
+                { date: '2024-02-24', imageUrl: 'https://r.resimlink.com/r_hXi-nT4.png', title: 'img' },
                 { date: '2024-05-25', imageUrl: 'https://r.resimlink.com/NcqWARS_3Q.png', title: 'img' },
                 { date: '2024-05-26', imageUrl: 'https://r.resimlink.com/r_hXi-nT4.png', title: 'img' },
                 { date: '2024-05-27', imageUrl: 'https://r.resimlink.com/NcqWARS_3Q.png', title: 'img' },
                 { date: '2024-05-29', imageUrl: 'https://r.resimlink.com/r_hXi-nT4.png', title: 'img' },
+                { date: '2024-06-01', imageUrl: 'https://r.resimlink.com/r_hXi-nT4.png', title: 'img' },
             ];
 
             // Güncel tarihli veri kontrolü
@@ -153,7 +154,7 @@ const GalleryPage = () => {
                 data.unshift({
                     date: today.toISOString(),
                     imageUrl: 'https://r.resimlink.com/ErUWpXBD.png',
-                    title: "Today's Image"
+                    title: "Loading Image"
                 });
             }
 
