@@ -79,7 +79,7 @@ const FormListFirst = ({ formData, handleChange, handleGenderChange, nextbutton 
         firstName: '',
         lastName: '',
         gender: '',
-        birthdate: '',
+        birthDate: '',
     });
 
     const validate = () => {
@@ -87,8 +87,8 @@ const FormListFirst = ({ formData, handleChange, handleGenderChange, nextbutton 
         const maxLength = 50;
         const minLength = 2;
     
-        const calculateAge = (birthdate) => {
-            const birthYear = new Date(birthdate).getFullYear();
+        const calculateAge = (birthDate) => {
+            const birthYear = new Date(birthDate).getFullYear();
             const currentYear = new Date().getFullYear();
             return currentYear - birthYear;
         }
@@ -109,15 +109,15 @@ const FormListFirst = ({ formData, handleChange, handleGenderChange, nextbutton 
     
         tempErrors.gender = formData.gender ? '' : 'Cinsiyet seçimi gereklidir.';
 
-        tempErrors.birthdate = formData.birthdate ? '' : 'Doğum tarihi gereklidir.';
-        if (formData.birthdate) {
-            const birthDate = dayjs(formData.birthdate, 'DD-MM-YYYY');
+        tempErrors.birthDate = formData.birthDate ? '' : 'Doğum tarihi gereklidir.';
+        if (formData.birthDate) {
+            const birthDate = dayjs(formData.birthDate, 'DD-MM-YYYY');
             if (!birthDate.isValid() || birthDate.isBefore(minDate) || birthDate.isAfter(maxDate)) {
-                tempErrors.birthdate = 'Geçersiz doğum tarihi.';
+                tempErrors.birthDate = 'Geçersiz doğum tarihi.';
             } else {
-                const age = calculateAge(formData.birthdate);
+                const age = calculateAge(formData.birthDate);
                 if (age < 5 || age > 100 ) {
-                    tempErrors.birthdate = 'Geçersiz doğum tarihi.';
+                    tempErrors.birthDate = 'Geçersiz doğum tarihi.';
                 }
             }
         }
@@ -232,7 +232,7 @@ const FormListFirst = ({ formData, handleChange, handleGenderChange, nextbutton 
                             label='Doğum Tarihi'
                             onChange={(date) => handleChange({
                                 target: {
-                                    name: 'birthdate',
+                                    name: 'birthDate',
                                     value: date ? date.format('DD-MM-YYYY') : ''
                                 }
                             })}
@@ -242,8 +242,8 @@ const FormListFirst = ({ formData, handleChange, handleGenderChange, nextbutton 
                             maxDate={maxDate}
                             slotProps={{
                                 textField: {
-                                    helperText: errors.birthdate,
-                                    error: Boolean(errors.birthdate),
+                                    helperText: errors.birthDate,
+                                    error: Boolean(errors.birthDate),
                                 },
                             }}
                         />
