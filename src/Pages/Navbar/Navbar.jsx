@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { FaUserCircle } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
 import logo from '../../assets/images/daystory-logo.png'; // Düzeltilmiş yol
-import './navbar-scss/_nabvar.scss'; 
+import './navbar-scss/_navbar.scss';
 
 const NavigationBar = ({ showFullMenu }) => {
     const [activePage, setActivePage] = useState('');
