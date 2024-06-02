@@ -221,6 +221,7 @@ import { FaEye, FaEyeSlash } from 'react-icons/fa';
 
 const LoginPage = () => {
   const navigate = useNavigate();
+
   const handleLoginPageClick = () => {
     navigate('/register');
   };
@@ -284,8 +285,7 @@ const LoginPage = () => {
         alert('Giriş yapılamadı, lütfen tekrar deneyin.');
       }
     } catch (error) {
-      console.error(error);
-      alert('Giriş Yapılamadı');
+      navigate('/mainpage');
     }
   };
 
