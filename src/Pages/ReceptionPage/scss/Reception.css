@@ -91,4 +91,38 @@
   font-weight: 400;
   line-height: 28px;
   text-align: center;
+}
+.landingpage__buttons {
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  gap: 20px;
+}
+.landingpage .signin {
+  width: 97px;
+  height: 40px;
+  background: #5A6CA5;
+  border-radius: 100px;
+  color: white;
+  border: 0px;
+  font-family: "Roboto", sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 20px;
+  letter-spacing: 0.1000000015px;
+  cursor: pointer;
+}
+.landingpage .login {
+  width: 97px;
+  height: 40px;
+  border-radius: 100px;
+  border: 1px solid #79747E;
+  border-radius: 100px;
+  color: rgb(90, 108, 165);
+  font-family: "Roboto", sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 20px;
+  letter-spacing: 0.1000000015px;
+  cursor: pointer;
 }/*# sourceMappingURL=Reception.css.map */

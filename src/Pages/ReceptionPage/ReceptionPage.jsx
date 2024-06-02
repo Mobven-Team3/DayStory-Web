@@ -1,5 +1,9 @@
-import '@material/web/all';
+
 import React from 'react';
+
+import { useNavigate } from 'react-router-dom';
+
+import { Button } from '@mui/base';
 import FootBar from '../../../src/Pages/Footer/footer';
 import NavigationBar from '../../../src/Pages/Navbar/Navbar';
 import receptionImg2 from '../../../src/assets/images/2 1.png';
@@ -9,6 +13,16 @@ import receptionImg from '../../../src/assets/images/Karşılama_resimleri.png';
 import './scss/Reception.css';
 
 const ReceptionPage = () => {
+    const navigate = useNavigate();
+
+    const handleLoginPageClick = () => {
+        navigate('/login');
+    };
+    
+    const handleRegisterPageClick = () => {
+        navigate('/register');
+      };
+
 
     return (
         <>
@@ -46,6 +60,23 @@ const ReceptionPage = () => {
                 <div className='landingpage__last'>
                     <center>
                         <p>Sen de gününü DayStory’e anlat ve anılarının hikayesini canlandırmaya başla!</p>
+                        <div>
+                            <div className='landingpage__buttons'>
+                                <Button className="signin"
+                                    variant="submit"
+                                    onClick={handleRegisterPageClick}
+
+                                >
+                                    Kayıt Ol
+                                </Button>
+                                <Button className="login"
+                                    variant="submit"
+                                    onClick={handleLoginPageClick}
+                                >
+                                    Giriş Yap
+                                </Button>
+                            </div>
+                        </div>
                     </center>
                 </div>
 
