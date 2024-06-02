@@ -10,7 +10,7 @@ import receptionImg2 from '../../../src/assets/images/2 1.png';
 import receptionImg3 from '../../../src/assets/images/5 1.png';
 import receptionImg4 from '../../../src/assets/images/Group 26085612.png';
 import receptionImg from '../../../src/assets/images/Karşılama_resimleri.png';
-import './scss/Reception.css';
+import './scss/_reception.scss';
 
 const ReceptionPage = () => {
     const navigate = useNavigate();
