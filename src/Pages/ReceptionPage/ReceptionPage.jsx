@@ -69,11 +69,3 @@ const ReceptionPage = () => {
 }
 
 export default ReceptionPage;
-
-
-/* <>
-<button onClick={handleRegisterClick} > kayıt ol</button>
-<button onClick={handleLoginClick}> giriş Yap</button>
-<button onClick={handleMainClick}> Main Page</button>
-
-</> */
