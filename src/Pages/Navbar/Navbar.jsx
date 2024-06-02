@@ -1,13 +1,16 @@
 import React, { useState } from 'react';
 import { FaUserCircle } from 'react-icons/fa';
-import logo from '../../../src/assets/images/daystory-logo.png';
-import './navbar-scss/_nabvar.scss';
+import { useNavigate } from 'react-router-dom';
+import logo from '../../assets/images/daystory-logo.png'; // Düzeltilmiş yol
+import './navbar-scss/_nabvar.scss'; 
 
-const NavigationBar = () => {
+const NavigationBar = ({ showFullMenu }) => {
     const [activePage, setActivePage] = useState('');
+    const navigate = useNavigate();
 
-    const handlePageChangeGallary = (page) => { 
+    const handlePageChange = (page, route) => {
         setActivePage(page);
+        navigate(route);
     };
 
     return (
@@ -18,27 +21,42 @@ const NavigationBar = () => {
                     <p className="nav__logo-text">Day<span>Story</span></p>
                 </div>
                 <div className="nav__items">
+                    {showFullMenu && (
+                        <>
+                            <p
+                                className={`nav__item ${activePage === 'gallery' ? 'active' : ''}`} 
+                                onClick={() => handlePageChange('gallery', '/gallery')}
+                            >
+                                Galeri
+                            </p>
+                            <p
+                                className={`nav__item ${activePage === 'today' ? 'active' : ''}`} 
+                                onClick={() => handlePageChange('today', '/today')}
+                            >
+                                Bu Gün
+                            </p>
+                        </>
+                    )}
                     <p
-                        to="/gallary"
-                        className={`nav__item ${activePage === 'gallery' ? 'active' : ''}`} 
-                        onClick={() => handlePageChangeGallary('gallery')} 
+                        className={`nav__item ${activePage === 'login' ? 'active' : ''}`} 
+                        onClick={() => handlePageChange('login', '/login')}
                     >
-                        Galeri
+                        Giriş Yap
                     </p>
                     <p
-                        to="/deneme" 
-                        className={`nav__item ${activePage === 'bugun' ? 'active' : ''}`} 
-                        onClick={() => handlePageChangeGallary('bugun')}
+                        className={`nav__item ${activePage === 'register' ? 'active' : ''}`} 
+                        onClick={() => handlePageChange('register', '/register')}
                     >
-                        Bu Gün
+                        Kaydol
                     </p>
-                    <p
-                        to="/profile" 
-                        className={`nav__item ${activePage === 'profile' ? 'active' : ''}`} 
-                        onClick={() => handlePageChangeGallary('profile')} 
-                    >
-                        <FaUserCircle size={30} />
-                    </p>
+                    {showFullMenu && (
+                        <p
+                            className={`nav__item ${activePage === 'profile' ? 'active' : ''}`} 
+                            onClick={() => handlePageChange('profile', '/profile')}
+                        >
+                            <FaUserCircle size={30} />
+                        </p>
+                    )}
                 </div>
             </nav>
         </div>
@@ -46,5 +64,3 @@ const NavigationBar = () => {
 };
 
 export default NavigationBar;
-
-
