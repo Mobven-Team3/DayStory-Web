@@ -4,6 +4,7 @@ import logo from '../../../src/assets/images/daystory-logo.png';
 import Footer from '../Footer/footer';
 import GallaryPage from '../GalleryPage/GalleryPage';
 import TodayPage from '../NotePage/NotePage';
+import ProfilePage from '../ProfilePage/ProfilePage';
 import './mainpage-scss/_mainPage.scss';
 
 const MainPage = () => {
@@ -32,7 +33,7 @@ const MainPage = () => {
                             className={`nav__item ${activePage === 'todaypage' ? 'active' : ''}`} 
                             onClick={() => handlePageChange('todaypage')}
                         >
-                            Bu Gün
+                            Bugün
                         </p>
                         <p
                             className={`nav__item ${activePage === 'profile' ? 'active' : ''}`} 
@@ -46,7 +47,7 @@ const MainPage = () => {
 
             {activePage === 'gallery' && <GallaryPage />}
             {activePage === 'todaypage' && <TodayPage />}
-
+            {activePage === 'profile' && <ProfilePage />}
 
             <Footer  /> 
         </center>
