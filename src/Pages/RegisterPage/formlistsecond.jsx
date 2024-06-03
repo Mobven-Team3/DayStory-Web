@@ -266,7 +266,7 @@ const FormListSecond = ({ formData, handleChange, onPreviousClick, submit, setEr
 
   const validate = () => {
     let tempErrors = {};
-    const emailRegex = /^[a-zA-Z0-9]+@[^\s@]+\.[^\s@]+$/;
+    const emailRegex = /@.*\./;
     const usernameRegex = /^[a-z0-9_-]+$/;
     const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@.$!%*?&])[A-Za-z\d@$!%.*?&]{7,}$/;
     const maxLength = 50;
