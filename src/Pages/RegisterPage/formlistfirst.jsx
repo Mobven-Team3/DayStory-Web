@@ -10,6 +10,7 @@ import {
     Button, FormControl, FormHelperText, IconButton, InputAdornment,
     InputLabel, MenuItem, Select, TextField
 } from '@mui/material';
+
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
@@ -17,58 +18,9 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 //icons
 import { AiOutlineCloseCircle } from 'react-icons/ai';
 
-
-
-// import {, ThemeProvider, createTheme} from '@mui/material';
-
-// const theme = createTheme({
-//     components: {
-//         MuiTextField: {
-//             defaultProps: {
-//                 variant: 'outlined',
-//             },
-//             styleOverrides: {
-//                 root: {
-//                     '& .MuiInputLabel-outlined.Mui-focused': {
-//                         color: 'rgba(73, 69, 79, 1)',
-//                     },
-
-//                     '& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline': {
-//                         borderColor: 'rgba(121, 116, 126, 1)',
-//                     },
-
-
-//                 },
-//             },
-//         },
-
-//         MuiFormControl: {
-//             styleOverrides: {
-//                 root: {
-//                     '& .MuiInputLabel-outlined.Mui-focused': {
-//                         color: 'rgba(73, 69, 79, 1)',
-//                     },
-
-//                     '& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline': {
-//                         borderColor: 'rgba(121, 116, 126, 1)',
-//                     },
-
-
-//                 },
-//             },
-
-//         }
-
-
-
-//     },
-// });
-
 const FormListFirst = ({ formData, handleChange, handleGenderChange, nextbutton }) => {
-
-    const today = dayjs();
-    const minDate = today.subtract(100, 'year');
-    const maxDate = today.subtract(5, 'year');
+    const minDate = dayjs('1924-01-01');
+    const maxDate = dayjs('2019-12-31');
 
     const navigate = useNavigate();
     const handleLoginPageClick = () => {
@@ -122,8 +74,6 @@ const FormListFirst = ({ formData, handleChange, handleGenderChange, nextbutton 
             }
         }
 
-
-    
         setErrors(tempErrors);
     
         return Object.values(tempErrors).every(x => x === '');
@@ -147,7 +97,6 @@ const FormListFirst = ({ formData, handleChange, handleGenderChange, nextbutton 
     };
 
     return (
-        // <ThemeProvider theme={theme}>
         <>
             <div className='form__list-header'>Yeni Hesap Oluştur</div>
             <form className='form__list-items' onSubmit={handleSubmit} noValidate>
