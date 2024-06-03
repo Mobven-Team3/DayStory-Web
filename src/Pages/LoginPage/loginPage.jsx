@@ -237,7 +237,7 @@ const LoginPage = () => {
   };
 
   const [loginData, setLoginData] = useState({
-    username: '',
+    email: '',
     password: ''
   });
 
@@ -247,47 +247,48 @@ const LoginPage = () => {
   };
 
   const [errors, setErrors] = useState({
-    username: '',
+    email: '',
     password: '',
   });
 
   const loginHandler = async (e) => {
     e.preventDefault();
     try {
-      const loginRequest = await fetch('', {
+      const loginRequest = await fetch('http://165.22.93.225:5003/api/Users/login', {
         method: 'POST',
         headers: {
           'Accept': 'application/json',
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify({ username: loginData.username, password: loginData.password })
+        body: JSON.stringify({ email: loginData.email, password: loginData.password })
       });
-
+  
       const response = await loginRequest.json();
-
-      if (loginRequest.status >= 200 && loginRequest.status <= 299) {
-        window.localStorage.setItem('token', response.accessToken);
-        window.localStorage.setItem('userId', response.userId);
+  
+      if (loginRequest.ok) { // Kontrolü fetch() fonksiyonuyla yapabilirsiniz.
+        window.localStorage.setItem('token', response.token); // Token alımını gözden geçirin.
+        window.localStorage.setItem('userId', response.userId); // Kullanıcı ID'sini almayı unutmayın.
         alert('Kullanıcı girişi başarılı');
-        setLoginData({ username: '', password: '' });
-        navigate('/deneme');
+        setLoginData({ email: '', password: '' });
+        navigate('/mainpage');
       } else if (loginRequest.status === 404) {
         setErrors((prevErrors) => ({
           ...prevErrors,
-          username: 'Kullanıcı bulunamadı.'
+          email: 'Kullanıcı bulunamadı.'
         }));
       } else if (loginRequest.status === 401) {
         setErrors((prevErrors) => ({
           ...prevErrors,
-          password: 'Şifre veya kullanıcı adı uyuşmuyor.'
+          password: 'Şifre yanlış.'
         }));
       } else {
         alert('Giriş yapılamadı, lütfen tekrar deneyin.');
       }
     } catch (error) {
-      navigate('/mainpage');
+      console.error('Giriş yapılamadı:', error);
     }
   };
+  
 
   const handleClear = (field) => {
     handleChange({
@@ -320,22 +321,22 @@ const LoginPage = () => {
               <p>Hesap bilgilerinizi giriniz</p>
 
               <TextField
-                label="Kullanıcı Adı"
-                name="username"
-                placeholder="Kullanıcı Adınızı Yazınız."
+                label="Email"
+                name="email"
+                placeholder="Emailinizi Yazınız."
                 required
-                value={loginData.username}
+                value={loginData.email}
                 onChange={handleChange}
-                error={!!errors.username}
-                helperText={errors.username}
+                error={!!errors.email}
+                helperText={errors.email}
                 fullWidth
                 InputProps={{
                   endAdornment: (
-                    loginData.username && (
+                    loginData.email && (
                       <InputAdornment position="end">
                         <IconButton
                           aria-label="clear input"
-                          onClick={() => handleClear('username')}
+                          onClick={() => handleClear('email')}
                           edge="end"
                         >
                           <AiOutlineCloseCircle />
