@@ -37,7 +37,7 @@ steps:
 - task: CopyFilesOverSSH@0
   inputs:
     sshEndpoint: 'mobven-ssh'
-    sourceFolder: '$(Pipeline.Workspace)/s/dist'
+    sourceFolder: '$(Pipeline.Workspace)/s/build'
     contents: '**'
     targetFolder: '/var/www/DayStory/html'
     readyTimeout: '20000'
