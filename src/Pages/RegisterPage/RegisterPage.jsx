@@ -115,7 +115,7 @@
 
 // export default RegisterPage;
 
-
+// ----------------------------------
 
 import React, { useState } from 'react';
 import { useNavigate } from "react-router-dom";
@@ -173,6 +173,7 @@ const RegisterPage = () => {
   const registerUser = async () => {
     setLoading(true);
     try {
+      console.log('aysu');
       const response = await fetch("https://5c5eb3ddf47a409bbc789c200ed6f8f9.api.mockbin.io/", {
         method: "POST",
         headers: {
@@ -186,7 +187,6 @@ const RegisterPage = () => {
       } else {
         const errorData = await response.json();
         console.error("Registration failed:", errorData);
-        // Hata mesajlarını buraya ekleyin
         if (errorData.type === 'UserAlreadyExistsException') {
           setErrors({
             email: errorData.title.includes(formData.email) ? 'Bu email adresi zaten kayıtlı.' : '',
@@ -256,3 +256,5 @@ const RegisterPage = () => {
 }
 
 export default RegisterPage;
+
+
