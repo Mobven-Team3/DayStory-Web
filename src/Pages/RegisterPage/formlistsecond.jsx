@@ -39,7 +39,6 @@ const FormListSecond = ({ formData, handleChange, onPreviousClick, submit, setEr
   const validate = () => {
     let tempErrors = {};
     const emailRegex = /@.*\./;
-    const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@.$!%*?&])[A-Za-z\d@$!%.*?&]{7,}$/;
     const maxLength = 50;
     const minLength = 3;
     const minLengthPassword = 7;
@@ -70,18 +69,29 @@ const FormListSecond = ({ formData, handleChange, onPreviousClick, submit, setEr
 
     // Password validation
     tempErrors.password = formData.password ? '' : 'Şifre gereklidir.';
-    if (formData.password && !passwordRegex.test(formData.password)) {
-      tempErrors.password = 'Geçersiz şifre formatı. Büyük harf, Küçük harf, özel karakter ve sayı içermelidir.';
-    }
+    
     if (formData.password && formData.password.length > maxLength) {
       tempErrors.password = 'Şifre 50 karakterden fazla olamaz.';
     }
     if (formData.password && formData.password.length < minLengthPassword) {
-      tempErrors.password = 'Şifre 7 karakterden az olamaz.';
+      tempErrors.password = 'Şifre en az 7 karakter uzunluğunda olmalıdır.';
     }
-
+    if (formData.password && !/[A-Z]/.test(formData.password)) {
+      tempErrors.password = 'Şifre en az bir büyük harf içermelidir.';
+    }
+    if (formData.password && !/[a-z]/.test(formData.password)) {
+      tempErrors.password = 'Şifre en az bir küçük harf içermelidir.';
+    }
+    if (formData.password && !/[0-9]/.test(formData.password)) {
+      tempErrors.password = 'Şifre en az bir rakam içermelidir.';
+    }
+    if (formData.password && !/[!@#$%^&*()_+\-=\[\]{};':"|,.<>\/?]/.test(formData.password)) {
+      tempErrors.password = 'Şifre en az bir sembol içermelidir.';
+    }
+    
     // Confirm Password validation
     tempErrors.passwordConfirmed = formData.passwordConfirmed ? '' : 'Şifre Tekrarı gereklidir.';
+
     if (formData.passwordConfirmed && formData.passwordConfirmed.length > maxLength) {
       tempErrors.passwordConfirmed = 'Şifre Tekrarı 50 karakterden fazla olamaz.';
     }
