@@ -14,6 +14,7 @@ import { FaEye, FaEyeSlash } from 'react-icons/fa';
 
 const LoginPage = () => {
   const navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
 
   const handleLoginPageClick = () => {
     navigate('/register');
@@ -45,6 +46,7 @@ const LoginPage = () => {
   });
 
   const loginHandler = async (e) => {
+    setLoading(true);
     e.preventDefault();
     try {
       const loginRequest = await fetch('http://165.22.93.225:5003/api/Users/login', {
@@ -55,13 +57,12 @@ const LoginPage = () => {
         },
         body: JSON.stringify({ email: loginData.email, password: loginData.password })
       });
-  
+
       const response = await loginRequest.json();
-  
+
       if (loginRequest.ok) {
         window.localStorage.setItem('token', response.token);
         window.localStorage.setItem('userId', response.userId);
-        alert('Kullanıcı girişi başarılı');
         setLoginData({ email: '', password: '' });
         navigate('/mainpage');
       } else if (loginRequest.status === 404) {
@@ -75,13 +76,16 @@ const LoginPage = () => {
           password: 'Şifre yanlış.'
         }));
       } else {
-        alert('Giriş yapılamadı, lütfen tekrar deneyin.');
+        console.error('Giriş yapılamadı, lütfen tekrar deneyin.');
       }
     } catch (error) {
       console.error('Giriş yapılamadı:', error);
     }
+    setLoading(false);
   };
-  
+
+
+
 
   const handleClear = (field) => {
     handleChange({
@@ -99,91 +103,97 @@ const LoginPage = () => {
         <p className='header__text'>Day<span>Story</span></p>
       </header>
 
-      <div className='form'>
-        <div className='form__description'>
-          <div className='form__description-text'>
-            <h2>Day<span>Story</span>’e Tekrar<h2>Hoş geldin!</h2></h2>
+
+      {loading ? (
+        <p>Giriş Yapılıyor...</p>
+      ) : (
+
+        <div className='form'>
+          <div className='form__description'>
+            <div className='form__description-text'>
+              <h2>Day<span>Story</span>’e Tekrar<h2>Hoş geldin!</h2></h2>
+            </div>
+            <img className='form__description-img' src={login_img} alt="main_image" />
           </div>
-          <img className='form__description-img' src={login_img} alt="main_image" />
-        </div>
 
-        <div className='form__list'>
-          <>
-            <div className='form__list-header'>Giriş Yap</div>
-            <form className='form__list-items' onSubmit={loginHandler} noValidate>
-              <p>Hesap bilgilerinizi giriniz</p>
+          <div className='form__list'>
+            <>
+              <div className='form__list-header'>Giriş Yap</div>
+              <form className='form__list-items' onSubmit={loginHandler} noValidate>
+                <p>Hesap bilgilerinizi giriniz</p>
 
-              <TextField
-                label="Email"
-                name="email"
-                placeholder="Emailinizi Yazınız."
-                required
-                value={loginData.email}
-                onChange={handleChange}
-                error={!!errors.email}
-                helperText={errors.email}
-                fullWidth
-                InputProps={{
-                  endAdornment: (
-                    loginData.email && (
+                <TextField
+                  label="Email"
+                  name="email"
+                  placeholder="Emailinizi Yazınız."
+                  required
+                  value={loginData.email}
+                  onChange={handleChange}
+                  error={!!errors.email}
+                  helperText={errors.email}
+                  fullWidth
+                  InputProps={{
+                    endAdornment: (
+                      loginData.email && (
+                        <InputAdornment position="end">
+                          <IconButton
+                            aria-label="clear input"
+                            onClick={() => handleClear('email')}
+                            edge="end"
+                          >
+                            <AiOutlineCloseCircle />
+                          </IconButton>
+                        </InputAdornment>
+                      )
+                    )
+                  }}
+                />
+
+                <TextField
+                  type={showPassword ? 'text' : 'password'}
+                  label="Şifre"
+                  name="password"
+                  value={loginData.password}
+                  placeholder="Şifrenizi Belirleyiniz."
+                  onChange={handleChange}
+                  error={!!errors.password}
+                  helperText={errors.password}
+                  required
+                  fullWidth
+                  InputProps={{
+                    endAdornment: (
                       <InputAdornment position="end">
                         <IconButton
-                          aria-label="clear input"
-                          onClick={() => handleClear('email')}
+                          aria-label="toggle password visibility"
+                          onClick={handleClickShowPassword}
+                          onMouseDown={handleMouseDownPassword}
                           edge="end"
                         >
-                          <AiOutlineCloseCircle />
+                          {showPassword ? <FaEye /> : <FaEyeSlash />}
                         </IconButton>
                       </InputAdornment>
                     )
-                  )
-                }}
-              />
+                  }}
+                />
 
-              <TextField
-                type={showPassword ? 'text' : 'password'}
-                label="Şifre"
-                name="password"
-                value={loginData.password}
-                placeholder="Şifrenizi Belirleyiniz."
-                onChange={handleChange}
-                error={!!errors.password}
-                helperText={errors.password}
-                required
-                fullWidth
-                InputProps={{
-                  endAdornment: (
-                    <InputAdornment position="end">
-                      <IconButton
-                        aria-label="toggle password visibility"
-                        onClick={handleClickShowPassword}
-                        onMouseDown={handleMouseDownPassword}
-                        edge="end"
-                      >
-                        {showPassword ? <FaEye /> : <FaEyeSlash />}
-                      </IconButton>
-                    </InputAdornment>
-                  )
-                }}
-              />
+                <div className='form__list-button'>
+                  <Button
+                    variant="contained"
+                    color="primary"
+                    type="submit"
+                  >
+                    Giriş Yap
+                  </Button>
 
-              <div className='form__list-button'>
-                <Button
-                  variant="contained"
-                  color="primary"
-                  type="submit"
-                >
-                  Giriş Yap
-                </Button>
-
-                <div className='form__list-footer'>
-                  <p>Henüz hesabın yok mu? <span onClick={handleLoginPageClick}>Kayıt Ol</span></p>
+                  <div className='form__list-footer'>
+                    <p>Henüz hesabın yok mu? <span onClick={handleLoginPageClick}>Kayıt Ol</span></p>
+                  </div>
                 </div>
-              </div>
-            </form>
-          </>
+              </form>
+            </>
+          </div>
         </div>
-      </div>
+      )}
     </div>
   );
 };

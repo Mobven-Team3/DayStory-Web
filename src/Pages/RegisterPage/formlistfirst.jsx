@@ -4,12 +4,15 @@ import { useNavigate } from 'react-router-dom';
 import dayjs from 'dayjs';
 import 'dayjs/locale/tr';
 
+//css
+import './register-scss/_register.scss';
 
 //components
 import {
     Button, FormControl, FormHelperText, IconButton, InputAdornment,
     InputLabel, MenuItem, Select, TextField
 } from '@mui/material';
+
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
@@ -17,58 +20,9 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 //icons
 import { AiOutlineCloseCircle } from 'react-icons/ai';
 
-
-
-// import {, ThemeProvider, createTheme} from '@mui/material';
-
-// const theme = createTheme({
-//     components: {
-//         MuiTextField: {
-//             defaultProps: {
-//                 variant: 'outlined',
-//             },
-//             styleOverrides: {
-//                 root: {
-//                     '& .MuiInputLabel-outlined.Mui-focused': {
-//                         color: 'rgba(73, 69, 79, 1)',
-//                     },
-
-//                     '& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline': {
-//                         borderColor: 'rgba(121, 116, 126, 1)',
-//                     },
-
-
-//                 },
-//             },
-//         },
-
-//         MuiFormControl: {
-//             styleOverrides: {
-//                 root: {
-//                     '& .MuiInputLabel-outlined.Mui-focused': {
-//                         color: 'rgba(73, 69, 79, 1)',
-//                     },
-
-//                     '& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline': {
-//                         borderColor: 'rgba(121, 116, 126, 1)',
-//                     },
-
-
-//                 },
-//             },
-
-//         }
-
-
-
-//     },
-// });
-
 const FormListFirst = ({ formData, handleChange, handleGenderChange, nextbutton }) => {
-
-    const today = dayjs();
-    const minDate = today.subtract(100, 'year');
-    const maxDate = today.subtract(5, 'year');
+    const minDate = dayjs('1924-01-01');
+    const maxDate = dayjs('2019-12-31');
 
     const navigate = useNavigate();
     const handleLoginPageClick = () => {
@@ -86,27 +40,33 @@ const FormListFirst = ({ formData, handleChange, handleGenderChange, nextbutton 
         let tempErrors = {};
         const maxLength = 50;
         const minLength = 2;
-    
+
         const calculateAge = (birthDate) => {
             const birthYear = new Date(birthDate).getFullYear();
             const currentYear = new Date().getFullYear();
             return currentYear - birthYear;
         }
-    
+
         tempErrors.firstName = formData.firstName ? '' : 'İsim gereklidir.';
         if (formData.firstName && formData.firstName.length > maxLength) {
             tempErrors.firstName = 'İsim 50 karakterden fazla olamaz.';
         } if (formData.firstName && formData.firstName.length < minLength) {
             tempErrors.firstName = 'İsim 2 karakterden az olamaz.';
         }
-    
+        if (formData.firstName && !/^[a-zA-ZğüşöçİĞÜŞÖÇ\s]+$/.test(formData.firstName)) {
+            tempErrors.firstName = 'İsim sadece harflerden oluşabilir.';
+        }
+
         tempErrors.lastName = formData.lastName ? '' : 'Soyisim gereklidir.';
         if (formData.lastName && formData.lastName.length > maxLength) {
             tempErrors.lastName = 'Soyisim 50 karakterden fazla olamaz.';
-        }if (formData.lastName && formData.lastName.length < minLength) {
+        } if (formData.lastName && formData.lastName.length < minLength) {
             tempErrors.lastName = 'İsim 2 karakterden az olamaz.';
         }
-    
+        if (formData.lastName && !/^[a-zA-ZğüşöçİĞÜŞÖÇ\s]+$/.test(formData.lastName)) {
+            tempErrors.lastName = 'İsim sadece harflerden oluşabilir.';
+        }
+
         tempErrors.gender = formData.gender ? '' : 'Cinsiyet seçimi gereklidir.';
 
         tempErrors.birthDate = formData.birthDate ? '' : 'Doğum tarihi gereklidir.';
@@ -116,16 +76,14 @@ const FormListFirst = ({ formData, handleChange, handleGenderChange, nextbutton 
                 tempErrors.birthDate = 'Geçersiz doğum tarihi.';
             } else {
                 const age = calculateAge(formData.birthDate);
-                if (age < 5 || age > 100 ) {
+                if (age < 5 || age > 100) {
                     tempErrors.birthDate = 'Geçersiz doğum tarihi.';
                 }
             }
         }
 
-
-    
         setErrors(tempErrors);
-    
+
         return Object.values(tempErrors).every(x => x === '');
     }
 
@@ -147,7 +105,6 @@ const FormListFirst = ({ formData, handleChange, handleGenderChange, nextbutton 
     };
 
     return (
-        // <ThemeProvider theme={theme}>
         <>
             <div className='form__list-header'>Yeni Hesap Oluştur</div>
             <form className='form__list-items' onSubmit={handleSubmit} noValidate>
