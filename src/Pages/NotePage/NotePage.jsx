@@ -1,7 +1,7 @@
 import React from 'react';
 
 //css
-import './note-scss/NotePage.css';
+import './note-scss/_note.scss';
 
 //components
 
