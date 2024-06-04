@@ -145,10 +145,10 @@ const GalleryPage = () => {
                 { date: '27-05-2024', imageUrl: 'https://r.resimlink.com/NcqWARS_3Q.png', title: 'img' },
                 { date: '29-05-2024', imageUrl: 'https://r.resimlink.com/r_hXi-nT4.png', title: 'img' },
                 { date: '01-06-2024', imageUrl: 'https://r.resimlink.com/r_hXi-nT4.png', title: 'img' },
-        
+
             ];
 
-            const todayExists = data.some(img => img.date === todayStr.split('-').reverse().join('-'), );
+            const todayExists = data.some(img => img.date === todayStr.split('-').reverse().join('-'),);
 
             if (!todayExists) {
                 data.unshift({
@@ -230,3 +230,128 @@ const GalleryPage = () => {
 };
 
 export default GalleryPage;
+
+
+
+// -------------------
+
+
+
+// import axios from 'axios';
+// import React, { useEffect, useState } from 'react';
+// import { useNavigate } from 'react-router-dom';
+// import './gallery-scss/_gallery.scss';
+
+// const GalleryPage = () => {
+//     const [images, setImages] = useState([]);
+//     const [selectedDate, setSelectedDate] = useState(new Date());
+//     const navigate = useNavigate();
+//     const [isLoading, setIsLoading] = useState(true);
+//     const [userId, setUserId] = useState(1);
+
+//     useEffect(() => {
+//         const fetchImages = async () => {
+//             setIsLoading(true);
+//             try {
+//                 const response = await axios.get(`/api/daysummaries/user/${userId}`);
+
+//                 const data = response.data.map(item => ({
+//                     date: new Date(item.date).toLocaleDateString('tr-TR', { day: '2-digit', month: '2-digit', year: 'numeric' }),
+//                     imageUrl: item.imagePath,
+//                     title: item.summary
+//                 }));
+
+//                 const today = new Date();
+//                 const todayStr = today.toLocaleDateString('tr-TR', { day: '2-digit', month: '2-digit', year: 'numeric' });
+//                 const todayExists = data.some(img => img.date === todayStr);
+
+//                 if (!todayExists) {
+//                     data.unshift({
+//                         date: todayStr,
+//                         imageUrl: 'https://r.resimlink.com/ErUWpXBD.png', // Varsayılan görsel URL'si
+//                         title: "Loading Image"
+//                     });
+//                 }
+
+//                 const sortedData = data.sort((a, b) => {
+//                     const dateA = new Date(a.date.split('.').reverse().join('-'));
+//                     const dateB = new Date(b.date.split('.').reverse().join('-'));
+//                     return dateB - dateA;
+//                 });
+
+//                 setImages(sortedData);
+//                 setSelectedDate(today);
+//             } catch (error) {
+//                 console.error("Veri alınırken hata oluştu:", error);
+//             } finally {
+//                 setIsLoading(false);
+//             }
+//         };
+
+//         fetchImages();
+//     }, [userId]);
+
+//     const renderImages = (images) => {
+//         return images.map((img, index) => {
+//             const imgDate = new Date(img.date.split('.').reverse().join('-'));
+//             const isSelected = selectedDate.toDateString() === imgDate.toDateString();
+//             return (
+//                 <div
+//                     key={index}
+//                     className={`calendar ${isSelected ? 'today' : ''}`}
+//                     onClick={() => navigate(`/mainpage/${img.date}`)}
+//                 >
+//                     <div className="calendar__header">
+//                         <p className="calendar__header-dayno">{imgDate.getDate()}</p>
+//                         <div>
+//                             <p className="calendar__header-dayname">{imgDate.toLocaleDateString('tr-TR', { weekday: 'long' })}</p>
+//                             <p className="calendar__header-month">{imgDate.toLocaleDateString('tr-TR', { month: 'long', year: 'numeric' })}</p>
+//                         </div>
+//                     </div>
+//                     <img src={img.imageUrl} alt={`summary`} className="calendar__image" />
+//                 </div>
+//             );
+//         });
+//     };
+
+//     const groupImagesByMonth = () => {
+//         const groupedImages = images.reduce((acc, img) => {
+//             const date = new Date(img.date.split('.').reverse().join('-'));
+//             const monthYear = date.toLocaleDateString('tr-TR', { month: 'long', year: 'numeric' });
+
+//             if (!acc[monthYear]) {
+//                 acc[monthYear] = [];
+//             }
+
+//             acc[monthYear].push(img);
+//             return acc;
+//         }, {});
+
+//         return groupedImages;
+//     };
+
+//     const renderMonths = () => {
+//         const groupedImages = groupImagesByMonth();
+
+//         return Object.keys(groupedImages).map((monthYear, index) => (
+//             <div className="month__container" key={index}>
+//                 <h2 className='month__container-text'>{monthYear}</h2>
+//                 <div className="days">
+//                     {renderImages(groupedImages[monthYear])}
+//                 </div>
+//             </div>
+//         ));
+//     };
+
+//     return (
+//         <div className='gallery-container'>
+//             {isLoading ? (
+//                 <div>Yükleniyor...</div>
+//             ) : (
+//                 renderMonths()
+//             )}
+//         </div>
+//     );
+// };
+
+// export default GalleryPage;
