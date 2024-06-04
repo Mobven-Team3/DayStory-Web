@@ -1,5 +1,5 @@
 import React from 'react';
-import '../NotePage/note-scss/NotePage.css';
+import '../NotePage/note-scss/_note.scss';
 
 // images
 
