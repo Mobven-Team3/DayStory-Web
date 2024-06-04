@@ -85,7 +85,8 @@ const FormListSecond = ({ formData, handleChange, onPreviousClick, submit, setEr
     if (formData.password && !/[0-9]/.test(formData.password)) {
       tempErrors.password = 'Şifre en az bir rakam içermelidir.';
     }
-    if (formData.password && !/[!@#$%^&*()_+\-=\[\]{};':"|,.<>\/?]/.test(formData.password)) {
+    // eslint-disable-next-line 
+    if (formData.password && !/[!@#$%^&*()_+\-=\[\]{};':"|,.<>\/?]/.test(formData.password)) { 
       tempErrors.password = 'Şifre en az bir sembol içermelidir.';
     }
     
