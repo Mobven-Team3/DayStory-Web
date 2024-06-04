@@ -6,12 +6,14 @@ import './App.css';
 import '@mui/material';
 
 //components
+import GalleryDetailPage from './Pages/GalleryPage/GalleryDetailPage';
 import Gallery from './Pages/GalleryPage/GalleryPage';
 import LoginPage from './Pages/LoginPage/loginPage';
 import MainPage from './Pages/MainPage/MainPage';
 import TodayPage from './Pages/NotePage/NotePage';
 import ReceptionPage from './Pages/ReceptionPage/ReceptionPage';
 import RegisterPage from './Pages/RegisterPage/RegisterPage';
+
 
 
 function App() {
@@ -23,6 +25,7 @@ function App() {
         <Route path='/login' element={<LoginPage />} />
         <Route path='/todaypage' element={<TodayPage />} />
         <Route path='/gallery' element={<Gallery />} />
+        <Route path='/mainpage/:date' element={<GalleryDetailPage />} />
         <Route path='/mainpage' element={<MainPage />} />
       </Routes>
     </BrowserRouter>

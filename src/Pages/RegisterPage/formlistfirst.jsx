@@ -4,6 +4,8 @@ import { useNavigate } from 'react-router-dom';
 import dayjs from 'dayjs';
 import 'dayjs/locale/tr';
 
+//css
+import './register-scss/_register.scss';
 
 //components
 import {
@@ -38,27 +40,33 @@ const FormListFirst = ({ formData, handleChange, handleGenderChange, nextbutton 
         let tempErrors = {};
         const maxLength = 50;
         const minLength = 2;
-    
+
         const calculateAge = (birthDate) => {
             const birthYear = new Date(birthDate).getFullYear();
             const currentYear = new Date().getFullYear();
             return currentYear - birthYear;
         }
-    
+
         tempErrors.firstName = formData.firstName ? '' : 'İsim gereklidir.';
         if (formData.firstName && formData.firstName.length > maxLength) {
             tempErrors.firstName = 'İsim 50 karakterden fazla olamaz.';
         } if (formData.firstName && formData.firstName.length < minLength) {
             tempErrors.firstName = 'İsim 2 karakterden az olamaz.';
         }
-    
+        if (formData.firstName && !/^[a-zA-ZğüşöçİĞÜŞÖÇ\s]+$/.test(formData.firstName)) {
+            tempErrors.firstName = 'İsim sadece harflerden oluşabilir.';
+        }
+
         tempErrors.lastName = formData.lastName ? '' : 'Soyisim gereklidir.';
         if (formData.lastName && formData.lastName.length > maxLength) {
             tempErrors.lastName = 'Soyisim 50 karakterden fazla olamaz.';
-        }if (formData.lastName && formData.lastName.length < minLength) {
+        } if (formData.lastName && formData.lastName.length < minLength) {
             tempErrors.lastName = 'İsim 2 karakterden az olamaz.';
         }
-    
+        if (formData.lastName && !/^[a-zA-ZğüşöçİĞÜŞÖÇ\s]+$/.test(formData.lastName)) {
+            tempErrors.lastName = 'İsim sadece harflerden oluşabilir.';
+        }
+
         tempErrors.gender = formData.gender ? '' : 'Cinsiyet seçimi gereklidir.';
 
         tempErrors.birthDate = formData.birthDate ? '' : 'Doğum tarihi gereklidir.';
@@ -68,14 +76,14 @@ const FormListFirst = ({ formData, handleChange, handleGenderChange, nextbutton 
                 tempErrors.birthDate = 'Geçersiz doğum tarihi.';
             } else {
                 const age = calculateAge(formData.birthDate);
-                if (age < 5 || age > 100 ) {
+                if (age < 5 || age > 100) {
                     tempErrors.birthDate = 'Geçersiz doğum tarihi.';
                 }
             }
         }
 
         setErrors(tempErrors);
-    
+
         return Object.values(tempErrors).every(x => x === '');
     }
 
