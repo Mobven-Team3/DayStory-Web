@@ -25,7 +25,7 @@ function App() {
         <Route path='/login' element={<LoginPage />} />
         <Route path='/todaypage' element={<TodayPage />} />
         <Route path='/gallery' element={<Gallery />} />
-        <Route path="/gallery/:date" component={<GalleryDetailPage />} />
+        <Route path='/mainpage/:date' element={<GalleryDetailPage />} />
         <Route path='/mainpage' element={<MainPage />} />
       </Routes>
     </BrowserRouter>

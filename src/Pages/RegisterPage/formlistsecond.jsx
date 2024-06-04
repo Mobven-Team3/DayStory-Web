@@ -42,17 +42,21 @@ const FormListSecond = ({ formData, handleChange, onPreviousClick, submit, setEr
     const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@.$!%*?&])[A-Za-z\d@$!%.*?&]{7,}$/;
     const maxLength = 50;
     const minLength = 3;
+    const minLengthPassword = 7;
 
     // Email validation
     tempErrors.email = formData.email ? '' : 'Email gereklidir.';
     if (formData.email && !emailRegex.test(formData.email)) {
-      tempErrors.email = 'Geçersiz email formatı. Örnek format: xxx@xxxx.xxx';
+      tempErrors.email = 'Geçersiz email formatı. Örnek format: xxxx@xxxx.xxx';
     }
     if (formData.email && formData.email.length > maxLength) {
       tempErrors.email = 'Email 50 karakterden fazla olamaz.';
     }
     if (formData.email && formData.email.length < minLength) {
       tempErrors.email = 'Email 3 karakterden az olamaz.';
+    }
+    if (formData.email && !/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(formData.email)) { 
+      tempErrors.email = 'Geçerli bir email adresi giriniz.'; 
     }
 
     // Username validation
@@ -67,13 +71,13 @@ const FormListSecond = ({ formData, handleChange, onPreviousClick, submit, setEr
     // Password validation
     tempErrors.password = formData.password ? '' : 'Şifre gereklidir.';
     if (formData.password && !passwordRegex.test(formData.password)) {
-      tempErrors.password = 'Geçersiz şifre formatı. En az 7 karakter. 1 büyük harf, 1 küçük harf ve özel karakter.';
+      tempErrors.password = 'Geçersiz şifre formatı. Büyük harf, Küçük harf, özel karakter ve sayı içermelidir.';
     }
     if (formData.password && formData.password.length > maxLength) {
       tempErrors.password = 'Şifre 50 karakterden fazla olamaz.';
     }
-    if (formData.password && formData.password.length < minLength) {
-      tempErrors.password = 'Şifre 3 karakterden az olamaz.';
+    if (formData.password && formData.password.length < minLengthPassword) {
+      tempErrors.password = 'Şifre 7 karakterden az olamaz.';
     }
 
     // Confirm Password validation
@@ -84,8 +88,8 @@ const FormListSecond = ({ formData, handleChange, onPreviousClick, submit, setEr
     if (formData.password && formData.passwordConfirmed && formData.password !== formData.passwordConfirmed) {
       tempErrors.passwordConfirmed = 'Şifreler eşleşmiyor.';
     }
-    if (formData.password && formData.password.length < minLength) {
-      tempErrors.password = 'Şifre 3 karakterden az olamaz.';
+    if (formData.password && formData.password.length < minLengthPassword) {
+      tempErrors.password = 'Şifre 7 karakterden az olamaz.';
     }
 
     setErrors(tempErrors);
@@ -169,7 +173,7 @@ const FormListSecond = ({ formData, handleChange, onPreviousClick, submit, setEr
           onChange={handleChange}
           required
           error={!!errors.password}
-          helperText={errors.password ? errors.password : "En az 7 karakter. 1 büyük harf ,1 küçük harf ve özel karakter."}
+          helperText={errors.password ? errors.password : "En az 7 karakter. Büyük harf, küçük harf, özel karakter ve sayı içermelidir."}
           fullWidth
           InputProps={{
             endAdornment: (

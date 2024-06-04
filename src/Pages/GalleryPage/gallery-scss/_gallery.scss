@@ -9,7 +9,7 @@
     .days {
         display: grid;
         grid-template-columns: repeat(6, 1fr);
-        gap: 12px;
+        gap: 16px;
         justify-content: space-between;
     }
 
@@ -23,7 +23,7 @@
         border-radius: 5px;
         padding: 10px;
         cursor: pointer;
-        box-shadow: 5px 5px 18px black;
+        box-shadow: 2px 2px 15px rgb(107, 107, 107);
 
         &:hover{
             background-color: rgb(146, 157, 193);
@@ -31,7 +31,7 @@
         }
 
         &.today {
-            box-shadow: 5px 5px 18px black;
+            box-shadow: 2px 2px 15px rgb(107, 107, 107)k;
             background-color: rgb(146, 157, 193);
             
         }
