@@ -178,7 +178,7 @@ const GalleryPage = () => {
                 <div
                     key={index}
                     className={`calendar ${isSelected ? 'today' : ''}`}
-                    onClick={() => navigate(`/gallery/${img.date}`)}
+                    onClick={() => navigate(`/mainpage/${img.date}`)}
                 >
                     <div className="calendar__header">
                         <p className="calendar__header-dayno">{imgDate.getDate()}</p>
