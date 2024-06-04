@@ -64,7 +64,7 @@ const LoginPage = () => {
         window.localStorage.setItem('token', response.token);
         window.localStorage.setItem('userId', response.userId);
         setLoginData({ email: '', password: '' });
-        navigate('/mainpage');
+        navigate('/gallery');
       } else if (loginRequest.status === 404) {
         setErrors((prevErrors) => ({
           ...prevErrors,
