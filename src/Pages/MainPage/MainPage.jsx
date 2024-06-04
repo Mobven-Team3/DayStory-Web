@@ -5,7 +5,7 @@ import Footer from '../Footer/footer';
 import GallaryPage from '../GalleryPage/GalleryPage';
 import TodayPage from '../NotePage/NotePage';
 import ProfilePage from '../ProfilePage/ProfilePage';
-import './mainpage-scss/_mainPage.scss';
+import './mainpage-scss/_main.scss';
 
 const MainPage = () => {
     const [activePage, setActivePage] = useState('gallery');

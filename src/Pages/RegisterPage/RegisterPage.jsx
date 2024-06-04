@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from "react-router-dom";
 
 //css
-import './register-scss/RegisterPage.css';
+import './register-scss/_register.scss';
 
 //components
 import FormListFirst from './formlistfirst';

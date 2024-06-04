@@ -4,6 +4,8 @@ import { useNavigate } from 'react-router-dom';
 import dayjs from 'dayjs';
 import 'dayjs/locale/tr';
 
+//css
+import './register-scss/_register.scss';
 
 //components
 import {

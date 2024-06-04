@@ -110,14 +110,15 @@
 // ------------------------------------------------------------------------------------------------------------------------------------
 
 
-import React, { useEffect, useState } from 'react';
 
-//css
+import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import './gallery-scss/_gallery.scss';
 
 const GalleryPage = () => {
     const [images, setImages] = useState([]);
     const [selectedDate, setSelectedDate] = useState(new Date());
+    const navigate = useNavigate();
 
     useEffect(() => {
         const fetchImages = async () => {
@@ -146,10 +147,8 @@ const GalleryPage = () => {
                 { date: '2024-06-01', imageUrl: 'https://r.resimlink.com/r_hXi-nT4.png', title: 'img' },
             ];
 
-            // Güncel tarihli veri kontrolü
             const todayExists = data.some(img => new Date(img.date).toDateString() === today.toDateString());
 
-            // Eğer güncel tarihli veri yoksa ekle
             if (!todayExists) {
                 data.unshift({
                     date: today.toISOString(),
@@ -158,7 +157,6 @@ const GalleryPage = () => {
                 });
             }
 
-            // Verileri tarihe göre sıralama
             const sortedData = data.sort((a, b) => new Date(b.date) - new Date(a.date));
 
             setImages(sortedData);
@@ -172,10 +170,10 @@ const GalleryPage = () => {
             const imgDate = new Date(img.date);
             const isSelected = selectedDate.toDateString() === imgDate.toDateString();
             return (
-                <button
+                <div
                     key={index}
                     className={`calendar ${isSelected ? 'today' : ''}`}
-                    onClick={() => setSelectedDate(imgDate)}
+                    onClick={() => navigate(`/gallery/${imgDate.toISOString().slice(0, 10)}`)}
                 >
                     <div className="calendar__header">
                         <p className="calendar__header-dayno">{imgDate.getDate()}</p>
@@ -185,7 +183,7 @@ const GalleryPage = () => {
                         </div>
                     </div>
                     <img src={img.imageUrl} alt={`aysu`} className="calendar__image" />
-                </button>
+                </div>
             );
         });
     };
@@ -227,3 +225,5 @@ const GalleryPage = () => {
 };
 
 export default GalleryPage;
+
+// ------------------------------------------------------------------------------------------------------------------------------------

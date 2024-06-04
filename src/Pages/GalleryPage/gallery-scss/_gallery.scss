@@ -14,19 +14,26 @@
     }
 
     .calendar {
-       text-align: left;
+        text-align: left;
         display: grid;
         gap: 10px;
         justify-content: space-around;
         align-items: center;
         background-color: rgba(250, 250, 250, 1);
         border-radius: 5px;
-        border: 1px solid rgba(219, 219, 219, 1);
         padding: 10px;
+        cursor: pointer;
+        box-shadow: 5px 5px 18px black;
+
+        &:hover{
+            background-color: rgb(146, 157, 193);
+            color: white;
+        }
 
         &.today {
-            background-color: rgba(90, 108, 165, 1);
-            color: #fff;
+            box-shadow: 5px 5px 18px black;
+            background-color: rgb(146, 157, 193);
+            
         }
 
         &__header {
