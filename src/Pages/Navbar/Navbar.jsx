@@ -34,7 +34,7 @@ const NavigationBar = ({ showFullMenu }) => {
                             className={`nav__item ${activePage === 'note' ? 'active' : ''}`}
                             onClick={() => handlePageChange('note', '/note')}
                         >
-                            Bu Gün
+                            Bugün
                         </p>
                         <p
                             className={`nav__item ${activePage === 'profile' ? 'active' : ''}`}
