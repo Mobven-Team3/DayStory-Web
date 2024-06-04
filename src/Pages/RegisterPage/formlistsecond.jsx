@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 //css
-import './register-scss/RegisterPage.css';
+import './register-scss/_register.scss';
 
 //components
 import { Button, IconButton, InputAdornment, TextField } from '@mui/material';
@@ -39,20 +39,23 @@ const FormListSecond = ({ formData, handleChange, onPreviousClick, submit, setEr
   const validate = () => {
     let tempErrors = {};
     const emailRegex = /@.*\./;
-    const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@.$!%*?&])[A-Za-z\d@$!%.*?&]{7,}$/;
     const maxLength = 50;
     const minLength = 3;
+    const minLengthPassword = 7;
 
     // Email validation
     tempErrors.email = formData.email ? '' : 'Email gereklidir.';
     if (formData.email && !emailRegex.test(formData.email)) {
-      tempErrors.email = 'Geçersiz email formatı. Örnek format: xxx@xxxx.xxx';
+      tempErrors.email = 'Geçersiz email formatı. Örnek format: xxxx@xxxx.xxx';
     }
     if (formData.email && formData.email.length > maxLength) {
       tempErrors.email = 'Email 50 karakterden fazla olamaz.';
     }
     if (formData.email && formData.email.length < minLength) {
       tempErrors.email = 'Email 3 karakterden az olamaz.';
+    }
+    if (formData.email && !/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(formData.email)) { 
+      tempErrors.email = 'Geçerli bir email adresi giriniz.'; 
     }
 
     // Username validation
@@ -66,26 +69,38 @@ const FormListSecond = ({ formData, handleChange, onPreviousClick, submit, setEr
 
     // Password validation
     tempErrors.password = formData.password ? '' : 'Şifre gereklidir.';
-    if (formData.password && !passwordRegex.test(formData.password)) {
-      tempErrors.password = 'Geçersiz şifre formatı. En az 7 karakter. 1 büyük harf, 1 küçük harf ve özel karakter.';
-    }
+    
     if (formData.password && formData.password.length > maxLength) {
       tempErrors.password = 'Şifre 50 karakterden fazla olamaz.';
     }
-    if (formData.password && formData.password.length < minLength) {
-      tempErrors.password = 'Şifre 3 karakterden az olamaz.';
+    if (formData.password && formData.password.length < minLengthPassword) {
+      tempErrors.password = 'Şifre en az 7 karakter uzunluğunda olmalıdır.';
     }
-
+    if (formData.password && !/[A-Z]/.test(formData.password)) {
+      tempErrors.password = 'Şifre en az bir büyük harf içermelidir.';
+    }
+    if (formData.password && !/[a-z]/.test(formData.password)) {
+      tempErrors.password = 'Şifre en az bir küçük harf içermelidir.';
+    }
+    if (formData.password && !/[0-9]/.test(formData.password)) {
+      tempErrors.password = 'Şifre en az bir rakam içermelidir.';
+    }
+    // eslint-disable-next-line 
+    if (formData.password && !/[!@#$%^&*()_+\-=\[\]{};':"|,.<>\/?]/.test(formData.password)) { 
+      tempErrors.password = 'Şifre en az bir sembol içermelidir.';
+    }
+    
     // Confirm Password validation
     tempErrors.passwordConfirmed = formData.passwordConfirmed ? '' : 'Şifre Tekrarı gereklidir.';
+
     if (formData.passwordConfirmed && formData.passwordConfirmed.length > maxLength) {
       tempErrors.passwordConfirmed = 'Şifre Tekrarı 50 karakterden fazla olamaz.';
     }
     if (formData.password && formData.passwordConfirmed && formData.password !== formData.passwordConfirmed) {
       tempErrors.passwordConfirmed = 'Şifreler eşleşmiyor.';
     }
-    if (formData.password && formData.password.length < minLength) {
-      tempErrors.password = 'Şifre 3 karakterden az olamaz.';
+    if (formData.password && formData.password.length < minLengthPassword) {
+      tempErrors.password = 'Şifre 7 karakterden az olamaz.';
     }
 
     setErrors(tempErrors);
@@ -169,7 +184,7 @@ const FormListSecond = ({ formData, handleChange, onPreviousClick, submit, setEr
           onChange={handleChange}
           required
           error={!!errors.password}
-          helperText={errors.password ? errors.password : "En az 7 karakter. 1 büyük harf ,1 küçük harf ve özel karakter."}
+          helperText={errors.password ? errors.password : "En az 7 karakter. Büyük harf, küçük harf, özel karakter ve sayı içermelidir."}
           fullWidth
           InputProps={{
             endAdornment: (
