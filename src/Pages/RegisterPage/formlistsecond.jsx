@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 //css
-import './register-scss/RegisterPage.css';
+import './register-scss/_register.scss';
 
 //components
 import { Button, IconButton, InputAdornment, TextField } from '@mui/material';
@@ -46,7 +46,7 @@ const FormListSecond = ({ formData, handleChange, onPreviousClick, submit, setEr
     // Email validation
     tempErrors.email = formData.email ? '' : 'Email gereklidir.';
     if (formData.email && !emailRegex.test(formData.email)) {
-      tempErrors.email = 'Geçersiz email formatı. Örnek format: xxxx@xxxxx.xxxx';
+      tempErrors.email = 'Geçersiz email formatı. Örnek format: xxx@xxxx.xxx';
     }
     if (formData.email && formData.email.length > maxLength) {
       tempErrors.email = 'Email 50 karakterden fazla olamaz.';
