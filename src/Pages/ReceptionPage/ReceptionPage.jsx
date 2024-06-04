@@ -5,7 +5,6 @@ import { useNavigate } from 'react-router-dom';
 
 import { Button } from '@mui/base';
 import FootBar from '../../../src/Pages/Footer/footer';
-import NavigationBar from '../../../src/Pages/Navbar/Navbar';
 import receptionImg2 from '../../../src/assets/images/2 1.png';
 import receptionImg3 from '../../../src/assets/images/5 1.png';
 import receptionImg4 from '../../../src/assets/images/Group 26085612.png';
@@ -26,7 +25,7 @@ const ReceptionPage = () => {
 
     return (
         <>
-            <NavigationBar showFullMenu={false} />
+           
             <div className="landingpage">
 
                 <div className="landingpage__info">
