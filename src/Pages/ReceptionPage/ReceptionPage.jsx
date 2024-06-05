@@ -25,7 +25,7 @@ const ReceptionPage = () => {
 
     return (
         <>
-           
+
             <div className="landingpage">
 
                 <div className="landingpage__info">
