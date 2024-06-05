@@ -49,7 +49,5 @@
   },
   "devDependencies": {
     "react-scripts": "^5.0.1"
-  },
-  "proxy": "http://165.22.93.225:5003"
-
+  }
 }

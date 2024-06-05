@@ -261,7 +261,8 @@ const LoginPage = () => {
           'Accept': 'application/json',
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify({ email: loginData.email, password: loginData.password })
+        body: JSON.stringify({ email: loginData.email, password: loginData.password }),
+        mode: 'cors'
       });
 
       const response = await loginRequest.json();
