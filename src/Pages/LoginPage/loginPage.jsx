@@ -257,7 +257,7 @@ const LoginPage = () => {
     setLoading(true);
     e.preventDefault();
     try {
-      const loginRequest = await fetch('https://daystory.netlify.app//api/Users/login', {
+      const loginRequest = await fetch('https://daystory.netlify.app/api/Users/login', {
         method: 'POST',
         headers: {
           'Accept': 'application/json',
