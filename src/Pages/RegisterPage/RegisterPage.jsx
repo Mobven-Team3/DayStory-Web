@@ -54,7 +54,7 @@ const RegisterPage = () => {
   const registerUser = async () => {
     setLoading(true);
     try {
-      const response = await fetch("https://daystory.netlify.app/api/Users/register", {
+      const response = await fetch("http://165.22.93.225:5003/api/Users/register", {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
@@ -131,6 +131,7 @@ const RegisterPage = () => {
           </div>
         </div>
       )}
+
     </div>
   );
 }
