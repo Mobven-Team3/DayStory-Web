@@ -11,6 +11,9 @@ import receptionImg4 from '../../../src/assets/images/Group 26085612.png';
 import receptionImg from '../../../src/assets/images/Karşılama_resimleri.png';
 import './scss/_reception.scss';
 
+
+import Navbar from '../Navbar/Navbar';
+
 const ReceptionPage = () => {
     const navigate = useNavigate();
 
@@ -25,7 +28,7 @@ const ReceptionPage = () => {
 
     return (
         <>
-
+            <Navbar></Navbar>
             <div className="landingpage">
 
                 <div className="landingpage__info">

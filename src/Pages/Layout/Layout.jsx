@@ -1,5 +1,4 @@
 import React from 'react';
-import Footer from '../Footer/footer';
 import Navbar from '../Navbar/Navbar';
 import './_layout.scss';
 
@@ -10,7 +9,7 @@ const Layout = ({ children }) => {
             <center>
                 {children}
             </center>
-            <Footer />
+            {/* <Footer /> */}
         </>
     );
 };
