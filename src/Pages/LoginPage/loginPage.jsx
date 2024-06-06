@@ -250,12 +250,14 @@ const LoginPage = () => {
     email: '',
     password: '',
   });
-
+  
+// http://165.22.93.225:5003/api/Users/login
+  
   const loginHandler = async (e) => {
     setLoading(true);
     e.preventDefault();
     try {
-      const loginRequest = await fetch('http://165.22.93.225:5003/api/Users/login', {
+      const loginRequest = await fetch('https://your-netlify-site.netlify.app/api/Users/login', {
         method: 'POST',
         headers: {
           'Accept': 'application/json',
