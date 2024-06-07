@@ -14,6 +14,7 @@ import { default as NotePage } from './Pages/NotePage/NotePage';
 import ProfilePage from './Pages/ProfilePage/ProfilePage';
 import ReceptionPage from './Pages/ReceptionPage/ReceptionPage';
 import RegisterPage from './Pages/RegisterPage/RegisterPage';
+import Deneme from './Pages/deneme';
 
 function App() {
   return (
@@ -26,6 +27,7 @@ function App() {
         <Route path='/gallery/:date' element={<Layout><GalleryDetail /></Layout>} />
         <Route path='/note' element={<Layout><NotePage /></Layout>} />
         <Route path='/profile' element={<Layout><ProfilePage /></Layout>} />
+        <Route path='/deneme' element={<Deneme />} />
       </Routes>
     </BrowserRouter>
   );

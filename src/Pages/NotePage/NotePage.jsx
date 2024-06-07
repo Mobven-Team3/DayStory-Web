@@ -1,9 +1,8 @@
-
-import React, { useState, useEffect } from 'react';
-import { Container, TextField, Button, List, ListItem, ListItemText, Typography, Box } from '@mui/material';
+import { Box, Button, Container, List, ListItem, ListItemText, TextField, Typography } from '@mui/material';
+import React, { useEffect, useState } from 'react';
 import NavigationBar from '../../../src/Pages/Navbar/Navbar'; // Doğru yolu düzelt
 import Footer from '../Footer/footer';
-import './note-scss/NotePage.scss';
+import './note-scss/_note.scss';
 
 const NoteApp = () => {
     const [currentDate, setCurrentDate] = useState('');
