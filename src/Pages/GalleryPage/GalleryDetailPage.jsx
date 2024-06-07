@@ -262,12 +262,12 @@ const GalleryDetailPage = () => {
                         </div>
                     </div>
                     <div className='detail__notes'>
-                        {events.map(event => (
+                       {events.map(event => (
                             <div className='detail__notes-area' key={event.id}>
                                 <p className='detail__notes-title'>{event.title}</p>
                                 <p className='detail__notes-description'>{event.description}</p>
                             </div>
-                        ))}
+                        ))} 
                     </div>
                 </div>
             </div>

@@ -83,14 +83,15 @@
 
     &__notes {
         width: max-content;
-        height: max-content;
+        height: 582px;
         display: grid;
         gap: 20px;
         border-radius: 16px;
-        justify-content:space-between;
+        align-items: start;
         text-align: left;
         padding: 10px;
         border: 1px solid rgba(193, 189, 189, 0.5);
+        overflow-y: auto;
 
         &-area {
             display: block;
@@ -117,7 +118,5 @@
 
         }
     }
-
-
 
 }
