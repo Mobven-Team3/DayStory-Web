@@ -1,16 +1,36 @@
-import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom'; // useNavigate hook'unu ekleyin
-import { Container, TextField, Button, List, ListItem, ListItemText, Typography, Box, Modal, Backdrop, Fade } from '@mui/material';
-import NavigationBar from '../../../src/Pages/Navbar/Navbar'; // Doğru yolu düzelt
+import { Backdrop, Box, Button, Container, Fade, Modal, TextField, Typography } from '@mui/material';
+import axios from 'axios';
+import React, { useEffect, useState } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
+import NavigationBar from '../../../src/Pages/Navbar/Navbar';
 import "./note-scss/_note.scss";
+
 const NoteApp = () => {
-    const navigate = useNavigate(); // useNavigate hook'u ile navigate fonksiyonunu alın
+    const navigate = useNavigate();
 
     const [currentDate, setCurrentDate] = useState('');
     const [notes, setNotes] = useState([]);
-    const [noteTitle, setNoteTitle] = useState('');
-    const [noteContent, setNoteContent] = useState('');
     const [modalOpen, setModalOpen] = useState(false);
+    const { date } = useParams();
+    const [events, setEvents] = useState([]);
+    const [error, setError] = useState(null);
+    const [formattedDate, setFormattedDate] = useState('');
+
+    const [noteData, setNoteData] = useState({
+        title: "",
+        description: "",
+        date: "",
+        time: "",
+        priority: "High"
+    });
+
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setNoteData((prevData) => ({
+            ...prevData,
+            [name]: value
+        }));
+    };
 
     useEffect(() => {
         const getCurrentDate = () => {
@@ -18,20 +38,83 @@ const NoteApp = () => {
             const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
             return date.toLocaleDateString('tr-TR', options);
         };
-        
-        setCurrentDate(getCurrentDate());
-    }, [notes]); // notes değişkenini bağımlılıklara ekledik
 
-    const handleAddNote = () => {
-        if (noteTitle.trim() && noteContent.trim()) {
-            setNotes([...notes, { title: noteTitle, content: noteContent, date: currentDate }]);
-            setNoteTitle('');
-            setNoteContent('');
+        setCurrentDate(getCurrentDate());
+    }, []);
+
+    useEffect(() => {
+        const today = new Date();
+        const formattedDate = `${String(today.getDate()).padStart(2, '0')}-${String(today.getMonth() + 1).padStart(2, '0')}-${today.getFullYear()}`;
+        setFormattedDate(formattedDate);
+
+        fetchEvents(formattedDate);
+    }, [date]);
+
+    useEffect(() => {
+        const getCurrentTime = () => {
+            const now = new Date();
+            const hours = String(now.getHours()).padStart(2, '0');
+            const minutes = String(now.getMinutes()).padStart(2, '0');
+            return `${hours}:${minutes}`;
+        };
+
+        setNoteData((prevData) => ({
+            ...prevData,
+            time: getCurrentTime()
+        }));
+    }, []);
+
+    const fetchEvents = async (formattedDate) => {
+        try {
+            const token = localStorage.getItem('token');
+            const response = await axios.get('http://165.22.93.225:5030/api/Events/day', {
+                params: { date: formattedDate },
+                headers: {
+                    'Authorization': `Bearer ${token}`,
+                    'Content-Type': 'application/json',
+                }
+            });
+            if (response.data && Array.isArray(response.data.data)) {
+                setEvents(response.data.data);
+            } else {
+                setError('Etkinlikler alınırken bir hata oluştu');
+            }
+        } catch (error) {
+            setError('Etkinlikler alınırken bir hata oluştu');
         }
     };
 
     const handleModalOpen = () => {
         setModalOpen(true);
+    };
+
+    const handleAddNote = async () => {
+        try {
+            const token = localStorage.getItem('token');
+            if (!token) {
+                throw new Error('Token bulunamadı, lütfen giriş yapın.');
+            }
+
+            const response = await axios.post("http://165.22.93.225:5030/api/Events", {
+                ...noteData,
+                date: formattedDate
+            }, {
+                headers: {
+                    "Content-Type": "application/json",
+                    'Authorization': `Bearer ${token}`
+                }
+            });
+
+            if (response.status === 200 || response.status === 201) {
+                console.log('Note added successfully:', response.data);
+                setNotes(prevNotes => [...prevNotes, response.data]);
+                fetchEvents(formattedDate); // Fetch events after adding a new note
+            } else {
+                console.error('Not ekleme başarısız:', response.data);
+            }
+        } catch (error) {
+            console.error("Failed to add note:", error.response ? error.response.data : error.message);
+        }
     };
 
     const handleModalClose = () => {
@@ -41,14 +124,13 @@ const NoteApp = () => {
     const handleContinue = () => {
         import('./notedetail.jsx').then(module => {
             const Notedetail = module.default;
-            // Yeni sayfaya yönlendirme işlemi
-            navigate('/notedetail'); // notedetail yolunu belirttik
+            navigate('/notedetail');
         });
     };
 
     return (
         <Container className="note-app-container">
-            <NavigationBar showFullMenu={false} /> {/* NavigationBar'ı ekledik */}
+            <NavigationBar showFullMenu={false} />
             <Box className="gün-sayacı">
                 <Typography variant="subtitle1" gutterBottom>{currentDate}</Typography>
             </Box>
@@ -56,11 +138,11 @@ const NoteApp = () => {
                 className="summary-add-button"
                 sx={{ 
                     marginRight: '50px',
-                    marginTop: '2px'   // Üst kenara olan uzaklığı arttırdık
+                    marginTop: '2px'
                 }}
                 variant="contained"
                 color="primary"
-                onClick={handleModalOpen} // Modalı açmak için handleModalOpen fonksiyonunu çağırın
+                onClick={handleModalOpen}
             >
                 Gün Özeti Oluştur
             </Button>
@@ -71,21 +153,26 @@ const NoteApp = () => {
                     <TextField 
                         className="note-input"
                         label="Not Başlığı"
+                        name="title"
+                        placeholder="not başlığı...."
                         variant="outlined"
                         fullWidth 
-                        value={noteTitle}
-                        onChange={(e) => setNoteTitle(e.target.value)}
+                        value={noteData.title}
+                        onChange={handleChange}
                     />
                     <TextField 
                         className="note-input"
+                        name="description"
+                        placeholder="not içeriğini yazınız.."
                         label="Not İçeriği"
                         variant="outlined"
                         multiline
                         rows={4}
                         fullWidth 
-                        value={noteContent}
-                        onChange={(e) => setNoteContent(e.target.value)}
+                        value={noteData.description}
+                        onChange={handleChange}
                     />
+                   
                     <Button 
                         className="add-button"
                         variant="contained" 
@@ -95,24 +182,19 @@ const NoteApp = () => {
                         Ekle
                     </Button>
                 </Box>
-                <List className="note-list">
-                    {notes.length > 0 ? (
-                        notes.map((note, index) => (
-                            <ListItem key={index} className="note-item">
-                                <ListItemText primary={note.title} secondary={note.content} />
-                            </ListItem>
-                        ))
-                    ) : (
-                        <Typography variant="body1" className="no-notes-message">Bugün için notunuz bulunmuyor.</Typography>
-                    )}
-                </List>
+                <div className='detail__notes'>
+                    {events.map(event => (
+                        <div className='detail__notes-area' key={event.id}>
+                            <p className='detail__notes-title'>{event.title}</p>
+                            <p className='detail__notes-description'>{event.description}</p>
+                        </div>
+                    ))}
+                </div>
             </Box>
-           
 
-            {/* Modal */}
             <Modal
                 open={modalOpen}
-                onClose={handleModalClose} 
+                onClose={handleModalClose}
                 aria-labelledby="modal-title"
                 aria-describedby="modal-description"
                 closeAfterTransition
@@ -139,8 +221,8 @@ const NoteApp = () => {
                         <Typography id="modal-description" sx={{ mt: 2 }}>
                             Günde yalnızca bir AI gün özeti oluşturabilirsiniz. Devam etmek istiyor musunuz?
                         </Typography>
-                        <Button onClick={handleModalClose} sx={{ mt: 2 }}>Vazgeç</Button> {/* Kapat butonu */}
-                        <Button onClick={handleContinue} sx={{ mt: 2, mr: 2 }}>Devam Et</Button> {/* Ekle butonu */}
+                        <Button onClick={handleModalClose} sx={{ mt: 2 }}>Vazgeç</Button>
+                        <Button onClick={handleContinue} sx={{ mt: 2, mr: 2 }}>Devam Et</Button>
                     </Box>
                 </Fade>
             </Modal>
