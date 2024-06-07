@@ -182,7 +182,9 @@
 
 // export default GalleryDetailPage;
 
-import React, { useState } from 'react';
+
+import axios from 'axios';
+import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import './gallery-scss/_gallery-detail.scss';
 
@@ -190,6 +192,7 @@ const GalleryDetailPage = () => {
     const { date } = useParams();
     const [events, setEvents] = useState([]);
     const [error, setError] = useState(null);
+    const [image, setImage] = useState(null);
 
     const months = [
         'Ocak', 'Şubat', 'Mart', 'Nisan', 'Mayıs', 'Haziran',
@@ -211,37 +214,63 @@ const GalleryDetailPage = () => {
 
     const { dayNo, dayName, monthName, year } = getDateInfo(date);
 
+    useEffect(() => {
+        const fetchEvents = async () => {
+            try {
+                const token = localStorage.getItem('token');
+                const response = await axios.get('http://165.22.93.225:5030/api/Events/day', {
+                    params: { date },
+                    headers: {
+                        'Authorization': `Bearer ${token}`,
+                        'Content-Type': 'application/json',
+                    }
+                });
+                if (response.data && Array.isArray(response.data.data)) {
+                    setEvents(response.data.data);
+                } else {
+                    setError('Etkinlikler alınırken bir hata oluştu');
+                }
+            } catch (error) {
+                setError('Etkinlikler alınırken bir hata oluştu');
+            }
+        };
+
+        fetchEvents();
+    }, [date]);
+
+
+
     // useEffect(() => {
-    //     const fetchEvents = async () => {
+    //     const fetchImage = async () => {
     //         try {
     //             const token = localStorage.getItem('token');
-    //             const response = await axios.get('http://165.22.93.225:5003/api/Events/day', {
-    //                 params: { date },
+    //             const response = await axios.get('dsfs', {
     //                 headers: {
     //                     'Authorization': `Bearer ${token}`,
     //                     'Content-Type': 'application/json',
     //                 }
     //             });
-    //             if (response.data && Array.isArray(response.data.data)) {
-    //                 setEvents(response.data.data);
+    //             if (response.data && response.data.url) {
+    //                 setImage(response.data.url);
     //             } else {
-    //                 setError('Etkinlikler alınırken bir hata oluştu');
+    //                 setError('Resim alınırken bir hata oluştu');
     //             }
     //         } catch (error) {
-    //             setError('Etkinlikler alınırken bir hata oluştu');
+    //             setError('Resim alınırken bir hata oluştu');
     //         }
     //     };
 
-    //     fetchEvents();
-    // }, [date]);
+    //     fetchImage();
+    // }, [image]);
 
-    // if (error) {
-    //     return <div>Error: {error}</div>;
-    // }
 
-    // if (events.length === 0) {
-    //     return <div>No events found for this date</div>;
-    // }
+    if (error) {
+        return <div>Error: {error}</div>;
+    }
+
+    if (events.length === 0) {
+        return <div>No events found for this date</div>;
+    }
 
     return (
         <center>
@@ -261,22 +290,12 @@ const GalleryDetailPage = () => {
                         </div>
                     </div>
                     <div className='detail__notes'>
-
-                    <div className='detail__notes-area' >
-                                <p className='detail__notes-title'>başlık</p>
-                                <p className='detail__notes-description'>dsufkhskjfhsjk</p>
-                            </div>
-
-                            <div className='detail__notes-area' >
-                                <p className='detail__notes-title'>başlık</p>
-                                <p className='detail__notes-description'>dsufkhskjfhsjk</p>
-                            </div>
-                        {/* {events.map(event => (
+                        {events.map(event => (
                             <div className='detail__notes-area' key={event.id}>
                                 <p className='detail__notes-title'>{event.title}</p>
                                 <p className='detail__notes-description'>{event.description}</p>
                             </div>
-                        ))} */}
+                        ))}
                     </div>
                 </div>
             </div>
