@@ -1,5 +1,167 @@
-.content{
-    width: 500px;
-    height: 100vh;
-   
+.note-app-container {
+  position: relative;
+  width: 40vh; /* Genişlik değerini güncelledik */
+  height: 500px; /* Daha fazla yer kaplaması için yüksekliği artırdık */
+  top: 150px; /* Sayfanın üstünden biraz boşluk bırakalım */
+  left: -20px; /* Sayfanın tam soluna hizala */
+  gap: 0px;
+  opacity: 1; /* Container'ı görünür yapalım */
 }
+
+.note-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.note-input-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-bottom: 20px;
+  width: 300px; 
+  height: auto;
+}
+
+.note-input {
+  width: 300px; 
+  margin-bottom: 10px;
+}
+
+.summary-add-button {
+  border-radius: 20px;
+  background: linear-gradient(to right, #6A7FC1, #F3AFE5);
+  width: 300px; /* Genişlik değerini arttırın */
+  height: 30px;
+  margin-bottom: 30px;
+  background-size: 100% 100%; /* Arkaplanın boyutunu genişliği kadar ayarlayın */
+}
+
+.note-list {
+  border-radius: 30px;
+  position: relative; /* Göreceli konumlandırma */
+  top: -50px; // öğenin konumunu değiştirirken kullanılan değer
+  left: 80px; /* Sağdan 20px mesafe */
+  background-color: white;
+  border: 1px solid #ccc;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  float: right;
+  height: 380px; /* Sabit yükseklik */
+  overflow-y: auto; /* Dikey scroll eklendi */
+  gap: 10px; /* Notlar arasında boşluk bırakın */
+  width: 60%;
+}
+
+.no-notes-message {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 18px;
+  color: rgb(189, 3, 3);
+  text-align: center; // Yazıyı ortala
+}
+
+.note-item {
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin-bottom: 10px;
+  padding: 10px;
+  width: 300px; 
+  height: auto;
+}
+
+.add-button {
+  border-color: blue;
+  background-color: none;
+  position: relative;
+  margin-top: 10px; 
+  opacity: 1;
+  border-radius: 20px;
+}
+
+// .note-app-container {
+//   position: relative;
+//   width: 40vh; /* Genişlik değerini güncelledik */
+//   height: 600px; // Daha fazla yer kaplaması için yüksekliği artırdık
+//   top: 150px; // Sayfanın üstünden biraz boşluk bırakalım
+//   left: -20px; // Sayfanın tam soluna hizala
+//   gap: 0px;
+//   opacity: 1; // Container'ı görünür yapalım
+
+//   .note-input-wrapper {
+//     display: flex;
+//     flex-direction: column;
+//     align-items: flex-start;
+//     margin-bottom: 20px;
+//     width: 300px; 
+//     height: auto;
+
+//     .note-input {
+//       width: 300px; 
+//       margin-bottom: 10px;
+//     }
+//   }
+
+//   .summary-add-button {
+//     border-radius: 20px;
+//     background: linear-gradient(to right, #6A7FC1, #F3AFE5);
+//     width: 300px; /* Genişlik değerini arttırın */
+//     height: 30px;
+//     margin-bottom: 30px;
+//     background-size: 100% 100%; /* Arkaplanın boyutunu genişliği kadar ayarlayın */
+//   }
+
+//   .note-list {
+    
+//     border: 1px solid #ccc;
+//     border-radius: 20px;
+//     margin-right: 300px;
+//     position: absolute;
+//     top: 0;
+//     right: 0;
+//     display: flex;
+//     flex-direction: column;
+//     align-items: flex-end; /* Notları sağa hizala */
+//     height: 380px; /* Sabit yükseklik */
+//     overflow-y: auto; /* Dikey scroll eklendi */
+//     gap: 10px; /* Notlar arasında boşluk bırakın */
+
+//     &::-webkit-scrollbar {
+//       width: 12px;
+//     }
+
+//     &::-webkit-scrollbar-track {
+//       background: #f1f1f1;
+//     }
+
+//     &::-webkit-scrollbar-thumb {
+//       background: #888;
+//       border-radius: 10px;
+//     }
+
+//     &::-webkit-scrollbar-thumb:hover {
+//       background: #555;
+//     }
+//   }
+
+//   .note-item {
+//     border: 1px solid #ccc;
+//     border-radius: 5px;
+//     margin-bottom: 10px;
+//     padding: 10px;
+//     width: 300px; 
+//     height: auto;
+//   }
+
+//   .add-button {
+//     border-color: blue;
+//     background-color: none;
+//     position: relative;
+//     margin-top: 10px; 
+//     opacity: 1;
+//     border-radius: 20px;
+//   }
+// }
