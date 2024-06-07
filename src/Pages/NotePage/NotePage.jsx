@@ -1,13 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { useParams } from 'react-router-dom';
-import { useNavigate } from 'react-router-dom';
-import { Container, TextField, Button, List, ListItem, ListItemText, Typography, Box, Modal, Backdrop, Fade } from '@mui/material';
+import { useParams, useNavigate } from 'react-router-dom';
+import { Container, TextField, Button, Typography, Box, Modal, Backdrop, Fade } from '@mui/material';
 import NavigationBar from '../../../src/Pages/Navbar/Navbar';
 import "./note-scss/_note.scss";
 
 const NoteApp = () => {
-    const navigate = useNavigate(); 
+    const navigate = useNavigate();
 
     const [currentDate, setCurrentDate] = useState('');
     const [notes, setNotes] = useState([]);
@@ -17,14 +16,31 @@ const NoteApp = () => {
     const { date } = useParams();
     const [events, setEvents] = useState([]);
     const [error, setError] = useState(null);
-    
+    const [formattedDate, setFormattedDate] = useState('');
+
+    const [noteData, setNoteData] = useState({
+        title: '', 
+        description: '', 
+        date: '', 
+        time: '', 
+        priority: ''
+    });
+
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setNoteData((prevData) => ({
+            ...prevData,
+            [name]: value
+        }));
+    };
+
     useEffect(() => {
         const getCurrentDate = () => {
             const date = new Date();
             const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
             return date.toLocaleDateString('tr-TR', options);
         };
-        
+
         setCurrentDate(getCurrentDate());
     }, [notes]);
 
@@ -34,8 +50,8 @@ const NoteApp = () => {
                 const token = localStorage.getItem('token');
                 const today = new Date().toLocaleDateString('en-GB').split('/').reverse().join('-'); // Bugünün tarihini al ve formatla
 
-                // Tarihi DD-MM-YYYY formatında düzenle
                 const formattedDate = today.split('-').reverse().join('-');
+                setFormattedDate(formattedDate);
 
                 const response = await axios.get('http://165.22.93.225:5030/api/Events/day', {
                     params: { date: formattedDate },
@@ -57,16 +73,36 @@ const NoteApp = () => {
         fetchEvents();
     }, [date]);
 
-    const handleAddNote = () => {
-        if (noteTitle.trim() && noteContent.trim()) {
-            setNotes([...notes, { title: noteTitle, content: noteContent, date: currentDate }]);
-            setNoteTitle('');
-            setNoteContent('');
-        }
-    };
-
     const handleModalOpen = () => {
         setModalOpen(true);
+    };
+
+    const handleAddNote = async () => {
+        try {
+            const token = localStorage.getItem('token');
+            if (!token) {
+                throw new Error('Token bulunamadı, lütfen giriş yapın.');
+            }
+
+            const response = await axios.post("http://165.22.93.225:5030/api/Events", {
+                ...noteData,
+                date: formattedDate
+            }, {
+                headers: {
+                    "Content-Type": "application/json",
+                    'Authorization': `Bearer ${token}`
+                }
+            });
+
+            if (response.status === 200 || response.status === 201) {
+                console.log('Note added successfully:', response.data);
+                setNotes(prevNotes => [...prevNotes, response.data]); // Yeni notu mevcut not listesine ekle
+            } else {
+                console.error('Not ekleme başarısız:', response.data);
+            }
+        } catch (error) {
+            console.error("Failed to add note:", error.response ? error.response.data : error.message);
+        }
     };
 
     const handleModalClose = () => {
@@ -105,20 +141,24 @@ const NoteApp = () => {
                     <TextField 
                         className="note-input"
                         label="Not Başlığı"
+                        name="title"
+                        placeholder="not başlığı...."
                         variant="outlined"
                         fullWidth 
-                        value={noteTitle}
-                        onChange={(e) => setNoteTitle(e.target.value)}
+                        value={noteData.title}
+                        onChange={handleChange}
                     />
                     <TextField 
                         className="note-input"
+                        name="description"
+                        placeholder="not içeriğini yazınız.."
                         label="Not İçeriği"
                         variant="outlined"
                         multiline
                         rows={4}
                         fullWidth 
-                        value={noteContent}
-                        onChange={(e) => setNoteContent(e.target.value)}
+                        value={noteData.description}
+                        onChange={handleChange}
                     />
                     <Button 
                         className="add-button"
