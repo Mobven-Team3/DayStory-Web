@@ -30,7 +30,7 @@ const NoteApp = () => {
 
     return (
         <Container className="note-app-container">
-            <NavigationBar showFullMenu={false} /> {/* NavigationBar'ı ekledik */}
+         
             <Box className="gün-sayacı">
                 <Typography variant="subtitle1" gutterBottom>{currentDate}</Typography>
             </Box>
@@ -86,7 +86,7 @@ const NoteApp = () => {
                     )}
                 </List>
             </Box>
-            <Footer /> {/* Footer bileşenini ekledik */}
+            
         </Container>
     );
 };
