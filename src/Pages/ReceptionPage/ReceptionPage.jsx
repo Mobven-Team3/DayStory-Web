@@ -12,7 +12,7 @@ import receptionImg from '../../../src/assets/images/Karşılama_resimleri.png';
 import './scss/_reception.scss';
 
 
-import Navbar from '../Navbar/Navbar';
+import Navbar from '../ReseptionNavbar/reseptionNavbar';
 
 const ReceptionPage = () => {
     const navigate = useNavigate();
@@ -23,7 +23,7 @@ const ReceptionPage = () => {
     
     const handleRegisterPageClick = () => {
         navigate('/register');
-      };
+    };
 
 
     return (
