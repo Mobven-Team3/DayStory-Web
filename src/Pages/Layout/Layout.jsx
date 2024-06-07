@@ -10,7 +10,7 @@ const Layout = ({ children }) => {
             <center>
                 <div className='layout'>
                     {children}
-                    </div>
+                </div>
             </center>
             <Footer />
         </>
