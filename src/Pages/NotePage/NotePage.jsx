@@ -1,17 +1,23 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom'; // useNavigate hook'unu ekleyin
+import axios from 'axios';
+import { useParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { Container, TextField, Button, List, ListItem, ListItemText, Typography, Box, Modal, Backdrop, Fade } from '@mui/material';
-import NavigationBar from '../../../src/Pages/Navbar/Navbar'; // Doğru yolu düzelt
+import NavigationBar from '../../../src/Pages/Navbar/Navbar';
 import "./note-scss/_note.scss";
+
 const NoteApp = () => {
-    const navigate = useNavigate(); // useNavigate hook'u ile navigate fonksiyonunu alın
+    const navigate = useNavigate(); 
 
     const [currentDate, setCurrentDate] = useState('');
     const [notes, setNotes] = useState([]);
     const [noteTitle, setNoteTitle] = useState('');
     const [noteContent, setNoteContent] = useState('');
     const [modalOpen, setModalOpen] = useState(false);
-
+    const { date } = useParams();
+    const [events, setEvents] = useState([]);
+    const [error, setError] = useState(null);
+    
     useEffect(() => {
         const getCurrentDate = () => {
             const date = new Date();
@@ -20,7 +26,36 @@ const NoteApp = () => {
         };
         
         setCurrentDate(getCurrentDate());
-    }, [notes]); // notes değişkenini bağımlılıklara ekledik
+    }, [notes]);
+
+    useEffect(() => {
+        const fetchEvents = async () => {
+            try {
+                const token = localStorage.getItem('token');
+                const today = new Date().toLocaleDateString('en-GB').split('/').reverse().join('-'); // Bugünün tarihini al ve formatla
+
+                // Tarihi DD-MM-YYYY formatında düzenle
+                const formattedDate = today.split('-').reverse().join('-');
+
+                const response = await axios.get('http://165.22.93.225:5030/api/Events/day', {
+                    params: { date: formattedDate },
+                    headers: {
+                        'Authorization': `Bearer ${token}`,
+                        'Content-Type': 'application/json',
+                    }
+                });
+                if (response.data && Array.isArray(response.data.data)) {
+                    setEvents(response.data.data);
+                } else {
+                    setError('Etkinlikler alınırken bir hata oluştu');
+                }
+            } catch (error) {
+                setError('Etkinlikler alınırken bir hata oluştu');
+            }
+        };
+
+        fetchEvents();
+    }, [date]);
 
     const handleAddNote = () => {
         if (noteTitle.trim() && noteContent.trim()) {
@@ -41,14 +76,13 @@ const NoteApp = () => {
     const handleContinue = () => {
         import('./notedetail.jsx').then(module => {
             const Notedetail = module.default;
-            // Yeni sayfaya yönlendirme işlemi
-            navigate('/notedetail'); // notedetail yolunu belirttik
+            navigate('/notedetail');
         });
     };
 
     return (
         <Container className="note-app-container">
-            <NavigationBar showFullMenu={false} /> {/* NavigationBar'ı ekledik */}
+            <NavigationBar showFullMenu={false} />
             <Box className="gün-sayacı">
                 <Typography variant="subtitle1" gutterBottom>{currentDate}</Typography>
             </Box>
@@ -56,11 +90,11 @@ const NoteApp = () => {
                 className="summary-add-button"
                 sx={{ 
                     marginRight: '50px',
-                    marginTop: '2px'   // Üst kenara olan uzaklığı arttırdık
+                    marginTop: '2px'
                 }}
                 variant="contained"
                 color="primary"
-                onClick={handleModalOpen} // Modalı açmak için handleModalOpen fonksiyonunu çağırın
+                onClick={handleModalOpen}
             >
                 Gün Özeti Oluştur
             </Button>
@@ -95,24 +129,19 @@ const NoteApp = () => {
                         Ekle
                     </Button>
                 </Box>
-                <List className="note-list">
-                    {notes.length > 0 ? (
-                        notes.map((note, index) => (
-                            <ListItem key={index} className="note-item">
-                                <ListItemText primary={note.title} secondary={note.content} />
-                            </ListItem>
-                        ))
-                    ) : (
-                        <Typography variant="body1" className="no-notes-message">Bugün için notunuz bulunmuyor.</Typography>
-                    )}
-                </List>
+                <div className='detail__notes'>
+                    {events.map(event => (
+                        <div className='detail__notes-area' key={event.id}>
+                            <p className='detail__notes-title'>{event.title}</p>
+                            <p className='detail__notes-description'>{event.description}</p>
+                        </div>
+                    ))}
+                </div>
             </Box>
-           
 
-            {/* Modal */}
             <Modal
                 open={modalOpen}
-                onClose={handleModalClose} 
+                onClose={handleModalClose}
                 aria-labelledby="modal-title"
                 aria-describedby="modal-description"
                 closeAfterTransition
@@ -139,8 +168,8 @@ const NoteApp = () => {
                         <Typography id="modal-description" sx={{ mt: 2 }}>
                             Günde yalnızca bir AI gün özeti oluşturabilirsiniz. Devam etmek istiyor musunuz?
                         </Typography>
-                        <Button onClick={handleModalClose} sx={{ mt: 2 }}>Vazgeç</Button> {/* Kapat butonu */}
-                        <Button onClick={handleContinue} sx={{ mt: 2, mr: 2 }}>Devam Et</Button> {/* Ekle butonu */}
+                        <Button onClick={handleModalClose} sx={{ mt: 2 }}>Vazgeç</Button>
+                        <Button onClick={handleContinue} sx={{ mt: 2, mr: 2 }}>Devam Et</Button>
                     </Box>
                 </Fade>
             </Modal>
