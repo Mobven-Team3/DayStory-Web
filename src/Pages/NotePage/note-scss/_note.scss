@@ -1,8 +1,10 @@
 .note-app-container {
-  padding: 150px;
+padding: 150px;
   text-align: left;
-  width: 40vh; 
+  // position: relative;
+  width: 40vh; /* Genişlik değerini güncelledik */
 
+  opacity: 1; /* Container'ı görünür yapalım */
 }
 
 .note-content {
@@ -26,35 +28,40 @@
 }
 
 .summary-add-button {
-  border-radius: 20px;
+  border-radius:30px;
+  overflow: hidden;
   background: linear-gradient(to right, #6A7FC1, #F3AFE5);
-  width: 300px; 
+  width: 300px; /* Genişlik değerini arttırın */
   height: 30px;
   margin-bottom: 30px;
-  background-size: 100% 100%;
-  z-index: -1;
+  background-size: 100% 100%; /* Arkaplanın boyutunu genişliği kadar ayarlayın */
 }
 
 .note-list {
   border-radius: 30px;
+  position: relative; /* Göreceli konumlandırma */
+  top: -50px; // öğenin konumunu değiştirirken kullanılan değer
+  left: 80px; /* Sağdan 20px mesafe */
   background-color: white;
   border: 1px solid #ccc;
   border-radius: 20px;
   display: flex;
   flex-direction: column;
   float: right;
-  height: 380px;
-  overflow-y: auto; 
+  height: 380px; /* Sabit yükseklik */
+  overflow-y: auto; /* Dikey scroll eklendi */
+  gap: 10px; /* Notlar arasında boşluk bırakın */
   width: 60%;
 }
 
 .no-notes-message {
+  position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   font-size: 18px;
   color: rgb(189, 3, 3);
-  text-align: center;
+  text-align: center; // Yazıyı ortala
 }
 
 .note-item {
@@ -69,90 +76,53 @@
 .add-button {
   border-color: blue;
   background-color: none;
+  position: relative;
   margin-top: 10px; 
+  opacity: 1;
   border-radius: 20px;
 }
+.modal-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(193, 190, 190, 0.879); /* Modal arka planı için yarı saydam siyah bir renk */
+  z-index: 9999; /* Modalın diğer öğelerin üstünde olmasını sağlar */
+}
 
-// .note-app-container {
-//   position: relative;
-//   width: 40vh; /* Genişlik değerini güncelledik */
-//   height: 600px; // Daha fazla yer kaplaması için yüksekliği artırdık
-//   top: 150px; // Sayfanın üstünden biraz boşluk bırakalım
-//   left: -20px; // Sayfanın tam soluna hizala
-//   gap: 0px;
-//   opacity: 1; // Container'ı görünür yapalım
+.modal-content {
+  background-color: white;
+  border-radius: 20px; /* Border radius değerini arttırdık */
+  padding: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Hafif bir gölge efekti */
+  max-width: 80%; /* Modalın maksimum genişliği */
+  max-height: 80%; /* Modalın maksimum yüksekliği */
+  overflow-y: auto; /* İçeriği aşan durumlarda dikey kaydırma çubuğu göster */
+  border: none; /* Border rengini kaldırdık */
+}
 
-//   .note-input-wrapper {
-//     display: flex;
-//     flex-direction: column;
-//     align-items: flex-start;
-//     margin-bottom: 20px;
-//     width: 300px; 
-//     height: auto;
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
 
-//     .note-input {
-//       width: 300px; 
-//       margin-bottom: 10px;
-//     }
-//   }
+.modal-title {
+  font-size: 1.2rem;
+  font-weight: bold;
+}
 
-//   .summary-add-button {
-//     border-radius: 20px;
-//     background: linear-gradient(to right, #6A7FC1, #F3AFE5);
-//     width: 300px; /* Genişlik değerini arttırın */
-//     height: 30px;
-//     margin-bottom: 30px;
-//     background-size: 100% 100%; /* Arkaplanın boyutunu genişliği kadar ayarlayın */
-//   }
+.modal-close-button {
+  cursor: pointer;
+  color: #777;
+  transition: color 0.3s ease;
+}
 
-//   .note-list {
-    
-//     border: 1px solid #ccc;
-//     border-radius: 20px;
-//     margin-right: 300px;
-//     position: absolute;
-//     top: 0;
-//     right: 0;
-//     display: flex;
-//     flex-direction: column;
-//     align-items: flex-end; /* Notları sağa hizala */
-//     height: 380px; /* Sabit yükseklik */
-//     overflow-y: auto; /* Dikey scroll eklendi */
-//     gap: 10px; /* Notlar arasında boşluk bırakın */
-
-//     &::-webkit-scrollbar {
-//       width: 12px;
-//     }
-
-//     &::-webkit-scrollbar-track {
-//       background: #f1f1f1;
-//     }
-
-//     &::-webkit-scrollbar-thumb {
-//       background: #888;
-//       border-radius: 10px;
-//     }
-
-//     &::-webkit-scrollbar-thumb:hover {
-//       background: #555;
-//     }
-//   }
-
-//   .note-item {
-//     border: 1px solid #ccc;
-//     border-radius: 5px;
-//     margin-bottom: 10px;
-//     padding: 10px;
-//     width: 300px; 
-//     height: auto;
-//   }
-
-//   .add-button {
-//     border-color: blue;
-//     background-color: none;
-//     position: relative;
-//     margin-top: 10px; 
-//     opacity: 1;
-//     border-radius: 20px;
-//   }
-// }
+.modal-close-button:hover {
+  color: #333;
+}
