@@ -182,6 +182,7 @@
 
 // export default GalleryDetailPage;
 
+
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
@@ -191,6 +192,7 @@ const GalleryDetailPage = () => {
     const { date } = useParams();
     const [events, setEvents] = useState([]);
     const [error, setError] = useState(null);
+    const [image, setImage] = useState(null);
 
     const months = [
         'Ocak', 'Şubat', 'Mart', 'Nisan', 'Mayıs', 'Haziran',
@@ -235,6 +237,32 @@ const GalleryDetailPage = () => {
 
         fetchEvents();
     }, [date]);
+
+
+
+    // useEffect(() => {
+    //     const fetchImage = async () => {
+    //         try {
+    //             const token = localStorage.getItem('token');
+    //             const response = await axios.get('dsfs', {
+    //                 headers: {
+    //                     'Authorization': `Bearer ${token}`,
+    //                     'Content-Type': 'application/json',
+    //                 }
+    //             });
+    //             if (response.data && response.data.url) {
+    //                 setImage(response.data.url);
+    //             } else {
+    //                 setError('Resim alınırken bir hata oluştu');
+    //             }
+    //         } catch (error) {
+    //             setError('Resim alınırken bir hata oluştu');
+    //         }
+    //     };
+
+    //     fetchImage();
+    // }, [image]);
+
 
     if (error) {
         return <div>Error: {error}</div>;

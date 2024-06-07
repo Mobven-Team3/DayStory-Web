@@ -1,7 +1,5 @@
 import { Box, Button, Container, List, ListItem, ListItemText, TextField, Typography } from '@mui/material';
 import React, { useEffect, useState } from 'react';
-import NavigationBar from '../../../src/Pages/Navbar/Navbar'; // Doğru yolu düzelt
-import Footer from '../Footer/footer';
 import './note-scss/_note.scss';
 
 const NoteApp = () => {
@@ -30,11 +28,10 @@ const NoteApp = () => {
 
     return (
         <Container className="note-app-container">
-         
             <Box className="gün-sayacı">
                 <Typography variant="subtitle1" gutterBottom>{currentDate}</Typography>
             </Box>
-            {/* Gün Özeti butonunu buraya taşıdık */}
+            
             <Button 
                 className="summary-add-button"
                 variant="contained"

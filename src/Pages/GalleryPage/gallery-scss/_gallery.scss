@@ -1,8 +1,7 @@
-
 .gallery-container {
     width: max-content;
     height: max-content;
-    margin: 138px 0px 100px 0px; 
+    margin: 138px 0px 100px 0px;
 
     .days {
         display: grid;
@@ -23,7 +22,7 @@
         cursor: pointer;
         box-shadow: 2px 2px 15px rgb(107, 107, 107);
 
-        &:hover{
+        &:hover {
             background-color: rgb(146, 157, 193);
             color: white;
         }
@@ -31,7 +30,7 @@
         &.today {
             box-shadow: 2px 2px 15px rgb(107, 107, 107)k;
             background-color: rgb(146, 157, 193);
-            
+
         }
 
         &__header {
@@ -82,13 +81,102 @@
 
 
         }
-
-
     }
 
 
 
 
+    .empty-content {
+        width: max-content;
+        display: flex;
+        gap: 80px;
+        align-items: center;
+        justify-content: center;
 
+    }
+
+    .empty {
+        display: block;
+        gap: 10px;
+        padding: 22px 15px 15px 15px;
+        border-radius: 16px;
+        border: 1px solid rgba(106, 127, 193, 1);
+        cursor: pointer;
+
+
+        &:hover {
+            background-color: rgb(146, 157, 193);
+            color: white;
+        }
+
+
+        &__header {
+            font-family: "Roboto", sans-serif;
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        &-dayno {
+            margin: 0px;
+            font-size: 100px;
+            font-weight: 400;
+            line-height: 16px;
+            text-align: left;
+
+        }
+
+        &__date {
+            display: block;
+            align-items: center;
+
+            &-dayname {
+                margin: 20px 0px;
+                font-size: 45px;
+                font-weight: 400;
+                line-height: 16px;
+                text-align: left;
+            }
+
+            &-month {
+                margin: 20px 0px;
+                font-size: 45px;
+                font-weight: 400;
+                line-height: 16px;
+                text-align: left;
+            }
+
+        }
+
+        &__image {
+            width: 350px;
+            height: 350px;
+            background-color: rgba(241, 240, 240, 1);
+        }
+
+
+        &__info {
+            width: 600px;
+            position: relative;
+
+            &-img {
+                width: 380px;
+                margin: 0px;
+            }
+
+            &-text {
+                width: 530px;
+                position: absolute;
+                top: 300px;
+                left: 50px;
+                font-size: 25px;
+                font-weight: 400;
+                line-height: 40px;
+            }
+
+        }
+
+
+    }
 
 }

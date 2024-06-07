@@ -1,11 +1,8 @@
 .note-app-container {
-  position: relative;
-  width: 40vh; /* Genişlik değerini güncelledik */
-  height: 500px; /* Daha fazla yer kaplaması için yüksekliği artırdık */
-  top: 150px; /* Sayfanın üstünden biraz boşluk bırakalım */
-  left: -20px; /* Sayfanın tam soluna hizala */
-  gap: 0px;
-  opacity: 1; /* Container'ı görünür yapalım */
+  padding: 150px;
+  text-align: left;
+  width: 40vh; 
+
 }
 
 .note-content {
@@ -31,37 +28,33 @@
 .summary-add-button {
   border-radius: 20px;
   background: linear-gradient(to right, #6A7FC1, #F3AFE5);
-  width: 300px; /* Genişlik değerini arttırın */
+  width: 300px; 
   height: 30px;
   margin-bottom: 30px;
-  background-size: 100% 100%; /* Arkaplanın boyutunu genişliği kadar ayarlayın */
+  background-size: 100% 100%;
+  z-index: -1;
 }
 
 .note-list {
   border-radius: 30px;
-  position: relative; /* Göreceli konumlandırma */
-  top: -50px; // öğenin konumunu değiştirirken kullanılan değer
-  left: 80px; /* Sağdan 20px mesafe */
   background-color: white;
   border: 1px solid #ccc;
   border-radius: 20px;
   display: flex;
   flex-direction: column;
   float: right;
-  height: 380px; /* Sabit yükseklik */
-  overflow-y: auto; /* Dikey scroll eklendi */
-  gap: 10px; /* Notlar arasında boşluk bırakın */
+  height: 380px;
+  overflow-y: auto; 
   width: 60%;
 }
 
 .no-notes-message {
-  position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   font-size: 18px;
   color: rgb(189, 3, 3);
-  text-align: center; // Yazıyı ortala
+  text-align: center;
 }
 
 .note-item {
@@ -76,9 +69,7 @@
 .add-button {
   border-color: blue;
   background-color: none;
-  position: relative;
   margin-top: 10px; 
-  opacity: 1;
   border-radius: 20px;
 }
 
