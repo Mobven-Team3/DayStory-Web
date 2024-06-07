@@ -243,7 +243,6 @@ const LoginPage = () => {
         },
         body: JSON.stringify({ email: loginData.email, password: loginData.password }),
         mode: 'cors',
-        credentials: 'include'
       });
 
       const response = await loginRequest.json();
