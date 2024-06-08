@@ -557,6 +557,8 @@ const NoteApp = () => {
                         Ekle
                     </Button>
                 </Box>
+
+                
                 <div className='detail__notes'>
                     {error ? (
                         <div className='detail__notes-empty' style={{ color: '#d32f2f', }}>
