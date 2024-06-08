@@ -462,7 +462,7 @@ const NoteApp = () => {
                 setNotes(prevNotes => [...prevNotes, response.data]);
                 setSuccessMessage('Notunuz başarıyla kaydedilmiştir.');
                 setErrorMessage('');
-                fetchEvents(formattedDate); // Fetch events after adding a new note
+                fetchEvents(formattedDate); 
             } else {
                 console.error('Not ekleme başarısız:', response.data);
                 setSuccessMessage('');
