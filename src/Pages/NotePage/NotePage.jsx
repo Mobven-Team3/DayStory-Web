@@ -309,7 +309,7 @@ import "./note-scss/_note.scss";
 const NoteApp = () => {
     const navigate = useNavigate();
 
-    const [setNotes] = useState([]);
+    const [notes, setNotes] = useState([]); 
     const [modalOpen, setModalOpen] = useState(false);
     const { date } = useParams();
     const [events, setEvents] = useState([]);
