@@ -1,10 +1,10 @@
+import { Email, Phone } from '@mui/icons-material';
 import React from 'react';
 import './footer-scss/_footer.scss';
-import { Email, Phone } from '@mui/icons-material'; // Material-UI'den gerekli ikonları ekliyoruz
 
 // images
-import logo from '../../../src/assets/images/daystory-logo.png';
 import apple from '../../../src/assets/images/apple.png';
+import logo from '../../../src/assets/images/daystory-logo.png';
 import google from '../../../src/assets/images/google.png';
 
 const Footer = () => {

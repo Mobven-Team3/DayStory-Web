@@ -4,8 +4,6 @@
     display: flex;
     justify-content: space-between; 
     align-items: center;
-    position: fixed; 
-    bottom: 0; 
     width: 100%; 
     z-index: 1000; 
 
@@ -50,6 +48,7 @@
         
         &-images {
             display: flex;
+            gap: 10px;
             img {
                 width: 100px; 
             }
