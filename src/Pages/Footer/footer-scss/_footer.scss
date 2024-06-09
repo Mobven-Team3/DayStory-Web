@@ -5,6 +5,10 @@
     justify-content: space-between;
     display: flex;
     align-items: center;
+    position: fixed; /* Sabit konum */
+    bottom: 0; /* Sayfanın altına yerleştir */
+    width: 100%; /* Genişliği tam sayfa genişliğinde */
+    z-index: 1000; /* Diğer elemanların üstünde gösterilmesi için */
 
     &__logo {
         align-items: center;
@@ -20,7 +24,7 @@
             font-weight: 400;
             font-size: 32px;
             line-height: 40px;
-            margin: 0px;
+            margin: 0;
 
             span {
                 font-family: "Roboto", sans-serif;
@@ -32,16 +36,35 @@
         }
     }
 
-    &__mobil{
+    &__mobile {
         text-align: center;
+
+        &-text {
+            font-family: "Roboto", sans-serif;
+            font-size: 16px;
+            color: rgba(90, 108, 165, 1);
+            margin-bottom: 10px;
+        }
         
-        &-images{
+        &-images {
             display: flex;
             gap: 10px;
         }
     }
 
+    &__contact {
+        &-text {
+            font-family: "Roboto", sans-serif;
+            font-size: 16px;
+            color: rgba(90, 108, 165, 1);
+            margin-bottom: 5px;
+        }
 
-
-
+        &-phone,
+        &-mail {
+            font-family: "Roboto", sans-serif;
+            font-size: 14px;
+            color: rgba(90, 108, 165, 1);
+        }
+    }
 }
