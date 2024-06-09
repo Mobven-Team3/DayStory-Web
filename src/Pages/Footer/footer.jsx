@@ -2,6 +2,7 @@ import React from 'react';
 import './footer-scss/_footer.scss';
 
 // images
+import logo from '../../../src/assets/images/';
 import logo from '../../../src/assets/images/daystory-logo.png';
 import apple from '../../assets/images/apple.png';
 import google from '../../assets/images/google.png';

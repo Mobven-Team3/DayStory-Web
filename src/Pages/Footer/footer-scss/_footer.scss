@@ -1,47 +1,82 @@
 .footer {
     background-color: white;
-    padding: 20px 180px;
+    padding: 10px 20px; /* Daha dar padding */
     filter: drop-shadow(0px 0.5px 0.5px rgba(0, 0, 0, 0.25));
-    justify-content: space-between;
     display: flex;
+    justify-content: space-between; /* Elemanları yatay eksende aralıklı olarak yerleştir */
     align-items: center;
+    position: fixed; /* Sabit konum */
+    bottom: 0; /* Sayfanın altına yerleştir */
+    width: 100%; /* Genişliği tam sayfa genişliğinde */
+    z-index: 1000; /* Diğer elemanların üstünde gösterilmesi için */
 
     &__logo {
-        align-items: center;
         display: flex;
+        align-items: center;
 
         &-img {
-            width: 58px;
+            width: 80px; 
+            margin-left: 50px;
         }
 
         &-text {
             font-family: "Roboto", sans-serif;
             color: rgba(90, 108, 165, 1);
             font-weight: 400;
-            font-size: 32px;
-            line-height: 40px;
-            margin: 0px;
+            font-size: 24px; 
+            line-height: 32px;
+            margin: 0 0 0 10px; 
 
             span {
                 font-family: "Roboto", sans-serif;
-                font-size: 32px;
+                font-size: 24px; 
                 font-weight: 300;
-                line-height: 40px;
+                line-height: 32px;
                 text-align: left;
             }
         }
     }
 
-    &__mobil{
+    &__mobil {
         text-align: center;
+        margin-right: 40px; 
+
+        &-text {
+            font-family: "Roboto", sans-serif;
+            font-size: 20px;
+            color: rgb(0, 0, 0);
+        }
         
-        &-images{
+        &-images {
+          
             display: flex;
-            gap: 10px;
+            img {
+                width: 100px; 
+            }
         }
     }
 
+    &__contact {
+        display: flex;
+        flex-direction: column; 
+        justify-content: flex-start; 
+        margin-right: 100px; 
+      
 
-
-
+        &-text {
+            font-family: "Roboto", sans-serif;
+            font-size: 20px; 
+            color: rgb(0, 0, 0);
+           
+        }
+        
+        &-phone,
+        &-mail {
+            font-family: "Roboto", sans-serif;
+            font-size: 14px; 
+            color: rgb(0, 0, 0);
+            margin: 2px 0; 
+            
+        }
+    }
 }
