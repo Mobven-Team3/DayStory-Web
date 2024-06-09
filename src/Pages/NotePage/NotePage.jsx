@@ -10,8 +10,6 @@ const NoteApp = () => {
 
     const [currentDate, setCurrentDate] = useState('');
     const [notes, setNotes] = useState([]);
-    const [noteTitle, setNoteTitle] = useState('');
-    const [noteContent, setNoteContent] = useState('');
     const [modalOpen, setModalOpen] = useState(false);
     const { date } = useParams();
     const [events, setEvents] = useState([]);
@@ -48,6 +46,10 @@ const NoteApp = () => {
         const fetchEvents = async () => {
             try {
                 const token = localStorage.getItem('token');
+                if (!token) {
+                    throw new Error('Token bulunamadı, lütfen giriş yapın.');
+                }
+
                 const today = new Date().toLocaleDateString('en-GB').split('/').reverse().join('-'); // Bugünün tarihini al ve formatla
 
                 const formattedDate = today.split('-').reverse().join('-');
@@ -84,10 +86,16 @@ const NoteApp = () => {
                 throw new Error('Token bulunamadı, lütfen giriş yapın.');
             }
 
-            const response = await axios.post("http://165.22.93.225:5030/api/Events", {
-                ...noteData,
-                date: formattedDate
-            }, {
+            // Tüm alanların dolu olup olmadığını kontrol edin ve boş alanları doldurun
+            const noteToAdd = {
+                title: noteData.title || 'Varsayılan Başlık',
+                description: noteData.description || 'Varsayılan Açıklama',
+                date: formattedDate,
+                time: noteData.time || '12:00', // Varsayılan zaman
+                priority: noteData.priority || 'Normal' // Varsayılan öncelik
+            };
+
+            const response = await axios.post("http://165.22.93.225:5030/api/Events", noteToAdd, {
                 headers: {
                     "Content-Type": "application/json",
                     'Authorization': `Bearer ${token}`
@@ -97,11 +105,28 @@ const NoteApp = () => {
             if (response.status === 200 || response.status === 201) {
                 console.log('Note added successfully:', response.data);
                 setNotes(prevNotes => [...prevNotes, response.data]); // Yeni notu mevcut not listesine ekle
+                // Clear the note data after successful addition
+                setNoteData({
+                    title: '', 
+                    description: '', 
+                    date: '', 
+                    time: '', 
+                    priority: ''
+                });
             } else {
                 console.error('Not ekleme başarısız:', response.data);
+                setError('Not ekleme başarısız');
             }
         } catch (error) {
-            console.error("Failed to add note:", error.response ? error.response.data : error.message);
+            if (error.response) {
+                console.error("Failed to add note:", error.response.data);
+                setError(`Error: ${error.response.status} - ${error.response.data.title}`);
+                // Hata detaylarını konsola yazdır
+                console.error('Hata Detayları:', error.response.data.errors);
+            } else {
+                console.error("Failed to add note:", error.message);
+                setError(`Error: ${error.message}`);
+            }
         }
     };
 
@@ -178,6 +203,10 @@ const NoteApp = () => {
                     ))}
                 </div>
             </Box>
+
+            {error && (
+                <Typography color="error" variant="subtitle1">{error}</Typography>
+            )}
 
             <Modal
                 open={modalOpen}
