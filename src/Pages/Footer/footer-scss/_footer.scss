@@ -1,14 +1,13 @@
 .footer {
     background-color: white;
-    padding: 10px 20px; /* Daha dar padding */
     filter: drop-shadow(0px 0.5px 0.5px rgba(0, 0, 0, 0.25));
     display: flex;
-    justify-content: space-between; /* Elemanları yatay eksende aralıklı olarak yerleştir */
+    justify-content: space-between; 
     align-items: center;
-    position: fixed; /* Sabit konum */
-    bottom: 0; /* Sayfanın altına yerleştir */
-    width: 100%; /* Genişliği tam sayfa genişliğinde */
-    z-index: 1000; /* Diğer elemanların üstünde gösterilmesi için */
+    position: fixed; 
+    bottom: 0; 
+    width: 100%; 
+    z-index: 1000; 
 
     &__logo {
         display: flex;
@@ -17,6 +16,7 @@
         &-img {
             width: 80px; 
             margin-left: 50px;
+            margin-bottom: -10px;
         }
 
         &-text {
@@ -40,6 +40,7 @@
     &__mobil {
         text-align: center;
         margin-right: 40px; 
+        margin-bottom: 15px;
 
         &-text {
             font-family: "Roboto", sans-serif;
@@ -48,7 +49,6 @@
         }
         
         &-images {
-          
             display: flex;
             img {
                 width: 100px; 
@@ -60,23 +60,27 @@
         display: flex;
         flex-direction: column; 
         justify-content: flex-start; 
-        margin-right: 100px; 
-      
+        margin-right: 20vh; 
+        margin-top: 5px;
 
         &-text {
             font-family: "Roboto", sans-serif;
             font-size: 20px; 
             color: rgb(0, 0, 0);
-           
+            margin-bottom: 5px;
         }
         
-        &-phone,
-        &-mail {
+        &-phone, &-mail {
+            display: flex;
+            align-items: center;
             font-family: "Roboto", sans-serif;
             font-size: 14px; 
             color: rgb(0, 0, 0);
-            margin: 2px 0; 
-            
+            margin: 2px 0;
+
+            svg {
+                margin-right: 5px; // İkon ile metin arasında boşluk bırakır
+            }
         }
     }
 }
