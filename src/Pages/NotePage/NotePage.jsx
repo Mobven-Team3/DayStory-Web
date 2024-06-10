@@ -323,7 +323,7 @@ const NoteApp = () => {
         description: "",
         date: "",
         time: "",
-        priority: "High"
+        priority: null
     });
 
     const [errors, setErrors] = useState({
