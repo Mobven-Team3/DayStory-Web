@@ -413,7 +413,7 @@ const NoteApp = () => {
     const fetchEvents = async (formattedDate) => {
         try {
             const token = localStorage.getItem('token');
-            const response = await axios.get('http://165.22.93.225:5030/api/Events/day', {
+            const response = await axios.get('https://talent.mobven.com:5043/api/Events/day', {
                 params: { date: formattedDate },
                 headers: {
                     'Authorization': `Bearer ${token}`,
