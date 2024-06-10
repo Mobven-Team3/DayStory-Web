@@ -13,11 +13,10 @@ const Profile = () => {
       return;
     }
 
-    axios.get('https://talent.mobven.com:5043/api/Users', {
+    axios.get('http://165.22.93.225:5030/api/Users/', { // URL'i geçerli bir IP ile değiştirin
       headers: {
         Authorization: `Bearer ${token}`
-        },
-        
+      },
     })
     .then(response => {
       setUser(response.data);
@@ -41,7 +40,7 @@ const Profile = () => {
         <CardContent>
           <Grid container spacing={2} alignItems="center">
             <Grid item xs={12} sm={4}>
-              <Avatar alt={user.firstName} src="/static/images/avatar/1.jpg" style={{ width: '150px', height: '150px' }} />
+              <Avatar alt={user.firstName} src={user.avatarUrl || "/static/images/avatar/1.jpg"} style={{ width: '150px', height: '150px' }} />
             </Grid>
             <Grid item xs={12} sm={8}>
               <Typography variant="h5">{`${user.firstName} ${user.lastName}`}</Typography>
