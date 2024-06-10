@@ -221,7 +221,7 @@ const GalleryDetailPage = () => {
         const fetchEvents = async () => {
             try {
                 const token = localStorage.getItem('token');
-                const response = await axios.get('http://165.22.93.225:5030/api/Events/day', {
+                const response = await axios.get('https://165.22.93.225:5043/api/Events/day', {
                     params: { date },
                     headers: {
                         'Authorization': `Bearer ${token}`,

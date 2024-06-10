@@ -235,7 +235,7 @@ const LoginPage = () => {
   const loginHandler = async () => {
     setLoading(true);
     try {
-      const loginRequest = await fetch('http://165.22.93.225:5030/api/Users/login', {
+      const loginRequest = await fetch('https://165.22.93.225:5043/api/Users/login', {
         method: 'POST',
         headers: {
           'Accept': 'application/json',
