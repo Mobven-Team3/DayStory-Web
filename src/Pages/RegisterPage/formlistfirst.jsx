@@ -53,7 +53,7 @@ const FormListFirst = ({ formData, handleChange, handleGenderChange, nextbutton 
         } if (formData.firstName && formData.firstName.length < minLength) {
             tempErrors.firstName = 'İsim 2 karakterden az olamaz.';
         }
-        if (formData.firstName && !/^[a-zA-ZğüşöçİĞÜŞÖÇ\s]+$/.test(formData.firstName)) {
+        if (formData.firstName && !/^[a-zA-ZğüşöçIıİĞÜŞÖÇ\s]+$/.test(formData.firstName)) {
             tempErrors.firstName = 'İsim sadece harflerden oluşabilir.';
         }
 
@@ -63,7 +63,7 @@ const FormListFirst = ({ formData, handleChange, handleGenderChange, nextbutton 
         } if (formData.lastName && formData.lastName.length < minLength) {
             tempErrors.lastName = 'İsim 2 karakterden az olamaz.';
         }
-        if (formData.lastName && !/^[a-zA-ZğüşöçİĞÜŞÖÇ\s]+$/.test(formData.lastName)) {
+        if (formData.lastName && !/^[a-zA-ZğüşöçIıİĞÜŞÖÇ\s]+$/.test(formData.lastName)) {
             tempErrors.lastName = 'İsim sadece harflerden oluşabilir.';
         }
 
