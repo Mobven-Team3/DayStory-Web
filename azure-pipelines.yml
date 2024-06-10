@@ -42,3 +42,9 @@ steps:
     targetFolder: '/var/www/DayStory/html'
     readyTimeout: '20000'
   displayName: 'CopyFilesOverSSH'
+
+# appendCommitMessageToRunName:sonar-scanner \
+#   -Dsonar.projectKey=MenuMaster-FrontEnd--T3- \
+#   -Dsonar.sources=. \
+#   -Dsonar.host.url=http://localhost:9000 \
+#   -Dsonar.token=sqp_f73bc77646f69f3f82d09a48215e8099a7c227db
