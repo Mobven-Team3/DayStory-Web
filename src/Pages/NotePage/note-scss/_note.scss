@@ -1,10 +1,10 @@
 .note-app-container {
 padding: 150px;
   text-align: left;
-  // position: relative;
-  width: 40vh; /* Genişlik değerini güncelledik */
+  position: relative;
+  width: 40vh; 
 
-  opacity: 1; /* Container'ı görünür yapalım */
+  opacity: 1; 
 }
 
 .note-content {
@@ -31,26 +31,26 @@ padding: 150px;
   border-radius:30px;
   overflow: hidden;
   background: linear-gradient(to right, #6A7FC1, #F3AFE5);
-  width: 300px; /* Genişlik değerini arttırın */
+  width: 300px;
   height: 30px;
   margin-bottom: 30px;
-  background-size: 100% 100%; /* Arkaplanın boyutunu genişliği kadar ayarlayın */
+  background-size: 100% 100%;
 }
 
 .note-list {
   border-radius: 30px;
-  position: relative; /* Göreceli konumlandırma */
-  top: -50px; // öğenin konumunu değiştirirken kullanılan değer
-  left: 80px; /* Sağdan 20px mesafe */
+  position: relative; 
+  top: -50px;
+  left: 80px; 
   background-color: white;
   border: 1px solid #ccc;
   border-radius: 20px;
   display: flex;
   flex-direction: column;
   float: right;
-  height: 380px; /* Sabit yükseklik */
-  overflow-y: auto; /* Dikey scroll eklendi */
-  gap: 10px; /* Notlar arasında boşluk bırakın */
+  height: 380px;
+  overflow-y: auto; 
+  gap: 10px; 
   width: 60%;
 }
 
