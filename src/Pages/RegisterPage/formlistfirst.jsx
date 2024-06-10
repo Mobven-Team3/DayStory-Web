@@ -53,7 +53,7 @@ const FormListFirst = ({ formData, handleChange, handleGenderChange, nextbutton 
         } if (formData.firstName && formData.firstName.length < minLength) {
             tempErrors.firstName = 'İsim 2 karakterden az olamaz.';
         }
-        if (formData.firstName && !/^[a-zA-ZğüşıIöçİĞÜŞÖÇ\s]+$/.test(formData.firstName)) {
+        if (formData.firstName && !/^[a-zA-ZğüşöçİĞÜŞÖÇ\s]+$/.test(formData.firstName)) {
             tempErrors.firstName = 'İsim sadece harflerden oluşabilir.';
         }
 
@@ -63,7 +63,7 @@ const FormListFirst = ({ formData, handleChange, handleGenderChange, nextbutton 
         } if (formData.lastName && formData.lastName.length < minLength) {
             tempErrors.lastName = 'İsim 2 karakterden az olamaz.';
         }
-        if (formData.lastName && !/^[a-zA-ZğüşöçıIİĞÜŞÖÇ\s]+$/.test(formData.lastName)) {
+        if (formData.lastName && !/^[a-zA-ZğüşöçİĞÜŞÖÇ\s]+$/.test(formData.lastName)) {
             tempErrors.lastName = 'İsim sadece harflerden oluşabilir.';
         }
 
@@ -165,20 +165,19 @@ const FormListFirst = ({ formData, handleChange, handleGenderChange, nextbutton 
                 />
 
                 <div className='form__list-item'>
-                    <FormControl className="cinsiyet" error={!!errors.gender}>
+                <FormControl className="cinsiyet" error={!!errors.gender}>
                         <InputLabel>Cinsiyet</InputLabel>
                         <Select
                             label="Cinsiyet"
                             name="gender"
-                            value={formData.gender}
+                            value={formData.genderText}
                             onChange={handleGenderChange}
                             required
                         >
-                            <MenuItem value="Female">Kadın</MenuItem>
-                            <MenuItem value="Male">Erkek</MenuItem>
-                            <MenuItem value="NotSpecified">Belirtmek İstemiyorum</MenuItem>
-                            <MenuItem value="Other">Diğer</MenuItem>
-
+                            <MenuItem value="Kadın">Kadın</MenuItem>
+                            <MenuItem value="Erkek">Erkek</MenuItem>
+                            <MenuItem value="Belirtmek İstemiyorum">Belirtmek İstemiyorum</MenuItem>
+                            <MenuItem value="Diğer">Diğer</MenuItem>
                         </Select>
                         {errors.gender && <FormHelperText>{errors.gender}</FormHelperText>}
                     </FormControl>

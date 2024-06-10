@@ -25,7 +25,7 @@ const RegisterPage = () => {
     email: "",
     username: "",
     password: "",
-    passwordConfirmed:"",
+    passwordConfirmed: "",
   });
 
   const [errors, setErrors] = useState({
@@ -43,13 +43,30 @@ const RegisterPage = () => {
     }));
   };
 
-  const handleGenderChange = (e) => {
-    const { value } = e.target;
+  const handleGenderChange = (event) => {
+    let genderText = event.target.value;
+    let genderValue;
+    switch (genderText) {
+      case "Kadın":
+        genderValue = 2;
+        break;
+      case "Erkek":
+        genderValue = 1;
+        break;
+      case "Diğer":
+        genderValue = 3;
+        break;
+      default:
+        genderValue = 0;
+    }
     setFormData((prevData) => ({
       ...prevData,
-      gender: value
+      gender: genderValue,
+      genderText: genderText
     }));
   };
+
+
 
   const registerUser = async () => {
     setLoading(true);

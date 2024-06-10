@@ -86,10 +86,31 @@
         align-items: center;
         justify-content: space-between;
         text-align: left;
-        padding: 10px;
+        padding: 0px 10px;
         border: 1px solid rgba(193, 189, 189, 0.5);
-        overflow-y: auto;
-        position: relative;
+        overflow-y: scroll;
+        padding-right: 20px;
+
+        ::-webkit-scrollbar {
+            width: 15px;
+            background: #FAFAFA;
+            border: 3px solid #6A7FC1;
+            border-radius: 5px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background-color: #6A7FC1; 
+            border-radius: 5px;
+            height: 5px;
+        }
+
+        scrollbar-color: #6A7FC1 #FAFAFA; 
+        scrollbar-width: thin;
 
         &-area {
             margin: 20px 0px;
@@ -126,7 +147,7 @@
             text-align: center;
         }
 
-        .color{
+        .color {
             color: black;
         }
     }
