@@ -447,7 +447,7 @@ const NoteApp = () => {
                 throw new Error('Token bulunamadı, lütfen giriş yapın.');
             }
 
-            const response = await axios.post("http://165.22.93.225:5030/api/Events", {
+            const response = await axios.post("https://talent.mobven.com:5043/api/Events", {
                 ...noteData,
                 date: formattedDate
             }, {
