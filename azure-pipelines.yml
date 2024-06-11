@@ -1,8 +1,3 @@
-# Node.js
-# Build a general Node.js project with npm.
-# Add steps that analyze code, save build artifacts, deploy, and more:
-# https://docs.microsoft.com/azure/devops/pipelines/languages/javascript
-
 trigger:
 - main
 
@@ -10,12 +5,12 @@ pool:
   name: Default
   demands:
   - agent.name -equals test-deneme
+
 steps:
 - task: NodeTool@0
   inputs:
     versionSpec: '18.x'
   displayName: 'Install Node.js'
-
 
 - task: Npm@1
   displayName: 'npm install'
@@ -29,10 +24,9 @@ steps:
     verbose: false
     customCommand: 'run build'
 
-# - script: |
-#     sonar-scanner.bat -D"sonar.projectKey=MenuMaster-FrontEnd--T3-" -D"sonar.sources=." -D"sonar.host.url=http://localhost:9000" -D"sonar.token=sqa_302c8afa9b9b6410b5de145de201da1cd9ed75ba"
-#   displayName: 'SonarQube'
-
+- script: |
+    sonar-scanner.bat -D"sonar.projectKey=MenuMaster-FrontEnd--T3-" -D"sonar.sources=." -D"sonar.host.url=http://localhost:9000" -D"sonar.token=sqp_f73bc77646f69f3f82d09a48215e8099a7c227db"
+  displayName: 'SonarQube'
 
 - task: CopyFilesOverSSH@0
   inputs:
@@ -42,9 +36,3 @@ steps:
     targetFolder: '/var/www/DayStory/html'
     readyTimeout: '20000'
   displayName: 'CopyFilesOverSSH'
-
-# appendCommitMessageToRunName:sonar-scanner \
-#   -Dsonar.projectKey=MenuMaster-FrontEnd--T3- \
-#   -Dsonar.sources=. \
-#   -Dsonar.host.url=http://localhost:9000 \
-#   -Dsonar.token=sqp_f73bc77646f69f3f82d09a48215e8099a7c227db
