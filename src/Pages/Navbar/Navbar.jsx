@@ -62,7 +62,7 @@
 
 
 
-// import { Avatar, Card, CardContent, Grid, Popover, Typography } from '@mui/material';
+// import { Avatar, Card, CardContent, Grid, Popover, div } from '@mui/material';
 // import axios from 'axios';
 // import React, { useEffect, useState } from 'react';
 // import { FaUserCircle } from 'react-icons/fa';
@@ -166,9 +166,9 @@
 //             >
 //                 <div style={{ padding: '20px', width: '300px' }}>
 //                     {error ? (
-//                         <Typography>{error}</Typography>
+//                         <div>{error}</div>
 //                     ) : !user ? (
-//                         <Typography>Loading...</Typography>
+//                         <div>Loading...</div>
 //                     ) : (
 //                         <Card>
 //                             <CardContent>
@@ -177,11 +177,11 @@
 //                                         <Avatar alt={user.firstName} src="/static/images/avatar/1.jpg" style={{ width: '80px', height: '80px' }} />
 //                                     </Grid>
 //                                     <Grid item xs={12} sm={8}>
-//                                         <Typography variant="h6">{`${user.firstName} ${user.lastName}`}</Typography>
-//                                         <Typography variant="body2">Username: {user.username}</Typography>
-//                                         <Typography variant="body2">Email: {user.email}</Typography>
-//                                         <Typography variant="body2">Birth Date: {user.birthDate}</Typography>
-//                                         <Typography variant="body2">Gender: {user.gender}</Typography>
+//                                         <div variant="h6">{`${user.firstName} ${user.lastName}`}</div>
+//                                         <div variant="body2">Username: {user.username}</div>
+//                                         <div variant="body2">Email: {user.email}</div>
+//                                         <div variant="body2">Birth Date: {user.birthDate}</div>
+//                                         <div variant="body2">Gender: {user.gender}</div>
 //                                     </Grid>
 //                                 </Grid>
 //                             </CardContent>
@@ -196,13 +196,17 @@
 // export default NavigationBar;
 
 
-import { Avatar, Card, CardContent, Grid, Popover, Typography } from '@mui/material';
+import { Avatar, Card, CardContent, Grid, Popover, div } from '@mui/material';
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { FaUserCircle } from 'react-icons/fa';
 import { useLocation, useNavigate } from 'react-router-dom';
 import logo from '../../assets/images/daystory-logo.png';
+import profile from '../../assets/images/profile.png'
 import './navbar-scss/_navbar.scss';
+
+
+
 
 const NavigationBar = () => {
     const [activePage, setActivePage] = useState('');
@@ -242,12 +246,12 @@ const NavigationBar = () => {
                 Authorization: `Bearer ${token}`
             }
         })
-        .then(response => {
-            setUser(response.data.data);
-        })
-        .catch(error => {
-            setError('User not found');
-        });
+            .then(response => {
+                setUser(response.data.data);
+            })
+            .catch(error => {
+                setError('User not found');
+            });
     }, []);
 
     const handlePageChange = (page, route) => {
@@ -306,28 +310,28 @@ const NavigationBar = () => {
                     horizontal: 'right',
                 }}
             >
-                <div style={{ padding: '20px', width: '300px' }}>
+                <div className='profile' >
                     {error ? (
-                        <Typography>{error}</Typography>
+                        <div>{error}</div>
                     ) : !user ? (
-                        <Typography>Loading...</Typography>
+                        <div>Loading...</div>
                     ) : (
-                        <Card>
-                            <CardContent>
-                                <Grid container spacing={2} alignItems="center">
-                                    <Grid item xs={12} sm={4}>
-                                        <Avatar alt={user.firstName} src="/static/images/avatar/1.jpg" style={{ width: '80px', height: '80px' }} />
-                                    </Grid>
-                                    <Grid item xs={12} sm={8}>
-                                        <Typography variant="h6">{`${user.firstName} ${user.lastName}`}</Typography>
-                                        <Typography variant="body2">Username: {user.username}</Typography>
-                                        <Typography variant="body2">Email: {user.email}</Typography>
-                                        <Typography variant="body2">Birth Date: {user.birthDate}</Typography>
-                                        <Typography variant="body2">Gender: {user.gender}</Typography>
-                                    </Grid>
-                                </Grid>
-                            </CardContent>
-                        </Card>
+                        <div className='profile'>
+                            <div className='profile__avatar'>
+                                <img className='profile__avatar-img' src={profile}/>
+                                <p>{user.username}</p>
+                            </div>
+                            <div className='profile__body'>
+                                <p>{`${user.firstName} ${user.lastName}`}</p>
+                                <p>{user.email}</p>
+                                <p>{user.birthDate}</p>
+                                <p>{user.gender}</p>
+                            </div>
+
+                                    <div className='profile__logout'>
+                                        Çıkış Yap
+                            </div>
+                        </div>
                     )}
                 </div>
             </Popover>

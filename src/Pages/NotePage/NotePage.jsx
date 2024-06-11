@@ -320,7 +320,7 @@ const NoteApp = () => {
                         ))
                     )}
                     {events.length === 0 && (
-                        <div>No events found for this date</div>
+                        <div>Notlarınız alınamadı.</div>
                     )}
                 </div>
             </div>
