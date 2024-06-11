@@ -160,7 +160,7 @@ const NoteApp = () => {
                 setNotes(prevNotes => [...prevNotes, response.data]);
                 setSuccessMessage('Notunuz başarıyla kaydedilmiştir.');
                 setErrorMessage('');
-                fetchEvents(formattedDate); 
+                fetchEvents(formattedDate);
             } else {
                 console.error('Not ekleme başarısız:', response.data);
                 setSuccessMessage('');
@@ -183,7 +183,7 @@ const NoteApp = () => {
             if (!token) {
                 throw new Error('Token bulunamadı, lütfen giriş yapın.');
             }
-
+    
             const response = await axios.post("", {
                 date: formattedDate
             }, {
@@ -192,24 +192,18 @@ const NoteApp = () => {
                     'Authorization': `Bearer ${token}`
                 }
             });
-
+    
             if (response.status === 200 || response.status === 201) {
                 console.log('Day summary created successfully:', response.data);
-                setSuccessMessage('Gün özeti başarıyla oluşturulmuştur.');
-                setErrorMessage('');
-                navigate('/notedetail');
+                navigate(`/gallery/${formattedDate}`);
             } else {
                 console.error('Gün özeti oluşturma başarısız:', response.data);
-                setSuccessMessage('');
-                setErrorMessage('Gün özeti oluşturulamadı, tekrar deneyiniz.');
             }
         } catch (error) {
             console.error("Failed to create day summary:", error.response ? error.response.data : error.message);
-            setSuccessMessage('');
-            setErrorMessage('Gün özeti oluşturulamadı, tekrar deneyiniz.');
         }
     };
-
+    
     return (
         <Container className="note-app-container">
             <NavigationBar showFullMenu={false} />
@@ -282,7 +276,7 @@ const NoteApp = () => {
                     </Button>
                 </Box>
 
-                
+
                 <div className='detail__notes'>
                     {error ? (
                         <div className='detail__notes-empty' style={{ color: '#d32f2f', }}>
