@@ -221,7 +221,7 @@ const GalleryDetailPage = () => {
         const fetchEvents = async () => {
             try {
                 const token = localStorage.getItem('token');
-                const response = await axios.get('http://165.22.93.225:5030/api/Events/day', {
+                const response = await axios.get('https://talent.mobven.com:5043/api/Events/day', {
                     params: { date },
                     headers: {
                         'Authorization': `Bearer ${token}`,
@@ -241,20 +241,19 @@ const GalleryDetailPage = () => {
         fetchEvents();
     }, [date]);
 
-
-
     useEffect(() => {
         const fetchImage = async () => {
             try {
                 const token = localStorage.getItem('token');
-                const response = await axios.get('dsfs', {
+                const response = await axios.get(`https://talent.mobven.com:5043/api/DaySummarys/day`, {
+                    params: { date },
                     headers: {
                         'Authorization': `Bearer ${token}`,
                         'Content-Type': 'application/json',
                     }
                 });
-                if (response.data && response.data.url) {
-                    setImage(response.data.url);
+                if (response.data && response.data.length > 0) {
+                    setImage(response.data[0].imagePath); 
                 } else {
                     setError('Resim alınırken bir hata oluştu');
                 }
@@ -264,8 +263,7 @@ const GalleryDetailPage = () => {
         };
 
         fetchImage();
-    }, [image]);
-
+    }, [date]);
 
     if (error) {
         return <div>Error: {error}</div>;
@@ -285,11 +283,11 @@ const GalleryDetailPage = () => {
                             <p className="detail__date-dayno">{dayNo}</p>
                             <div className='detail__date-info'>
                                 <p className="detail__date-dayname">{dayName}</p>
-                                <p className="detail__date-month">{monthName}{year}</p>
+                                <p className="detail__date-month">{monthName} {year}</p>
                             </div>
                         </div>
                         <div className='detail__img'>
-                            {/* {image ? <img src={image} alt="Event" /> : 'Resim yükleniyor...'} */}
+                            {image ? <img src={image} alt="Event" /> : 'Resim yükleniyor...'}
                         </div>
                     </div>
                     <div className='detail__notes'>
