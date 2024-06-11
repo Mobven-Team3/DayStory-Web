@@ -62,15 +62,15 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import './gallery-scss/_gallery-detail.scss';
+import '../GalleryPage/gallery-scss/_gallery-detail.scss';
 import loadingimg from '../../assets/images/loading.png';
-const GalleryDetailPage = () => {
+const NoteDetailPage = () => {
     const { date } = useParams();
     const [events, setEvents] = useState([]);
     const [error, setError] = useState(null);
     const [image, setImage] = useState(null);
     const months = [
-        'Ocak', 'Şubat', 'Mart', 'Nisan', 'Mayıs', 'Haziran',
+        'Ocak', 'Şubat', 'Mart', 'Nisan', 'Mayıs', 'Haziran', // //
         'Temmuz', 'Ağustos', 'Eylül', 'Ekim', 'Kasım', 'Aralık'
     ];
     const days = [
@@ -165,4 +165,4 @@ const GalleryDetailPage = () => {
         </center>
     );
 };
-export default GalleryDetailPage;
+export default NoteDetailPage;

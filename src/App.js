@@ -10,7 +10,8 @@ import GalleryDetail from './Pages/GalleryPage/GalleryDetailPage';
 import Gallery from './Pages/GalleryPage/GalleryPage';
 import Layout from './Pages/Layout/Layout';
 import LoginPage from './Pages/LoginPage/loginPage';
-import { default as NotePage } from './Pages/NotePage/NotePage';
+import NotePage  from './Pages/NotePage/NotePage';
+import Notedetail  from './Pages/NotePage/notedetail';
 import ProfilePage from './Pages/ProfilePage/ProfilePage';
 import ReceptionPage from './Pages/ReceptionPage/ReceptionPage';
 import RegisterPage from './Pages/RegisterPage/RegisterPage';
@@ -27,6 +28,7 @@ function App() {
         <Route path='/gallery/:date' element={<Layout><GalleryDetail /></Layout>} />
         <Route path='/note' element={<Layout><NotePage /></Layout>} />
         <Route path='/profile' element={<Layout><ProfilePage /></Layout>} />
+        <Route path='/notedetail' element={<Layout><Notedetail /></Layout>} />
         <Route path='/deneme' element={<Deneme />} />
       </Routes>
     </BrowserRouter>
