@@ -4,39 +4,36 @@ import { Container, Typography, Box } from '@mui/material';
 import NavigationBar from '../../../src/Pages/Navbar/Navbar';
 import "./note-scss/_note.scss";
 
-
-
 const NoteDetailPage = () => {
     const date = "06-11-2024"; 
     const [events, setEvents] = useState([]);
     const [error, setError] = useState(null);
- 
 
-
-useEffect(() => {
-    const fetchEvents = async () => {
-        try {
-            const token = localStorage.getItem('token');
-            const response = await axios.get('https://talent.mobven.com:5043/api/Events/day', {
-                params: { date },
-                headers: {
-                    'Authorization': `Bearer ${token}`,
-                    'Content-Type': 'application/json',
+    useEffect(() => {
+        const fetchEvents = async () => {
+            try {
+                const token = localStorage.getItem('token');
+                const response = await axios.get('https://talent.mobven.com:5043/api/Events/day', {
+                    params: { date },
+                    headers: {
+                        'Authorization': `Bearer ${token}`,
+                        'Content-Type': 'application/json',
+                    }
+                });
+                if (response.data && Array.isArray(response.data.data)) {
+                    setEvents(response.data.data);
+                } else {
+                    setError('Etkinlikler alınırken bir hata oluştu');
                 }
-            });
-            if (response.data && Array.isArray(response.data.data)) {
-                setEvents(response.data.data);
-            } else {
+            } catch (error) {
                 setError('Etkinlikler alınırken bir hata oluştu');
             }
-        } catch (error) {
-            setError('Etkinlikler alınırken bir hata oluştu');
-        }
-    };
+        };
 
-    fetchEvents();
-}, [date]);
-const formatDateDetails = (dateString) => {
+        fetchEvents();
+    }, [date]);
+
+    const formatDateDetails = (dateString) => {
         const date = new Date(dateString);
         const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
         const formattedDate = date.toLocaleDateString('tr-TR', options);
