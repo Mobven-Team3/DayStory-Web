@@ -1,7 +1,7 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import './gallery-scss/_gallery-detail.scss';
+import '../GalleryPage/gallery-scss/_gallery-detail.scss';
 
 import loadingimg from '../../assets/images/loading.png';
 
