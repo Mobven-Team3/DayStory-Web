@@ -70,7 +70,7 @@ const NoteDetailPage = () => {
     const [error, setError] = useState(null);
     const [image, setImage] = useState(null);
     const months = [
-        'Ocak', 'Şubat', 'Mart', 'Nisan', 'Mayıs', 'Haziran', // //
+        'Ocak', 'Şubat', 'Mart', 'Nisan', 'Mayıs', 'Haziran',
         'Temmuz', 'Ağustos', 'Eylül', 'Ekim', 'Kasım', 'Aralık'
     ];
     const days = [
