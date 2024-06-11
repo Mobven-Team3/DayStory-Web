@@ -1,5 +1,6 @@
 import {
-    Backdrop, Box, Button, CircularProgress, Fade,
+    Backdrop, Box, Button,
+    Fade,
     IconButton, InputAdornment,
     Modal, TextField, Typography
 } from '@mui/material';
@@ -361,11 +362,9 @@ const NoteApp = () => {
                                         <div className='add__button'>
                                             <Button
                                                 className="add__button-type"
-                                                variant="contained"
-                                                color="primary"
                                                 onClick={handleAddNote}
                                             >
-                                                Ekle
+                                                Kaydet
                                             </Button>
                                         </div>
                                     </div>
@@ -389,14 +388,14 @@ const NoteApp = () => {
                 </div>
             </div>
 
-            {loading ? (
+            {/* {loading ? (
                 <div className='loading-area'>
                     <CircularProgress />
                     <Typography variant="body1" sx={{ mt: 2 }}>
                         Gün özeti oluşturuluyor, lütfen bekleyin...
                     </Typography>
                 </div>
-            ) : null}
+            ) : null} */}
 
             <Modal
                 open={modalOpen}
