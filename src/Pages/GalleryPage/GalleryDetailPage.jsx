@@ -7,7 +7,7 @@ const GalleryDetailPage = () => {
     const { date } = useParams();
     const [events, setEvents] = useState([]);
     const [imagePath, setImagePath] = useState('');
-    const [error, setError] = useState(null);
+    const [setError] = useState(null);
 
     const months = ['Ocak', 'Şubat', 'Mart', 'Nisan', 'Mayıs', 'Haziran', 'Temmuz', 'Ağustos', 'Eylül', 'Ekim', 'Kasım', 'Aralık'];
     const days = ['Pazar', 'Pazartesi', 'Salı', 'Çarşamba', 'Perşembe', 'Cuma', 'Cumartesi'];

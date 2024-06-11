@@ -196,13 +196,13 @@
 // export default NavigationBar;
 
 
-import { Avatar, Card, CardContent, Grid, Popover, div } from '@mui/material';
+import { Popover } from '@mui/material';
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { FaUserCircle } from 'react-icons/fa';
 import { useLocation, useNavigate } from 'react-router-dom';
 import logo from '../../assets/images/daystory-logo.png';
-import profile from '../../assets/images/profile.png'
+import profile from '../../assets/images/profile.png';
 import './navbar-scss/_navbar.scss';
 
 
