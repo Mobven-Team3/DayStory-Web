@@ -185,27 +185,19 @@
 
 // export default GalleryDetailPage;
 
-
-
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import './gallery-scss/_gallery-detail.scss';
+import '../GalleryPage/gallery-scss/_gallery-detail.scss';
 
 const GalleryDetailPage = () => {
     const { date } = useParams();
     const [events, setEvents] = useState([]);
+    const [imagePath, setImagePath] = useState('');
     const [error, setError] = useState(null);
-    const [image, setImage] = useState(null);
 
-    const months = [
-        'Ocak', 'Şubat', 'Mart', 'Nisan', 'Mayıs', 'Haziran',
-        'Temmuz', 'Ağustos', 'Eylül', 'Ekim', 'Kasım', 'Aralık'
-    ];
-
-    const days = [
-        'Pazar', 'Pazartesi', 'Salı', 'Çarşamba', 'Perşembe', 'Cuma', 'Cumartesi'
-    ];
+    const months = ['Ocak', 'Şubat', 'Mart', 'Nisan', 'Mayıs', 'Haziran', 'Temmuz', 'Ağustos', 'Eylül', 'Ekim', 'Kasım', 'Aralık'];
+    const days = ['Pazar', 'Pazartesi', 'Salı', 'Çarşamba', 'Perşembe', 'Cuma', 'Cumartesi'];
 
     const getDateInfo = (dateString) => {
         const [day, month, year] = dateString.split('-').map(Number);
@@ -238,7 +230,6 @@ const GalleryDetailPage = () => {
                 setError('Etkinlikler alınırken bir hata oluştu');
             }
         };
-
         fetchEvents();
     }, [date]);
 
@@ -246,33 +237,26 @@ const GalleryDetailPage = () => {
         const fetchImage = async () => {
             try {
                 const token = localStorage.getItem('token');
-                const response = await axios.get(`https://talent.mobven.com:5043/api/DaySummarys/day`, {
-                    params: { date },
+                const response = await axios.get('https://talent.mobven.com:5043/api/DaySummarys/day', {
+                    params: {date},
                     headers: {
                         'Authorization': `Bearer ${token}`,
                         'Content-Type': 'application/json',
                     }
                 });
-                if (response.data && response.data.length > 0) {
-                    setImage(response.data[0].imagePath); 
+                if (response.data.data && response.data.data.imagePath) {
+                    setImagePath(response.data.data.imagePath);
                 } else {
-                    setError('Resim alınırken bir hata oluştu');
+                    setImagePath('');
+                    setError(null);
                 }
             } catch (error) {
                 setError('Resim alınırken bir hata oluştu');
             }
         };
-
         fetchImage();
     }, [date]);
-
-    if (error) {
-        return <div>Error: {error}</div>;
-    }
-
-    if (events.length === 0) {
-        return <div>No events found for this date</div>;
-    }
+    
 
     return (
         <center>
@@ -287,17 +271,29 @@ const GalleryDetailPage = () => {
                                 <p className="detail__date-month">{monthName} {year}</p>
                             </div>
                         </div>
-                        <div className='detail__img'>
-                            {image ? <img src={image} alt="Event" /> : 'Resim yükleniyor...'}
-                        </div>
+                        {imagePath && (
+                            <div className='detail__img'>
+                                <img src={imagePath} alt="Event" />
+                            </div>
+                        )}
+                        {!imagePath && (
+                            <div className='detail__img'>
+                            <p>loading</p>
+                            </div>
+                        )}
                     </div>
                     <div className='detail__notes'>
-                        {events.map(event => (
-                            <div className='detail__notes-area' key={event.id}>
-                                <p className='detail__notes-title'>{event.title}</p>
-                                <p className='detail__notes-description'>{event.description}</p>
-                            </div>
-                        ))}
+                        {events.length > 0 && (
+                            events.map(event => (
+                                <div className='detail__notes-area' key={event.id}>
+                                    <p className='detail__notes-title'>{event.title}</p>
+                                    <p className='detail__notes-description'>{event.description}</p>
+                                </div>
+                            ))
+                        )}
+                        {events.length === 0 && (
+                            <div>No events found for this date</div>
+                        )}
                     </div>
                 </div>
             </div>
