@@ -67,8 +67,6 @@ const NavigationBar = () => {
         updateActivePage(location.pathname);
     };
 
-
-    
     const open = Boolean(anchorEl);
     const id = open ? 'profile-popover' : undefined;
 
