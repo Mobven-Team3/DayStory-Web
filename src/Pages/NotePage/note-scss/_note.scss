@@ -1,128 +1,117 @@
-.note-app-container {
-padding: 150px;
-  text-align: left;
-  position: relative;
-  width: 40vh; 
 
-  opacity: 1; 
-}
+.note__container {
+  width: max-content;
+  height: max-content;
+  margin: 138px 0px 100px 0px;
+  display: block;
+  gap: 20px;
+ 
 
-.note-content {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-}
 
-.note-input-wrapper {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  margin-bottom: 20px;
-  width: 300px; 
-  height: auto;
-}
+  .note__area {
+    width: 480px;
+    height: auto;
+    border-radius: 16px;
+    padding: 15px;
+    display: grid;
+    gap: 20px;
 
-.note-input {
-  width: 300px; 
-  margin-bottom: 10px;
-}
+    .summary-add-button {
+      color: white;
+      cursor: pointer;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      border-radius: 30px;
+      background: linear-gradient(to right, #6A7FC1, #F3AFE5);
+      width: 400px;
+      p{
+        margin: 5px;
+      }
 
-.summary-add-button {
-  border-radius:30px;
-  overflow: hidden;
-  background: linear-gradient(to right, #6A7FC1, #F3AFE5);
-  width: 300px;
-  height: 30px;
-  margin-bottom: 30px;
-  background-size: 100% 100%;
-}
+      
+    }
+  
 
-.note-list {
-  border-radius: 30px;
-  position: relative; 
-  top: -50px;
-  left: 80px; 
-  background-color: white;
-  border: 1px solid #ccc;
-  border-radius: 20px;
-  display: flex;
-  flex-direction: column;
-  float: right;
-  height: 380px;
-  overflow-y: auto; 
-  gap: 10px; 
-  width: 60%;
-}
 
-.no-notes-message {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  font-size: 18px;
-  color: rgb(1, 1, 1);
-  text-align: center; // Yazıyı ortala
-}
+    .note__add {
 
-.note-item {
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  margin-bottom: 10px;
-  padding: 10px;
-  width: 300px; 
-  height: auto;
-}
+      width: 400px;
+      height: 400px;
+      padding: 30px;
+      background: white;
+      border-radius: 10px;
+      display: grid;
+      gap: 10px;
 
-.add-button {
-  border-color: blue;
-  background-color: none;
-  position: relative;
-  margin-top: 10px; 
-  opacity: 1;
-  border-radius: 20px;
-}
-.modal-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(193, 190, 190, 0.879); /* Modal arka planı için yarı saydam siyah bir renk */
-  z-index: 9999; /* Modalın diğer öğelerin üstünde olmasını sağlar */
-}
 
-.modal-content {
-  background-color: white;
-  border-radius: 20px; /* Border radius değerini arttırdık */
-  padding: 20px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Hafif bir gölge efekti */
-  max-width: 80%; /* Modalın maksimum genişliği */
-  max-height: 80%; /* Modalın maksimum yüksekliği */
-  overflow-y: auto; /* İçeriği aşan durumlarda dikey kaydırma çubuğu göster */
-  border: none; /* Border rengini kaldırdık */
-}
+      &-header {
+        font-size: 16px;
+        height: auto;
+        font-weight: 500;
+        line-height: 24px;
+        letter-spacing: 0.15000000596046448px;
+        text-align: left;
+        margin: 0px;
+      }
 
-.modal-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 10px;
-}
+      .add__button {
+        text-align: right;
+        height: auto;
+      }
 
-.modal-title {
-  font-size: 1.2rem;
-  font-weight: bold;
-}
 
-.modal-close-button {
-  cursor: pointer;
-  color: #777;
-  transition: color 0.3s ease;
-}
+    }
 
-.modal-close-button:hover {
-  color: #333;
+
+  }
+
+
+  .modal-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(193, 190, 190, 0.879); /* Modal arka planı için yarı saydam siyah bir renk */
+    z-index: 9999; /* Modalın diğer öğelerin üstünde olmasını sağlar */
+  }
+  
+  .modal-content {
+    background-color: white;
+    border-radius: 20px; /* Border radius değerini arttırdık */
+    padding: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Hafif bir gölge efekti */
+    max-width: 80%; /* Modalın maksimum genişliği */
+    max-height: 80%; /* Modalın maksimum yüksekliği */
+    overflow-y: auto; /* İçeriği aşan durumlarda dikey kaydırma çubuğu göster */
+    border: none; /* Border rengini kaldırdık */
+  }
+  
+  .modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+  
+  .modal-title {
+    font-size: 1.2rem;
+    font-weight: bold;
+  }
+  
+  .modal-close-button {
+    cursor: pointer;
+    color: #777;
+    transition: color 0.3s ease;
+  }
+  
+  .modal-close-button:hover {
+    color: #333;
+  }
+
+
 }

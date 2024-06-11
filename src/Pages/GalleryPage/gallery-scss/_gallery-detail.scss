@@ -83,7 +83,7 @@
     }
 
     &__notes {
-        width: max-content;
+        min-width: 659px;
         height: 582px;
         display: block;
         gap: 20px;
