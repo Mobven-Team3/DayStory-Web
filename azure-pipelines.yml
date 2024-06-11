@@ -25,8 +25,18 @@ steps:
     customCommand: 'run build'
 
 - script: |
-    sonar-scanner.bat -D"sonar.projectKey=MenuMaster-FrontEnd--T3-" -D"sonar.sources=." -D"sonar.host.url=http://localhost:9000" -D"sonar.token=sqp_f73bc77646f69f3f82d09a48215e8099a7c227db"
+    sonar-scanner.bat -D"sonar.projectKey=Mobven-Team3.DayStory-Web" -D"sonar.sources=." -D"sonar.host.url=http://localhost:9000" -D"sonar.token=sqp_739d77a89c942c8b50f9a77414501e7d9455826a"
   displayName: 'SonarQube'
+
+- task: SSH@0
+  inputs:
+    sshEndpoint: 'mobven-ssh'
+    runOptions: 'commands'
+    commands: |
+      systemctl stop apache2
+
+    readyTimeout: '20000'
+  displayName: 'Service-Stop'
 
 - task: CopyFilesOverSSH@0
   inputs:
@@ -36,3 +46,13 @@ steps:
     targetFolder: '/var/www/DayStory/html'
     readyTimeout: '20000'
   displayName: 'CopyFilesOverSSH'
+
+- task: SSH@0
+  inputs:
+    sshEndpoint: 'mobven-ssh'
+    runOptions: 'commands'
+    commands: |
+      systemctl start apache2
+
+    readyTimeout: '20000'
+  displayName: 'Service-Start'
