@@ -1,9 +1,16 @@
-import { Backdrop, Box, Button, CircularProgress, Fade, Modal, TextField, Typography } from '@mui/material';
+import {
+    Backdrop, Box, Button, CircularProgress, Fade,
+    IconButton, InputAdornment,
+    Modal, TextField, Typography
+} from '@mui/material';
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import loadingimg from '../../assets/images/loading.png';
 import "./note-scss/_note.scss";
+
+//icons
+import { AiOutlineCloseCircle } from 'react-icons/ai';
 
 const NoteApp = () => {
     const { date } = useParams();
@@ -59,7 +66,14 @@ const NoteApp = () => {
             [name]: value
         }));
         validate(name, value);
+        setSuccessMessage(''); 
     };
+
+    const handleClear = (e) => {
+        setNoteData((prevData) => ({ ...prevData, [e]: '' }));
+    };
+
+
 
     const formatDateDetails = (dateString) => {
         const date = new Date(dateString);
@@ -160,19 +174,19 @@ const NoteApp = () => {
     const handleModalOpen = () => {
         setModalOpen(true);
     };
-
+    
     const handleAddNote = async () => {
         if (errors.title || errors.description) {
             console.error('Validation errors:', errors);
             return;
         }
-
+    
         try {
             const token = localStorage.getItem('token');
             if (!token) {
                 throw new Error('Token bulunamadı, lütfen giriş yapın.');
             }
-
+    
             const response = await axios.post("https://talent.mobven.com:5043/api/Events", {
                 ...noteData,
                 date: formattedDate
@@ -182,11 +196,16 @@ const NoteApp = () => {
                     'Authorization': `Bearer ${token}`
                 }
             });
-
+    
             if (response.status === 200 || response.status === 201) {
                 console.log('Note added successfully:', response.data);
                 setSuccessMessage('Notunuz başarıyla kaydedilmiştir.');
                 setErrorMessage('');
+                setNoteData((prevData) => ({
+                    ...prevData,
+                    title: '',
+                    description: ''
+                }));
                 fetchEvents(formattedDate);
             } else {
                 console.error('Not ekleme başarısız:', response.data);
@@ -199,6 +218,8 @@ const NoteApp = () => {
             setErrorMessage('Notunuz kaydedilemedi, tekrar deneyiniz.');
         }
     };
+    
+
 
     const handleModalClose = () => {
         setModalOpen(false);
@@ -213,7 +234,7 @@ const NoteApp = () => {
             if (!token) {
                 throw new Error('Token bulunamadı, lütfen giriş yapın.');
             }
-    
+
             const response = await axios.post("https://talent.mobven.com:5043/api/DaySummarys/", {
                 date: formattedDate
             }, {
@@ -222,7 +243,7 @@ const NoteApp = () => {
                     'Authorization': `Bearer ${token}`
                 }
             });
-    
+
             if (response.status === 200 || response.status === 201) {
                 console.log('Day summary created successfully:', response.data);
                 await fetchSummary(formattedDate);
@@ -233,7 +254,7 @@ const NoteApp = () => {
         } catch (error) {
             console.error("Failed to create day summary:", error.response ? error.response.data : error.message);
         } finally {
-            console.log({formattedDate})
+            console.log({ formattedDate })
             setLoadingImg(true);
             setModalOpen(false)
         }
@@ -266,10 +287,10 @@ const NoteApp = () => {
                                     <div className="summary-add-button" onClick={handleModalOpen}>
                                         <p> AI Gün Özeti Oluştur </p>
                                     </div>
-    
+
                                     <div className='note__add'>
                                         <p className='note__add-header'>Notunuzu yazınız.</p>
-    
+
                                         <TextField
                                             className="note-input"
                                             label="Başlık"
@@ -280,22 +301,52 @@ const NoteApp = () => {
                                             onChange={handleChange}
                                             error={Boolean(errors.title)}
                                             helperText={errors.title}
+                                            InputProps={{
+                                                endAdornment: (
+                                                    noteData.title && (
+                                                        <InputAdornment position="end">
+                                                            <IconButton
+                                                                aria-label="clear input"
+                                                                onClick={() => handleClear('title')}
+                                                                edge="end"
+                                                            >
+                                                                <AiOutlineCloseCircle />
+                                                            </IconButton>
+                                                        </InputAdornment>
+                                                    )
+                                                )
+                                            }}
                                         />
-    
+
                                         <TextField
                                             className="note-input"
+                                            label="Notunuz"
                                             name="description"
                                             placeholder="Notunuzun Detaylarını Giriniz."
-                                            label="Notunuz"
                                             multiline
                                             rows={4}
-                                            fullWidth
                                             value={noteData.description}
                                             onChange={handleChange}
                                             error={Boolean(errors.description)}
                                             helperText={errors.description}
+                                            InputProps={{
+                                                endAdornment: (
+                                                    noteData.description && (
+                                                        <InputAdornment position="end">
+                                                            <IconButton
+                                                                aria-label="clear input"
+                                                                onClick={() => handleClear('description')}
+                                                                edge="end"
+                                                            >
+                                                                <AiOutlineCloseCircle />
+                                                            </IconButton>
+                                                        </InputAdornment>
+                                                    )
+                                                )
+                                            }}
                                         />
-    
+
+
                                         {successMessage && (
                                             <div style={{ color: 'green', marginTop: '10px' }}>
                                                 {successMessage}
@@ -306,7 +357,7 @@ const NoteApp = () => {
                                                 {errorMessage}
                                             </div>
                                         )}
-    
+
                                         <div className='add__button'>
                                             <Button
                                                 className="add__button-type"
@@ -337,7 +388,7 @@ const NoteApp = () => {
                     )}
                 </div>
             </div>
-    
+
             {loading ? (
                 <div className='loading-area'>
                     <CircularProgress />
@@ -346,7 +397,7 @@ const NoteApp = () => {
                     </Typography>
                 </div>
             ) : null}
-    
+
             <Modal
                 open={modalOpen}
                 onClose={handleModalClose}
@@ -383,7 +434,7 @@ const NoteApp = () => {
             </Modal>
         </div>
     );
-    
+
 };
 
 export default NoteApp;
