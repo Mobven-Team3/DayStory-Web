@@ -110,6 +110,7 @@
 // ------------------------------------------------------------------------------------------------------------------------------------
 
 
+import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import login_img from '../../../src/assets/images/login_img.png';
@@ -122,17 +123,27 @@ const GalleryPage = () => {
 
     useEffect(() => {
         const fetchImages = async () => {
-            const today = new Date();
-            const todayStr = today.toLocaleDateString('tr-TR').split('.').reverse().join('-');
+            try {
+                const token = localStorage.getItem('token'); 
+                const response = await axios.get('https://talent.mobven.com:5043/api/DaySummarys/all', {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    },
+                });
 
-            const data = [
-                // { date: '06-06-2024', imageUrl: 'https://r.resimlink.com/NcqWARS_3Q.png', title: 'img' },
-                // { date: '08-06-2024', imageUrl: 'https://r.resimlink.com/r_hXi-nT4.png', title: 'img' },
-            ];
+                const data = response.data.map(item => ({
+                    date: item.date,
+                    imageUrl: item.imagePath,
+                    title: 'img',
+                }));
 
-            if (data.length > 0) {
+                const today = new Date();
+                const todayStr = today.toLocaleDateString('tr-TR').split('.').reverse().join('-');
+
                 const todayExists = data.some(img => img.date === todayStr.split('-').reverse().join('-'));
-                if (!todayExists) {
+                if (todayExists) {
+                    navigate(`/notedetail`);
+                } else {
                     data.unshift({
                         date: todayStr.split('-').reverse().join('-'),
                         imageUrl: 'https://r.resimlink.com/ErUWpXBD.png',
@@ -147,12 +158,15 @@ const GalleryPage = () => {
                 });
 
                 setImages(sortedData);
+                setSelectedDate(today);
+            } catch (error) {
+                console.error('Error fetching images:', error);
+               
             }
-
-            setSelectedDate(today);
         };
+
         fetchImages();
-    }, []);
+    }, [navigate]);
 
     const renderImages = (images) => {
         return images.map((img, index) => {
@@ -199,10 +213,9 @@ const GalleryPage = () => {
                         </div>
                     </div>
                     <img src='https://r.resimlink.com/ErUWpXBD.png' alt='aysu' className="empty__image" />
-
                 </div>
                 <div className="empty__info">
-                    <img className="empty__info-img" src={login_img} alt="empty_image"  />
+                    <img className="empty__info-img" src={login_img} alt="empty_image" />
                     <p className='empty__info-text'>İlk günün için notlarını al ve kişisel hikayeni oluşturmaya başla!</p>
                 </div>
             </div>
