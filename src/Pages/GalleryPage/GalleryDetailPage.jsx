@@ -1,16 +1,22 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import '../GalleryPage/gallery-scss/_gallery-detail.scss';
+import './gallery-scss/_gallery-detail.scss';
 
 const GalleryDetailPage = () => {
     const { date } = useParams();
     const [events, setEvents] = useState([]);
-    const [imagePath, setImagePath] = useState('');
     const [error, setError] = useState(null);
+    const [image, setImage] = useState(null);
 
-    const months = ['Ocak', 'Şubat', 'Mart', 'Nisan', 'Mayıs', 'Haziran', 'Temmuz', 'Ağustos', 'Eylül', 'Ekim', 'Kasım', 'Aralık'];
-    const days = ['Pazar', 'Pazartesi', 'Salı', 'Çarşamba', 'Perşembe', 'Cuma', 'Cumartesi'];
+    const months = [
+        'Ocak', 'Şubat', 'Mart', 'Nisan', 'Mayıs', 'Haziran',
+        'Temmuz', 'Ağustos', 'Eylül', 'Ekim', 'Kasım', 'Aralık'
+    ];
+
+    const days = [
+        'Pazar', 'Pazartesi', 'Salı', 'Çarşamba', 'Perşembe', 'Cuma', 'Cumartesi'
+    ];
 
     const getDateInfo = (dateString) => {
         const [day, month, year] = dateString.split('-').map(Number);
@@ -27,7 +33,7 @@ const GalleryDetailPage = () => {
         const fetchEvents = async () => {
             try {
                 const token = localStorage.getItem('token');
-                const response = await axios.get('https://talent.mobven.com:5043/api/Events/day', {
+                const response = await axios.get('http://165.22.93.225:5030/api/Events/day', {
                     params: { date },
                     headers: {
                         'Authorization': `Bearer ${token}`,
@@ -43,33 +49,43 @@ const GalleryDetailPage = () => {
                 setError('Etkinlikler alınırken bir hata oluştu');
             }
         };
+
         fetchEvents();
     }, [date]);
+
+
 
     useEffect(() => {
         const fetchImage = async () => {
             try {
                 const token = localStorage.getItem('token');
-                const response = await axios.get('https://talent.mobven.com:5043/api/DaySummarys/day', {
-                    params: {date},
+                const response = await axios.get('dsfs', {
                     headers: {
                         'Authorization': `Bearer ${token}`,
                         'Content-Type': 'application/json',
                     }
                 });
-                if (response.data.data && response.data.data.imagePath) {
-                    setImagePath(response.data.data.imagePath);
+                if (response.data && response.data.url) {
+                    setImage(response.data.url);
                 } else {
-                    setImagePath('');
-                    setError(null);
+                    setError('Resim alınırken bir hata oluştu');
                 }
             } catch (error) {
                 setError('Resim alınırken bir hata oluştu');
             }
         };
+
         fetchImage();
-    }, [date]);
-    
+    }, [image]);
+
+
+    if (error) {
+        return <div>Error: {error}</div>;
+    }
+
+    if (events.length === 0) {
+        return <div>No events found for this date</div>;
+    }
 
     return (
         <center>
@@ -81,32 +97,20 @@ const GalleryDetailPage = () => {
                             <p className="detail__date-dayno">{dayNo}</p>
                             <div className='detail__date-info'>
                                 <p className="detail__date-dayname">{dayName}</p>
-                                <p className="detail__date-month">{monthName} {year}</p>
+                                <p className="detail__date-month">{monthName}{year}</p>
                             </div>
                         </div>
-                        {imagePath && (
-                            <div className='detail__img'>
-                                <img src={imagePath} alt="Event" />
-                            </div>
-                        )}
-                        {!imagePath && (
-                            <div className='detail__img'>
-                            <p>loading</p>
-                            </div>
-                        )}
+                        <div className='detail__img'>
+                            {/* {image ? <img src={image} alt="Event" /> : 'Resim yükleniyor...'} */}
+                        </div>
                     </div>
                     <div className='detail__notes'>
-                        {events.length > 0 && (
-                            events.map(event => (
-                                <div className='detail__notes-area' key={event.id}>
-                                    <p className='detail__notes-title'>{event.title}</p>
-                                    <p className='detail__notes-description'>{event.description}</p>
-                                </div>
-                            ))
-                        )}
-                        {events.length === 0 && (
-                            <div>No events found for this date</div>
-                        )}
+                        {events.map(event => (
+                            <div className='detail__notes-area' key={event.id}>
+                                <p className='detail__notes-title'>{event.title}</p>
+                                <p className='detail__notes-description'>{event.description}</p>
+                            </div>
+                        ))}
                     </div>
                 </div>
             </div>

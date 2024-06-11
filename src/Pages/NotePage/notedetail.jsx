@@ -1,8 +1,7 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import '../GalleryPage/gallery-scss/_gallery-detail.scss';
-
+import "./note-scss/_note.scss";
 import loadingimg from '../../assets/images/loading.png';
 
 const NoteDetailPage = () => {
