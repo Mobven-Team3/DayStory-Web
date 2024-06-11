@@ -51,7 +51,7 @@ const GalleryPage = () => {
                 setSelectedDate(today);
             } catch (error) {
                 console.error('Error fetching images:', error);
-                // Handle error accordingly
+               
             }
         };
 
