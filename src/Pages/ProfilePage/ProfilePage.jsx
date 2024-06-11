@@ -13,7 +13,7 @@ const Profile = () => {
       return;
     }
 
-    axios.get('http://165.22.93.225:5030/api/Users/', { // URL'i geçerli bir IP ile değiştirin
+    axios.get('http://165.22.93.225:5030/api/Users/', { 
       headers: {
         Authorization: `Bearer ${token}`
       },

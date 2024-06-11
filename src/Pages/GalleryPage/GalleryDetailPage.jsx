@@ -243,28 +243,28 @@ const GalleryDetailPage = () => {
 
 
 
-    // useEffect(() => {
-    //     const fetchImage = async () => {
-    //         try {
-    //             const token = localStorage.getItem('token');
-    //             const response = await axios.get('dsfs', {
-    //                 headers: {
-    //                     'Authorization': `Bearer ${token}`,
-    //                     'Content-Type': 'application/json',
-    //                 }
-    //             });
-    //             if (response.data && response.data.url) {
-    //                 setImage(response.data.url);
-    //             } else {
-    //                 setError('Resim alınırken bir hata oluştu');
-    //             }
-    //         } catch (error) {
-    //             setError('Resim alınırken bir hata oluştu');
-    //         }
-    //     };
+    useEffect(() => {
+        const fetchImage = async () => {
+            try {
+                const token = localStorage.getItem('token');
+                const response = await axios.get('dsfs', {
+                    headers: {
+                        'Authorization': `Bearer ${token}`,
+                        'Content-Type': 'application/json',
+                    }
+                });
+                if (response.data && response.data.url) {
+                    setImage(response.data.url);
+                } else {
+                    setError('Resim alınırken bir hata oluştu');
+                }
+            } catch (error) {
+                setError('Resim alınırken bir hata oluştu');
+            }
+        };
 
-    //     fetchImage();
-    // }, [image]);
+        fetchImage();
+    }, [image]);
 
 
     if (error) {

@@ -1,7 +1,7 @@
 .note-app-container {
 padding: 150px;
   text-align: left;
-  position: relative;
+  // position: relative;
   width: 40vh; 
 
   opacity: 1; 
@@ -31,7 +31,7 @@ padding: 150px;
   border-radius:30px;
   overflow: hidden;
   background: linear-gradient(to right, #6A7FC1, #F3AFE5);
-  width: 300px;
+  width: 300px; /* Genişlik değerini arttırın */
   height: 30px;
   margin-bottom: 30px;
   background-size: 100% 100%;
