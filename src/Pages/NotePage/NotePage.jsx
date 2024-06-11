@@ -1,20 +1,20 @@
-import { Backdrop, Box, Button, Container, Fade, Modal, TextField, Typography } from '@mui/material';
+import { Backdrop, Box, Button, CircularProgress, Fade, Modal, TextField, Typography } from '@mui/material';
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import NavigationBar from '../../../src/Pages/Navbar/Navbar';
 import "./note-scss/_note.scss";
 
 const NoteApp = () => {
-    const navigate = useNavigate();
-    const [notes, setNotes] = useState([]);
-    const [modalOpen, setModalOpen] = useState(false);
     const { date } = useParams();
     const [events, setEvents] = useState([]);
+    const [modalOpen, setModalOpen] = useState(false);
     const [error, setError] = useState(null);
     const [formattedDate, setFormattedDate] = useState('');
     const [successMessage, setSuccessMessage] = useState('');
     const [errorMessage, setErrorMessage] = useState('');
+    const [loading, setLoading] = useState(false);
+    const [summaryImage, setSummaryImage] = useState(null);
 
     const [noteData, setNoteData] = useState({
         title: "",
@@ -92,6 +92,7 @@ const NoteApp = () => {
         setFormattedDate(formattedDate);
 
         fetchEvents(formattedDate);
+        fetchSummary(formattedDate);
     }, [date]);
 
     useEffect(() => {
@@ -129,6 +130,32 @@ const NoteApp = () => {
         }
     };
 
+    const fetchSummary = async (formattedDate) => {
+        setLoading(true);
+        try {
+            const token = localStorage.getItem('token');
+            const response = await axios.get('https://talent.mobven.com:5043/api/DaySummarys/day', {
+                params: { date: formattedDate },
+                headers: {
+                    'Authorization': `Bearer ${token}`,
+                    'Content-Type': 'application/json',
+                }
+            });
+
+            if (response.data.data && response.data.data.imagePath) {
+                setSummaryImage(response.data.data.imagePath);
+            } else {
+                setSummaryImage('');
+                setError(null);
+            }
+        } catch (error) {
+            setSummaryImage(null);
+            setError('Gün özeti alınırken bir hata oluştu');
+        } finally {
+            setLoading(false);
+        }
+    };
+
     const handleModalOpen = () => {
         setModalOpen(true);
     };
@@ -157,10 +184,9 @@ const NoteApp = () => {
 
             if (response.status === 200 || response.status === 201) {
                 console.log('Note added successfully:', response.data);
-                setNotes(prevNotes => [...prevNotes, response.data]);
                 setSuccessMessage('Notunuz başarıyla kaydedilmiştir.');
                 setErrorMessage('');
-                fetchEvents(formattedDate); 
+                fetchEvents(formattedDate);
             } else {
                 console.error('Not ekleme başarısız:', response.data);
                 setSuccessMessage('');
@@ -179,12 +205,13 @@ const NoteApp = () => {
 
     const handleContinue = async () => {
         try {
+            setLoading(true);
             const token = localStorage.getItem('token');
             if (!token) {
                 throw new Error('Token bulunamadı, lütfen giriş yapın.');
             }
 
-            const response = await axios.post("https://talent.mobven.com:5043/api/DaySummarys", {
+            const response = await axios.post("https://talent.mobven.com:5043/api/Events/summary", {
                 date: formattedDate
             }, {
                 headers: {
@@ -195,88 +222,123 @@ const NoteApp = () => {
 
             if (response.status === 200 || response.status === 201) {
                 console.log('Day summary created successfully:', response.data);
-                setSuccessMessage('Gün özeti başarıyla oluşturulmuştur.');
-                setErrorMessage('');
-                navigate('/notedetail');
+                await fetchSummary(formattedDate);
+                setModalOpen(false);
             } else {
                 console.error('Gün özeti oluşturma başarısız:', response.data);
-                setSuccessMessage('');
-                setErrorMessage('Gün özeti oluşturulamadı, tekrar deneyiniz.');
             }
         } catch (error) {
             console.error("Failed to create day summary:", error.response ? error.response.data : error.message);
-            setSuccessMessage('');
-            setErrorMessage('Gün özeti oluşturulamadı, tekrar deneyiniz.');
+        } finally {
+            setLoading(false);
         }
     };
 
     return (
-        <Container className="note-app-container">
-            <NavigationBar showFullMenu={false} />
-            <div className="detail__date">
-                <p className="detail__date-dayno">{currentDateDetails.dayNo}</p>
-                <div className="detail__date-info">
-                    <p className="detail__date-dayname">{currentDateDetails.dayName}</p>
-                    <p className="detail__date-month">{currentDateDetails.monthName} {currentDateDetails.year}</p>
+        <div className='note__container'>
+            <div className='detail__header'>Notlar</div>
+            <div className='detail__content'>
+                <div className='note__area'>
+                    <div className="detail__date">
+                        <p className="detail__date-dayno">{currentDateDetails.dayNo}</p>
+                        <div className="detail__date-info">
+                            <p className="detail__date-dayname">{currentDateDetails.dayName}</p>
+                            <p className="detail__date-month">{currentDateDetails.monthName} {currentDateDetails.year}</p>
+                        </div>
+                    </div>
+                    {summaryImage ? (
+                        <div className='detail__img'>
+                            <img src={summaryImage} alt="Event" />
+                        </div>
+                    ) : (
+                        <>
+                            <div className="summary-add-button" onClick={handleModalOpen}>
+                                <p> AI Gün Özeti Oluştur </p>
+                            </div>
+
+                            <div className='note__add'>
+                                <p className='note__add-header'>Notunuzu yazınız.</p>
+
+                                <TextField
+                                    className="note-input"
+                                    label="Başlık"
+                                    name="title"
+                                    placeholder="Not Başlığınızı Giriniz."
+                                    fullWidth
+                                    value={noteData.title}
+                                    onChange={handleChange}
+                                    error={Boolean(errors.title)}
+                                    helperText={errors.title}
+                                />
+
+                                <TextField
+                                    className="note-input"
+                                    name="description"
+                                    placeholder="Notunuzun Detaylarını Giriniz."
+                                    label="Notunuz"
+                                    multiline
+                                    rows={4}
+                                    fullWidth
+                                    value={noteData.description}
+                                    onChange={handleChange}
+                                    error={Boolean(errors.description)}
+                                    helperText={errors.description}
+                                />
+
+                                {successMessage && (
+                                    <div style={{ color: 'green', marginTop: '10px' }}>
+                                        {successMessage}
+                                    </div>
+                                )}
+                                {errorMessage && (
+                                    <div style={{ color: '#d32f2f', marginTop: '10px' }}>
+                                        {errorMessage}
+                                    </div>
+                                )}
+
+                                <div className='add__button'>
+                                    <Button
+                                        className="add__button-type"
+                                        variant="contained"
+                                        color="primary"
+                                        onClick={handleAddNote}
+                                    >
+                                        Ekle
+                                    </Button>
+                                </div>
+                            </div>
+                        </>
+                    )}
+                </div>
+                <div className='detail__notes'>
+                    {events.length > 0 && (
+                        events.map(event => (
+                            <div className='detail__notes-area' key={event.id}>
+                                <p className='detail__notes-title'>{event.title}</p>
+                                <p className='detail__notes-description'>{event.description}</p>
+                            </div>
+                        ))
+                    )}
+                    {events.length === 0 && (
+                        <div>No events found for this date</div>
+                    )}
                 </div>
             </div>
-            <Button
-                className="summary-add-button"
-                sx={{
-                    marginRight: '50px',
-                    marginTop: '2px'
-                }}
-                variant="contained"
-                color="primary"
-                onClick={handleModalOpen}
-            >
-                Gün Özeti Oluştur
-            </Button>
 
-            <Box className="note-content">
-                <Box className="note-input-wrapper">
-                    <Typography variant="h4" gutterBottom>Not Ekle</Typography>
-                    <TextField
-                        className="note-input"
-                        label="Not Başlığı"
-                        name="title"
-                        placeholder="not başlığı...."
-                        variant="outlined"
-                        fullWidth
-                        value={noteData.title}
-                        onChange={handleChange}
-                        error={Boolean(errors.title)}
-                        helperText={errors.title}
-                    />
-                    <TextField
-                        className="note-input"
-                        name="description"
-                        placeholder="not içeriğini yazınız.."
-                        label="Not Açıklaması"
-                        variant="outlined"
-                        fullWidth
-                        multiline
-                        rows={4}
-                        value={noteData.description}
-                        onChange={handleChange}
-                        error={Boolean(errors.description)}
-                        helperText={errors.description}
-                    />
-                    <Button
-                        variant="contained"
-                        color="primary"
-                        onClick={handleAddNote}
-                        disabled={errors.title || errors.description}
-                    >
-                        Not Ekle
-                    </Button>
-                    {successMessage && <Typography color="success">{successMessage}</Typography>}
-                    {errorMessage && <Typography color="error">{errorMessage}</Typography>}
-                </Box>
-            </Box>
+            {loading ? (
+                <div className='loading-area'>
+                    <CircularProgress />
+                    <Typography variant="body1" sx={{ mt: 2 }}>
+                        Gün özeti oluşturuluyor, lütfen bekleyin...
+                    </Typography>
+                </div>
+            ) : null}
+
             <Modal
                 open={modalOpen}
                 onClose={handleModalClose}
+                aria-labelledby="modal-title"
+                aria-describedby="modal-description"
                 closeAfterTransition
                 BackdropComponent={Backdrop}
                 BackdropProps={{
@@ -284,30 +346,29 @@ const NoteApp = () => {
                 }}
             >
                 <Fade in={modalOpen}>
-                    <Box className="modal-content">
-                        <Typography variant="h6" component="h2">
-                            Gün özeti oluşturulacak ve artık not ekleyemeyeceksiniz. Devam etmek istediğinize emin misiniz?
+                    <Box sx={{
+                        position: 'absolute',
+                        top: '50%',
+                        left: '50%',
+                        transform: 'translate(-50%, -50%)',
+                        width: 400,
+                        bgcolor: 'background.paper',
+                        border: '2px solid #000',
+                        boxShadow: 24,
+                        p: 4,
+                    }}>
+                        <Typography id="modal-title" variant="h6" component="h2">
+                            Uyarı
                         </Typography>
-                        <Box className="modal-buttons">
-                            <Button
-                                variant="contained"
-                                color="primary"
-                                onClick={handleContinue}
-                            >
-                                Devam Et
-                            </Button>
-                            <Button
-                                variant="contained"
-                                color="secondary"
-                                onClick={handleModalClose}
-                            >
-                                İptal
-                            </Button>
-                        </Box>
+                        <Typography id="modal-description" sx={{ mt: 2 }}>
+                            Günde yalnızca bir AI gün özeti oluşturabilirsiniz. Devam etmek istiyor musunuz?
+                        </Typography>
+                        <Button onClick={handleModalClose} sx={{ mt: 2 }}>Vazgeç</Button>
+                        <Button onClick={handleContinue} sx={{ mt: 2, mr: 2 }}>Devam Et</Button>
                     </Box>
                 </Fade>
             </Modal>
-        </Container>
+        </div>
     );
 };
 
