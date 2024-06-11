@@ -94,6 +94,7 @@
         padding: 10px;
         border: 1px solid rgba(193, 189, 189, 0.5);
         overflow-y: auto;
+   
 
         &-area {
             margin: 20px 0px;
@@ -119,6 +120,11 @@
             line-height: 20px;
             letter-spacing: 0.10000000149011612px;
 
+        }
+
+        &-nodata{
+            text-align: center;
+            
         }
     }
 

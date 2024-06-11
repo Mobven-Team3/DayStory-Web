@@ -2,7 +2,6 @@ import { Backdrop, Box, Button, CircularProgress, Fade, Modal, TextField, Typogr
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import NavigationBar from '../../../src/Pages/Navbar/Navbar';
 import "./note-scss/_note.scss";
 
 const NoteApp = () => {
@@ -320,7 +319,7 @@ const NoteApp = () => {
                         ))
                     )}
                     {events.length === 0 && (
-                        <div>Notlarınız alınamadı.</div>
+                        <div className='detail__notes-nodata'>Bu gün için notunuz bulunmuyor.</div>
                     )}
                 </div>
             </div>
