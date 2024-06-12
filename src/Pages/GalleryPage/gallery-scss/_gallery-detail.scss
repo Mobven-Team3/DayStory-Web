@@ -157,10 +157,13 @@
 
     &__generate {
         width: 480px;
-        height: auto;
+        height: 600px;
         border-radius: 16px;
         background-color: white;
         padding: 15px;
+        img{
+            margin-top: 20px;
+        }
     }
 
     &__date {
