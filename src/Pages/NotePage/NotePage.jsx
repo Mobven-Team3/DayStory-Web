@@ -228,7 +228,47 @@ const NoteApp = () => {
         }
     };
 
-    
+    const handleModalClose = () => {
+        setModalOpen(false);
+    };
+
+    const handleContinue = async () => {
+        try {
+            setLoadingImg(true);
+            const token = localStorage.getItem('token');
+            if (!token) {
+                throw new Error('Token bulunamadı, lütfen giriş yapın.');
+            }
+
+            const response = await axios.post("https://talent.mobven.com:5043/api/DaySummarys", {
+                date: formattedDate
+            }, {
+                headers: {
+                    "Content-Type": "application/json",
+                    'Authorization': `Bearer ${token}`
+                }
+            });
+            
+            setModalOpen(false);
+
+            if (response.status === 200 || response.status === 201) {
+                console.log('Day summary created successfully:', response.data);
+                await fetchSummary(formattedDate);
+                setLoadingImg(false);
+                setModalOpen(false);
+            } else {
+                setLoadingImg(true);
+                console.error('Gün özeti oluşturma başarısız:', response.data);
+                setModalOpen(false);
+            }
+        } catch (error) {
+            setLoadingImg(true);
+            console.error("Failed to create day summary:", error.response ? error.response.data : error.message);
+            setModalOpen(false);
+        } finally {
+            setModalOpen(false);
+        }
+    };
 
     return (
         <div className='note__container'>
