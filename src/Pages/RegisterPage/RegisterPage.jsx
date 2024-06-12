@@ -11,6 +11,7 @@ import FormListSecond from './formlistsecond';
 //images
 import logo from '../../../src/assets/images/daystory-logo.png';
 import register_img from '../../../src/assets/images/register_img.png';
+import loadingimg from '../../assets/images/daystory-logo.png';
 
 const RegisterPage = () => {
   const navigate = useNavigate();
@@ -56,9 +57,11 @@ const RegisterPage = () => {
       case "Diğer":
         genderValue = 3;
         break;
-      default:
+      case "Belirtmek İstemiyorum":
         genderValue = 0;
+        break;
     }
+    
     setFormData((prevData) => ({
       ...prevData,
       gender: genderValue,
@@ -114,7 +117,13 @@ const RegisterPage = () => {
       </header>
 
       {loading ? (
-        <p>Kayıt Olunuyor...</p>
+        <div className='form'>
+          <center>
+            <div className='detail__loading'>
+              <img src={loadingimg} alt="Event" />
+            </div>
+          </center>
+        </div>
       ) : (
         <div className='form'>
           <div className='form__description'>
