@@ -203,7 +203,6 @@
             width: 448px;
             height: 448px;
 
-
         }
     }
 
@@ -249,6 +248,10 @@
         justify-content: center;
         align-items: center;
         text-align: center;
+        img{
+            width: 480px;
+            height: 480px;
+        }
     }
 
     &__loading {

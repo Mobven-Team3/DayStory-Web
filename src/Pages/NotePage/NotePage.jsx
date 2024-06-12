@@ -611,6 +611,15 @@ const NoteApp = () => {
         }
     };
 
+    useEffect(() => {
+        if (summaryImage) {
+            setLoadingImg(false); 
+        } else {
+            setLoadingImg(true); 
+        }
+    }, [summaryImage]); 
+    
+
     const handleModalOpen = () => {
         setModalOpen(true);
     };
@@ -688,10 +697,12 @@ const NoteApp = () => {
             } else {
                 setLoadingImg(true);
                 console.error('Gün özeti oluşturma başarısız:', response.data);
+                setModalOpen(false);
             }
         } catch (error) {
             setLoadingImg(true);
             console.error("Failed to create day summary:", error.response ? error.response.data : error.message);
+            setModalOpen(false);
         } finally {
             setModalOpen(false);
         }
