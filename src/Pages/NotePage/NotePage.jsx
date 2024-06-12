@@ -283,53 +283,99 @@ const NoteApp = () => {
         setEditMode(true);
         setNoteId(note.id);
     };
-
-    const handleUpdateNote = async () => {
-        if (errors.title || errors.description) {
-            console.error('Validation errors:', errors);
-            return;
-        }
-
-        try {
-            const token = localStorage.getItem('token');
-            if (!token) {
-                throw new Error('Token bulunamadı, lütfen giriş yapın.');
+    
+    const handleNoteAction = async () => {
+        if (editMode) {
+            // Güncelleme işlemi
+            if (errors.title || errors.description) {
+                console.error('Validation errors:', errors);
+                return;
             }
-
-            const response = await axios.put(`https://talent.mobven.com:5043/api/Events/${noteId}`, {
-                ...noteData,
-                id: noteId,
-                date: formattedDate
-            }, {
-                headers: {
-                    "Content-Type": "application/json",
-                    'Authorization': `Bearer ${token}`
+    
+            try {
+                const token = localStorage.getItem('token');
+                if (!token) {
+                    throw new Error('Token bulunamadı, lütfen giriş yapın.');
                 }
-            });
+    
+          const response = await axios.put(`https://talent.mobven.com:5043/api/Events/${noteId}`, {
+    ...noteData,
+    id: noteId,
+    date: formattedDate
+}, {
+    headers: {
+        "Content-Type": "application/json",
+        'Authorization': `Bearer ${token}`
+    }
+});
 
-            if (response.status === 200 || response.status === 201) {
-                console.log('Note updated successfully:', response.data);
-                setSuccessMessage('Notunuz başarıyla güncellenmiştir.');
-                setErrorMessage('');
-                setNoteData({
-                    title: '',
-                    description: '',
-                    date: '',
-                    time: '',
-                    priority: null
-                });
-                setEditMode(false);
-                setNoteId(null);
-                fetchEvents(formattedDate);
-            } else {
-                console.error('Not güncelleme başarısız:', response.data);
+    
+                if (response.status === 200 || response.status === 201) {
+                    console.log('Note updated successfully:', response.data);
+                    setSuccessMessage('Notunuz başarıyla güncellenmiştir.');
+                    setErrorMessage('');
+                    setNoteData({
+                        title: '',
+                        description: '',
+                        date: '',
+                        time: '',
+                        priority: null
+                    });
+                    setEditMode(false);
+                    setNoteId(null);
+                    fetchEvents(formattedDate); // Güncelleme işlemi sonrasında güncellemeleri al
+                } else {
+                    console.error('Not güncelleme başarısız:', response.data);
+                    setSuccessMessage('');
+                    setErrorMessage('Notunuz güncellenemedi, tekrar deneyiniz.');
+                }
+            } catch (error) {
+                console.error("Failed to update note:", error.response ? error.response.data : error.message);
                 setSuccessMessage('');
                 setErrorMessage('Notunuz güncellenemedi, tekrar deneyiniz.');
             }
-        } catch (error) {
-            console.error("Failed to update note:", error.response ? error.response.data : error.message);
-            setSuccessMessage('');
-            setErrorMessage('Notunuz güncellenemedi, tekrar deneyiniz.');
+        } else {
+            // Not ekleme işlemi
+            if (errors.title || errors.description) {
+                console.error('Validation errors:', errors);
+                return;
+            }
+    
+            try {
+                const token = localStorage.getItem('token');
+                if (!token) {
+                    throw new Error('Token bulunamadı, lütfen giriş yapın.');
+                }
+    
+                const response = await axios.post("https://talent.mobven.com:5043/api/Events", {
+                    ...noteData,
+                    date: formattedDate
+                }, {
+                    headers: {
+                        "Content-Type": "application/json",
+                        'Authorization': `Bearer ${token}`
+                    }
+                });
+    
+                if (response.status === 200 || response.status === 201) {
+                    console.log('Note added successfully:', response.data);
+                    setSuccessMessage('Notunuz başarıyla kaydedilmiştir.');
+                    setErrorMessage('');
+                    setNoteData({
+                        title: '',
+                        description: ''
+                    });
+                    fetchEvents(formattedDate); // Not ekleme işlemi sonrasında güncellemeleri al
+                } else {
+                    console.error('Not ekleme başarısız:', response.data);
+                    setSuccessMessage('');
+                    setErrorMessage('Notunuz kaydedilemedi, tekrar deneyiniz.');
+                }
+            } catch (error) {
+                console.error("Failed to add note:", error.response ? error.response.data : error.message);
+                setSuccessMessage('');
+                setErrorMessage('Notunuz kaydedilemedi, tekrar deneyiniz.');
+            }
         }
     };
 
@@ -371,7 +417,6 @@ const NoteApp = () => {
     const handleMenuClose = () => {
         setAnchorEl(null);
     };
-
     return (
         <div className='note__container'>
             <div className='detail__header'>Notlar</div>
@@ -473,7 +518,7 @@ const NoteApp = () => {
                                             {editMode ? (
                                                 <Button
                                                     className="add__button-type"
-                                                    onClick={handleUpdateNote}
+                                                    onClick={handleNoteAction}
                                                 >
                                                     Güncelle
                                                 </Button>
@@ -492,6 +537,7 @@ const NoteApp = () => {
                         </>
                     )}
                 </div>
+    
                 <div className='detail__notes'>
                     {events.length > 0 && (
                         events.map(event => (
