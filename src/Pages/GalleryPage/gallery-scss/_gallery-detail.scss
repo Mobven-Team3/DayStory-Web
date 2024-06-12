@@ -173,7 +173,7 @@
         justify-content: center;
 
         p {
-            margin: 14px;
+            margin: 14px 2px;
         }
 
         &-info {
@@ -188,7 +188,7 @@
         }
 
         &-dayname {
-            font-family: Roboto;
+            font-family: "Roboto", sans-serif;
             font-size: 45px;
             font-weight: 400;
             line-height: 16px;
@@ -196,7 +196,7 @@
         }
 
         &-month {
-            font-family: Roboto;
+            font-family: "Roboto", sans-serif;
             font-size: 45px;
             font-weight: 500;
             line-height: 16px;
@@ -268,9 +268,6 @@
             -o-animation: rotating 2s linear infinite;
             animation: rotating 2s linear infinite;
         }
-       
-
-
     }
 
     &__notes {
@@ -318,6 +315,7 @@
             background: #FAFAFA;
             box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.3), 0px 1px 3px 1px rgba(0, 0, 0, 0.15);
             border-radius: 12px;
+           align-items:  center;
 
             p {
                 margin: 10px;
