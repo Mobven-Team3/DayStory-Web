@@ -202,6 +202,7 @@ import { FaEye, FaEyeSlash } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
 import logo from '../../../src/assets/images/daystory-logo.png';
 import login_img from '../../../src/assets/images/login_img.png';
+import loadingimg from '../../assets/images/daystory-logo.png';
 import { setToken } from '../../utils/auth';
 
 const LoginPage = () => {
@@ -302,8 +303,16 @@ const LoginPage = () => {
         <p className='header__text'>Day<span>Story</span></p>
       </header>
 
+      
       {loading ? (
-        <p>Giriş Yapılıyor...</p>
+        <div className='form'>
+        <center>
+          <div className='detail__loading'>
+            <img src={loadingimg} alt="Event" />
+          </div>
+        </center>
+      </div>
+
       ) : (
         <div className='form'>
           <div className='form__description'>

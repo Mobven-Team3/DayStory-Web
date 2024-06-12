@@ -1,37 +1,32 @@
 .footer {
     background-color: white;
+    padding: 20px 180px;
     filter: drop-shadow(0px 0.5px 0.5px rgba(0, 0, 0, 0.25));
+    justify-content: space-between;
     display: flex;
-    justify-content: space-between; 
     align-items: center;
-    // position: fixed; 
-    bottom: 0; 
-    width: 100%; 
-    z-index: 1000; 
 
     &__logo {
-        display: flex;
         align-items: center;
+        display: flex;
 
         &-img {
-            width: 80px; 
-            margin-left: 50px;
-            margin-bottom: -10px;
+            width: 58px;
         }
 
         &-text {
             font-family: "Roboto", sans-serif;
             color: rgba(90, 108, 165, 1);
             font-weight: 400;
-            font-size: 24px; 
-            line-height: 32px;
-            margin: 0 0 0 10px; 
+            font-size: 32px;
+            line-height: 40px;
+            margin: 0px;
 
             span {
                 font-family: "Roboto", sans-serif;
-                font-size: 24px; 
+                font-size: 32px;
                 font-weight: 300;
-                line-height: 32px;
+                line-height: 40px;
                 text-align: left;
             }
         }
@@ -39,48 +34,45 @@
 
     &__mobil {
         text-align: center;
-        margin-right: 40px; 
-        margin-bottom: 15px;
-
-        &-text {
-            font-family: "Roboto", sans-serif;
-            font-size: 20px;
-            color: rgb(0, 0, 0);
-        }
 
         &-images {
             display: flex;
-            img {
-                width: 100px; 
-            }
+            gap: 10px;
         }
     }
 
     &__contact {
-        display: flex;
-        flex-direction: column; 
-        justify-content: flex-start; 
-        margin-right: 20vh; 
-        margin-top: 5px;
+
+
+
+        p {
+            margin: 0px;
+        }
 
         &-text {
-            font-family: "Roboto", sans-serif;
-            font-size: 20px; 
-            color: rgb(0, 0, 0);
-            margin-bottom: 5px;
+            display: grid;
+            gap: 5px;
         }
 
-        &-phone, &-mail {
+        &-phone {
             display: flex;
+            gap: 5px;
             align-items: center;
-            font-family: "Roboto", sans-serif;
-            font-size: 14px; 
-            color: rgb(0, 0, 0);
-            margin: 2px 0;
-
-            svg {
-                margin-right: 5px;
-            }
+            justify-content: center;
+            text-align: center;
         }
+
+        &-mail {
+            display: flex;
+            gap: 5px;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+
     }
+
+
+
+
 }

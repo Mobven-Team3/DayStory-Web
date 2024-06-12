@@ -1,74 +1,15 @@
-// import React, { useEffect, useState } from 'react';
-// import { FaUserCircle } from 'react-icons/fa';
-// import { useLocation, useNavigate } from 'react-router-dom';
-// import logo from '../../assets/images/daystory-logo.png';
-// import './navbar-scss/_navbar.scss';
 
-// const NavigationBar = () => {
-//     const [activePage, setActivePage] = useState('');
-//     const navigate = useNavigate();
-//     const location = useLocation();
-
-//     useEffect(() => {
-//         if (location.pathname.startsWith('/gallery')) {
-//             setActivePage('gallery');
-//         } else if (location.pathname === '/note') {
-//             setActivePage('note');
-//         } else if (location.pathname === '/profile') {
-//             setActivePage('profile');
-//         } else if (/\/gallery\/\d{2}-\d{2}-\d{4}/.test(location.pathname)) {
-//             setActivePage('note');
-//         }
-//     }, [location.pathname]);
-
-//     const handlePageChange = (page, route) => {
-//         setActivePage(page);
-//         navigate(route);
-//     };
-
-//     return (
-//         <div className='navigation'>
-//             <nav className="nav">
-//                 <div className="nav__logo">
-//                     <img className="nav__logo-img" src={logo} alt="daystory-logo" />
-//                     <p className="nav__logo-text">Day<span>Story</span></p>
-//                 </div>
-//                 <div className="nav__items">
-//                     <p
-//                         className={`nav__item ${activePage === 'gallery' ? 'active' : ''}`}
-//                         onClick={() => handlePageChange('gallery', '/gallery')}
-//                     >
-//                         Galeri
-//                     </p>
-//                     <p
-//                         className={`nav__item ${activePage === 'note' ? 'active' : ''}`}
-//                         onClick={() => handlePageChange('note', '/note')}
-//                     >
-//                         Bugün
-//                     </p>
-//                     <p
-//                         className={`nav__item ${activePage === 'profile' ? 'active' : ''}`}
-//                         onClick={() => handlePageChange('profile', '/profile')}
-//                     >
-//                         <FaUserCircle size={30} />
-//                     </p>
-//                 </div>
-//             </nav>
-//         </div>
-//     );
-// };
-
-// export default NavigationBar;
-
-
-
-// import { Avatar, Card, CardContent, Grid, Popover, Typography } from '@mui/material';
+// import { Popover } from '@mui/material';
 // import axios from 'axios';
 // import React, { useEffect, useState } from 'react';
 // import { FaUserCircle } from 'react-icons/fa';
 // import { useLocation, useNavigate } from 'react-router-dom';
 // import logo from '../../assets/images/daystory-logo.png';
+// import profile from '../../assets/images/profile.png';
 // import './navbar-scss/_navbar.scss';
+
+
+
 
 // const NavigationBar = () => {
 //     const [activePage, setActivePage] = useState('');
@@ -78,16 +19,22 @@
 //     const navigate = useNavigate();
 //     const location = useLocation();
 
-//     useEffect(() => {
-//         if (location.pathname.startsWith('/gallery')) {
+//     const updateActivePage = (pathname) => {
+//         if (pathname.startsWith('/gallery')) {
 //             setActivePage('gallery');
-//         } else if (location.pathname === '/note') {
+//         } else if (pathname === '/note') {
 //             setActivePage('note');
-//         } else if (location.pathname === '/profile') {
+//         } else if (pathname === '/profile') {
 //             setActivePage('profile');
-//         } else if (/\/gallery\/\d{2}-\d{2}-\d{4}/.test(location.pathname)) {
+//         } else if (/\/gallery\/\d{2}-\d{2}-\d{4}/.test(pathname)) {
 //             setActivePage('note');
+//         } else {
+//             setActivePage('');
 //         }
+//     };
+
+//     useEffect(() => {
+//         updateActivePage(location.pathname);
 //     }, [location.pathname]);
 
 //     useEffect(() => {
@@ -102,12 +49,12 @@
 //                 Authorization: `Bearer ${token}`
 //             }
 //         })
-//         .then(response => {
-//             setUser(response.data.data);
-//         })
-//         .catch(error => {
-//             setError('User not found');
-//         });
+//             .then(response => {
+//                 setUser(response.data.data);
+//             })
+//             .catch(error => {
+//                 setError('User not found');
+//             });
 //     }, []);
 
 //     const handlePageChange = (page, route) => {
@@ -117,10 +64,12 @@
 
 //     const handleProfileClick = (event) => {
 //         setAnchorEl(event.currentTarget);
+//         setActivePage('profile');
 //     };
 
 //     const handleClose = () => {
 //         setAnchorEl(null);
+//         updateActivePage(location.pathname);
 //     };
 
 //     const open = Boolean(anchorEl);
@@ -164,28 +113,28 @@
 //                     horizontal: 'right',
 //                 }}
 //             >
-//                 <div style={{ padding: '20px', width: '300px' }}>
+//                 <div className='profile' >
 //                     {error ? (
-//                         <Typography>{error}</Typography>
+//                         <div>{error}</div>
 //                     ) : !user ? (
-//                         <Typography>Loading...</Typography>
+//                         <div>Loading...</div>
 //                     ) : (
-//                         <Card>
-//                             <CardContent>
-//                                 <Grid container spacing={2} alignItems="center">
-//                                     <Grid item xs={12} sm={4}>
-//                                         <Avatar alt={user.firstName} src="/static/images/avatar/1.jpg" style={{ width: '80px', height: '80px' }} />
-//                                     </Grid>
-//                                     <Grid item xs={12} sm={8}>
-//                                         <Typography variant="h6">{`${user.firstName} ${user.lastName}`}</Typography>
-//                                         <Typography variant="body2">Username: {user.username}</Typography>
-//                                         <Typography variant="body2">Email: {user.email}</Typography>
-//                                         <Typography variant="body2">Birth Date: {user.birthDate}</Typography>
-//                                         <Typography variant="body2">Gender: {user.gender}</Typography>
-//                                     </Grid>
-//                                 </Grid>
-//                             </CardContent>
-//                         </Card>
+//                         <div className='profile'>
+//                             <div className='profile__avatar'>
+//                                 <img className='profile__avatar-img' src={profile}/>
+//                                 <p>{user.username}</p>
+//                             </div>
+//                             <div className='profile__body'>
+//                                 <p>{`${user.firstName} ${user.lastName}`}</p>
+//                                 <p>{user.email}</p>
+//                                 <p>{user.birthDate}</p>
+//                                 <p>{user.gender}</p>
+//                             </div>
+
+//                                     <div className='profile__logout'>
+//                                         Çıkış Yap
+//                             </div>
+//                         </div>
 //                     )}
 //                 </div>
 //             </Popover>
@@ -195,13 +144,13 @@
 
 // export default NavigationBar;
 
-
-import { Avatar, Card, CardContent, Grid, Popover, Typography } from '@mui/material';
+import { Popover } from '@mui/material';
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { FaUserCircle } from 'react-icons/fa';
 import { useLocation, useNavigate } from 'react-router-dom';
 import logo from '../../assets/images/daystory-logo.png';
+import profile from '../../assets/images/profile.png';
 import './navbar-scss/_navbar.scss';
 
 const NavigationBar = () => {
@@ -242,12 +191,12 @@ const NavigationBar = () => {
                 Authorization: `Bearer ${token}`
             }
         })
-        .then(response => {
-            setUser(response.data.data);
-        })
-        .catch(error => {
-            setError('User not found');
-        });
+            .then(response => {
+                setUser(response.data.data);
+            })
+            .catch(error => {
+                setError('User not found');
+            });
     }, []);
 
     const handlePageChange = (page, route) => {
@@ -267,6 +216,25 @@ const NavigationBar = () => {
 
     const open = Boolean(anchorEl);
     const id = open ? 'profile-popover' : undefined;
+
+    const translateGender = (gender) => {
+        switch (gender) {
+            case 'NotSpecified':
+                return 'Belirtmek İstemiyorum';
+            case 'Male':
+                return 'Erkek';
+            case 'Female':
+                return 'Kadın';
+            case 'Other':
+                return 'Diğer';
+            default:
+                return gender;
+        }
+    };
+
+    const formatBirthDate = (birthDate) => {
+        return birthDate.replace(/-/g, '/');
+    };
 
     return (
         <div className='navigation'>
@@ -306,28 +274,28 @@ const NavigationBar = () => {
                     horizontal: 'right',
                 }}
             >
-                <div style={{ padding: '20px', width: '300px' }}>
+                <div className='profile'>
                     {error ? (
-                        <Typography>{error}</Typography>
+                        <div>{error}</div>
                     ) : !user ? (
-                        <Typography>Loading...</Typography>
+                        <div>Loading...</div>
                     ) : (
-                        <Card>
-                            <CardContent>
-                                <Grid container spacing={2} alignItems="center">
-                                    <Grid item xs={12} sm={4}>
-                                        <Avatar alt={user.firstName} src="/static/images/avatar/1.jpg" style={{ width: '80px', height: '80px' }} />
-                                    </Grid>
-                                    <Grid item xs={12} sm={8}>
-                                        <Typography variant="h6">{`${user.firstName} ${user.lastName}`}</Typography>
-                                        <Typography variant="body2">Username: {user.username}</Typography>
-                                        <Typography variant="body2">Email: {user.email}</Typography>
-                                        <Typography variant="body2">Birth Date: {user.birthDate}</Typography>
-                                        <Typography variant="body2">Gender: {user.gender}</Typography>
-                                    </Grid>
-                                </Grid>
-                            </CardContent>
-                        </Card>
+                        <div className='profile'>
+                            <div className='profile__avatar'>
+                                <img className='profile__avatar-img' src={profile}/>
+                                <p>{user.username}</p>
+                            </div>
+                            <div className='profile__body'>
+                                <p>{`${user.firstName} ${user.lastName}`}</p>
+                                <p>{user.email}</p>
+                                <p>{formatBirthDate(user.birthDate)}</p>
+                                <p>{translateGender(user.gender)}</p>
+                            </div>
+
+                            <div className='profile__logout'>
+                                Çıkış Yap
+                            </div>
+                        </div>
                     )}
                 </div>
             </Popover>
