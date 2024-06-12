@@ -821,17 +821,17 @@ const NoteApp = () => {
                         </>
                     )}
                 </div>
-                <div className='detail__notes'>
+                <div className='edit__notes'>
                     {events.length > 0 && (
                         events.map(event => (
-                            <div className='detail__notes-area' key={event.id}>
-                                <p className='detail__notes-title'>{event.title}</p>
-                                <p className='detail__notes-description'>{event.description}</p>
+                            <div className='edit__notes-area' key={event.id}>
+                                <p className='edit__notes-title'>{event.title}</p>
+                                <p className='edit__notes-description'>{event.description}</p>
                             </div>
                         ))
                     )}
                     {events.length === 0 && (
-                        <div className='detail__notes-empty'>Bu gün için notunuz bulunmuyor.</div>
+                        <div className='edit__notes-empty'>Bu gün için notunuz bulunmuyor.</div>
                     )}
                 </div>
             </div>

@@ -30,7 +30,7 @@
 
       
     }
-  
+
 
 
     .note__add {
@@ -64,6 +64,27 @@
 
 
   }
+
+
+  .edit__notes-empty{
+    
+    background-color: green;
+    width: 400px;
+    height: 400px;
+   
+ }
+ 
+
+ .edit__notes {
+  width: 400px;
+  height: 400px;
+  padding: 30px;
+  background: rgb(12, 116, 36);
+  border-radius: 10px;
+  display: grid;
+  gap: 10px;
+ }
+
 
 
   .modal-container {
