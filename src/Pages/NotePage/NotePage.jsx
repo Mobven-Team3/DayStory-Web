@@ -419,4 +419,20 @@ const NoteApp = () => {
                         boxShadow: 24,
                         p: 4,
                     }}>
-                     
+                        <Typography id="modal-title" variant="h6" component="h2">
+                            Uyarı
+                        </Typography>
+                        <Typography id="modal-description" sx={{ mt: 2 }}>
+                            Günde yalnızca bir AI gün özeti oluşturabilirsiniz. Devam etmek istiyor musunuz?
+                        </Typography>
+                        <Button onClick={handleModalClose} sx={{ mt: 2 }}>Vazgeç</Button>
+                        <Button onClick={handleContinue} sx={{ mt: 2, mr: 2 }}>Devam Et</Button>
+                    </Box>
+                </Fade>
+            </Modal>
+        </div>
+    );
+
+};
+
+export default NoteApp;
