@@ -305,7 +305,7 @@ const LoginPage = () => {
 
       
       {loading ? (
-        <div className='form'>
+        <div className='formyapısı'>
         <center>
           <div className='detail__loading'>
             <img src={loadingimg} alt="Event" />

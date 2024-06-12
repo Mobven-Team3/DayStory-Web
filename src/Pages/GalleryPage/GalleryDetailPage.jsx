@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import loadingimg from '../../assets/images/daystory-logo.png';
 import '../GalleryPage/gallery-scss/_gallery-detail.scss';
 
 const GalleryDetailPage = () => {
@@ -90,9 +91,11 @@ const GalleryDetailPage = () => {
                             </div>
                         )}
                         {!imagePath && (
-                            <div className='detail__img'>
-                            <p>loading</p>
+                            <center>
+                            <div className='detail__loading'>
+                              <img src={loadingimg} alt="Event" />
                             </div>
+                          </center>
                         )}
                     </div>
                     <div className='detail__notes'>
