@@ -518,7 +518,7 @@ const NoteApp = () => {
                                             {editMode ? (
                                                 <Button
                                                     className="add__button-type"
-                                                    onClick={handleNoteUpdate}
+                                                    onClick={handleAddNote}
                                                 >
                                                     Güncelle
                                                 </Button>
