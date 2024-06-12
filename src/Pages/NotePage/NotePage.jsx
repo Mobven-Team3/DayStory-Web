@@ -62,7 +62,7 @@ const NoteApp = () => {
         validate(name, value);
     };
 
-    
+
     const handleClear = (e) => {
         setNoteData((prevData) => ({ ...prevData, [e]: '' }));
     };
@@ -189,11 +189,15 @@ const NoteApp = () => {
                     'Authorization': `Bearer ${token}`
                 }
             });
-
             if (response.status === 200 || response.status === 201) {
                 console.log('Note added successfully:', response.data);
                 setSuccessMessage('Notunuz başarıyla kaydedilmiştir.');
                 setErrorMessage('');
+                setNoteData((prevData) => ({
+                    ...prevData,
+                    title: '',
+                    description: ''
+                }));
                 fetchEvents(formattedDate);
             } else {
                 console.error('Not ekleme başarısız:', response.data);
@@ -206,6 +210,9 @@ const NoteApp = () => {
             setErrorMessage('Notunuz kaydedilemedi, tekrar deneyiniz.');
         }
     };
+    
+
+    
 
     const handleModalClose = () => {
         setModalOpen(false);
