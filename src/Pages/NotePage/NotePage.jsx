@@ -10,7 +10,7 @@ import { useParams } from 'react-router-dom';
 import loadingimg from '../../assets/images/daystory-logo.png';
 import "./note-scss/_note.scss";
 
-//icons
+// icons
 import { AiOutlineCloseCircle } from 'react-icons/ai';
 
 const NoteApp = () => {
@@ -289,48 +289,48 @@ const NoteApp = () => {
                         </div>
                     ) : (
                         <>
-                            {summaryImage ? (
-                                <div className='detail__img'>
-                                    <img src={summaryImage} alt="Event" />
-                                </div>
+                         {summaryImage ? (
+                            <div className='detail__img'>
+                           <img src={summaryImage} alt="Event" />
+                           </div>
                             ) : (
                                 <>
-                                    <div className="summary-add-button" onClick={handleModalOpen}>
-                                        <p> AI Gün Özeti Oluştur </p>
-                                    </div>
+                           <div className="summary-add-button" onClick={handleModalOpen}>
+                              <p> AI Gün Özeti Oluştur </p>
+                           </div>
 
-                                    <div className='note__add'>
-                                        <p className='note__add-header'>Notunuzu yazınız.</p>
+                       <div className='note__add'>
+                     <p className='note__add-header'>Notunuzu yazınız.</p>
 
-                                        <TextField
-                                            className="note-input"
-                                            label="Başlık"
-                                            name="title"
-                                            placeholder="Not Başlığınızı Giriniz."
-                                            fullWidth
-                                            value={noteData.title}
-                                            onChange={handleChange}
-                                            error={Boolean(errors.title)}
-                                            helperText={errors.title}
-                                            InputProps={{
-                                                endAdornment: (
-                                                    noteData.title && (
-                                                        <InputAdornment position="end">
-                                                            <IconButton
-                                                                aria-label="clear input"
-                                                                onClick={() => handleClear('title')}
-                                                                edge="end"
-                                                            >
-                                                                <AiOutlineCloseCircle />
-                                                            </IconButton>
-                                                        </InputAdornment>
-                                                    )
-                                                )
-                                            }}
-                                        />
+                   <TextField
+                     className="note-input"
+                     label="Başlık"
+                     name="title"
+                     placeholder="Not Başlığınızı Giriniz."
+                     fullWidth
+                     value={noteData.title}
+                     onChange={handleChange}
+                     error={Boolean(errors.title)}
+                     helperText={errors.title}
+                     InputProps={{
+                    endAdornment: (
+                     noteData.title && (
+                     <InputAdornment position="end">
+                     <IconButton
+                    aria-label="clear input"
+                    onClick={() => handleClear('title')}
+                    edge="end"
+                      >
+                     <AiOutlineCloseCircle />
+                    </IconButton>
+                        </InputAdornment>
+                        )
+                         )
+                        }}
+                         />
 
-                                        <TextField
-                                            className="note-input"
+                        <TextField
+                         className="note-input"
                                             label="Notunuz"
                                             name="description"
                                             placeholder="Notunuzun Detaylarını Giriniz."
@@ -432,7 +432,6 @@ const NoteApp = () => {
             </Modal>
         </div>
     );
-
 };
 
 export default NoteApp;
