@@ -15,6 +15,7 @@
     display: grid;
     gap: 20px;
     align-items: center;
+    justify-content: center;
 
     .summary-add-button {
       color: white;
@@ -24,7 +25,7 @@
       text-align: center;
       border-radius: 30px;
       background: linear-gradient(to right, #6A7FC1, #F3AFE5);
-      width:95%;
+      margin: 0px 20px;
       padding: 5px 0px;
 
       p {
