@@ -2,6 +2,7 @@ import { Backdrop, Box, Button, CircularProgress, Fade, Modal, TextField, Typogr
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import loadingimg from '../../assets/images/loading.png';
 import NavigationBar from '../../../src/Pages/Navbar/Navbar';
 import "./note-scss/_note.scss";
 
@@ -15,6 +16,7 @@ const NoteApp = () => {
     const [errorMessage, setErrorMessage] = useState('');
     const [loading, setLoading] = useState(false);
     const [summaryImage, setSummaryImage] = useState(null);
+    const [loadingImg, setLoadingImg] = useState(false);
 
     const [noteData, setNoteData] = useState({
         title: "",
@@ -59,6 +61,12 @@ const NoteApp = () => {
         }));
         validate(name, value);
     };
+
+    
+    const handleClear = (e) => {
+        setNoteData((prevData) => ({ ...prevData, [e]: '' }));
+    };
+
 
     const formatDateDetails = (dateString) => {
         const date = new Date(dateString);
