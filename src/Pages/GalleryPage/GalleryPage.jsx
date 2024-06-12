@@ -11,6 +11,8 @@ const GalleryPage = () => {
     useEffect(() => {
         const fetchImages = async () => {
             const token = localStorage.getItem('token');
+            const today = new Date();
+            const todayStr = today.toLocaleDateString('tr-TR').split('.').reverse().join('-');
 
             if (!token) {
                 console.error('No token found');
@@ -25,28 +27,35 @@ const GalleryPage = () => {
                 });
                 const result = await response.json();
 
-                if (result.data && result.data.length > 0) {
-                    const formattedData = result.data.map(img => ({
-                        date: img.date,
-                        imagePath: img.imagePath || '',
-                        title: "img"
-                    }));
+                let data = result.data || [];
+                const todayExists = data.some(img => img.date === todayStr.split('-').reverse().join('-'));
 
-                    const sortedData = formattedData.sort((a, b) => {
-                        const dateA = new Date(a.date.split('-').reverse().join('-'));
-                        const dateB = new Date(b.date.split('-').reverse().join('-'));
-                        return dateB - dateA;
+                if (!todayExists) {
+                    data.unshift({
+                        date: todayStr.split('-').reverse().join('-'),
+                        imagePath: 'https://r.resimlink.com/ErUWpXBD.png',
+                        title: "Loading Image"
                     });
-                    setImages(sortedData);
-                } else {
-                    setImages([]);
                 }
+
+                const formattedData = data.map(img => ({
+                    date: img.date,
+                    imagePath: img.imagePath || '',
+                    title: img.title || "img"
+                }));
+
+                const sortedData = formattedData.sort((a, b) => {
+                    const dateA = new Date(a.date.split('-').reverse().join('-'));
+                    const dateB = new Date(b.date.split('-').reverse().join('-'));
+                    return dateB - dateA;
+                });
+
+                setImages(sortedData);
+                setSelectedDate(today);
             } catch (error) {
                 console.error('Error fetching images:', error);
                 setImages([]);
             }
-
-            setSelectedDate(new Date());
         };
 
         fetchImages();
@@ -128,8 +137,6 @@ const GalleryPage = () => {
 
     const renderMonths = () => {
         const groupedImages = groupImagesByMonth();
-
-        console.log('Grouped images by month:', groupedImages);
 
         return Object.keys(groupedImages).map((monthYear, index) => (
             <div className="month__container" key={index}>
