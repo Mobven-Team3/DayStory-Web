@@ -167,13 +167,14 @@
         font-family: "Roboto", sans-serif;
         display: flex;
         align-items: center;
+        justify-content: center;
 
         p {
-            margin: 24px 5px;
+            margin: 14px;
         }
 
         &-info {
-            display: block;
+            display: grid;
         }
 
         &-dayno {
@@ -271,7 +272,7 @@
 
     &__notes {
         min-width: 676px;
-        height: 582px;
+        height: 676px;
         display: block;
         gap: 20px;
         border-radius: 16px;
@@ -325,6 +326,10 @@
             font-weight: 500;
             line-height: 20px;
             letter-spacing: 0.10000000149011612px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            
         }
 
         &-empty {
