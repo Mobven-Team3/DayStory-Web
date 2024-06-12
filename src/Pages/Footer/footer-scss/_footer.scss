@@ -32,13 +32,44 @@
         }
     }
 
-    &__mobil{
+    &__mobil {
         text-align: center;
-        
-        &-images{
+
+        &-images {
             display: flex;
             gap: 10px;
         }
+    }
+
+    &__contact {
+
+
+
+        p {
+            margin: 0px;
+        }
+
+        &-text {
+            display: grid;
+            gap: 5px;
+        }
+
+        &-phone {
+            display: flex;
+            gap: 5px;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+
+        &-mail {
+            display: flex;
+            gap: 5px;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+
     }
 
 

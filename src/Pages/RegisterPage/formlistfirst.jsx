@@ -165,20 +165,19 @@ const FormListFirst = ({ formData, handleChange, handleGenderChange, nextbutton 
                 />
 
                 <div className='form__list-item'>
-                    <FormControl className="cinsiyet" error={!!errors.gender}>
+                <FormControl className="cinsiyet" error={!!errors.gender}>
                         <InputLabel>Cinsiyet</InputLabel>
                         <Select
                             label="Cinsiyet"
                             name="gender"
-                            value={formData.gender}
+                            value={formData.genderText}
                             onChange={handleGenderChange}
                             required
                         >
-                            <MenuItem value="Female">Kadın</MenuItem>
-                            <MenuItem value="Male">Erkek</MenuItem>
-                            <MenuItem value="NotSpecified">Belirtmek İstemiyorum</MenuItem>
-                            <MenuItem value="Other">Diğer</MenuItem>
-
+                            <MenuItem value="Kadın">Kadın</MenuItem>
+                            <MenuItem value="Erkek">Erkek</MenuItem>
+                            <MenuItem value="Belirtmek İstemiyorum">Belirtmek İstemiyorum</MenuItem>
+                            <MenuItem value="Diğer">Diğer</MenuItem>
                         </Select>
                         {errors.gender && <FormHelperText>{errors.gender}</FormHelperText>}
                     </FormControl>

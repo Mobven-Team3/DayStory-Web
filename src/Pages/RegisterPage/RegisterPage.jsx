@@ -25,7 +25,7 @@ const RegisterPage = () => {
     email: "",
     username: "",
     password: "",
-    passwordConfirmed:"",
+    passwordConfirmed: "",
   });
 
   const [errors, setErrors] = useState({
@@ -43,18 +43,35 @@ const RegisterPage = () => {
     }));
   };
 
-  const handleGenderChange = (e) => {
-    const { value } = e.target;
+  const handleGenderChange = (event) => {
+    let genderText = event.target.value;
+    let genderValue;
+    switch (genderText) {
+      case "Kadın":
+        genderValue = 2;
+        break;
+      case "Erkek":
+        genderValue = 1;
+        break;
+      case "Diğer":
+        genderValue = 3;
+        break;
+      default:
+        genderValue = 0;
+    }
     setFormData((prevData) => ({
       ...prevData,
-      gender: value
+      gender: genderValue,
+      genderText: genderText
     }));
   };
+
+
 
   const registerUser = async () => {
     setLoading(true);
     try {
-      const response = await fetch("http://165.22.93.225:5030/api/Users/register", {
+      const response = await fetch("https://talent.mobven.com:5043/api/Users/register", {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
