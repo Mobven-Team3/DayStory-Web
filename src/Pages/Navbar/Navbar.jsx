@@ -214,6 +214,10 @@ const NavigationBar = () => {
         updateActivePage(location.pathname);
     };
 
+    const handleMain = () => {
+        navigate('/');
+    };
+
     const open = Boolean(anchorEl);
     const id = open ? 'profile-popover' : undefined;
 
@@ -282,7 +286,7 @@ const NavigationBar = () => {
                     ) : (
                         <div className='profile'>
                             <div className='profile__avatar'>
-                                <img className='profile__avatar-img' src={profile}/>
+                                <img className='profile__avatar-img' src={profile} />
                                 <p>{user.username}</p>
                             </div>
                             <div className='profile__body'>
@@ -292,7 +296,8 @@ const NavigationBar = () => {
                                 <p>{translateGender(user.gender)}</p>
                             </div>
 
-                            <div className='profile__logout'>
+                            <div className='profile__logout'
+                                onClick={handleMain}>
                                 Çıkış Yap
                             </div>
                         </div>
