@@ -71,6 +71,7 @@ const NoteApp = () => {
         }));
         validate(name, value);
         setSuccessMessage('');
+        setErrorMessage('');
     };
 
     const handleClear = (e) => {
