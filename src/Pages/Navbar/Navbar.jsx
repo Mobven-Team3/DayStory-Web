@@ -153,6 +153,12 @@ import logo from '../../assets/images/daystory-logo.png';
 import profile from '../../assets/images/profile.png';
 import './navbar-scss/_navbar.scss';
 
+import calendericon from '../../assets/images/icons/calendar.png';
+import gendericon from '../../assets/images/icons/gender.png';
+import maillicon from '../../assets/images/icons/maill.png';
+import profileicon from '../../assets/images/icons/personalcard.png';
+
+
 const NavigationBar = () => {
     const [activePage, setActivePage] = useState('');
     const [anchorEl, setAnchorEl] = useState(null);
@@ -290,10 +296,10 @@ const NavigationBar = () => {
                                 <p>{user.username}</p>
                             </div>
                             <div className='profile__body'>
-                                <p>{`${user.firstName} ${user.lastName}`}</p>
-                                <p>{user.email}</p>
-                                <p>{formatBirthDate(user.birthDate)}</p>
-                                <p>{translateGender(user.gender)}</p>
+                                <p><img src={profileicon} alt='profile-icon'></img>{`${user.firstName} ${user.lastName}`}</p>
+                                <p><img src={maillicon} alt='profile-icon'></img>{user.email}</p>
+                                <p><img src={calendericon} alt='profile-icon'></img>{formatBirthDate(user.birthDate)}</p>
+                                <p><img src={gendericon} alt='profile-icon'></img>{translateGender(user.gender)}</p>
                             </div>
 
                             <div className='profile__logout'
