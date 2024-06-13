@@ -1,8 +1,10 @@
 .navigation {
+
     position: fixed;
     left: 0;
     top: 0;
     width: 100%;
+    z-index: 2;
 
     .nav {
         padding: 20px 76px 30px 76px;

@@ -236,6 +236,7 @@ const NoteApp = () => {
     };
 
     const handleContinue = async () => {
+        setModalOpen(false);
         try {
             setLoadingImg(true);
             const token = localStorage.getItem('token');
@@ -518,7 +519,7 @@ const NoteApp = () => {
                             ))
                         )}
                         {events.length === 0 && (
-                            <div className='detail__notes-empty'>Bu gün için notunuz bulunmuyor.</div>
+                            <div className='detail__notes-empty'>Bugün için notunuz bulunmuyor.</div>
                         )}
                     </div>
 
@@ -549,7 +550,7 @@ const NoteApp = () => {
                             ))
                         )}
                         {events.length === 0 && (
-                            <div className='detail__notes-empty'>Bu gün için notunuz bulunmuyor.</div>
+                            <div className='detail__notes-empty'>Bugün için notunuz bulunmuyor.</div>
                         )}
                     </div>
                 )}
