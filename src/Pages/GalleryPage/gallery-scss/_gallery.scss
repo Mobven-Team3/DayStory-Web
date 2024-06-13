@@ -90,7 +90,7 @@
     .empty-content {
         width: max-content;
         display: flex;
-        gap: 80px;
+        gap: 30px;
         align-items: center;
         justify-content: center;
 
@@ -102,47 +102,52 @@
         padding: 22px 15px 15px 15px;
         border-radius: 16px;
         border: 1px solid rgba(106, 127, 193, 1);
-        cursor: pointer;
 
 
-        &:hover {
-            background-color: rgb(146, 157, 193);
-            color: white;
-        }
+        // &:hover {
+        //     background-color: rgb(146, 157, 193);
+        //     color: white;
+        // }
 
 
         &__header {
-            font-family: "Roboto", sans-serif;
+            font-family: "Inconsolata", monospace;
             display: flex;
+            gap: 5px;
             align-items: center;
             margin-bottom: 15px;
+            color: rgb(26, 26, 26);
         }
 
         &-dayno {
             margin: 0px;
-            font-size: 100px;
-            font-weight: 400;
+            font-size: 85px;
+            font-weight: 600;
             line-height: 16px;
             text-align: left;
-
         }
 
         &__date {
-            display: block;
+            display: grid;
             align-items: center;
+            gap:10px;
+
+            p{
+                margin:5px;
+            }
 
             &-dayname {
                 margin: 20px 0px;
-                font-size: 45px;
-                font-weight: 400;
+                font-size: 40px;
+                font-weight: 450;
                 line-height: 16px;
                 text-align: left;
             }
 
             &-month {
                 margin: 20px 0px;
-                font-size: 45px;
-                font-weight: 400;
+                font-size: 40px;
+                font-weight: 450;
                 line-height: 16px;
                 text-align: left;
             }
@@ -150,15 +155,14 @@
         }
 
         &__image {
-            width: 350px;
-            height: 350px;
+            width: 400px;
+            height: 400px;
             background-color: rgba(241, 240, 240, 1);
         }
 
 
         &__info {
             width: 600px;
-            position: relative;
 
             &-img {
                 width: 380px;
@@ -167,12 +171,25 @@
 
             &-text {
                 width: 530px;
-                position: absolute;
                 top: 300px;
                 left: 50px;
-                font-size: 25px;
+                font-size: 21px;
                 font-weight: 400;
                 line-height: 40px;
+                font-family: "Inconsolata", monospace;
+
+                p{
+                    margin: 0px;
+                }
+            }
+
+            &-button{
+                margin-top: 20px;
+                width: 200px;
+                background: linear-gradient(271.96deg, #6A7FC1 48.21%, #F3AFE5 100%);
+                color: white;
+                border-radius: 100px;
+                cursor: pointer;
             }
 
         }

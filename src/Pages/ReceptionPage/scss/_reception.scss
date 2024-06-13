@@ -5,12 +5,14 @@
     justify-content: center;
     text-align: center;
     padding: 110px 90px;
+    font-family: "Inconsolata", monospace;
 
     &__info {
         display: flex;
         gap: 70px;
         align-items: center;
         text-align: center;
+        margin-bottom: 100px;
 
         &-img {
             width: 600px;
@@ -25,14 +27,14 @@
                 color: rgba(90, 108, 165, 1);
                 margin: 0px;
                 font-size: 36px;
-                font-family: "Roboto", sans-serif;
+                font-family: "Inconsolata", monospace;
                 font-weight: 400;
                 line-height: 40px;
                 width: auto;
             }
 
             span {
-                font-family: "Roboto", sans-serif;
+                font-family: "Inconsolata", monospace;
                 font-size: 36px;
                 font-weight: 300;
                 line-height: 40px;
@@ -40,7 +42,7 @@
             }
 
             h3 {
-                font-family: "Roboto", sans-serif;
+                font-family: "Inconsolata", monospace;
                 font-size: 24px;
                 font-weight: 500;
                 line-height: 24px;
@@ -49,7 +51,7 @@
             }
 
             p {
-                font-family: "Roboto", sans-serif;
+                font-family: "Inconsolata", monospace;
                 font-size: 16px;
                 font-weight: 400;
                 line-height: 24px;
@@ -60,25 +62,67 @@
     }
 
     .middle {
-        margin-top: 100px;
+        margin-bottom: 100px;
+        font-size: 25px;
+
+        h2 {
+           margin-bottom: 50px;
+        }
     }
 
 
     &__card {
-        padding: 200px 0px 20px 0px;
         display: flex;
-        justify-content: space-around;
+        justify-content: center;
         align-items: center;
+        gap: 30px;
         text-align: center;
+        font-size: 20px;
+
+        &-how3{
+            width: 100px ;
+        }
+
+
+        &-first {
+            width: 500px;
+            margin-right:60px;
+
+            img {
+                width: auto;
+                height: 330px;
+            }
+            p {
+                
+            }
+
+        }
+        &-second {
+            width: 500px;
+        
+            p {
+                
+            }
+    
+            img {
+                width: auto;
+                height: 300px;
+                
+            }
+        }
+
+
+
+       
 
         &-area {
-            padding: 25px;
+            padding: 30px 25px;
             justify-content: center;
             align-items: center;
             text-align: center;
             position: relative;
             width: 200px;
-            height: 130px;
+            height: 115px;
             background: #FAFAFA;
             border: 1px solid #D9D9D9;
             border-radius: 20px;
@@ -96,9 +140,9 @@
 
         &-info {
             position: absolute;
-            bottom: 0px;
+            bottom: 10px;
             width: 200px;
-    
+
         }
 
     }
@@ -109,11 +153,15 @@
 
         p {
             width: 405px;
-            font-family: "Roboto", sans-serif;
+            font-family: "Inconsolata", monospace;
             font-size: 22px;
             font-weight: 400;
             line-height: 28px;
             text-align: center;
+        }
+        h2{
+            margin-bottom: 50px;
+            font-size: 25px;
         }
     }
 
@@ -133,12 +181,12 @@
         color: white;
         border: 0px;
 
-        font-family: "Roboto", sans-serif;
+        font-family: "Inconsolata", monospace;
         font-size: 14px;
         font-weight: 500;
         line-height: 20px;
         letter-spacing: 0.10000000149011612px;
-        cursor:pointer;
+        cursor: pointer;
 
     }
 
@@ -150,13 +198,13 @@
         border-radius: 100px;
         color: rgba(90, 108, 165, 1);
 
-        font-family: "Roboto", sans-serif;
+        font-family: "Inconsolata", monospace;
         font-size: 14px;
         font-weight: 500;
         line-height: 20px;
         letter-spacing: 0.10000000149011612px;
 
-        cursor:pointer;
+        cursor: pointer;
     }
 
 

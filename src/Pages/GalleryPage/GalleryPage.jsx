@@ -168,51 +168,6 @@ const GalleryPage = () => {
     const [selectedDate, setSelectedDate] = useState(new Date());
     const navigate = useNavigate();
 
-    // useEffect(() => {
-    //     const fetchImages = async () => {
-    //         const token = localStorage.getItem('token');
-
-    //         if (!token) {
-    //             console.error('No token found');
-    //             return;
-    //         }
-
-    //         try {
-    //             const response = await fetch('https://talent.mobven.com:5043/api/DaySummarys/all', {
-    //                 headers: {
-    //                     'Authorization': `Bearer ${token}`
-    //                 }
-    //             });
-    //             const result = await response.json();
-
-    //             if (result.data && result.data.length > 0) {
-    //                 const formattedData = result.data.map(img => ({
-    //                     date: img.date,
-    //                     imagePath: img.imagePath || '',
-    //                     title: "img"
-    //                 }));
-
-    //                 const sortedData = formattedData.sort((a, b) => {
-    //                     const dateA = new Date(a.date.split('-').reverse().join('-'));
-    //                     const dateB = new Date(b.date.split('-').reverse().join('-'));
-    //                     return dateB - dateA;
-    //                 });
-    //                 setImages(sortedData);
-    //             } else {
-    //                 setImages([]);
-    //             }
-    //         } catch (error) {
-    //             console.error('Error fetching images:', error);
-    //             setImages([]);
-    //         }
-
-    //         setSelectedDate(new Date());
-    //     };
-
-    //     fetchImages();
-    // }, []);
-
-
     useEffect(() => {
                 const fetchImages = async () => {
                     const token = localStorage.getItem('token');
@@ -235,13 +190,13 @@ const GalleryPage = () => {
                         let data = result.data || [];
                         const todayExists = data.some(img => img.date === todayStr.split('-').reverse().join('-'));
         
-                        if (!todayExists) {
-                            data.unshift({
-                                date: todayStr.split('-').reverse().join('-'),
-                                imagePath: 'https://r.resimlink.com/ErUWpXBD.png',
-                                title: "Loading Image"
-                            });
-                        }
+                        // if (!todayExists) {
+                        //     data.unshift({
+                        //         date: todayStr.split('-').reverse().join('-'),
+                        //         imagePath: 'https://r.resimlink.com/ErUWpXBD.png',
+                        //         title: "Loading Image"
+                        //     });
+                        // }
         
                         const formattedData = data.map(img => ({
                             date: img.date,

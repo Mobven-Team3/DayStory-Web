@@ -128,9 +128,9 @@ const RegisterPage = () => {
         <div className='form'>
           <div className='form__description'>
             <div className='form__description-text'>
-              <h2>Day<span>Story</span>’e Hoş geldin!</h2>
+              <h2>Aramıza Katıl</h2>
             </div>
-            <img className='form__description-img' src={register_img} alt="main_image" />
+            <img className='form__description-register' src={register_img} alt="main_image" />
           </div>
 
           <div className='form__list'>

@@ -47,8 +47,8 @@ import './footer-scss/_footer.scss';
 
 // images
 import logo from '../../../src/assets/images/daystory-logo.png';
-import apple from '../../assets/images/apple.png';
-import google from '../../assets/images/google.png';
+import apple from '../../assets/images/apple1.png';
+import google from '../../assets/images/google1.png';
 
 // icons
 import { Email, Phone } from '@mui/icons-material';
@@ -71,7 +71,8 @@ const Footer = () => {
             </div>
         </div>
         <div className='footer__contact'>
-                <div className='footer__contact-text'>İletişim
+                <div className='footer__contact-text'>
+                    <p className='footer__contact-header'>İletişim</p>
                     <div className='footer__contact-phone'>
                     <Phone /> 
                         <p>+90 000 000 00 00</p>
@@ -82,7 +83,8 @@ const Footer = () => {
                     </div>  
             </div>
 
-        </div>
+            </div>
+            
     </footer>
 
     );

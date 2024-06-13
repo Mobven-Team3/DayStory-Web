@@ -5,9 +5,11 @@ import { useNavigate } from 'react-router-dom';
 
 import { Button } from '@mui/base';
 import FootBar from '../../../src/Pages/Footer/footer';
-import receptionImg2 from '../../../src/assets/images/2 1.png';
-import receptionImg3 from '../../../src/assets/images/5 1.png';
-import receptionImg4 from '../../../src/assets/images/Group 26085612.png';
+
+
+import how1 from '../../../src/assets/images/how1.png';
+import how2 from '../../../src/assets/images/how2.png';
+import how3 from '../../../src/assets/images/how3.png';
 import receptionImg from '../../../src/assets/images/Karşılama_resimleri.png';
 import './scss/_reception.scss';
 
@@ -20,7 +22,7 @@ const ReceptionPage = () => {
     const handleLoginPageClick = () => {
         navigate('/login');
     };
-    
+
     const handleRegisterPageClick = () => {
         navigate('/register');
     };
@@ -40,10 +42,48 @@ const ReceptionPage = () => {
                     </div>
                 </div>
 
+
                 <div className='middle'>
                     <h2>Nasıl Çalışır</h2>
                     <div className="landingpage__card">
-                        <div className="landingpage__card-area">
+                        <div className='landingpage__card-first'>
+                            <img className='' src={how1} alt="Reception" />
+                        </div>
+                        <div className='landingpage__card-second'>
+                            <p>O gün yaşadığınız önemli olayları ve duygularınızı günlüğünüze not alın.</p>
+                        </div>
+                    </div>
+                  
+                    <div className="landingpage__card">
+                    <div className='landingpage__card-first'>
+                    <p >Gün içindeki özel anlarınızı sizin için ai görselleştirsin.</p>
+                        </div>
+                        <div className='landingpage__card-second'>
+                        <img src={how2} alt="Reception" />
+                        </div>
+
+                    </div>
+
+                    
+                    <div className="landingpage__card">
+                        <div className='landingpage__card-first'>
+                            <img className='landingpage__card-how3' src={how3} alt="Reception" />
+                        </div>
+                        <div className='landingpage__card-second'>
+                        <p>Görselleştirilen günlerinizi düzenli olarak takip edin arkadaşlarınızla paylaşın.</p>
+                        </div>
+                    </div>
+
+
+                </div>
+
+
+
+
+
+
+
+                {/* <div className="landingpage__card-area">
                             <img className='landingpage__card-img' src={receptionImg2} alt="Reception" />
                             <p className='landingpage__card-info' >O gün yaşadığınız önemli olayları ve duygularınızı günlüğünüze not alın.</p>
                         </div>
@@ -56,10 +96,12 @@ const ReceptionPage = () => {
                         <div className="landingpage__card-area">
                             <img className='landingpage__card-img' src={receptionImg4} alt="Reception" />
                             <p className='landingpage__card-info' >Görselleştirilen günlerinizi düzenli olarak takip edin arkadaşlarınızla paylaşın.</p>
-                        </div>
-                    </div>
-                </div>
+                        </div> */}
+
+
+
                 <div className='landingpage__last'>
+                <h2>Hemen Başla</h2>
                     <center>
                         <p>Sen de gününü DayStory’e anlat ve anılarının hikayesini canlandırmaya başla!</p>
                         <div>
