@@ -25,7 +25,7 @@ const NavigationBar = () => {
             setActivePage('note');
         } else if (pathname === '/profile') {
             setActivePage('profile');
-        } else if (/\/gallery\/\d{2}-\d{2}-\d{4}/.test()) {
+        } else if (/\/gallery\/\d{2}-\d{2}-\d{4}/.test(pathname)) {
             setActivePage('note');
         } else {
             setActivePage('');
