@@ -32,7 +32,7 @@ const NoteApp = () => {
 
     const [noteData, setNoteData] = useState({
         title: "",
-        description: "",
+        description: null,
         date: "",
         time: "",
         priority: null
