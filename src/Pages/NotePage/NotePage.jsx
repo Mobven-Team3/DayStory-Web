@@ -52,10 +52,8 @@ const NoteApp = () => {
                 error = '3 ila 250 karakter aralığında bir değer almalıdır.';
             }
         } if (name === 'description') {
-            if (!value) {
-                error = 'Bu değer boş bırakılamaz.';
-            } else if (value.length < 3 || value.length > 350) {
-                error = '3 ila 350 karakter aralığında bir değer almalıdır.';
+            if (value.length > 350) {
+                error = 'En fazla 350 karakterden oluşabilir.';
             }
         }
 
@@ -73,6 +71,7 @@ const NoteApp = () => {
         }));
         validate(name, value);
         setSuccessMessage('');
+        setErrorMessage('');
     };
 
     const handleClear = (e) => {
@@ -417,10 +416,11 @@ const NoteApp = () => {
                                             name="title"
                                             placeholder="Not Başlığınızı Giriniz."
                                             fullWidth
+                                            required
                                             value={noteData.title}
                                             onChange={handleChange}
                                             error={Boolean(errors.title)}
-                                            helperText={errors.title}
+                                            helperText={errors.title ? errors.title : "*En fazla 250 karakter"}
                                             InputProps={{
                                                 endAdornment: (
                                                     noteData.title && (
@@ -438,6 +438,8 @@ const NoteApp = () => {
                                             }}
                                         />
 
+                                                
+
                                         <TextField
                                             className="note-input"
                                             label="Notunuz"
@@ -448,7 +450,7 @@ const NoteApp = () => {
                                             value={noteData.description}
                                             onChange={handleChange}
                                             error={Boolean(errors.description)}
-                                            helperText={errors.description}
+                                            helperText={errors.description ? errors.description : "*En fazla 350 karakter"}
                                             InputProps={{
                                                 endAdornment: (
                                                     noteData.description && (
