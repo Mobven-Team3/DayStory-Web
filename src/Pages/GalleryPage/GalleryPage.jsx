@@ -160,7 +160,8 @@
 
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import loadingimg from '../../assets/images/login_img.png';
+import login_img from '../../../src/assets/images/login_img.png';
+import addimg from '../../assets/images/add.png';
 import './gallery-scss/_gallery.scss';
 
 const GalleryPage = () => {
@@ -168,103 +169,48 @@ const GalleryPage = () => {
     const [selectedDate, setSelectedDate] = useState(new Date());
     const navigate = useNavigate();
 
-    // useEffect(() => {
-    //     const fetchImages = async () => {
-    //         const token = localStorage.getItem('token');
-
-    //         if (!token) {
-    //             console.error('No token found');
-    //             return;
-    //         }
-
-    //         try {
-    //             const response = await fetch('https://talent.mobven.com:5043/api/DaySummarys/all', {
-    //                 headers: {
-    //                     'Authorization': `Bearer ${token}`
-    //                 }
-    //             });
-    //             const result = await response.json();
-
-    //             if (result.data && result.data.length > 0) {
-    //                 const formattedData = result.data.map(img => ({
-    //                     date: img.date,
-    //                     imagePath: img.imagePath || '',
-    //                     title: "img"
-    //                 }));
-
-    //                 const sortedData = formattedData.sort((a, b) => {
-    //                     const dateA = new Date(a.date.split('-').reverse().join('-'));
-    //                     const dateB = new Date(b.date.split('-').reverse().join('-'));
-    //                     return dateB - dateA;
-    //                 });
-    //                 setImages(sortedData);
-    //             } else {
-    //                 setImages([]);
-    //             }
-    //         } catch (error) {
-    //             console.error('Error fetching images:', error);
-    //             setImages([]);
-    //         }
-
-    //         setSelectedDate(new Date());
-    //     };
-
-    //     fetchImages();
-    // }, []);
-
-
     useEffect(() => {
-                const fetchImages = async () => {
-                    const token = localStorage.getItem('token');
-                    const today = new Date();
-                    const todayStr = today.toLocaleDateString('tr-TR').split('.').reverse().join('-');
-        
-                    if (!token) {
-                        console.error('No token found');
-                        return;
+        const fetchImages = async () => {
+            const token = localStorage.getItem('token');
+            if (!token) {
+                console.error('No token found');
+                return;
+            }
+
+            try {
+                const response = await fetch('https://talent.mobven.com:5043/api/DaySummarys/all', {
+                    headers: {
+                        'Authorization': `Bearer ${token}`
                     }
-        
-                    try {
-                        const response = await fetch('https://talent.mobven.com:5043/api/DaySummarys/all', {
-                            headers: {
-                                'Authorization': `Bearer ${token}`
-                            }
-                        });
-                        const result = await response.json();
-        
-                        let data = result.data || [];
-                        const todayExists = data.some(img => img.date === todayStr.split('-').reverse().join('-'));
-        
-                        if (!todayExists) {
-                            data.unshift({
-                                date: todayStr.split('-').reverse().join('-'),
-                                imagePath: 'https://r.resimlink.com/ErUWpXBD.png',
-                                title: "Loading Image"
-                            });
-                        }
-        
-                        const formattedData = data.map(img => ({
-                            date: img.date,
-                            imagePath: img.imagePath || '',
-                            title: img.title || "img"
-                        }));
-        
-                        const sortedData = formattedData.sort((a, b) => {
-                            const dateA = new Date(a.date.split('-').reverse().join('-'));
-                            const dateB = new Date(b.date.split('-').reverse().join('-'));
-                            return dateB - dateA;
-                        });
-        
-                        setImages(sortedData);
-                        setSelectedDate(today);
-                    } catch (error) {
-                        console.error('Error fetching images:', error);
-                        setImages([]);
-                    }
-                };
-        
-                fetchImages();
-            }, []);
+                });
+                const result = await response.json();
+
+                if (result.data && result.data.length > 0) {
+                    const formattedData = result.data.map(img => ({
+                        date: img.date,
+                        imagePath: img.imagePath || '',
+                        title: "img"
+                    }));
+
+                    const sortedData = formattedData.sort((a, b) => {
+                        const dateA = new Date(a.date.split('-').reverse().join('-'));
+                        const dateB = new Date(b.date.split('-').reverse().join('-'));
+                        return dateB - dateA;
+                    });
+                    setImages(sortedData);
+                } else {
+                    setImages([]);
+                }
+            } catch (error) {
+                console.error('Error fetching images:', error);
+                setImages([]);
+            }
+
+            setSelectedDate(new Date());
+        };
+
+        fetchImages();
+    }, []);
 
     const renderImages = (images) => {
         return images.map((img, index) => {
@@ -306,24 +252,19 @@ const GalleryPage = () => {
 
         return (
             <div className='empty-content'>
-                <div className="empty">
-
+                <div className="empty" onClick={() => navigate('/note')}>
                     <div className="empty__header">
                         <p className="empty-dayno">{today.getDate()}</p>
                         <div className='empty__date'>
-                            <p className="empty__date-month">{today.toLocaleDateString('tr-TR', { month: 'long' })}</p>
                             <p className="empty__date-dayname">{today.toLocaleDateString('tr-TR', { weekday: 'long' })}</p>
-
+                            <p className="empty__date-month">{today.toLocaleDateString('tr-TR', { month: 'long', year: 'numeric' })}</p>
                         </div>
                     </div>
-                    <img src={loadingimg} alt='aysu' className="empty__image" />
+                    <img src={addimg} alt='aysu' className="empty__image" />
                 </div>
                 <div className="empty__info">
-                    <div className='empty__info-text'>
-                        <p>Hayallerini, anılarını ve hedeflerini not al, benzersiz hikayeni oluşturmaya başla!</p>
-                        <p>Bugünün hikayesini yazmaya hazır mısın? 📝✨</p>
-                        <div className='empty__info-button' onClick={() => navigate('/note')}>NOT EKLE</div>
-                    </div>
+                    <img className="empty__info-img" src={login_img} alt="empty_image" />
+                    <p className='empty__info-text'>İlk günün için notlarını al ve kişisel hikayeni oluşturmaya başla!</p>
                 </div>
             </div>
         );
