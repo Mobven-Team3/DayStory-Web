@@ -5,6 +5,11 @@ import { FaUserCircle } from 'react-icons/fa';
 import { useLocation, useNavigate } from 'react-router-dom';
 import logo from '../../assets/images/daystory-logo.png';
 import './navbar-scss/_navbar.scss';
+import calendericon from '../../assets/images/icons/calendar.png';
+import gendericon from '../../assets/images/icons/gender.png';
+import maillicon from '../../assets/images/icons/maill.png';
+import profileicon from '../../assets/images/icons/personalcard.png';
+
 
 const NavigationBar = () => {
     const [activePage, setActivePage] = useState('');
