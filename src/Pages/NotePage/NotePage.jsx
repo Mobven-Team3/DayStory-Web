@@ -289,48 +289,54 @@ const NoteApp = () => {
                         </div>
                     ) : (
                         <>
-                         {summaryImage ? (
-                            <div className='detail__img'>
-                           <img src={summaryImage} alt="Event" />
-                           </div>
+                            {summaryImage ? (
+
+                                <div className='detail__img'>
+                                    <img src={summaryImage} alt="Event" />
+                                </div>
+
+
                             ) : (
                                 <>
-                           <div className="summary-add-button" onClick={handleModalOpen}>
-                              <p> AI Gün Özeti Oluştur </p>
-                           </div>
+                                    <div className="summary-add-button" onClick={handleModalOpen}>
+                                        <p> AI Gün Özeti Oluştur </p>
+                                    </div>
 
-                       <div className='note__add'>
-                     <p className='note__add-header'>Notunuzu yazınız.</p>
+                                    <div className='note__add'>
+                                        <p className='note__add-header'>Notunuzu yazınız.</p>
 
-                   <TextField
-                     className="note-input"
-                     label="Başlık"
-                     name="title"
-                     placeholder="Not Başlığınızı Giriniz."
-                     fullWidth
-                     value={noteData.title}
-                     onChange={handleChange}
-                     error={Boolean(errors.title)}
-                     helperText={errors.title}
-                     InputProps={{
-                    endAdornment: (
-                     noteData.title && (
-                     <InputAdornment position="end">
-                     <IconButton
-                    aria-label="clear input"
-                    onClick={() => handleClear('title')}
-                    edge="end"
-                      >
-                     <AiOutlineCloseCircle />
-                    </IconButton>
-                        </InputAdornment>
-                        )
-                         )
-                        }}
-                         />
+                                        <TextField
+                                            className="note-input"
+                                            label="Başlık"
+                                            name="title"
+                                            placeholder="Not Başlığınızı Giriniz."
+                                            fullWidth
+                                            required
+                                            value={noteData.title}
+                                            onChange={handleChange}
+                                            error={Boolean(errors.title)}
+                                            helperText={errors.title ? errors.title : "*En fazla 250 karakter"}
+                                            InputProps={{
+                                                endAdornment: (
+                                                    noteData.title && (
+                                                        <InputAdornment position="end">
+                                                            <IconButton
+                                                                aria-label="clear input"
+                                                                onClick={() => handleClear('title')}
+                                                                edge="end"
+                                                            >
+                                                                <AiOutlineCloseCircle />
+                                                            </IconButton>
+                                                        </InputAdornment>
+                                                    )
+                                                )
+                                            }}
+                                        />
 
-                        <TextField
-                         className="note-input"
+                                                
+
+                                        <TextField
+                                            className="note-input"
                                             label="Notunuz"
                                             name="description"
                                             placeholder="Notunuzun Detaylarını Giriniz."
@@ -339,7 +345,7 @@ const NoteApp = () => {
                                             value={noteData.description}
                                             onChange={handleChange}
                                             error={Boolean(errors.description)}
-                                            helperText={errors.description}
+                                            helperText={errors.description ? errors.description : "*En fazla 350 karakter"}
                                             InputProps={{
                                                 endAdornment: (
                                                     noteData.description && (
@@ -368,6 +374,22 @@ const NoteApp = () => {
                                         )}
 
                                         <div className='add__button'>
+                                            {/* {editMode ? (
+                                                <Button
+                                                    className="add__button-type"
+                                                    onClick={handleUpdateNote}
+                                                >
+                                                    Güncelle
+                                                </Button>
+                                            ) : (
+                                                <Button
+                                                    className="add__button-type"
+                                                    onClick={handleAddNote}
+                                                >
+                                                    Kaydet
+                                                </Button>
+                                            )} */}
+
                                             <Button
                                                 className="add__button-type"
                                                 onClick={handleAddNote}
@@ -381,20 +403,57 @@ const NoteApp = () => {
                         </>
                     )}
                 </div>
-                <div className='detail__notes'>
-                    {events.length > 0 && (
-                        events.map(event => (
-                            <div className='detail__notes-area' key={event.id}>
-                                <p className='detail__notes-title'>{event.title}</p>
-                                <p className='detail__notes-description'>{event.description}</p>
-                            </div>
-                        ))
-                    )}
-                    {events.length === 0 && (
-                        <div className='detail__notes-empty'>Bu gün için notunuz bulunmuyor.</div>
-                    )}
-                </div>
+                {summaryImage ? (
+                    <div className='detail__notes'>
+                        {events.length > 0 && (
+                            events.map(event => (
+                                <div className='detail__notes-area' key={event.id}>
+                                    <div className='note-header'>
+                                        <p className='detail__notes-title'>{event.title}</p>
+                                    </div>
+                                    <p className='detail__notes-description'>{event.description}</p>
+                                </div>
+                            ))
+                        )}
+                        {events.length === 0 && (
+                            <div className='detail__notes-empty'>Bugün için notunuz bulunmuyor.</div>
+                        )}
+                    </div>
+
+                ) : (
+
+                    <div className='detail__notes'>
+                        {events.length > 0 && (
+                            events.map(event => (
+                                <div className='detail__notes-area' key={event.id}>
+                                    <div className='note-header'>
+                                        <div className='detail__notes-title'>
+                                            <p>{event.title}</p>
+                                            <IconButton className='iconbutton' onClick={(e) => { handleMenuClick(e); setNoteId(event.id); }}>
+                                                <MoreVert />
+                                            </IconButton>
+                                        </div>
+                                    </div>
+                                    <Menu
+                                        anchorEl={anchorEl}
+                                        open={Boolean(anchorEl)}
+                                        onClose={handleMenuClose}
+                                    >
+                                        {/* <MenuItem onClick={() => { handleEditNote(event); handleMenuClose(); }}>Düzenle</MenuItem> */}
+                                        <MenuItem onClick={() => { handleDeleteNote(noteId); handleMenuClose(); }}>Sil</MenuItem>
+                                    </Menu>
+                                    <p className='detail__notes-description'>{event.description}</p>
+                                </div>
+                            ))
+                        )}
+                        {events.length === 0 && (
+                            <div className='detail__notes-empty'>Bugün için notunuz bulunmuyor.</div>
+                        )}
+                    </div>
+                )}
+
             </div>
+
 
             <Modal
                 open={modalOpen}
