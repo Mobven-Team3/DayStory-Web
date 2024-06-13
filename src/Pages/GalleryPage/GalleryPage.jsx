@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import login_img from '../../../src/assets/images/login_img.png';
+import addpng from '../../assets/images/add.png';
 import './gallery-scss/_gallery.scss';
 
 const GalleryPage = () => {
@@ -40,7 +41,7 @@ const GalleryPage = () => {
                     if (!todayExists) {
                         formattedData.unshift({
                             date: todayStr.split('-').reverse().join('-'),
-                            imagePath: 'https://r.resimlink.com/ErUWpXBD.png',
+                            imagePath: null,
                             title: 'Loading Image'
                         });
                     }
@@ -94,7 +95,7 @@ const GalleryPage = () => {
                     {img.imagePath ? (
                         <img src={img.imagePath} alt={`Day ${imgDate.getDate()}`} className="calendar__image" />
                     ) : (
-                        <p className="calendar__image-placeholder">Image Not Available</p>
+                        <img src={addpng} alt={`Day ${imgDate.getDate()}`} className="calendar__image" />
                     )}
                 </div>
             );
@@ -114,7 +115,7 @@ const GalleryPage = () => {
                             <p className="empty__date-month">{today.toLocaleDateString('tr-TR', { month: 'long', year: 'numeric' })}</p>
                         </div>
                     </div>
-                    <img src='https://r.resimlink.com/ErUWpXBD.png' alt='aysu' className="empty__image" />
+                    <img src={addpng} alt='aysu' className="empty__image" />
                 </div>
                 <div className="empty__info">
                     <img className="empty__info-img" src={login_img} alt="empty_image" />
