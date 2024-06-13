@@ -10,7 +10,6 @@ import gendericon from '../../assets/images/icons/gender.png';
 import maillicon from '../../assets/images/icons/maill.png';
 import profileicon from '../../assets/images/icons/personalcard.png';
 
-
 const NavigationBar = () => {
     const [activePage, setActivePage] = useState('');
     const [anchorEl, setAnchorEl] = useState(null);
@@ -26,7 +25,7 @@ const NavigationBar = () => {
             setActivePage('note');
         } else if (pathname === '/profile') {
             setActivePage('profile');
-        } else if (/\/gallery\/\d{2}-\d{2}-\d{4}/.test(pathname)) {
+        } else if (/\/gallery\/\d{2}-\d{2}-\d{4}/.test()) {
             setActivePage('note');
         } else {
             setActivePage('');
