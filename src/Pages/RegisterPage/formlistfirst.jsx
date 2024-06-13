@@ -183,7 +183,8 @@ const FormListFirst = ({ formData, handleChange, handleGenderChange, nextbutton 
                     </FormControl>
 
 
-                    <LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale={"tr"}>
+                    <LocalizationProvider dateAdapter={AdapterDayjs}
+                        adapterLocale={"tr"}>
                         <DatePicker
                             label='Doğum Tarihi'
                             onChange={(date) => handleChange({

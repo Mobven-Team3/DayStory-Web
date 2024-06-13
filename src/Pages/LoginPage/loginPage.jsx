@@ -205,6 +205,9 @@ import login_img from '../../../src/assets/images/login_img.png';
 import loadingimg from '../../assets/images/daystory-logo.png';
 import { setToken } from '../../utils/auth';
 
+//api import
+import api from '../../service';
+
 const LoginPage = () => {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
@@ -236,47 +239,31 @@ const LoginPage = () => {
   const loginHandler = async () => {
     setLoading(true);
     try {
-      const loginRequest = await fetch('http://165.22.93.225:5030/api/Users/login', {
-        method: 'POST',
-        headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({ email: loginData.email, password: loginData.password }),
-        mode: 'cors',
-      });
+      const response = await api.request('POST', '/Users/login', { email: loginData.email, password: loginData.password })
+      const { token } = response.data;
+      setToken(token);
+      navigate('/gallery');
 
-      const response = await loginRequest.json();
-
-      if (loginRequest.ok && response.statusCode === 200) {
-        const { token } = response.data;
-        setToken(token);
-        setLoading(false);
-        navigate('/gallery');
-      } else if (loginRequest.status === 404) {
-        setErrors((prevErrors) => ({
-          ...prevErrors,
-          email: 'Kullanıcı bulunamadı.'
-        }));
-      } else if (loginRequest.status === 401) {
-        setErrors((prevErrors) => ({
-          ...prevErrors,
-          password: 'Şifre yanlış.'
-        }));
-      } else {
-        setErrors((prevErrors) => ({
-          ...prevErrors,
-          message: 'Giriş yapılamadı. Lütfen tekrar deneyin.'
-        }));
-      }
     } catch (error) {
-      setErrors((prevErrors) => ({
-        ...prevErrors,
-        message: 'Giriş yapılamadı, Lütfen tekrar deneyin.'
-      }));
-    }
+      switch (error.code) {
+        case 401:
+          setErrors((prevErrors) => ({
+            ...prevErrors,
+            password: 'Şifre yanlış.'
+          }));
+          break;
+        default: setErrors((prevErrors) => ({
+          ...prevErrors,
+          password: 'Giriş yapılamadı. Lütfen tekrar deneyin.'
+        }));
+          break;
+      }
+    
+    };
+    
     setLoading(false);
-  };
+
+  }
 
   const validate = () => {
     let tempErrors = {};
@@ -303,15 +290,15 @@ const LoginPage = () => {
         <p className='header__text'>Day<span>Story</span></p>
       </header>
 
-      
+
       {loading ? (
         <div className='formyapısı'>
-        <center>
-          <div className='detail__loading'>
-            <img src={loadingimg} alt="Event" />
-          </div>
-        </center>
-      </div>
+          <center>
+            <div className='detail__loading'>
+              <img src={loadingimg} alt="Event" />
+            </div>
+          </center>
+        </div>
 
       ) : (
         <div className='form'>
