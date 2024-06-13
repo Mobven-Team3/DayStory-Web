@@ -71,7 +71,8 @@ const Footer = () => {
             </div>
         </div>
         <div className='footer__contact'>
-                <div className='footer__contact-text'>İletişim
+                <div className='footer__contact-text'>
+                    <p className='header'>İletişim</p>
                     <div className='footer__contact-phone'>
                     <Phone /> 
                         <p>+90 000 000 00 00</p>

@@ -5,6 +5,7 @@
     justify-content: space-between;
     display: flex;
     align-items: center;
+    height: 120px;
 
     &__logo {
         align-items: center;
@@ -39,19 +40,26 @@
             display: flex;
             gap: 10px;
         }
+
+        &-text{
+            margin-top: 0px;
+            font-weight: 500;
+            margin-bottom: 25px;
+        }
     }
 
     &__contact {
-
-
-
         p {
             margin: 0px;
         }
 
         &-text {
             display: grid;
-            gap: 5px;
+
+           .header{
+            font-weight: 500;
+            margin-bottom: 18px;
+           }
         }
 
         &-phone {
