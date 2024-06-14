@@ -150,28 +150,29 @@ const NavigationBar = () => {
                     horizontal: 'right',
                 }}
             >
-                <div style={{ padding: '20px', width: '300px' }}>
+                  <div className='profile'>
                     {error ? (
-                        <Typography>{error}</Typography>
+                        <div>{error}</div>
                     ) : !user ? (
-                        <Typography>Loading...</Typography>
+                        <div>Loading...</div>
                     ) : (
-                        <Card>
-                            <CardContent>
-                                <Grid container spacing={2} alignItems="center">
-                                    <Grid item xs={12} sm={4}>
-                                        <Avatar alt={user.firstName} src="/static/images/avatar/1.jpg" style={{ width: '80px', height: '80px' }} />
-                                    </Grid>
-                                    <Grid item xs={12} sm={8}>
-                                        <Typography variant="h6">{`${user.firstName} ${user.lastName}`}</Typography>
-                                        <Typography variant="body2">Username: {user.username}</Typography>
-                                        <Typography variant="body2">Email: {user.email}</Typography>
-                                        <Typography variant="body2">Birth Date: {user.birthDate}</Typography>
-                                        <Typography variant="body2">Gender: {user.gender}</Typography>
-                                    </Grid>
-                                </Grid>
-                            </CardContent>
-                        </Card>
+                        <div className='profile'>
+                            <div className='profile__avatar'>
+                                <img className='profile__avatar-img' src={profile} />
+                                <p>{user.username}</p>
+                            </div>
+                            <div className='profile__body'>
+                                <p><img src={profileicon} alt='profile-icon'></img>{`${user.firstName} ${user.lastName}`}</p>
+                                <p><img src={maillicon} alt='profile-icon'></img>{user.email}</p>
+                                <p><img src={calendericon} alt='profile-icon'></img>{formatBirthDate(user.birthDate)}</p>
+                                <p><img src={gendericon} alt='profile-icon'></img>{translateGender(user.gender)}</p>
+                            </div>
+
+                            <div className='profile__logout'
+                                onClick={handleMain}>
+                                Çıkış Yap
+                            </div>
+                        </div>
                     )}
                 </div>
             </Popover>
@@ -180,3 +181,4 @@ const NavigationBar = () => {
 };
 
 export default NavigationBar;
+             
