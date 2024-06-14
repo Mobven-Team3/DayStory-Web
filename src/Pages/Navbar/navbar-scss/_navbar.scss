@@ -3,6 +3,7 @@
     left: 0;
     top: 0;
     width: 100%;
+    z-index: 2;
 
     .nav {
         padding: 20px 76px 30px 76px;
@@ -131,3 +132,75 @@
     letter-spacing: 0.10000000149011612px;
     cursor: pointer;
 }
+.profile {
+    display: grid;
+    padding: 15px;
+    gap: 10px;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+
+    &__avatar {
+
+        p {
+            font-family: Roboto;
+            font-size: 16px;
+            font-weight: 400;
+            line-height: 24px;
+            letter-spacing: 0.5px;
+        }
+
+        &-img{
+            width: 140px;
+            height: 140px;
+        }
+
+    }
+
+    &__body {
+        width: 250px;
+        background: rgba(249, 249, 249, 1);
+        padding: 15px;
+        display: grid;
+        gap: 5px;
+        text-align: left;
+        box-shadow: 0px 0.5px 0.5px rgba(0, 0, 0, 0.3), 0px 0.5px 0.5px 1px rgba(0, 0, 0, 0.15);
+        border-radius: 12px;
+        margin-bottom: 20px;
+
+        h2 {
+            margin: 0px;
+        }
+
+        p {
+            align-items: center;
+            display: flex;
+            gap: 10px;
+            margin: 0px;
+
+            img{
+                width: 20px;
+            }
+        }
+
+    }
+
+    &__logout {
+        justify-content: center;
+        align-items: center;
+        padding: 10px 24px;
+        gap: 8px;
+        color: rgba(90, 108, 165, 1);
+        border: 1px solid #79747E;
+        border-radius: 100px;
+        cursor: pointer;
+        font-family: Roboto;
+        font-size: 14px;
+        font-weight: 600;
+        line-height: 20px;
+        letter-spacing: 0.10000000149011612px;
+        text-align: center;
+
+
+
+    }
