@@ -1,29 +1,17 @@
-import { Avatar, Card, CardContent, Grid, Popover, Typography } from '@mui/material';
+import { Popover } from '@mui/material';
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { FaUserCircle } from 'react-icons/fa';
 import { useLocation, useNavigate } from 'react-router-dom';
 import logo from '../../assets/images/daystory-logo.png';
+import profile from '../../assets/images/profile.png';
 import './navbar-scss/_navbar.scss';
+
 import calendericon from '../../assets/images/icons/calendar.png';
 import gendericon from '../../assets/images/icons/gender.png';
-import maillicon from '../../assets/images/icons/maill.png';
+import maillicon from '../../assets/images/icons/mail.png';
 import profileicon from '../../assets/images/icons/personalcard.png';
 
-
-const updateActivePage = (pathname) => {
-    if (pathname.startsWith('/gallery')) {
-        setActivePage('gallery');
-    } else if (pathname === '/note') {
-        setActivePage('note');
-    } else if (pathname === '/profile') {
-        setActivePage('profile');
-    } else if (/\/gallery\/\d{2}-\d{2}-\d{4}/.test(pathname)) {
-        setActivePage('note');
-    } else {
-        setActivePage('');
-    }
-};
 
 const NavigationBar = () => {
     const [activePage, setActivePage] = useState('');
@@ -63,12 +51,12 @@ const NavigationBar = () => {
                 Authorization: `Bearer ${token}`
             }
         })
-        .then(response => {
-            setUser(response.data.data);
-        })
-        .catch(error => {
-            setError('User not found');
-        });
+            .then(response => {
+                setUser(response.data.data);
+            })
+            .catch(error => {
+                setError('User not found');
+            });
     }, []);
 
     const handlePageChange = (page, route) => {
@@ -85,14 +73,14 @@ const NavigationBar = () => {
         setAnchorEl(null);
         updateActivePage(location.pathname);
     };
+
     const handleMain = () => {
         navigate('/');
     };
 
-
-
     const open = Boolean(anchorEl);
     const id = open ? 'profile-popover' : undefined;
+
     const translateGender = (gender) => {
         switch (gender) {
             case 'NotSpecified':
@@ -150,7 +138,7 @@ const NavigationBar = () => {
                     horizontal: 'right',
                 }}
             >
-                  <div className='profile'>
+                <div className='profile'>
                     {error ? (
                         <div>{error}</div>
                     ) : !user ? (
@@ -181,4 +169,3 @@ const NavigationBar = () => {
 };
 
 export default NavigationBar;
-             

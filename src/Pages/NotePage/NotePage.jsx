@@ -2,6 +2,7 @@ import {
     Backdrop, Box, Button,
     Fade,
     IconButton, InputAdornment,
+    Menu, MenuItem,
     Modal, TextField, Typography
 } from '@mui/material';
 import axios from 'axios';
@@ -10,7 +11,8 @@ import { useParams } from 'react-router-dom';
 import loadingimg from '../../assets/images/daystory-logo.png';
 import "./note-scss/_note.scss";
 
-// icons
+//icons
+import { MoreVert } from '@mui/icons-material';
 import { AiOutlineCloseCircle } from 'react-icons/ai';
 
 const NoteApp = () => {
@@ -24,10 +26,13 @@ const NoteApp = () => {
     const [loading, setLoading] = useState(false);
     const [summaryImage, setSummaryImage] = useState(null);
     const [loadingImg, setLoadingImg] = useState(false);
+    const [editMode, setEditMode] = useState(false);
+    const [anchorEl, setAnchorEl] = useState(null);
+    const [noteId, setNoteId] = useState(null);
 
     const [noteData, setNoteData] = useState({
         title: "",
-        description: "",
+        description: null,
         date: "",
         time: "",
         priority: null
@@ -47,10 +52,8 @@ const NoteApp = () => {
                 error = '3 ila 250 karakter aralığında bir değer almalıdır.';
             }
         } if (name === 'description') {
-            if (!value) {
-                error = 'Bu değer boş bırakılamaz.';
-            } else if (value.length < 3 || value.length > 350) {
-                error = '3 ila 350 karakter aralığında bir değer almalıdır.';
+            if (value.length > 350) {
+                error = 'En fazla 350 karakterden oluşabilir.';
             }
         }
 
@@ -68,6 +71,7 @@ const NoteApp = () => {
         }));
         validate(name, value);
         setSuccessMessage('');
+        setErrorMessage('');
     };
 
     const handleClear = (e) => {
@@ -173,16 +177,11 @@ const NoteApp = () => {
 
     useEffect(() => {
         if (summaryImage) {
-            setLoadingImg(false); 
+            setLoadingImg(false);
         } else {
-            setLoadingImg(true); 
+            setLoadingImg(true);
         }
-    }, [summaryImage]); 
-    
-
-    const handleModalOpen = () => {
-        setModalOpen(true);
-    };
+    }, [summaryImage]);
 
     const handleAddNote = async () => {
         if (errors.title || errors.description) {
@@ -228,11 +227,15 @@ const NoteApp = () => {
         }
     };
 
+    const handleModalOpen = () => {
+        setModalOpen(true);
+    };
     const handleModalClose = () => {
         setModalOpen(false);
     };
 
     const handleContinue = async () => {
+        setModalOpen(false);
         try {
             setLoadingImg(true);
             const token = localStorage.getItem('token');
@@ -248,7 +251,7 @@ const NoteApp = () => {
                     'Authorization': `Bearer ${token}`
                 }
             });
-            
+
             setModalOpen(false);
 
             if (response.status === 200 || response.status === 201) {
@@ -268,6 +271,45 @@ const NoteApp = () => {
         } finally {
             setModalOpen(false);
         }
+    };
+
+    const handleDeleteNote = async (noteId) => {
+        try {
+            const token = localStorage.getItem('token');
+            if (!token) {
+                throw new Error('Token bulunamadı, lütfen giriş yapın.');
+            }
+
+            const response = await axios.delete(`https://talent.mobven.com:5043/api/Events/${noteId}`, {
+                headers: {
+                    "Content-Type": "application/json",
+                    'Authorization': `Bearer ${token}`
+                }
+            });
+
+            if (response.status === 200 || response.status === 204) {
+                console.log('Note deleted successfully:', response.data);
+                setSuccessMessage('Notunuz başarıyla silinmiştir.');
+                setErrorMessage('');
+                fetchEvents(formattedDate);
+            } else {
+                console.error('Not silme başarısız:', response.data);
+                setSuccessMessage('');
+                setErrorMessage('Notunuz silinemedi, tekrar deneyiniz.');
+            }
+        } catch (error) {
+            console.error("Failed to delete note:", error.response ? error.response.data : error.message);
+            setSuccessMessage('');
+            setErrorMessage('Notunuz silinemedi, tekrar deneyiniz.');
+        }
+    };
+
+    const handleMenuClick = (event) => {
+        setAnchorEl(event.currentTarget);
+    };
+
+    const handleMenuClose = () => {
+        setAnchorEl(null);
     };
 
     return (
