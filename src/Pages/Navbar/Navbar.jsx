@@ -90,9 +90,27 @@ const NavigationBar = () => {
     };
 
 
-    
+
     const open = Boolean(anchorEl);
     const id = open ? 'profile-popover' : undefined;
+    const translateGender = (gender) => {
+        switch (gender) {
+            case 'NotSpecified':
+                return 'Belirtmek İstemiyorum';
+            case 'Male':
+                return 'Erkek';
+            case 'Female':
+                return 'Kadın';
+            case 'Other':
+                return 'Diğer';
+            default:
+                return gender;
+        }
+    };
+
+    const formatBirthDate = (birthDate) => {
+        return birthDate.replace(/-/g, '/');
+    };
 
     return (
         <div className='navigation'>
