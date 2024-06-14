@@ -85,7 +85,12 @@ const NavigationBar = () => {
         setAnchorEl(null);
         updateActivePage(location.pathname);
     };
+    const handleMain = () => {
+        navigate('/');
+    };
 
+
+    
     const open = Boolean(anchorEl);
     const id = open ? 'profile-popover' : undefined;
 
